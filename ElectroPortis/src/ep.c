@@ -5589,23 +5589,17 @@ void reshape__GiT1(const GLuint width, const GLuint height)
 
 static void twixt__GiPff(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
   EPANOS_REG f1;
   twixt__GiPff:
   ARGS->a4.u64 = (int32_t) (ARGS->a0.u32 + -1);
 
   ARGS->a6.u64 = (int32_t) (ARGS->a0.u32 << 2);
-  ARGS->v0.u64 = (int32_t) (1 << 16);
   ARGS->a5.u64 = (int32_t) (ARGS->a1.u32 + ARGS->a6.u32);
   ARGS->v0.u64 = 48704;
   if (ARGS->a0.i64 <= 0)
   {
-    at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
     goto loc_100051A0;
   }
-  else
-    at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
 
   loc_10005178:
   memcpy(&ARGS->f2, &flt_100092A8, 4);

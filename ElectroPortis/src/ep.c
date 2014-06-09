@@ -5631,59 +5631,38 @@ static void twixt__GiPff(EPANOS_ARGS *ARGS)
 
 static void exprand__Gf(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
   EPANOS_REG f30;
   int EPANOS_fp_cond;
-  double var_20;
-  uint64_t var_18;
-  uint64_t var_10;
   exprand__Gf:
   ARGS->f0.u64 = 0;
 
-  memcpy(&var_20, &f30, 8);
   f30.d = ARGS->f12.s;
   if (ARGS->f0.d < f30.d)
     EPANOS_fp_cond = 1;
   else
     EPANOS_fp_cond = 0;
 
-  at.u64 = (int32_t) (1 << 16);
-  var_10 = ra.u64;
-  at.u64 = 55164;
-  var_18 = gp.u64;
   if (!EPANOS_fp_cond)
   {
-    gp.u64 = (int32_t) (t9.u32 + at.u32);
     goto loc_10003890;
   }
-  else
-    gp.u64 = (int32_t) (t9.u32 + at.u32);
 
-  t9.u64 = (uint64_t) drand48;
   loc_10003850:
   {
     ;
     ARGS->f0.d = (double) drand48();
   }
 
-  t9.u64 = (uint64_t) expm1;
   {
     ARGS->f12.d = ARGS->f0.d * f30.d;
     ARGS->f0.d = (double) expm1((double) ARGS->f12.d);
   }
-  t9.u64 = (uint64_t) expm1;
   f30.d = ARGS->f0.d;
   {
     memcpy(&ARGS->f12, &dbl_10009300, 8);
     ARGS->f0.d = (double) expm1((double) ARGS->f12.d);
   }
   ARGS->f0.d = f30.d / ARGS->f0.d;
-  ra.u64 = var_10;
-  gp.u64 = var_18;
-  memcpy(&f30, &var_20, 8);
   {
     ARGS->f0.s = ARGS->f0.d;
     return;
@@ -5698,7 +5677,6 @@ static void exprand__Gf(EPANOS_ARGS *ARGS)
     ;
   }
   {
-    t9.u64 = (uint64_t) drand48;
     goto loc_10003850;
   }
 }

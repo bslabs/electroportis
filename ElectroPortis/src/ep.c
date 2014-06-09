@@ -5374,10 +5374,6 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG s0;
   EPANOS_REG s1;
   EPANOS_REG s2;
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f3;
   EPANOS_REG f4;
@@ -5388,23 +5384,8 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG f9;
   EPANOS_REG f20;
   int EPANOS_fp_cond;
-  double var_30;
-  uint64_t var_10;
-  uint64_t var_28;
-  uint64_t var_20;
-  uint64_t var_8;
-  uint64_t var_18;
   setacttargets__Gv:
 
-  var_28 = s2.u64;
-  var_18 = ra.u64;
-  memcpy(&var_30, &f20, 8);
-  var_20 = s1.u64;
-  at.u64 = (int32_t) (1 << 16);
-  var_10 = s0.u64;
-  at.u64 = 49072;
-  var_8 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + at.u32);
   s0.u64 = (uint64_t) acttable;
   s1.u64 = 0;
   {
@@ -5449,11 +5430,8 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
 
   if (ARGS->a1.u64 != 0)
   {
-    t9.u64 = (uint64_t) drand48;
     goto loc_10005024;
   }
-  else
-    t9.u64 = (uint64_t) drand48;
 
   ARGS->a0.u64 = 1;
   {
@@ -5465,7 +5443,6 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   memcpy(&f1, (char *) (s2.u32 + 16), 4);
   ARGS->f2.s = f20.s - ARGS->f0.s;
   ARGS->f0.s = f3.s * ARGS->f0.s;
-  t9.u64 = (uint64_t) exprand__Gf;
   f1.s = f1.s * ARGS->f2.s;
   ARGS->f0.s = ARGS->f0.s + f1.s;
   ARGS->f12.s = f20.s;
@@ -5543,18 +5520,11 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
 
 
   loc_10005108:
-  gp.u64 = var_8;
 
-  s0.u64 = var_10;
-  ra.u64 = var_18;
-  s1.u64 = var_20;
-  s2.u64 = var_28;
-  memcpy(&f20, &var_30, 8);
   {
     return;
   }
   loc_10005128:
-  t9.u64 = (uint64_t) exprand__Gf;
 
   {
     ARGS->f12.s = f20.s;

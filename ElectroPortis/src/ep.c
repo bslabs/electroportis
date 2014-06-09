@@ -217,7 +217,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG fp;
   EPANOS_REG f1;
@@ -265,7 +264,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   uint64_t var_98;
   uint64_t var_48;
   drawit__Gv:
-  sp.u64 = (int32_t) (sp.u32 + -272);
 
   memcpy(&var_F8, &f22, 8);
   at.u64 = (int32_t) (1 << 16);
@@ -797,7 +795,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ra.u64 = var_B8;
   gp.u64 = var_B0;
   {
-    sp.u64 = (int32_t) (sp.u32 + 272);
     return;
   }
   loc_100058AC:
@@ -1458,7 +1455,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG t8;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG fp;
   EPANOS_REG f1;
@@ -1508,7 +1504,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_10;
   char var_1D8[256];
   readAnimation__Gv:
-  sp.u64 = (int32_t) (sp.u32 + -736);
 
   var_C0 = s3.u64;
   s3.u64 = 54768;
@@ -2583,7 +2578,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   s0.u64 = var_C8;
   s3.u64 = var_C0;
   {
-    sp.u64 = (int32_t) (sp.u32 + 736);
     return;
   }
   loc_100042C0:
@@ -3274,14 +3268,12 @@ static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   uint64_t var_20;
   uint64_t var_18;
   uint64_t var_10;
   uint64_t var_8;
   drawshape__GiT1:
-  sp.u64 = (int32_t) (sp.u32 + -32);
 
   var_18 = s0.u64;
   var_10 = s1.u64;
@@ -3340,7 +3332,6 @@ static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount)
   s1.u64 = var_10;
   gp.u64 = var_20;
   {
-    sp.u64 = (int32_t) (sp.u32 + 32);
     return;
   }
   loc_100052DC:
@@ -3419,7 +3410,6 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f4;
@@ -3437,7 +3427,6 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_8;
   uint64_t var_18;
   tasteQueue__Gv:
-  sp.u64 = (int32_t) (sp.u32 + -48);
 
   var_8 = ra.u64;
   var_18 = s0.u64;
@@ -3595,7 +3584,6 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   s2.u64 = var_10;
   memcpy(&f20, &var_30, 8);
   {
-    sp.u64 = (int32_t) (sp.u32 + 48);
     return;
   }
 }
@@ -3608,7 +3596,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f4;
@@ -3630,7 +3617,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   hls_to_rgb__GfN21PfN24:
   at.u64 = (int32_t) (1 << 16);
 
-  sp.u64 = (int32_t) (sp.u32 + -80);
   at.u64 = 55468;
   var_20 = gp.u64;
   gp.u64 = (int32_t) (t9.u32 + at.u32);
@@ -3697,7 +3683,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   memcpy(&f20, &var_18, 8);
   gp.u64 = var_20;
   {
-    sp.u64 = (int32_t) (sp.u32 + 80);
     return;
   }
   loc_10003794:
@@ -3755,7 +3740,6 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   uint64_t var_30;
   uint64_t var_28;
@@ -3763,7 +3747,6 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
   uint64_t var_20;
   uint64_t var_18;
   killSeq__GP7animSeq:
-  sp.u64 = (int32_t) (sp.u32 + -48);
 
   var_20 = s1.u64;
   var_18 = ra.u64;
@@ -3907,7 +3890,6 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
   s1.u64 = var_20;
   gp.u64 = var_28;
   {
-    sp.u64 = (int32_t) (sp.u32 + 48);
     return;
   }
 }
@@ -3919,7 +3901,6 @@ void createActTable__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   uint64_t var_20;
@@ -3927,7 +3908,6 @@ void createActTable__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_10;
   uint64_t var_8;
   createActTable__Gv:
-  sp.u64 = (int32_t) (sp.u32 + -32);
 
   at.u64 = (int32_t) (1 << 16);
   var_20 = s1.u64;
@@ -4017,7 +3997,6 @@ void createActTable__Gv(EPANOS_ARGS *ARGS)
   acttable[130] = ARGS->v0.u32;
   s0.u64 = var_8;
   {
-    sp.u64 = (int32_t) (sp.u32 + 32);
     return;
   }
 }
@@ -4027,7 +4006,6 @@ static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   uint64_t var_10;
@@ -4035,7 +4013,6 @@ static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
   createBlankActAnim__Gv:
   at.u64 = (int32_t) (1 << 16);
 
-  sp.u64 = (int32_t) (sp.u32 + -16);
   at.u64 = 45788;
   var_8 = gp.u64;
   gp.u64 = (int32_t) (t9.u32 + at.u32);
@@ -4059,7 +4036,6 @@ static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
   ra.u64 = var_10;
   memcpy((char *) (ARGS->v0.u32 + 28), &ARGS->f0, 4);
   memcpy((char *) (ARGS->v0.u32 + 32), &f1, 4);
-  sp.u64 = (int32_t) (sp.u32 + 16);
   {
     memcpy((char *) (ARGS->v0.u32 + 36), &ARGS->f0, 4);
     return;
@@ -4211,7 +4187,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   EPANOS_REG t8;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f3;
@@ -4230,7 +4205,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   processCommand__GP11animCommand:
   ARGS->v0.u64 = (int32_t) (1 << 16);
 
-  sp.u64 = (int32_t) (sp.u32 + -32);
   ARGS->v0.u64 = 50812;
   var_18 = gp.u64;
   gp.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
@@ -4368,7 +4342,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
 
   gp.u64 = var_18;
   {
-    sp.u64 = (int32_t) (sp.u32 + 32);
     return;
   }
   loc_10004A00:
@@ -5066,7 +5039,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG t8;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f5;
@@ -5091,7 +5063,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   display__Gv:
   at.u64 = (int32_t) (1 << 16);
 
-  sp.u64 = (int32_t) (sp.u32 + -80);
   at.u64 = 45256;
   var_30 = gp.u64;
   gp.u64 = (int32_t) (t9.u32 + at.u32);
@@ -5394,7 +5365,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ra.u64 = var_38;
   gp.u64 = var_30;
   {
-    sp.u64 = (int32_t) (sp.u32 + 80);
     return;
   }
 }
@@ -5407,7 +5377,6 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f3;
@@ -5426,7 +5395,6 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_8;
   uint64_t var_18;
   setacttargets__Gv:
-  sp.u64 = (int32_t) (sp.u32 + -48);
 
   var_28 = s2.u64;
   var_18 = ra.u64;
@@ -5583,7 +5551,6 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   s2.u64 = var_28;
   memcpy(&f20, &var_30, 8);
   {
-    sp.u64 = (int32_t) (sp.u32 + 48);
     return;
   }
   loc_10005128:
@@ -5667,7 +5634,6 @@ static void exprand__Gf(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t9;
   EPANOS_REG gp;
-  EPANOS_REG sp;
   EPANOS_REG ra;
   EPANOS_REG f30;
   int EPANOS_fp_cond;
@@ -5677,7 +5643,6 @@ static void exprand__Gf(EPANOS_ARGS *ARGS)
   exprand__Gf:
   ARGS->f0.u64 = 0;
 
-  sp.u64 = (int32_t) (sp.u32 + -32);
   memcpy(&var_20, &f30, 8);
   f30.d = ARGS->f12.s;
   if (ARGS->f0.d < f30.d)
@@ -5719,7 +5684,6 @@ static void exprand__Gf(EPANOS_ARGS *ARGS)
   ra.u64 = var_10;
   gp.u64 = var_18;
   memcpy(&f30, &var_20, 8);
-  sp.u64 = (int32_t) (sp.u32 + 32);
   {
     ARGS->f0.s = ARGS->f0.d;
     return;

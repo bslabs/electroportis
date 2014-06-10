@@ -55,9 +55,7 @@ static const char *aS_0 = "%s\n";
 static const char *aActset = "actset:";
 static const char *aSeqkillall = "seqkillall:";
 static const char *aD = "%d";
-static const char *aM0_0 = "m > 0.0";
 static const char *aF = "%f";
-static const char *aEp_c = "ep.c++";
 static const char *aSeqstop = "seqstop:";
 static const char *aActresetall = "actresetall:";
 static const char *aWarningSNotImp = "warning: %s not implemented\n";
@@ -154,7 +152,7 @@ static void value__GfN21(EPANOS_ARGS *ARGS);
 static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS);
 static void setacttargets__Gv(EPANOS_ARGS *ARGS);
 static void twixt__GiPff(EPANOS_ARGS *ARGS);
-static void exprand__Gf(EPANOS_ARGS *ARGS);
+static float exprand__Gf(float arg);
 
 #if defined(_MSC_VER) && (_MSC_VER < 1800)
 static double
@@ -3697,7 +3695,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   ;
   ;
   {
-    t9.u64 = (uint64_t) exprand__Gf;
     switch (ARGS->a1.u64)
     {
       case 0:
@@ -3800,16 +3797,12 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
     goto loc_100049EC;
   }
   loc_10004A14:
-  {
-    memcpy(&ARGS->f12, &flt_100092A8, 4);
-    exprand__Gf(ARGS);
-  }
 
   memcpy(&f8, &flt_100092A8, 4);
   memcpy(&f4, (char *) (s0.u32 + 12), 4);
   ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
   memcpy(&f9, &dbl_10009308, 8);
-  f7.d = ARGS->f0.s;
+  f7.d = exprand__Gf(flt_100092A8);
   memcpy(&f5, (char *) (ARGS->a4.u32 + 20), 4);
   f7.d = f7.d * f9.d;
   f6.d = f4.s;
@@ -4868,15 +4861,13 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   ARGS->f0.s = f3.s * ARGS->f0.s;
   f1.s = f1.s * ARGS->f2.s;
   ARGS->f0.s = ARGS->f0.s + f1.s;
-  ARGS->f12.s = f20.s;
   {
     memcpy((char *) (s2.u32 + 8), &ARGS->f0, 4);
-    exprand__Gf(ARGS);
   }
   memcpy(&f6, &flt_100092AC, 4);
   memcpy(&ARGS->f2, (char *) (s2.u32 + 32), 4);
   memcpy(&f1, (char *) (s2.u32 + 28), 4);
-  f3.s = ARGS->f0.s * f6.s;
+  f3.s = exprand__Gf(f20.s) * f6.s;
   f4.s = f20.s - ARGS->f2.s;
   f3.s = f1.s * f3.s;
   f1.s = f1.s * f4.s;
@@ -4949,14 +4940,10 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   }
   loc_10005128:
 
-  {
-    ARGS->f12.s = f20.s;
-    exprand__Gf(ARGS);
-  }
   memcpy(&f6, &flt_100092AC, 4);
   memcpy(&f7, (char *) (s2.u32 + 32), 4);
   memcpy(&f5, (char *) (s2.u32 + 28), 4);
-  f8.s = ARGS->f0.s * f6.s;
+  f8.s = exprand__Gf(f20.s) * f6.s;
   f9.s = f20.s - f7.s;
   f8.s = f5.s * f8.s;
   f5.s = f5.s * f9.s;
@@ -5016,54 +5003,9 @@ static void twixt__GiPff(EPANOS_ARGS *ARGS)
 
 }
 
-static void exprand__Gf(EPANOS_ARGS *ARGS)
+static float exprand__Gf(float arg)
 {
-  EPANOS_REG f30;
-  int EPANOS_fp_cond;
-  exprand__Gf:
-  ARGS->f0.u64 = 0;
+  assert ((double)arg > 0.0);
 
-  f30.d = ARGS->f12.s;
-  if (ARGS->f0.d < f30.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  if (!EPANOS_fp_cond)
-  {
-    goto loc_10003890;
-  }
-
-  loc_10003850:
-  {
-    ;
-    ARGS->f0.d = (double) drand48();
-  }
-
-  {
-    ARGS->f12.d = ARGS->f0.d * f30.d;
-    ARGS->f0.d = (double) expm1((double) ARGS->f12.d);
-  }
-  f30.d = ARGS->f0.d;
-  {
-    memcpy(&ARGS->f12, &dbl_10009300, 8);
-    ARGS->f0.d = (double) expm1((double) ARGS->f12.d);
-  }
-  ARGS->f0.d = f30.d / ARGS->f0.d;
-  {
-    ARGS->f0.s = ARGS->f0.d;
-    return;
-  }
-  loc_10003890:
-//  t9.u64 = (uint64_t) __assert;
-
-  ARGS->a2.u64 = 264;
-  ARGS->a1.u64 = (uint64_t) aEp_c;
-  {
-    ARGS->a0.u64 = (uint64_t) aM0_0;
-    ;
-  }
-  {
-    goto loc_10003850;
-  }
+  return (double)expm1(drand48() * (double)arg) / (double)expm1(1.0);
 }

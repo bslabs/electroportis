@@ -3955,21 +3955,9 @@ void createActTable__Gv(EPANOS_ARGS *ARGS)
 
 static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
   EPANOS_REG f1;
-  uint64_t var_10;
-  uint64_t var_8;
   createBlankActAnim__Gv:
-  at.u64 = (int32_t) (1 << 16);
 
-  at.u64 = 45788;
-  var_8 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + at.u32);
-  t9.u64 = (uint64_t) malloc;
-  var_10 = ra.u64;
   {
     ARGS->a0.u64 = 40;
     ARGS->v0.u64 = (void *) malloc((unsigned int) ARGS->a0.u64);
@@ -3977,7 +3965,6 @@ static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
   }
   memcpy(&ARGS->f2, &flt_100092A8, 4);
   memcpy(&f1, &flt_100092C0, 4);
-  gp.u64 = var_8;
   ARGS->f0.u32 = 0;
   memcpy((char *) (ARGS->v0.u32 + 4), &ARGS->f2, 4);
   memcpy((char *) (ARGS->v0.u32 + 8), &ARGS->f0, 4);
@@ -3985,7 +3972,6 @@ static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
   memcpy((char *) (ARGS->v0.u32 + 16), &ARGS->f0, 4);
   memcpy((char *) (ARGS->v0.u32 + 20), &ARGS->f0, 4);
   memcpy((char *) (ARGS->v0.u32 + 24), &ARGS->f0, 4);
-  ra.u64 = var_10;
   memcpy((char *) (ARGS->v0.u32 + 28), &ARGS->f0, 4);
   memcpy((char *) (ARGS->v0.u32 + 32), &f1, 4);
   {

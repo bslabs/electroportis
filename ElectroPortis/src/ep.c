@@ -3254,77 +3254,49 @@ static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount)
 {
   EPANOS_REG s0;
   EPANOS_REG s1;
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
-  uint64_t var_20;
-  uint64_t var_18;
-  uint64_t var_10;
-  uint64_t var_8;
   drawshape__GiT1:
 
-  var_18 = s0.u64;
-  var_10 = s1.u64;
-  at.u64 = (int32_t) (1 << 16);
-  var_8 = ra.u64;
-  at.u64 = 48476;
-  var_20 = gp.u64;
   if (ARGS->a1.u64 == 0)
   {
-    gp.u64 = (int32_t) (t9.u32 + at.u32);
     goto loc_100052DC;
   }
-  else
-    gp.u64 = (int32_t) (t9.u32 + at.u32);
 
-  t9.u64 = (uint64_t) glBegin;
   {
     ARGS->a0.u64 = 9;
     wrap_glBegin((unsigned int) ARGS->a0.u64, wincount);
   }
   s0.u64 = (uint64_t) glVertex2f;
   s1.u64 = (uint64_t) square;
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[0], 4);
   {
     memcpy(&ARGS->f13, &square[1], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[2], 4);
   {
     memcpy(&ARGS->f13, &square[3], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[4], 4);
   {
     memcpy(&ARGS->f13, &square[5], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[6], 4);
   {
     memcpy(&ARGS->f13, &square[7], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = (uint64_t) glEnd;
   {
     ;
     wrap_glEnd(wincount);
   }
-  ra.u64 = var_8;
   loc_100052C8:
-  s0.u64 = var_18;
 
-  s1.u64 = var_10;
-  gp.u64 = var_20;
   {
     return;
   }
   loc_100052DC:
-  t9.u64 = (uint64_t) glBegin;
 
   {
     ARGS->a0.u64 = 1;
@@ -3332,61 +3304,51 @@ static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   s0.u64 = (uint64_t) glVertex2f;
   s1.u64 = (uint64_t) square;
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[0], 4);
   {
     memcpy(&ARGS->f13, &square[1], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[2], 4);
   {
     memcpy(&ARGS->f13, &square[3], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[2], 4);
   {
     memcpy(&ARGS->f13, &square[3], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[4], 4);
   {
     memcpy(&ARGS->f13, &square[5], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[4], 4);
   {
     memcpy(&ARGS->f13, &square[5], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[6], 4);
   {
     memcpy(&ARGS->f13, &square[7], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[6], 4);
   {
     memcpy(&ARGS->f13, &square[7], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = s0.u64;
   memcpy(&ARGS->f12, &square[0], 4);
   {
     memcpy(&ARGS->f13, &square[1], 4);
     wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
   }
-  t9.u64 = (uint64_t) glEnd;
   {
     ;
     wrap_glEnd(wincount);
   }
   {
-    ra.u64 = var_8;
     goto loc_100052C8;
   }
 }

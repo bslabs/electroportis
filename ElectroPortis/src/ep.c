@@ -1286,8 +1286,6 @@ static void addToSeq__GP7animSeqP11animCommand(EPANOS_ARGS *ARGS)
 
 static void animateacts__Gv(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
   EPANOS_REG f4;
   EPANOS_REG f5;
   EPANOS_REG f6;
@@ -1299,7 +1297,6 @@ static void animateacts__Gv(EPANOS_ARGS *ARGS)
   ARGS->v0.u64 = 45932;
 
   f9.u64 = 0;
-  at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
   ARGS->a3.u64 = 0;
   {
     ARGS->a4.u64 = acttable_ptr;
@@ -1392,12 +1389,9 @@ static void animateacts__Gv(EPANOS_ARGS *ARGS)
 
 static void stopAnimation__Gv(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
   stopAnimation__Gv:
   ARGS->v0.u64 = 51120;
 
-  at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
   ARGS->a3.u64 = 0;
   ARGS->a2.u64 = acttable_ptr;
   ARGS->a5.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
@@ -3166,8 +3160,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
 static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
   EPANOS_REG f1;
   EPANOS_REG f4;
   EPANOS_REG f5;
@@ -3185,11 +3177,8 @@ static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS)
   ARGS->v0.u64 = 48628;
   if (ARGS->a0.i64 <= 0)
   {
-    at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
     goto loc_10005238;
   }
-  else
-    at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
 
   loc_100051C0:
   ARGS->a2.u64 = (int32_t) (ARGS->a5.u32 + ARGS->a1.u32);

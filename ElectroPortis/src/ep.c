@@ -1297,7 +1297,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t8;
   EPANOS_REG t9;
-  EPANOS_REG gp;
   EPANOS_REG ra;
   EPANOS_REG fp;
   EPANOS_REG f1;
@@ -1320,43 +1319,27 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_60;
   uint64_t var_D8;
   uint64_t var_58;
-  uint64_t var_18;
-  double var_50;
-  uint64_t var_48;
-  uint64_t var_C8;
-  uint64_t var_20;
-  uint64_t var_C0;
-  uint64_t var_30;
   uint64_t var_B8;
   uint64_t var_B0;
   char var_2D8[256];
   uint64_t var_A8;
   uint64_t var_A0;
-  uint64_t var_40;
   uint64_t var_98;
   uint64_t var_90;
   uint64_t var_28;
   uint64_t var_88;
   uint64_t var_80;
-  uint64_t var_D0;
   uint64_t var_78;
   uint64_t var_8;
   uint64_t var_70;
-  uint64_t var_38;
   uint64_t var_68;
-  uint64_t var_10;
   char var_1D8[256];
   readAnimation__Gv:
 
-  var_C0 = s3.u64;
   s3.u64 = 54768;
-  var_D0 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + s3.u32);
   s3.u64 = (uint64_t) (&oflag);
-  var_C8 = s0.u64;
   ARGS->a0.u64 = oflag;
   s0.u64 = (uint64_t) defaultScript;
-  var_18 = ra.u64;
   if (ARGS->a0.u64 == 0)
   {
     s0.u64 = defaultScript;
@@ -1372,17 +1355,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
   ARGS->a0.u64 = oflag;
   loc_100039F4:
-  memcpy(&var_50, &f20, 8);
 
   var_8 = s5.u64;
-  var_10 = s1.u64;
   if (ARGS->a0.u64 == 0)
   {
-    var_20 = s6.u64;
     goto loc_10003A14;
   }
-  else
-    var_20 = s6.u64;
 
   t9.u64 = (uint64_t) printf;
   {
@@ -1394,10 +1372,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   s1.u64 = (uint64_t) strcmp;
   s6.u64 = (uint64_t) strcspn;
-  var_30 = s7.u64;
-  var_38 = s4.u64;
-  var_40 = fp.u64;
-  var_48 = s2.u64;
   f20.u32 = 0;
   ARGS->a1.u64 = var_2E0;
   {
@@ -2409,17 +2383,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   loc_10004288:
   s5.u64 = var_8;
 
-  s1.u64 = var_10;
-  s6.u64 = var_20;
-  s7.u64 = var_30;
-  s4.u64 = var_38;
-  fp.u64 = var_40;
-  s2.u64 = var_48;
-  memcpy(&f20, &var_50, 8);
-  ra.u64 = var_18;
-  gp.u64 = var_D0;
-  s0.u64 = var_C8;
-  s3.u64 = var_C0;
   {
     return;
   }

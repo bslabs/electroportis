@@ -4044,8 +4044,6 @@ static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
 
 static void value__GfN21(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG at;
-  EPANOS_REG t9;
   EPANOS_REG f1;
   EPANOS_REG f3;
   EPANOS_REG f5;
@@ -4055,7 +4053,6 @@ static void value__GfN21(EPANOS_ARGS *ARGS)
   value__GfN21:
   ARGS->v0.u64 = 55680;
 
-  at.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
   memcpy(&f7, &flt_10009290, 4);
   if (f7.s < ARGS->f14.s)
     EPANOS_fp_cond = 1;

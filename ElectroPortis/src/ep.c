@@ -3367,10 +3367,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   EPANOS_REG s0;
   EPANOS_REG s1;
   EPANOS_REG s2;
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f4;
   EPANOS_REG f5;
@@ -3380,34 +3376,20 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   EPANOS_REG f23;
   int EPANOS_fp_cond;
   double var_50;
-  uint64_t var_30;
-  uint64_t var_20;
   double var_48;
-  uint64_t var_10;
   double var_40;
-  uint64_t var_28;
-  double var_18;
-  uint64_t var_38;
   hls_to_rgb__GfN21PfN24:
-  at.u64 = (int32_t) (1 << 16);
 
-  at.u64 = 55468;
-  var_20 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + at.u32);
   memcpy(&f1, &dbl_100092D8, 8);
   ARGS->f0.d = ARGS->f13.s;
-  memcpy(&var_18, &f20, 8);
-  var_28 = s2.u64;
   if (ARGS->f0.d <= f1.d)
     EPANOS_fp_cond = 1;
   else
     EPANOS_fp_cond = 0;
 
   f4.s = ARGS->f13.s;
-  var_30 = s1.u64;
   f5.s = ARGS->f12.s;
   s1.u64 = ARGS->a5.u64;
-  var_38 = s0.u64;
   s0.u64 = ARGS->a4.u64;
   s2.u64 = ARGS->a3.u64;
   if (!EPANOS_fp_cond)
@@ -3440,22 +3422,14 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   ;
   if (!EPANOS_fp_cond)
   {
-    var_10 = ra.u64;
     goto loc_10003794;
   }
-  else
-    var_10 = ra.u64;
 
   memcpy((char *) (s1.u32 + 0), &f4, 4);
   memcpy((char *) (s0.u32 + 0), &f4, 4);
   memcpy((char *) (s2.u32 + 0), &f4, 4);
   loc_10003778:
-  s0.u64 = var_38;
 
-  s1.u64 = var_30;
-  s2.u64 = var_28;
-  memcpy(&f20, &var_18, 8);
-  gp.u64 = var_20;
   {
     return;
   }
@@ -3469,7 +3443,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   memcpy(&ARGS->f15, &dbl_100092E8, 8);
   memcpy(&var_50, &ARGS->f14, 8);
   ARGS->f14.d = ARGS->f14.s;
-  t9.u64 = (uint64_t) value__GfN21;
   ARGS->f12.s = f4.s * ARGS->f12.s;
   memcpy(&var_48, &ARGS->f14, 8);
   ARGS->f14.d = ARGS->f14.d + ARGS->f15.d;
@@ -3480,7 +3453,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
     ARGS->f14.s = ARGS->f14.d;
     value__GfN21(ARGS);
   }
-  t9.u64 = (uint64_t) value__GfN21;
   memcpy((char *) (s2.u32 + 0), &ARGS->f0, 4);
   memcpy(&ARGS->f12, &var_40, 8);
   ARGS->f13.s = f20.s;
@@ -3490,7 +3462,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   }
   memcpy(&ARGS->f15, &dbl_100092F0, 8);
   memcpy(&ARGS->f14, &var_48, 8);
-  t9.u64 = (uint64_t) value__GfN21;
   ARGS->f14.d = ARGS->f14.d + ARGS->f15.d;
   memcpy(&ARGS->f12, &var_40, 8);
   memcpy((char *) (s0.u32 + 0), &ARGS->f0, 4);
@@ -3499,7 +3470,6 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
     ARGS->f14.s = ARGS->f14.d;
     value__GfN21(ARGS);
   }
-  ra.u64 = var_10;
   {
     memcpy((char *) (s1.u32 + 0), &ARGS->f0, 4);
     goto loc_10003778;

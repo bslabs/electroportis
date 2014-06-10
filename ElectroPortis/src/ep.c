@@ -4172,7 +4172,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t8;
   EPANOS_REG t9;
-  EPANOS_REG gp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f3;
@@ -4185,18 +4184,13 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   EPANOS_REG f10;
   EPANOS_REG f11;
   int EPANOS_fp_cond;
-  uint64_t var_20;
-  uint64_t var_18;
   uint64_t var_10;
   processCommand__GP11animCommand:
   ARGS->v0.u64 = (int32_t) (1 << 16);
 
   ARGS->v0.u64 = 50812;
-  var_18 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + ARGS->v0.u32);
   at.u64 = (uint64_t) (&oflag);
   at.u64 = oflag;
-  var_20 = s0.u64;
   s0.u64 = ARGS->a0.u64;
   if (at.u64 == 0)
   {
@@ -4324,9 +4318,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   ra.u64 = var_10;
 
   loc_100049F0:
-  s0.u64 = var_20;
 
-  gp.u64 = var_18;
   {
     return;
   }

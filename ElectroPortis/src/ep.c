@@ -101,7 +101,7 @@ char oflag;
 char bflag = 1;
 
 static char aflag = 1;
-static float square[8] = {-0.100000001f, -0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f};
+static const float square[8] = {-0.100000001f, -0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f};
 static float outlinecolRGBA[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
 static float colRGBA[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
 static char *defaultScript = "# created by mkmaster \n#\n# mello script\n#\n#\tDave Tristram\n#\n#\tthis script moves gently on the screen, and uses wheel to maintain\n#\ta 3D look.\n#\n#\n# constants\n#\nactset: 29, 1.0\t\t# \"full\"\nactset: 17, 0.0\t\t# \"auto\"\nactset: 18, 1.0\t\t# \"outline\"\n# actset: 73, 0.107258\t# \"whl\"\nactset: 31, 0.06\t# \"zoom\"\nactset: 38, 60.0\t# \"twst\"\n#actset: 80, 0.23\t# \"spn\" slow\nactset: 108, 1.2\t# \"size\"\nactset: 52, 40.0\t# \"n\"\n#\nseqdo: 1\t# wrist\nseqdo: 2\t# color\nseqdo: 3\t# wheel\nseqdo: 4\t# spin\nseqdo: 5\t# flip\nseqdo: 6\t# arm\nseqdo: 7\t# twist\nseqdo: 8\t# outline\n#\n# \n#\n# wrst anim: gentle radius modulation\n#\nseqname: 1\n#\nduration: 160\nactlim1: 101, -1.5\t\t# wrst\nactlim2: 101,  1.5\t\t# wrst\n#\n#\n#\n# color anim: hue and lightness motion\n#\n#\tthe hues chosen attempt to minimize \"green-out\"\n#\nseqname: 2\n#\nduration: 60\nactset: 127, 0.0\t\t# hue rate chan 0\n#\nactlim1: 123, 0.544053\t\t# hue chan 0 (just near cyan)\nactlim2: 123, 1.295\t\t# hue chan 0 (deep green)\n#\n#\nduration: 80\n#\nactlim1: 130, 0.0\t\t# lightness chan 0 (black)\nactlim2: 130, 1.0\t\t# lightness chan 0 (white)\n#\n#\n#\n# wheel anim: very slow, gentle rocking\n#\nseqname: 3\n#\nduration: 120\n#\nactlim1: 73, 0.137\t\t# wheel, real slow\nactlim2: 73, -0.137\t\t# wheel, real slow\n#\n#\n#\n# spin anim: somewhat fast occasionally\n#\nseqname: 4\n#\nduration: 100\n#\nactlim1: 80,  0.23\t\t# spn slow\nactlim2: 80, -0.23\t\t# spn slow\n#\nranddelay: 1000\n#\n#\nduration: 40\n#\nactlim1: 80,  5.23\t\t# spn fast\nactlim2: 80, -5.23\t\t# spn fast\n#\n#randdelay: 100\nranddelay: 200\n#\nseqloop:\n#\n#\n#\n# flip anim: somewhat fast occasionally\n#\nseqname: 5\n#\nduration: 50\n#\nactlim1: 87,  2.0\t\t# flip slow\nactlim2: 87, -2.0\t\t# flip slow\n#\n#randdelay: 500\nranddelay: 1200\n#\n#\nactlim1: 87,  10.0\t\t# flip fast\nactlim2: 87, -10.0\t\t# flip fast\n#\n#randdelay: 80\nranddelay: 220\n#\n#\nseqloop:\n#\n#\n#\n# arm anim: gentle radius modulation\n#\nseqname: 6\n#\nduration: 90\nactlim1: 94, -2.0\t\t# arm\nactlim2: 94,  2.0\t\t# arm\n#\n#\n#\n# twist anim:\n#\nseqname: 7\n#\n#duration: 1750\nduration: 2250\nactlim1: 38, 200.0\t\t# twst\nactlim2: 38, -200.0\t\t# twst\n#\n#\n#\n# outline anim: on and off infrequently, mostly on\n#\n#\nseqname: 8\n#\nduration: 5000\n#\nactlim1: 18, 0.2\t\t# outline\nactlim2: 18, 1.0\t\t# outline\n#\n#\n#\n# end of generated script";
@@ -145,7 +145,7 @@ static void animateacts__Gv(EPANOS_ARGS *ARGS);
 static void stopAnimation__Gv(EPANOS_ARGS *ARGS);
 static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS);
-static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount);
+static void drawshape__GiT1(char poly, wincount_t wincount);
 static void tasteQueue__Gv(EPANOS_ARGS *ARGS);
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS);
 static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS);
@@ -607,10 +607,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 1;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(1, wincount);
   }
   ARGS->a7.u64 = (uint64_t) outline;
   loc_100057BC:
@@ -629,10 +627,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 0;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(0, wincount);
   }
   loc_100057F8:
   {
@@ -760,10 +756,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 1;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(1, wincount);
   }
   ARGS->a2.u64 = var_A0;
   loc_10005980:
@@ -780,10 +774,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 0;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(0, wincount);
   }
   loc_100059B4:
   {
@@ -853,10 +845,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 1;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(1, wincount);
   }
   loc_10005A90:
   ARGS->a4.u64 = var_A0;
@@ -873,10 +863,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 0;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(0, wincount);
   }
   loc_10005AC0:
 
@@ -945,10 +933,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 1;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(1, wincount);
   }
   loc_10005B9C:
   ARGS->a6.u64 = var_A0;
@@ -965,10 +951,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = 0;
-    drawshape__GiT1(ARGS, wincount);
+    drawshape__GiT1(0, wincount);
   }
   loc_10005BCC:
 
@@ -3059,107 +3043,31 @@ static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS)
 
 }
 
-static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount)
+static void drawshape__GiT1(char poly, wincount_t wincount)
 {
-  EPANOS_REG s0;
-  EPANOS_REG s1;
-  drawshape__GiT1:
-
-  if (ARGS->a1.u64 == 0)
+  if (poly == 0)
   {
-    goto loc_100052DC;
+    wrap_glBegin(GL_LINES, wincount);
+    wrap_glVertex2f(square[0], square[1], wincount);
+    wrap_glVertex2f(square[2], square[3], wincount);
+    wrap_glVertex2f(square[2], square[3], wincount);
+    wrap_glVertex2f(square[4], square[5], wincount);
+    wrap_glVertex2f(square[4], square[5], wincount);
+    wrap_glVertex2f(square[6], square[7], wincount);
+    wrap_glVertex2f(square[6], square[7], wincount);
+    wrap_glVertex2f(square[0], square[1], wincount);
+  }
+  else
+  {
+    wrap_glBegin(GL_POLYGON, wincount);
+    wrap_glVertex2f(square[0], square[1], wincount);
+    wrap_glVertex2f(square[2], square[3], wincount);
+    wrap_glVertex2f(square[4], square[5], wincount);
+    wrap_glVertex2f(square[6], square[7], wincount);
   }
 
-  {
-    ARGS->a0.u64 = 9;
-    wrap_glBegin((unsigned int) ARGS->a0.u64, wincount);
-  }
-  s0.u64 = (uint64_t) glVertex2f;
-  s1.u64 = (uint64_t) square;
-  memcpy(&ARGS->f12, &square[0], 4);
-  {
-    memcpy(&ARGS->f13, &square[1], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[2], 4);
-  {
-    memcpy(&ARGS->f13, &square[3], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[4], 4);
-  {
-    memcpy(&ARGS->f13, &square[5], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[6], 4);
-  {
-    memcpy(&ARGS->f13, &square[7], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  {
-    ;
-    wrap_glEnd(wincount);
-  }
-  loc_100052C8:
-
-  {
-    return;
-  }
-  loc_100052DC:
-
-  {
-    ARGS->a0.u64 = 1;
-    wrap_glBegin((unsigned int) ARGS->a0.u64, wincount);
-  }
-  s0.u64 = (uint64_t) glVertex2f;
-  s1.u64 = (uint64_t) square;
-  memcpy(&ARGS->f12, &square[0], 4);
-  {
-    memcpy(&ARGS->f13, &square[1], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[2], 4);
-  {
-    memcpy(&ARGS->f13, &square[3], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[2], 4);
-  {
-    memcpy(&ARGS->f13, &square[3], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[4], 4);
-  {
-    memcpy(&ARGS->f13, &square[5], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[4], 4);
-  {
-    memcpy(&ARGS->f13, &square[5], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[6], 4);
-  {
-    memcpy(&ARGS->f13, &square[7], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[6], 4);
-  {
-    memcpy(&ARGS->f13, &square[7], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  memcpy(&ARGS->f12, &square[0], 4);
-  {
-    memcpy(&ARGS->f13, &square[1], 4);
-    wrap_glVertex2f((float) ARGS->f12.s, (float) ARGS->f13.s, wincount);
-  }
-  {
-    ;
-    wrap_glEnd(wincount);
-  }
-  {
-    goto loc_100052C8;
-  }
+  wrap_glEnd(wincount);
+  return;
 }
 
 static void tasteQueue__Gv(EPANOS_ARGS *ARGS)

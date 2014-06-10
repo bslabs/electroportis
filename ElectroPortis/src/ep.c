@@ -5038,7 +5038,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG at;
   EPANOS_REG t8;
   EPANOS_REG t9;
-  EPANOS_REG gp;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f5;
@@ -5051,33 +5050,21 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG f29;
   int EPANOS_fp_cond;
   double var_50;
-  uint64_t var_30;
-  uint64_t var_20;
   double var_48;
-  uint64_t var_10;
   double var_40;
-  double var_28;
-  uint64_t var_18;
-  uint64_t var_38;
-  uint64_t var_8;
   display__Gv:
   at.u64 = (int32_t) (1 << 16);
 
   at.u64 = 45256;
-  var_30 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + at.u32);
   t9.u64 = (uint64_t) glClear;
-  var_38 = ra.u64;
   ARGS->a0.u64 = 16384;
   {
-    memcpy(&var_28, &f20, 8);
     wrap_glClear((unsigned int) ARGS->a0.u64, wincount);
   }
   memcpy(&f20, &flt_100092A8, 4);
   t9.u64 = (uint64_t) glColor3f;
   ARGS->f14.s = f20.s;
   ARGS->f13.s = f20.s;
-  var_8 = s0.u64;
   {
     ARGS->f12.s = f20.s;
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
@@ -5087,14 +5074,12 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->v0.u64 = acttable[45];
   memcpy(&f1, &t, 4);
   memcpy(&ARGS->f2, (char *) (ARGS->v0.u32 + 24), 4);
-  var_20 = s1.u64;
   s1.u64 = (uint64_t) (&n);
   memcpy(&ARGS->f0, &dbl_10009300, 8);
   f1.s = f1.s + ARGS->f2.s;
   ARGS->a0.u64 = n;
   f1.d = f1.s;
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + 1);
-  var_18 = s2.u64;
   ARGS->a3.u64 = (int32_t) (ARGS->a0.i32 >> 31);
   if (ARGS->f0.d <= f1.d)
     EPANOS_fp_cond = 1;
@@ -5103,7 +5088,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   ARGS->a2.u64 = (uint64_t) (&aflag);
   ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
-  var_10 = s3.u64;
   s3.u64 = 1;
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
   ARGS->a1.u64 = aflag;
@@ -5325,9 +5309,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ra.u64 = (uint64_t) (&wheel);
   memcpy(&ARGS->f13, &var_50, 8);
   memcpy(&ARGS->f12, &wheel, 4);
-  s1.u64 = var_20;
-  s2.u64 = var_18;
-  s3.u64 = var_10;
   ARGS->f12.s = ARGS->f12.s - ARGS->f13.s;
   {
     ARGS->f13.s = f20.s;
@@ -5335,7 +5316,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   t9.u64 = (uint64_t) drawit__Gv;
   at.u64 = (uint64_t) (&wheel);
-  memcpy(&f20, &var_28, 8);
   {
     memcpy(&wheel, &ARGS->f0, 4);
     drawit__Gv(ARGS, wincount);
@@ -5352,7 +5332,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   //t9.u64 = (uint64_t) swapBuffers__Q2_10GLXWrapper6windowGv;
   ARGS->a0.u64 = (uint64_t) (&theWindow);
-  s0.u64 = var_8;
   {
     ARGS->a0.u64 = theWindow;
     ;
@@ -5362,8 +5341,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->a0.u64 = 0;
     ;
   }
-  ra.u64 = var_38;
-  gp.u64 = var_30;
   {
     return;
   }

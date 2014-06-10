@@ -3725,58 +3725,31 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
 {
   EPANOS_REG s0;
   EPANOS_REG s1;
-  EPANOS_REG s2;
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
-  uint64_t var_30;
-  uint64_t var_28;
-  uint64_t var_10;
-  uint64_t var_20;
-  uint64_t var_18;
   killSeq__GP7animSeq:
 
-  var_20 = s1.u64;
-  var_18 = ra.u64;
-  var_30 = s0.u64;
-  at.u64 = (int32_t) (1 << 16);
   s0.u64 = ARGS->a0.u64;
-  var_10 = s2.u64;
-  at.u64 = 51060;
-  var_28 = gp.u64;
   if (ARGS->a0.u64 == 0)
   {
-    gp.u64 = (int32_t) (t9.u32 + at.u32);
     goto loc_10004904;
   }
-  else
-    gp.u64 = (int32_t) (t9.u32 + at.u32);
 
   s1.u64 = (uint64_t) seqList;
   *((uint8_t *) (ARGS->a0.u32 + 4)) = 0;
   ARGS->a3.u64 = seqList;
   if (ARGS->a0.u64 != ARGS->a3.u64)
   {
-    s2.u64 = (uint64_t) free;
     goto loc_100048A4;
   }
-  else
-    s2.u64 = (uint64_t) free;
 
   ARGS->a0.u64 = *((int32_t *) (ARGS->a3.u32 + 36));
   seqList = ARGS->a0.u32;
   ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
   if (ARGS->a0.u64 == 0)
   {
-    t9.u64 = s2.u64;
     goto loc_10004894;
   }
-  else
-    t9.u64 = s2.u64;
 
   loc_1000487C:
-  t9.u64 = s2.u64;
 
   {
     s1.u64 = *((int32_t *) (ARGS->a0.u32 + 20));
@@ -3790,7 +3763,6 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
   else
     ARGS->a0.u64 = s1.u64;
 
-  t9.u64 = s2.u64;
   loc_10004894:
   s1.u64 = (uint64_t) seqList;
 
@@ -3804,11 +3776,8 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
 
   if (ARGS->a2.u64 == 0)
   {
-    s2.u64 = (uint64_t) free;
     goto loc_10004904;
   }
-  else
-    s2.u64 = (uint64_t) free;
 
   loc_100048B0:
   if (ARGS->a2.u64 == s0.u64)
@@ -3831,7 +3800,6 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
     ;
 
   {
-    s2.u64 = var_10;
     goto loc_10004908;
   }
   loc_100048D0:
@@ -3848,7 +3816,6 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
     ARGS->a0.u64 = ARGS->a1.u64;
 
   loc_100048E4:
-  t9.u64 = s2.u64;
 
   {
     s1.u64 = *((int32_t *) (ARGS->a0.u32 + 20));
@@ -3863,21 +3830,15 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
     ARGS->a0.u64 = s1.u64;
 
   loc_100048F8:
-  t9.u64 = s2.u64;
 
   {
     ARGS->a0.u64 = s0.u64;
     free((void *) ARGS->a0.u64);
   }
   loc_10004904:
-  s2.u64 = var_10;
 
   loc_10004908:
-  ra.u64 = var_18;
 
-  s0.u64 = var_30;
-  s1.u64 = var_20;
-  gp.u64 = var_28;
   {
     return;
   }

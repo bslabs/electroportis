@@ -54,7 +54,7 @@ extern char oflag, bflag;
 
 void init_ep(void);
 void reshape__GiT1(const GLuint width, const GLuint height);
-void createActTable__Gv(EPANOS_ARGS *ARGS);
+void createActTable__Gv(void);
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount);
 #ifdef __cplusplus
 }

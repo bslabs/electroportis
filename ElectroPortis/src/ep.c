@@ -43,9 +43,7 @@ static double dbl_100092D8 = 0.50000000000000000;
 static float flt_100092B4 = -1.00000000f;
 static float flt_100092AC = 2.00000000f;
 static float flt_10009290 = 360.000000f;
-static float flt_100092C4 = 52.0000000f;
 static float flt_10009294 = -360.000000f;
-static float flt_100092C0 = 0.600000024f;
 static const char *aDoneReadingAni = "# done reading animation\n";
 static const char *aDuration = "duration:";
 static const char *aVariance = "variance:";
@@ -107,8 +105,7 @@ static float square[8] = {-0.100000001f, -0.100000001f, 0.100000001f, -0.1000000
 static float outlinecolRGBA[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
 static float colRGBA[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
 static char *defaultScript = "# created by mkmaster \n#\n# mello script\n#\n#\tDave Tristram\n#\n#\tthis script moves gently on the screen, and uses wheel to maintain\n#\ta 3D look.\n#\n#\n# constants\n#\nactset: 29, 1.0\t\t# \"full\"\nactset: 17, 0.0\t\t# \"auto\"\nactset: 18, 1.0\t\t# \"outline\"\n# actset: 73, 0.107258\t# \"whl\"\nactset: 31, 0.06\t# \"zoom\"\nactset: 38, 60.0\t# \"twst\"\n#actset: 80, 0.23\t# \"spn\" slow\nactset: 108, 1.2\t# \"size\"\nactset: 52, 40.0\t# \"n\"\n#\nseqdo: 1\t# wrist\nseqdo: 2\t# color\nseqdo: 3\t# wheel\nseqdo: 4\t# spin\nseqdo: 5\t# flip\nseqdo: 6\t# arm\nseqdo: 7\t# twist\nseqdo: 8\t# outline\n#\n# \n#\n# wrst anim: gentle radius modulation\n#\nseqname: 1\n#\nduration: 160\nactlim1: 101, -1.5\t\t# wrst\nactlim2: 101,  1.5\t\t# wrst\n#\n#\n#\n# color anim: hue and lightness motion\n#\n#\tthe hues chosen attempt to minimize \"green-out\"\n#\nseqname: 2\n#\nduration: 60\nactset: 127, 0.0\t\t# hue rate chan 0\n#\nactlim1: 123, 0.544053\t\t# hue chan 0 (just near cyan)\nactlim2: 123, 1.295\t\t# hue chan 0 (deep green)\n#\n#\nduration: 80\n#\nactlim1: 130, 0.0\t\t# lightness chan 0 (black)\nactlim2: 130, 1.0\t\t# lightness chan 0 (white)\n#\n#\n#\n# wheel anim: very slow, gentle rocking\n#\nseqname: 3\n#\nduration: 120\n#\nactlim1: 73, 0.137\t\t# wheel, real slow\nactlim2: 73, -0.137\t\t# wheel, real slow\n#\n#\n#\n# spin anim: somewhat fast occasionally\n#\nseqname: 4\n#\nduration: 100\n#\nactlim1: 80,  0.23\t\t# spn slow\nactlim2: 80, -0.23\t\t# spn slow\n#\nranddelay: 1000\n#\n#\nduration: 40\n#\nactlim1: 80,  5.23\t\t# spn fast\nactlim2: 80, -5.23\t\t# spn fast\n#\n#randdelay: 100\nranddelay: 200\n#\nseqloop:\n#\n#\n#\n# flip anim: somewhat fast occasionally\n#\nseqname: 5\n#\nduration: 50\n#\nactlim1: 87,  2.0\t\t# flip slow\nactlim2: 87, -2.0\t\t# flip slow\n#\n#randdelay: 500\nranddelay: 1200\n#\n#\nactlim1: 87,  10.0\t\t# flip fast\nactlim2: 87, -10.0\t\t# flip fast\n#\n#randdelay: 80\nranddelay: 220\n#\n#\nseqloop:\n#\n#\n#\n# arm anim: gentle radius modulation\n#\nseqname: 6\n#\nduration: 90\nactlim1: 94, -2.0\t\t# arm\nactlim2: 94,  2.0\t\t# arm\n#\n#\n#\n# twist anim:\n#\nseqname: 7\n#\n#duration: 1750\nduration: 2250\nactlim1: 38, 200.0\t\t# twst\nactlim2: 38, -200.0\t\t# twst\n#\n#\n#\n# outline anim: on and off infrequently, mostly on\n#\n#\nseqname: 8\n#\nduration: 5000\n#\nactlim1: 18, 0.2\t\t# outline\nactlim2: 18, 1.0\t\t# outline\n#\n#\n#\n# end of generated script";
-static uintptr_t acttable[1024];
-static uintptr_t *acttable_ptr = acttable;
+static float *acttable[1024];
 static char sflag;
 static float currentFrame;
 static float relFrame;
@@ -152,7 +149,7 @@ static void drawshape__GiT1(EPANOS_ARGS *ARGS, wincount_t wincount);
 static void tasteQueue__Gv(EPANOS_ARGS *ARGS);
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS);
 static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS);
-static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS);
+static float *createBlankActAnim__Gv(void);
 static void value__GfN21(EPANOS_ARGS *ARGS);
 static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS);
 static void setacttargets__Gv(EPANOS_ARGS *ARGS);
@@ -183,7 +180,7 @@ init_ep(void)
     EPANOS_ARGS ARGS;
 
     memset(acttable, 0, sizeof(acttable));
-    createActTable__Gv(&ARGS);
+    createActTable__Gv();
     memset(outline, 1, sizeof(outline));
     memset(fill, 1, sizeof(fill));
 
@@ -1148,7 +1145,7 @@ static void animateacts__Gv(EPANOS_ARGS *ARGS)
   f9.u64 = 0;
   ARGS->a3.u64 = 0;
   {
-    ARGS->a4.u64 = acttable_ptr;
+    ARGS->a4.u64 = acttable;
     goto loc_10005C54;
   }
   loc_10005C4C:
@@ -1242,7 +1239,7 @@ static void stopAnimation__Gv(EPANOS_ARGS *ARGS)
   ARGS->v0.u64 = 51120;
 
   ARGS->a3.u64 = 0;
-  ARGS->a2.u64 = acttable_ptr;
+  ARGS->a2.u64 = acttable;
   ARGS->a5.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
   loc_10004804:
   ARGS->a2.u64 = (int32_t) (ARGS->a2.u32 + 4);
@@ -3562,101 +3559,36 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
   }
 }
 
-void createActTable__Gv(EPANOS_ARGS *ARGS)
+void createActTable__Gv(void)
 {
-  EPANOS_REG f1;
-  createActTable__Gv:
+  acttable[18] = createBlankActAnim__Gv();
+  acttable[73] = createBlankActAnim__Gv();
+  acttable[31] = createBlankActAnim__Gv();
+  acttable[38] = createBlankActAnim__Gv();
+  acttable[80] = createBlankActAnim__Gv();
+  acttable[108] = createBlankActAnim__Gv();
+  acttable[52] = createBlankActAnim__Gv();
+  acttable[52][6] = 52.0000000f;
+  acttable[101] = createBlankActAnim__Gv();
+  acttable[127] = createBlankActAnim__Gv();
+  acttable[123] = createBlankActAnim__Gv();
+  acttable[87] = createBlankActAnim__Gv();
+  acttable[94] = createBlankActAnim__Gv();
+  acttable[45] = createBlankActAnim__Gv();
+  acttable[45][6] = flt_100092A8;
+  acttable[130] = createBlankActAnim__Gv();
 
-  {
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[18] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[73] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[31] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[38] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[80] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[108] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  memcpy(&ARGS->f0, &flt_100092C4, 4);
-  memcpy((char *) (ARGS->v0.u32 + 24), &ARGS->f0, 4);
-  {
-    acttable[52] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[101] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[127] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[123] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[87] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  {
-    acttable[94] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  memcpy(&f1, &flt_100092A8, 4);
-  memcpy((char *) (ARGS->v0.u32 + 24), &f1, 4);
-  {
-    acttable[45] = ARGS->v0.u32;
-    createBlankActAnim__Gv(ARGS);
-  }
-  acttable[130] = ARGS->v0.u32;
-  {
-    return;
-  }
+  return;
 }
 
-static void createBlankActAnim__Gv(EPANOS_ARGS *ARGS)
+static float *createBlankActAnim__Gv(void)
 {
-  EPANOS_REG f1;
-  createBlankActAnim__Gv:
+  float *ret = calloc(10, sizeof(float));
+  
+  ret[1] = flt_100092A8;
+  ret[8] = 0.600000024f;
 
-  {
-    ARGS->a0.u64 = 40;
-    ARGS->v0.u64 = (void *) malloc((unsigned int) ARGS->a0.u64);
-    memset((void *)ARGS->v0.u32, 0, ARGS->a0.u32);
-  }
-  memcpy(&ARGS->f2, &flt_100092A8, 4);
-  memcpy(&f1, &flt_100092C0, 4);
-  ARGS->f0.u32 = 0;
-  memcpy((char *) (ARGS->v0.u32 + 4), &ARGS->f2, 4);
-  memcpy((char *) (ARGS->v0.u32 + 8), &ARGS->f0, 4);
-  memcpy((char *) (ARGS->v0.u32 + 12), &ARGS->f0, 4);
-  memcpy((char *) (ARGS->v0.u32 + 16), &ARGS->f0, 4);
-  memcpy((char *) (ARGS->v0.u32 + 20), &ARGS->f0, 4);
-  memcpy((char *) (ARGS->v0.u32 + 24), &ARGS->f0, 4);
-  memcpy((char *) (ARGS->v0.u32 + 28), &ARGS->f0, 4);
-  memcpy((char *) (ARGS->v0.u32 + 32), &f1, 4);
-  {
-    memcpy((char *) (ARGS->v0.u32 + 36), &ARGS->f0, 4);
-    return;
-  }
+  return ret;
 }
 
 static void value__GfN21(EPANOS_ARGS *ARGS)

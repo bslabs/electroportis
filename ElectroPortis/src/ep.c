@@ -3885,106 +3885,69 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS)
 
 void createActTable__Gv(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG s0;
-  EPANOS_REG s1;
-  EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
   EPANOS_REG f1;
-  uint64_t var_20;
-  uint64_t var_18;
-  uint64_t var_10;
-  uint64_t var_8;
   createActTable__Gv:
 
-  at.u64 = (int32_t) (1 << 16);
-  var_20 = s1.u64;
-  at.u64 = 45688;
-  var_10 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + at.u32);
-  s1.u64 = (uint64_t) createBlankActAnim__Gv;
-  t9.u64 = s1.u64;
-  var_18 = ra.u64;
   {
-    var_8 = s0.u64;
     createBlankActAnim__Gv(ARGS);
   }
-  s0.u64 = (uint64_t) acttable;
-  t9.u64 = s1.u64;
   {
     acttable[18] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[73] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[31] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[38] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[80] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[108] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
   memcpy(&ARGS->f0, &flt_100092C4, 4);
-  t9.u64 = s1.u64;
   memcpy((char *) (ARGS->v0.u32 + 24), &ARGS->f0, 4);
   {
     acttable[52] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[101] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[127] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[123] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[87] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  t9.u64 = s1.u64;
   {
     acttable[94] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
   memcpy(&f1, &flt_100092A8, 4);
-  t9.u64 = s1.u64;
   memcpy((char *) (ARGS->v0.u32 + 24), &f1, 4);
   {
     acttable[45] = ARGS->v0.u32;
     createBlankActAnim__Gv(ARGS);
   }
-  s1.u64 = var_20;
-  ra.u64 = var_18;
-  gp.u64 = var_10;
   acttable[130] = ARGS->v0.u32;
-  s0.u64 = var_8;
   {
     return;
   }

@@ -215,9 +215,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG s6;
   EPANOS_REG s7;
   EPANOS_REG at;
-  EPANOS_REG t9;
-  EPANOS_REG gp;
-  EPANOS_REG ra;
   EPANOS_REG fp;
   EPANOS_REG f1;
   EPANOS_REG f5;
@@ -233,69 +230,39 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   double var_110;
   uint64_t var_90;
   double var_108;
-  double var_50;
-  uint64_t var_10;
   double var_100;
-  double var_F8;
   uint64_t var_78;
-  uint64_t var_18;
   double var_F0;
-  double var_60;
   double var_E8;
-  uint64_t var_20;
   double var_E0;
   uint64_t var_88;
   double var_D8;
-  uint64_t var_28;
   double var_D0;
-  double var_70;
   double var_C8;
-  uint64_t var_30;
-  uint64_t var_C0;
-  double var_58;
-  uint64_t var_B8;
-  uint64_t var_38;
-  uint64_t var_B0;
   uint64_t var_80;
   uint64_t var_A8;
-  uint64_t var_40;
   uint64_t var_A0;
-  double var_68;
   uint64_t var_98;
-  uint64_t var_48;
   drawit__Gv:
 
-  memcpy(&var_F8, &f22, 8);
   at.u64 = (int32_t) (1 << 16);
-  var_C0 = s0.u64;
   at.u64 = 48152;
-  var_B0 = gp.u64;
-  gp.u64 = (int32_t) (t9.u32 + at.u32);
   memcpy(&f22, &flt_100092A8, 4);
   s0.u64 = (uint64_t) glColor3f;
   ARGS->f12.s = f22.s;
-  t9.u64 = s0.u64;
-  var_10 = s1.u64;
   ARGS->f13.s = f22.s;
-  var_B8 = ra.u64;
   {
     ARGS->f14.s = f22.s;
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   s1.u64 = (uint64_t) glPushMatrix;
-  t9.u64 = s1.u64;
-  memcpy(&var_70, &f20, 8);
   {
-    var_30 = fp.u64;
     wrap_glPushMatrix(wincount);
   }
   f20.u32 = 0;
   fp.u64 = (uint64_t) glRotatef;
-  memcpy(&var_58, &f24, 8);
   ARGS->f13.s = f22.s;
   ARGS->v0.u64 = (uint64_t) (&wheel);
-  t9.u64 = fp.u64;
-  var_40 = s3.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &wheel, 4);
   {
@@ -303,23 +270,15 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   memcpy(&f24, &flt_100092BC, 4);
-  memcpy(&var_68, &f26, 8);
-  memcpy(&var_60, &f30, 8);
-  memcpy(&var_50, &f28, 8);
-  var_38 = s6.u64;
-  var_18 = s7.u64;
-  var_20 = s5.u64;
   ARGS->a3.u64 = (uint64_t) (&nlimit);
   ARGS->a1.u64 = (uint64_t) (&n);
   ARGS->v1.u64 = nlimit;
-  var_28 = s4.u64;
   ARGS->a4.u64 = n;
   if (((signed) 0) < ((signed) ARGS->v1.i64))
     ARGS->v1.u64 = 1;
   else
     ARGS->v1.u64 = 0;
 
-  var_48 = s2.u64;
   var_A8 = ARGS->v1.u64;
   if (ARGS->v1.u64 == 0)
   {
@@ -345,14 +304,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   if (ARGS->a0.u64 != 0)
   {
-    t9.u64 = s2.u64;
     goto loc_10005470;
   }
-  else
-    t9.u64 = s2.u64;
 
   s0.u64 = (int32_t) (s0.u32 + -128);
-  t9.u64 = s2.u64;
   loc_10005470:
   ARGS->a0.u64 = s0.u64;
 
@@ -362,7 +317,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     twixt__GiPff(ARGS);
   }
   ARGS->f12.s = f20.s;
-  t9.u64 = s4.u64;
   ARGS->f13.s = f20.s;
   {
     ARGS->f14.s = ARGS->f0.s * f24.s;
@@ -455,14 +409,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   if (ARGS->a5.u64 != 0)
   {
-    t9.u64 = s2.u64;
     goto loc_10005540;
   }
-  else
-    t9.u64 = s2.u64;
 
   s0.u64 = (int32_t) (s0.u32 + -128);
-  t9.u64 = s2.u64;
   loc_10005540:
   ARGS->a1.u64 = (uint64_t) x;
 
@@ -471,7 +421,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
     twixt__GiPff(ARGS);
   }
-  t9.u64 = s2.u64;
   ARGS->a1.u64 = (uint64_t) y;
   f30.s = ARGS->f0.s;
   ARGS->a0.u64 = s0.u64;
@@ -480,14 +429,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     twixt__GiPff(ARGS);
   }
   memcpy(&var_D0, &ARGS->f0, 8);
-  t9.u64 = s2.u64;
   ARGS->a1.u64 = (uint64_t) dzoom;
   ARGS->a0.u64 = s0.u64;
   {
     memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
     twixt__GiPff(ARGS);
   }
-  t9.u64 = s2.u64;
   ARGS->a1.u64 = (uint64_t) arm;
   f24.s = ARGS->f0.s;
   ARGS->a0.u64 = s0.u64;
@@ -497,14 +444,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   memcpy(&var_C8, &ARGS->f0, 8);
   ARGS->a1.u64 = (uint64_t) wrist;
-  t9.u64 = s2.u64;
   memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
   ARGS->a0.u64 = s0.u64;
   {
     memcpy(&var_100, &f24, 8);
     twixt__GiPff(ARGS);
   }
-  t9.u64 = s2.u64;
   ARGS->a1.u64 = (uint64_t) size;
   f28.s = ARGS->f0.s;
   ARGS->a0.u64 = s0.u64;
@@ -513,7 +458,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     twixt__GiPff(ARGS);
   }
   memcpy(&f24, &flt_10009290, 4);
-  t9.u64 = s5.u64;
   f26.s = ARGS->f0.s;
   ARGS->a1.u64 = (uint64_t) spin;
   ARGS->a0.u64 = s0.u64;
@@ -524,7 +468,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   memcpy(&var_E0, &ARGS->f0, 8);
   ARGS->a1.u64 = (uint64_t) flip;
-  t9.u64 = s5.u64;
   memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
   ARGS->a0.u64 = s0.u64;
   ARGS->f15.s = f24.s;
@@ -533,14 +476,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     foldtwixt__GiPffT3(ARGS);
   }
   memcpy(&var_D8, &ARGS->f0, 8);
-  t9.u64 = s2.u64;
   ARGS->a1.u64 = (uint64_t) dtwist;
   ARGS->a0.u64 = s0.u64;
   {
     memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
     twixt__GiPff(ARGS);
   }
-  t9.u64 = s5.u64;
   f24.s = ARGS->f0.s;
   ARGS->a1.u64 = (uint64_t) hue;
   ARGS->a0.u64 = s0.u64;
@@ -550,7 +491,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     foldtwixt__GiPffT3(ARGS);
   }
   ARGS->a1.u64 = (uint64_t) alpha;
-  t9.u64 = s2.u64;
   memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
   f26.s = ARGS->f0.s;
   ARGS->a0.u64 = s0.u64;
@@ -559,7 +499,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     twixt__GiPff(ARGS);
   }
   memcpy(&var_E8, &ARGS->f0, 8);
-  t9.u64 = s5.u64;
   ARGS->a1.u64 = (uint64_t) light;
   ARGS->a0.u64 = s0.u64;
   memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
@@ -567,7 +506,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->f15.s = f22.s;
     foldtwixt__GiPffT3(ARGS);
   }
-  t9.u64 = s2.u64;
   ARGS->a1.u64 = (uint64_t) alphaout;
   f24.s = ARGS->f0.s;
   ARGS->a0.u64 = s0.u64;
@@ -575,7 +513,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
     twixt__GiPff(ARGS);
   }
-  t9.u64 = (uint64_t) hls_to_rgb__GfN21PfN24;
   memcpy(&var_F0, &ARGS->f0, 8);
   ARGS->f12.s = f26.s;
   ARGS->f13.s = f24.s;
@@ -610,7 +547,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   memcpy(&ARGS->f12, &flt_100092B4, 4);
   ARGS->f12.s = f5.s + ARGS->f12.s;
   loc_100056E8:
-  t9.u64 = (uint64_t) hls_to_rgb__GfN21PfN24;
 
   ARGS->f13.s = f22.s - f24.s;
   ARGS->a4.u64 = var_90;
@@ -620,12 +556,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->a5.u64 = var_88;
     hls_to_rgb__GfN21PfN24(ARGS);
   }
-  t9.u64 = (uint64_t) glPushMatrix;
   {
     ;
     wrap_glPushMatrix(wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f30.s;
   memcpy(&ARGS->f13, &var_D0, 8);
   {
@@ -633,14 +567,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f20.s;
   memcpy(&ARGS->f13, &var_C8, 8);
   {
@@ -648,7 +580,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f22.s;
   memcpy(&ARGS->f12, &var_D8, 8);
   {
@@ -656,7 +587,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
-  t9.u64 = s4.u64;
   ARGS->f13.s = f20.s;
   {
     ARGS->f14.s = f20.s;
@@ -674,14 +604,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   else
     ARGS->a7.u64 = (uint64_t) outline;
 
-  t9.u64 = (uint64_t) glColor3f;
   memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
   {
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 1;
@@ -695,26 +623,20 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->a7.u64 = *((int8_t *) (ARGS->a7.u32 + 0));
   if (ARGS->a7.u64 == 0)
   {
-    t9.u64 = (uint64_t) glPopMatrix;
     goto loc_100057F8;
   }
-  else
-    t9.u64 = (uint64_t) glPopMatrix;
 
-  t9.u64 = (uint64_t) glColor3f;
   memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
   {
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 0;
     drawshape__GiT1(ARGS, wincount);
   }
-  t9.u64 = (uint64_t) glPopMatrix;
   loc_100057F8:
   {
     ;
@@ -727,11 +649,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   t4.u64 = sflag;
   if (t4.u64 == 0)
   {
-    t9.u64 = (uint64_t) glScalef;
     goto loc_100058AC;
   }
-  else
-    t9.u64 = (uint64_t) glScalef;
 
   loc_10005818:
   t6.u64 = nlimit;
@@ -772,28 +691,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     goto loc_1000552C;
   }
   loc_10005858:
-  s2.u64 = var_48;
-
-  s3.u64 = var_40;
-  s6.u64 = var_38;
-  fp.u64 = var_30;
-  s4.u64 = var_28;
-  s0.u64 = var_C0;
-  s5.u64 = var_20;
-  s7.u64 = var_18;
-  s1.u64 = var_10;
-  memcpy(&f20, &var_70, 8);
-  memcpy(&f26, &var_68, 8);
-  memcpy(&f30, &var_60, 8);
-  t9.u64 = (uint64_t) glPopMatrix;
-  memcpy(&f22, &var_F8, 8);
-  memcpy(&f24, &var_58, 8);
   {
-    memcpy(&f28, &var_50, 8);
     wrap_glPopMatrix(wincount);
   }
-  ra.u64 = var_B8;
-  gp.u64 = var_B0;
   {
     return;
   }
@@ -805,12 +705,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->f14.s = f22.s;
     wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) glPushMatrix;
   {
     ;
     wrap_glPushMatrix(wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f30.s;
   memcpy(&ARGS->f13, &var_D0, 8);
   {
@@ -818,14 +716,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f20.s;
   memcpy(&ARGS->f13, &var_C8, 8);
   {
@@ -833,7 +729,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f22.s;
   memcpy(&ARGS->f12, &var_D8, 8);
   {
@@ -841,14 +736,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
-  t9.u64 = s4.u64;
   ARGS->f13.s = f20.s;
   {
     ARGS->f14.s = f20.s;
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   memcpy(&ARGS->f13, &var_108, 8);
-  t9.u64 = (uint64_t) glScalef;
   ARGS->f14.s = f22.s;
   {
     ARGS->f12.s = ARGS->f13.s;
@@ -864,14 +757,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   else
     ARGS->a2.u64 = var_A0;
 
-  t9.u64 = (uint64_t) glColor3f;
   memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
   {
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 1;
@@ -883,26 +774,20 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   if (ARGS->a2.u64 == 0)
   {
-    t9.u64 = (uint64_t) glPopMatrix;
     goto loc_100059B4;
   }
-  else
-    t9.u64 = (uint64_t) glPopMatrix;
 
-  t9.u64 = (uint64_t) glColor3f;
   memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
   {
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 0;
     drawshape__GiT1(ARGS, wincount);
   }
-  t9.u64 = (uint64_t) glPopMatrix;
   loc_100059B4:
   {
     ;
@@ -910,19 +795,16 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
 
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &flt_100092A0, 4);
   {
     ARGS->f15.s = f22.s;
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
-  t9.u64 = (uint64_t) glPushMatrix;
   {
     ;
     wrap_glPushMatrix(wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f30.s;
   memcpy(&ARGS->f13, &var_D0, 8);
   {
@@ -930,14 +812,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f20.s;
   memcpy(&ARGS->f13, &var_C8, 8);
   {
@@ -945,7 +825,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f22.s;
   memcpy(&ARGS->f12, &var_D8, 8);
   {
@@ -953,14 +832,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
-  t9.u64 = s4.u64;
   ARGS->f13.s = f20.s;
   {
     ARGS->f14.s = f20.s;
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   memcpy(&ARGS->f13, &var_108, 8);
-  t9.u64 = (uint64_t) glScalef;
   ARGS->f14.s = f22.s;
   {
     ARGS->f12.s = ARGS->f13.s;
@@ -970,11 +847,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->a3.u64 = *((int8_t *) (ARGS->a3.u32 + 0));
   if (ARGS->a3.u64 == 0)
   {
-    t9.u64 = (uint64_t) glColor3f;
     goto loc_10005A90;
   }
-  else
-    t9.u64 = (uint64_t) glColor3f;
 
   memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
@@ -982,7 +856,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 1;
@@ -994,11 +867,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->a4.u64 = *((int8_t *) (ARGS->a4.u32 + 0));
   if (ARGS->a4.u64 == 0)
   {
-    t9.u64 = (uint64_t) glColor3f;
     goto loc_10005AC0;
   }
-  else
-    t9.u64 = (uint64_t) glColor3f;
 
   memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
@@ -1006,32 +876,27 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 0;
     drawshape__GiT1(ARGS, wincount);
   }
   loc_10005AC0:
-  t9.u64 = (uint64_t) glPopMatrix;
 
   {
     ;
     wrap_glPopMatrix(wincount);
   }
-  t9.u64 = (uint64_t) glScalef;
   ARGS->f12.s = f22.s;
   memcpy(&ARGS->f13, &flt_100092B4, 4);
   {
     ARGS->f14.s = f22.s;
     wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) glPushMatrix;
   {
     ;
     wrap_glPushMatrix(wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f30.s;
   memcpy(&ARGS->f13, &var_D0, 8);
   {
@@ -1039,14 +904,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f20.s;
   memcpy(&ARGS->f13, &var_C8, 8);
   {
@@ -1054,7 +917,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f22.s;
   memcpy(&ARGS->f12, &var_D8, 8);
   {
@@ -1062,14 +924,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
-  t9.u64 = s4.u64;
   ARGS->f13.s = f20.s;
   {
     ARGS->f14.s = f20.s;
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
   memcpy(&ARGS->f13, &var_108, 8);
-  t9.u64 = (uint64_t) glScalef;
   ARGS->f14.s = f22.s;
   {
     ARGS->f12.s = ARGS->f13.s;
@@ -1079,11 +939,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->a5.u64 = *((int8_t *) (ARGS->a5.u32 + 0));
   if (ARGS->a5.u64 == 0)
   {
-    t9.u64 = (uint64_t) glColor3f;
     goto loc_10005B9C;
   }
-  else
-    t9.u64 = (uint64_t) glColor3f;
 
   memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
@@ -1091,7 +948,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 1;
@@ -1103,11 +959,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->a6.u64 = *((int8_t *) (ARGS->a6.u32 + 0));
   if (ARGS->a6.u64 == 0)
   {
-    t9.u64 = (uint64_t) glColor3f;
     goto loc_10005BCC;
   }
-  else
-    t9.u64 = (uint64_t) glColor3f;
 
   memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
   memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
@@ -1115,28 +968,24 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
     wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  t9.u64 = (uint64_t) drawshape__GiT1;
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->a1.u64 = 0;
     drawshape__GiT1(ARGS, wincount);
   }
   loc_10005BCC:
-  t9.u64 = (uint64_t) glPopMatrix;
 
   {
     ;
     wrap_glPopMatrix(wincount);
   }
   ARGS->f13.s = f20.s;
-  t9.u64 = fp.u64;
   ARGS->f14.s = f20.s;
   memcpy(&ARGS->f12, &var_110, 8);
   {
     ARGS->f15.s = f22.s;
     wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
-  t9.u64 = s4.u64;
   ARGS->f12.s = f20.s;
   ARGS->f13.s = f20.s;
   {

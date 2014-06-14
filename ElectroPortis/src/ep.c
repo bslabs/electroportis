@@ -44,44 +44,15 @@ static float flt_100092B4 = -1.00000000f;
 static float flt_100092AC = 2.00000000f;
 static float flt_10009290 = 360.000000f;
 static float flt_10009294 = -360.000000f;
-static const char *aDoneReadingAni = "# done reading animation\n";
-static const char *aDuration = "duration:";
-static const char *aVariance = "variance:";
-static const char *aSeqloop = "seqloop:";
-static const char *aActstop = "actstop:";
 static const char *asc_10009390 = "%[^\n]\n";
-static const char *asc_10009388 = "#";
-static const char *aS_0 = "%s\n";
-static const char *aActset = "actset:";
-static const char *aSeqkillall = "seqkillall:";
 static const char *aD = "%d";
 static const char *aF = "%f";
-static const char *aSeqstop = "seqstop:";
-static const char *aActresetall = "actresetall:";
-static const char *aWarningSNotImp = "warning: %s not implemented\n";
-static const char *aAbsframe = "absframe:";
-static const char *aSeqDAt_2f = "seq %d at %.2f\n";
-static const char *aActlim1 = "actlim1:";
-static const char *aSeqrepeat = "seqrepeat:";
 static const char *aSDF = "%s %d, %f";
-static const char *aActlim2 = "actlim2:";
 static const char *aProcCurrentfra = "proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n";
-static const char *aRanddelay = "randdelay:";
-static const char *aFrame = "frame:";
-static const char *asc_10009338 = "\n";
-static const char *aActstopall = "actstopall:";
 static const char *aSF = "%s %f";
 static const char *aSD = "%s %d";
-static const char *aReadingAnimati = "# reading animation...";
-static const char *aRelframe = "relframe:";
-static const char *aSeqdo = "seqdo:";
-static const char *aBadCommandS = "bad command: %s";
 static const char *aS = "%s";
-static const char *aActreset = "actreset:";
 static const char *aDF = "%d, %f";
-static const char *aCmdDDF = "  cmd %d,\t%d\t%f\n";
-static const char *aSeqkill = "seqkill:";
-static const char *aSeqname = "seqname:";
 static const char *aWarningBadComm = "warning: bad command type (%d) in sequence cmd->seq\n";
 
 /* swapBuffers__Q2_10GLXWrapper6windowGv: no regmap info, emitting empty stmt at .text:100061FC */
@@ -1266,7 +1237,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG t6;
   EPANOS_REG t7;
   EPANOS_REG s0;
-  EPANOS_REG s1;
   EPANOS_REG s2;
   EPANOS_REG s4;
   EPANOS_REG s6;
@@ -1311,33 +1281,14 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   readAnimation__Gv:
 
   s0.u64 = (uint64_t) defaultScript;
-  if (oflag == 0)
+  if (oflag != 0)
   {
-    s0.u64 = defaultScript;
-    goto loc_100039F4;
-  }
-  else
-    s0.u64 = defaultScript;
-
-  {
-    ARGS->a0.u64 = (uint64_t) (&aReadingAnimati[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64);
-  }
-  loc_100039F4:
-
-  if (oflag == 0)
-  {
-    goto loc_10003A14;
+    printf("# reading animation...");
+    printf("\n");
   }
 
-  {
-    ARGS->a0.u64 = (uint64_t) asc_10009338;
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64);
-  }
-  loc_10003A14:
 
-  s1.u64 = (uint64_t) strcmp;
-  s6.u64 = (uint64_t) strcspn;
+
   f20.u32 = 0;
   ARGS->a1.u64 = var_2E0;
   {
@@ -1345,32 +1296,18 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003B54;
   }
   loc_10003A40:
-  ARGS->a0.u64 = (uint64_t) asc_10009388;
-
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a2.u64 = 1;
-    ARGS->v0.u64 = (int) strncmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (unsigned int) ARGS->a2.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strncmp("#", var_2D8, 1) == 0)
   {
     goto loc_100047C0;
   }
 
-  if (oflag == 0)
+  if (oflag != 0)
   {
-    goto loc_10003A78;
+    printf("bad command: %s", var_2D8);
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   {
-    ARGS->a0.u64 = (uint64_t) (&aBadCommandS[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
-  }
-  loc_10003A78:
-  {
-    ARGS->a0.u64 = s2.u64;
-    free((void *) ARGS->a0.u64);
+    free(s2.u64);
   }
 
   ARGS->a1.u64 = 1;
@@ -1461,28 +1398,22 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   else
     t5.u64 = (uint64_t) (&bflag);
 
-  ARGS->a1.u64 = (uint64_t) (&var_1D8[0]);
   {
-    ARGS->a0.u64 = (uint64_t) aS_0;
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
+    printf("%s\n", var_1D8);
   }
   t5.u64 = (uint64_t) (&bflag);
   loc_10003B18:
   t5.u64 = bflag;
 
   s2.u64 = (uint64_t) strlen;
+  var_1D8[0] = 0;
   if (t5.u64 == 0)
   {
-    var_1D8[0] = 0;
     goto loc_10003DD8;
   }
-  else
-    var_1D8[0] = 0;
 
-  ARGS->a0.u64 = s0.u64;
   {
-    ARGS->a1.u64 = (uint64_t) asc_10009338;
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
+    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, "\n");
   }
   s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
   s0.u64 = (int32_t) (s0.u32 + 1);
@@ -1537,119 +1468,66 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   t8.u64 = (uint64_t) (&absFrame);
   memcpy(&ARGS->f0, &absFrame, 4);
   s2.u64 = ARGS->v0.u64;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  ARGS->a0.u64 = (uint64_t) aFrame;
   {
     memcpy((char *) (ARGS->v0.u32 + 8), &ARGS->f0, 4);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
   }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("frame:", var_2D8) == 0)
   {
     goto loc_10003D30;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aRelframe[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("relframe:", var_2D8) == 0)
   {
     goto loc_10003E58;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   s4.u64 = var_D8;
-  {
-    ARGS->a0.u64 = (uint64_t) (&aAbsframe[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("absframe:", var_2D8) == 0)
   {
     goto loc_10003ED0;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   s7.u64 = var_B8;
-  {
-    ARGS->a0.u64 = (uint64_t) (&aRanddelay[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("randdelay:", var_2D8) == 0)
   {
     goto loc_10003F48;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   fp.u64 = var_B0;
-  {
-    ARGS->a0.u64 = (uint64_t) (&aDuration[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("duration:", var_2D8) == 0)
   {
     goto loc_10004014;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aVariance[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("variance:", var_2D8) == 0)
   {
     goto loc_10004074;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   s4.u64 = var_A0;
-  {
-    ARGS->a0.u64 = (uint64_t) (&aActlim1[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("actlim1:", var_2D8) == 0)
   {
     goto loc_100040D0;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   s7.u64 = var_98;
-  {
-    ARGS->a0.u64 = (uint64_t) (&aActlim2[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("actlim2:", var_2D8) == 0)
   {
     goto loc_10004138;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   fp.u64 = var_90;
-  {
-    ARGS->a0.u64 = (uint64_t) aActset;
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("actset:", var_2D8) == 0)
   {
     goto loc_100042C0;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aActreset[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("actreset:", var_2D8) == 0)
   {
     goto loc_100043B4;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aActresetall[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 != 0)
+  if (strcmp("actresetall:", var_2D8) != 0)
   {
     goto loc_10003DFC;
   }
@@ -1764,22 +1642,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
   loc_10003DFC:
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aActstop[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("actstop:", var_2D8) == 0)
   {
     goto loc_10004408;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aActstopall[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 != 0)
+  if (strcmp("actstopall:", var_2D8) != 0)
   {
     goto loc_10003FA4;
   }
@@ -1930,32 +1798,17 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
   loc_10003FA4:
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aSeqname[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("seqname:", var_2D8) == 0)
   {
     goto loc_100044F8;
   }
 
-  ARGS->a0.u64 = (uint64_t) aSeqdo;
-  {
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("seqdo:", var_2D8) == 0)
   {
     goto loc_10004630;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aSeqloop[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 != 0)
+  if (strcmp("seqloop:", var_2D8) != 0)
   {
     goto loc_10004328;
   }
@@ -2168,14 +2021,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     ARGS->a1.u64 = (uint64_t) seqList;
 
   {
-    ARGS->a0.u64 = (uint64_t) (&aDoneReadingAni[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64);
+    printf("# done reading animation\n");
   }
   ARGS->a1.u64 = (uint64_t) seqList;
   loc_100041E4:
   ARGS->a1.u64 = seqList;
 
-  s1.u64 = (uint64_t) printf;
   if (ARGS->a1.u64 == 0)
   {
     return;
@@ -2213,8 +2064,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   ARGS->a2.u64 = *((int32_t *) (s0.u32 + 4));
   ARGS->a3.u64 = ARGS->f18.u64;
   {
-    ARGS->a0.u64 = (uint64_t) (&aCmdDDF[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (int32_t) ARGS->a1.u64, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
+    ARGS->v0.u64 = (int) printf("  cmd %d,\t%d\t%f\n", (int32_t) ARGS->a1.u64, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
   }
   s0.u64 = *((int32_t *) (s0.u32 + 20));
   if (s0.u64 != 0)
@@ -2248,19 +2098,15 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   ARGS->a1.u64 = *((int32_t *) (s4.u32 + 0));
   ARGS->a2.u64 = ARGS->f19.u64;
   {
-    ARGS->a0.u64 = (uint64_t) (&aSeqDAt_2f[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (int32_t) ARGS->a1.u64, (double) ARGS->a2.d);
+    ARGS->v0.u64 = (int) printf("seq %d at %.2f\n", (int32_t) ARGS->a1.u64, (double) ARGS->a2.d);
   }
   loc_10004274:
   s0.u64 = *((int32_t *) (s4.u32 + 24));
 
   if (s0.u64 == 0)
   {
-    s1.u64 = (uint64_t) printf;
     goto loc_10004240;
   }
-  else
-    s1.u64 = (uint64_t) printf;
 
   loc_10004280:
   {
@@ -2297,12 +2143,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   memcpy(&f21, (char *) (s2.u32 + 12), 4);
   f21.d = f21.s;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
   ARGS->a3.u64 = f21.u64;
   {
-    ARGS->a0.u64 = (uint64_t) (&aSDF[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
+    ARGS->v0.u64 = (int) printf("%s %d, %f", var_2D8, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
   }
   {
     fp.u64 = s4.u64;
@@ -2310,42 +2154,22 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
   loc_10004328:
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aSeqstop[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("seqstop:", var_2D8) == 0)
   {
     goto loc_1000469C;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aSeqrepeat[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("seqrepeat:", var_2D8) == 0)
   {
     goto loc_100046F0;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aSeqkill[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 == 0)
+  if (strcmp("seqkill:", var_2D8) == 0)
   {
     goto loc_1000476C;
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aSeqkillall[0]);
-    ARGS->v0.u64 = (int) strcmp((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64);
-  }
-  if (ARGS->v0.u64 != 0)
+  if (strcmp("seqkillall:", var_2D8) != 0)
   {
     goto loc_10003A40;
   }
@@ -2722,24 +2546,15 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
   }
   ARGS->a3.u64 = oflag;
-  if (ARGS->a3.u64 == 0)
+  if (ARGS->a3.u64 != 0)
   {
-    goto loc_10004758;
+    printf("warning: %s not implemented\n", var_2D8);
   }
 
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a0.u64 = (uint64_t) (&aWarningSNotImp[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
-  }
   loc_10004758:
-  {
-    ARGS->a0.u64 = s2.u64;
-    free((void *) ARGS->a0.u64);
-  }
-  {
-    goto loc_10003AE8;
-  }
+  free((void *) s2.u64);
+  goto loc_10003AE8;
+
   loc_1000476C:
   ARGS->a0.u64 = s0.u64;
 

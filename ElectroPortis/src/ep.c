@@ -2575,7 +2575,8 @@ static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS)
   ARGS->v0.u64 = 48628;
   if (ARGS->a0.i64 <= 0)
   {
-    goto loc_10005238;
+    ARGS->a4.u64 = (int32_t) (ARGS->a4.u32 + 128);
+    goto loc_100051C0;
   }
 
   loc_100051C0:
@@ -2640,12 +2641,6 @@ static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS)
     ARGS->f0.s = ARGS->f0.s + f1.s;
     return;
   }
-  loc_10005238:
-  {
-    ARGS->a4.u64 = (int32_t) (ARGS->a4.u32 + 128);
-    goto loc_100051C0;
-  }
-
 }
 
 static void drawshape__GiT1(char poly, wincount_t wincount)

@@ -27,16 +27,10 @@
 #endif /* !_MSC_VER */
 
 static float flt_100092A0 = 180.000000f;
-static float flt_100092A4 = 240.000000f;
 static float flt_100092A8 = 1.00000000f;
-static float flt_1000929C = 60.0000000f;
-static double dbl_100092E8 = 120.00000000000000;
-static double dbl_100092E0 = 360.00000000000000;
 static float flt_100092B8 = 0.500000000f;
 static double dbl_10009300 = 1.0000000000000000;
 static float flt_100092B0 = 300.000000f;
-static double dbl_10009308 = 2.0000000000000000;
-static double dbl_100092F0 = -120.00000000000000;
 static double dbl_100092D0 = 60.000000000000000;
 static float flt_100092BC = -0.500000000f;
 static double dbl_100092D8 = 0.50000000000000000;
@@ -2909,13 +2903,13 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
     return;
   }
   loc_10003794:
-  memcpy(&ARGS->f15, &dbl_100092E0, 8);
+  ARGS->f15.d = 360.00000000000000;
 
   ARGS->f14.d = f5.s;
   ARGS->f14.d = ARGS->f14.d * ARGS->f15.d;
   memcpy(&ARGS->f12, &flt_100092AC, 4);
   ARGS->f14.s = ARGS->f14.d;
-  memcpy(&ARGS->f15, &dbl_100092E8, 8);
+  ARGS->f15.d = 120.00000000000000;
   memcpy(&var_50, &ARGS->f14, 8);
   ARGS->f14.d = ARGS->f14.s;
   ARGS->f12.s = f4.s * ARGS->f12.s;
@@ -2935,7 +2929,7 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
     memcpy(&ARGS->f14, &var_50, 8);
     value__GfN21(ARGS);
   }
-  memcpy(&ARGS->f15, &dbl_100092F0, 8);
+  ARGS->f15.d = -120.00000000000000;
   memcpy(&ARGS->f14, &var_48, 8);
   ARGS->f14.d = ARGS->f14.d + ARGS->f15.d;
   memcpy(&ARGS->f12, &var_40, 8);
@@ -3142,8 +3136,8 @@ static void value__GfN21(EPANOS_ARGS *ARGS)
   else
     EPANOS_fp_cond = 0;
 
-  memcpy(&ARGS->f0, &flt_1000929C, 4);
-  memcpy(&f5, &flt_100092A4, 4);
+  ARGS->f0.s = 60.0000000f;
+  f5.s = 240.000000f;
   if (!EPANOS_fp_cond)
   {
     memcpy(&f6, &flt_100092A0, 4);
@@ -3409,7 +3403,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   memcpy(&f8, &flt_100092A8, 4);
   memcpy(&f4, (char *) (s0.u32 + 12), 4);
   ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-  memcpy(&f9, &dbl_10009308, 8);
+  f9.d = 2.0000000000000000;
   f7.d = exprand__Gf(flt_100092A8);
   memcpy(&f5, (char *) (ARGS->a4.u32 + 20), 4);
   f7.d = f7.d * f9.d;

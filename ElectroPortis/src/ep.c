@@ -44,16 +44,13 @@ static float flt_100092B4 = -1.00000000f;
 static float flt_100092AC = 2.00000000f;
 static float flt_10009290 = 360.000000f;
 static float flt_10009294 = -360.000000f;
-static const char *asc_10009390 = "%[^\n]\n";
 static const char *aD = "%d";
 static const char *aF = "%f";
 static const char *aSDF = "%s %d, %f";
-static const char *aProcCurrentfra = "proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n";
 static const char *aSF = "%s %f";
 static const char *aSD = "%s %d";
 static const char *aS = "%s";
 static const char *aDF = "%d, %f";
-static const char *aWarningBadComm = "warning: bad command type (%d) in sequence cmd->seq\n";
 
 /* swapBuffers__Q2_10GLXWrapper6windowGv: no regmap info, emitting empty stmt at .text:100061FC */
 /* sginap: no regmap info, emitting empty stmt at .text:10006208 */
@@ -73,7 +70,7 @@ static char aflag = 1;
 static const float square[8] = {-0.100000001f, -0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f};
 static float outlinecolRGBA[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
 static float colRGBA[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
-static char *defaultScript = "# created by mkmaster \n#\n# mello script\n#\n#\tDave Tristram\n#\n#\tthis script moves gently on the screen, and uses wheel to maintain\n#\ta 3D look.\n#\n#\n# constants\n#\nactset: 29, 1.0\t\t# \"full\"\nactset: 17, 0.0\t\t# \"auto\"\nactset: 18, 1.0\t\t# \"outline\"\n# actset: 73, 0.107258\t# \"whl\"\nactset: 31, 0.06\t# \"zoom\"\nactset: 38, 60.0\t# \"twst\"\n#actset: 80, 0.23\t# \"spn\" slow\nactset: 108, 1.2\t# \"size\"\nactset: 52, 40.0\t# \"n\"\n#\nseqdo: 1\t# wrist\nseqdo: 2\t# color\nseqdo: 3\t# wheel\nseqdo: 4\t# spin\nseqdo: 5\t# flip\nseqdo: 6\t# arm\nseqdo: 7\t# twist\nseqdo: 8\t# outline\n#\n# \n#\n# wrst anim: gentle radius modulation\n#\nseqname: 1\n#\nduration: 160\nactlim1: 101, -1.5\t\t# wrst\nactlim2: 101,  1.5\t\t# wrst\n#\n#\n#\n# color anim: hue and lightness motion\n#\n#\tthe hues chosen attempt to minimize \"green-out\"\n#\nseqname: 2\n#\nduration: 60\nactset: 127, 0.0\t\t# hue rate chan 0\n#\nactlim1: 123, 0.544053\t\t# hue chan 0 (just near cyan)\nactlim2: 123, 1.295\t\t# hue chan 0 (deep green)\n#\n#\nduration: 80\n#\nactlim1: 130, 0.0\t\t# lightness chan 0 (black)\nactlim2: 130, 1.0\t\t# lightness chan 0 (white)\n#\n#\n#\n# wheel anim: very slow, gentle rocking\n#\nseqname: 3\n#\nduration: 120\n#\nactlim1: 73, 0.137\t\t# wheel, real slow\nactlim2: 73, -0.137\t\t# wheel, real slow\n#\n#\n#\n# spin anim: somewhat fast occasionally\n#\nseqname: 4\n#\nduration: 100\n#\nactlim1: 80,  0.23\t\t# spn slow\nactlim2: 80, -0.23\t\t# spn slow\n#\nranddelay: 1000\n#\n#\nduration: 40\n#\nactlim1: 80,  5.23\t\t# spn fast\nactlim2: 80, -5.23\t\t# spn fast\n#\n#randdelay: 100\nranddelay: 200\n#\nseqloop:\n#\n#\n#\n# flip anim: somewhat fast occasionally\n#\nseqname: 5\n#\nduration: 50\n#\nactlim1: 87,  2.0\t\t# flip slow\nactlim2: 87, -2.0\t\t# flip slow\n#\n#randdelay: 500\nranddelay: 1200\n#\n#\nactlim1: 87,  10.0\t\t# flip fast\nactlim2: 87, -10.0\t\t# flip fast\n#\n#randdelay: 80\nranddelay: 220\n#\n#\nseqloop:\n#\n#\n#\n# arm anim: gentle radius modulation\n#\nseqname: 6\n#\nduration: 90\nactlim1: 94, -2.0\t\t# arm\nactlim2: 94,  2.0\t\t# arm\n#\n#\n#\n# twist anim:\n#\nseqname: 7\n#\n#duration: 1750\nduration: 2250\nactlim1: 38, 200.0\t\t# twst\nactlim2: 38, -200.0\t\t# twst\n#\n#\n#\n# outline anim: on and off infrequently, mostly on\n#\n#\nseqname: 8\n#\nduration: 5000\n#\nactlim1: 18, 0.2\t\t# outline\nactlim2: 18, 1.0\t\t# outline\n#\n#\n#\n# end of generated script";
+static const char *defaultScript = "# created by mkmaster \n#\n# mello script\n#\n#\tDave Tristram\n#\n#\tthis script moves gently on the screen, and uses wheel to maintain\n#\ta 3D look.\n#\n#\n# constants\n#\nactset: 29, 1.0\t\t# \"full\"\nactset: 17, 0.0\t\t# \"auto\"\nactset: 18, 1.0\t\t# \"outline\"\n# actset: 73, 0.107258\t# \"whl\"\nactset: 31, 0.06\t# \"zoom\"\nactset: 38, 60.0\t# \"twst\"\n#actset: 80, 0.23\t# \"spn\" slow\nactset: 108, 1.2\t# \"size\"\nactset: 52, 40.0\t# \"n\"\n#\nseqdo: 1\t# wrist\nseqdo: 2\t# color\nseqdo: 3\t# wheel\nseqdo: 4\t# spin\nseqdo: 5\t# flip\nseqdo: 6\t# arm\nseqdo: 7\t# twist\nseqdo: 8\t# outline\n#\n# \n#\n# wrst anim: gentle radius modulation\n#\nseqname: 1\n#\nduration: 160\nactlim1: 101, -1.5\t\t# wrst\nactlim2: 101,  1.5\t\t# wrst\n#\n#\n#\n# color anim: hue and lightness motion\n#\n#\tthe hues chosen attempt to minimize \"green-out\"\n#\nseqname: 2\n#\nduration: 60\nactset: 127, 0.0\t\t# hue rate chan 0\n#\nactlim1: 123, 0.544053\t\t# hue chan 0 (just near cyan)\nactlim2: 123, 1.295\t\t# hue chan 0 (deep green)\n#\n#\nduration: 80\n#\nactlim1: 130, 0.0\t\t# lightness chan 0 (black)\nactlim2: 130, 1.0\t\t# lightness chan 0 (white)\n#\n#\n#\n# wheel anim: very slow, gentle rocking\n#\nseqname: 3\n#\nduration: 120\n#\nactlim1: 73, 0.137\t\t# wheel, real slow\nactlim2: 73, -0.137\t\t# wheel, real slow\n#\n#\n#\n# spin anim: somewhat fast occasionally\n#\nseqname: 4\n#\nduration: 100\n#\nactlim1: 80,  0.23\t\t# spn slow\nactlim2: 80, -0.23\t\t# spn slow\n#\nranddelay: 1000\n#\n#\nduration: 40\n#\nactlim1: 80,  5.23\t\t# spn fast\nactlim2: 80, -5.23\t\t# spn fast\n#\n#randdelay: 100\nranddelay: 200\n#\nseqloop:\n#\n#\n#\n# flip anim: somewhat fast occasionally\n#\nseqname: 5\n#\nduration: 50\n#\nactlim1: 87,  2.0\t\t# flip slow\nactlim2: 87, -2.0\t\t# flip slow\n#\n#randdelay: 500\nranddelay: 1200\n#\n#\nactlim1: 87,  10.0\t\t# flip fast\nactlim2: 87, -10.0\t\t# flip fast\n#\n#randdelay: 80\nranddelay: 220\n#\n#\nseqloop:\n#\n#\n#\n# arm anim: gentle radius modulation\n#\nseqname: 6\n#\nduration: 90\nactlim1: 94, -2.0\t\t# arm\nactlim2: 94,  2.0\t\t# arm\n#\n#\n#\n# twist anim:\n#\nseqname: 7\n#\n#duration: 1750\nduration: 2250\nactlim1: 38, 200.0\t\t# twst\nactlim2: 38, -200.0\t\t# twst\n#\n#\n#\n# outline anim: on and off infrequently, mostly on\n#\n#\nseqname: 8\n#\nduration: 5000\n#\nactlim1: 18, 0.2\t\t# outline\nactlim2: 18, 1.0\t\t# outline\n#\n#\n#\n# end of generated script";
 #pragma pack (1)
 struct act
 {
@@ -1405,12 +1402,8 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
 
   loc_10003AE8:
-  ARGS->a0.u64 = s0.u64;
-
-  ARGS->a2.u64 = (uint64_t) (&var_1D8[0]);
   {
-    ARGS->a1.u64 = (uint64_t) asc_10009390;
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (char *) ARGS->a2.u64);
+    ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%[^\n]\n", var_1D8);
   }
   t4.u64 = oflag;
   if (t4.u64 == 0)
@@ -1891,10 +1884,8 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   loc_10003DD8:
 
   s0.u64 = -1;
-  ARGS->a0.u64 = (uint64_t) asc_10009390;
   {
-    ARGS->a1.u64 = var_A8;
-    ARGS->v0.u64 = (int) scanf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
+    ARGS->v0.u64 = (int) scanf("%[^\n]\n", (char *) var_A8);
   }
   if (ARGS->v0.u64 == s0.u64)
   {
@@ -3299,8 +3290,8 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
   ARGS->a1.u64 = ARGS->f0.u64;
   {
-    ARGS->a0.u64 = (uint64_t) (&aProcCurrentfra[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (double) ARGS->a1.d, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d, (int32_t) ARGS->a4.u64, (double) ARGS->a5.d);
+    printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
+        (double) ARGS->a1.d, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d, (int32_t) ARGS->a4.u64, (double) ARGS->a5.d);
   }
   loc_10004990:
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
@@ -3390,8 +3381,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
 
   ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
   {
-    ARGS->a0.u64 = (uint64_t) (&aWarningBadComm[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (int32_t) ARGS->a1.u64);
+    printf("warning: bad command type (%d) in sequence cmd->seq\n", (int32_t) ARGS->a1.u64);
   }
   ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
   ARGS->a1.u64 = *((int32_t *) (ARGS->a2.u32 + 28));

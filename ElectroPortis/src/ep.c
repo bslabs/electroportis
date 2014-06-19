@@ -4393,13 +4393,8 @@ static void setacttargets__Gv(void)
   struct act **s0 = acttable;
   float f0;
   float f1;
-  float f2;
-  float f3;
-  float f4;
   float f5;
-  float f7;
   const float f20 = 1.00000000f;
-  int EPANOS_fp_cond;
 
   for (unsigned int s1=0; s1 < NELEMS(acttable); s1++,s0++)
   {
@@ -4420,33 +4415,34 @@ static void setacttargets__Gv(void)
       continue;
     }
 
+    act->pad_a[1] = 1;
+
     {
-      act->pad_a[1] = 1;
-      f0 = drand48();
-    }
-    f1 = act->flt_e;
-    f2 = f20 - f0;
-    f0 = act->flt_d * f0;
-    f1 = f1 * f2;
-    f0 = f0 + f1;
-    {
+      float f0 = drand48();
+      f1 = act->flt_e;
+      float f2 = f20 - f0;
+      f0 = act->flt_d * f0;
+      f1 = f1 * f2;
+      f0 = f0 + f1;
       act->flt_c = f0;
     }
-    f2 = act->flt_i;
-    f1 = act->flt_h;
-    f3 = exprand__Gf(f20) * 2.00000000f;
-    f4 = f20 - f2;
-    f3 = f1 * f3;
-    f1 = f1 * f4;
-    f2 = f2 * f3;
-    f1 = f1 + f2;
+    {
+      float f2 = act->flt_i;
+      f1 = act->flt_h;
+      float f3 = exprand__Gf(f20) * 2.00000000f;
+      float f4 = f20 - f2;
+      f3 = f1 * f3;
+      f1 = f1 * f4;
+      f2 = f2 * f3;
+      f1 = f1 + f2;
+    }
     f5 = f20;
 
     if (f1 < f20)
       ;
     else
     {
-      f7 = act->flt_i;
+      float f7 = act->flt_i;
       f5 = act->flt_h;
       float f8 = exprand__Gf(f20) * 2.00000000f;
       float f9 = f20 - f7;
@@ -4456,31 +4452,20 @@ static void setacttargets__Gv(void)
       f5 = f5 + f7;
     }
 
-    f7 = act->flt_f;
-
-    f4 = act->flt_c;
-    f4 = f4 - f7;
-    f4 = f4 / f5;
-    f7 = 0;
-    ;
-    if (f7 < f4)
-      EPANOS_fp_cond = 1;
-    else
-      EPANOS_fp_cond = 0;
-
-    s0++;
-    act->flt_f = f4;
-
-    if (!EPANOS_fp_cond)
     {
-      f4 = -1.00000000f;
-    }
-    else
-    {
-      f4 = f20;
-    }
+      float f4 = act->flt_c;
+      f4 = f4 - act->flt_f;
+      f4 = f4 / f5;
+      s0++;
+      act->flt_f = f4;
 
-    act->flt_b = f4;
+      if (0 < f4)
+        f4 = f20;
+      else
+        f4 = -1.00000000f;
+
+      act->flt_b = f4;
+    }
 
     if (s1 < NELEMS(acttable)-1)
     {

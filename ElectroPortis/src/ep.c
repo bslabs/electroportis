@@ -130,7 +130,7 @@ static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS);
 static struct act *createBlankActAnim__Gv(void);
 static void value__GfN21(EPANOS_ARGS *ARGS);
 static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS);
-static void setacttargets__Gv(EPANOS_ARGS *ARGS);
+static void setacttargets__Gv(void);
 static void twixt__GiPff(EPANOS_ARGS *ARGS);
 static float exprand__Gf(float arg);
 
@@ -4169,8 +4169,7 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   t9.u64 = (uint64_t) setacttargets__Gv;
   {
-    ;
-    setacttargets__Gv(ARGS);
+    setacttargets__Gv();
   }
   t9.u64 = (uint64_t) animateacts__Gv;
   {
@@ -4389,10 +4388,12 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
 }
 
-static void setacttargets__Gv(EPANOS_ARGS *ARGS)
+static void setacttargets__Gv(void)
 {
   struct act **s0 = acttable;
+  float f0;
   float f1;
+  float f2;
   float f3;
   float f4;
   float f5;
@@ -4409,41 +4410,38 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
       continue;
     }
 
-    ARGS->v1.u64 = act->pad_a[0];
-    ARGS->a1.u64 = act->pad_a[1];
-    if (ARGS->v1.u64 == 0)
+    if (act->pad_a[0] == 0)
     {
       continue;
     }
 
-    if (ARGS->a1.u64 != 0)
+    if (act->pad_a[1] != 0)
     {
       continue;
     }
 
-    ARGS->a0.u64 = 1;
     {
-      act->pad_a[1] = ARGS->a0.u8;
-      ARGS->f0.d = (double) drand48();
+      act->pad_a[1] = 1;
+      f0 = drand48();
     }
-    ARGS->f0.s = ARGS->f0.d;
     f1 = act->flt_e;
-    ARGS->f2.s = f20 - ARGS->f0.s;
-    ARGS->f0.s = act->flt_d * ARGS->f0.s;
-    f1 = f1 * ARGS->f2.s;
-    ARGS->f0.s = ARGS->f0.s + f1;
+    f2 = f20 - f0;
+    f0 = act->flt_d * f0;
+    f1 = f1 * f2;
+    f0 = f0 + f1;
     {
-      act->flt_c = ARGS->f0.s;
+      act->flt_c = f0;
     }
-    ARGS->f2.s = act->flt_i;
+    f2 = act->flt_i;
     f1 = act->flt_h;
     f3 = exprand__Gf(f20) * 2.00000000f;
-    f4 = f20 - ARGS->f2.s;
+    f4 = f20 - f2;
     f3 = f1 * f3;
     f1 = f1 * f4;
-    ARGS->f2.s = ARGS->f2.s * f3;
-    f1 = f1 + ARGS->f2.s;
+    f2 = f2 * f3;
+    f1 = f1 + f2;
     f5 = f20;
+
     if (f1 < f20)
       ;
     else
@@ -4471,7 +4469,6 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
       EPANOS_fp_cond = 0;
 
     s0++;
-    ARGS->a2.u64 = s1 + 1;
     act->flt_f = f4;
 
     if (!EPANOS_fp_cond)
@@ -4487,14 +4484,10 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
 
     if (s1 < NELEMS(acttable)-1)
     {
-      ARGS->a1.u64 = 1;
-      s1 = ARGS->a2.u64;
+      s1++;
     }
     else
     {
-      ARGS->a1.u64 = 0;
-      s1 = ARGS->a2.u64;
-
       return;
     }
   }

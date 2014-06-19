@@ -26,6 +26,8 @@
 #include <time.h>
 #endif /* !_MSC_VER */
 
+#define NELEMS(x)  (sizeof(x) / sizeof(x[0]))
+
 static float flt_100092A0 = 180.000000f;
 static float flt_100092A8 = 1.00000000f;
 static float flt_100092B8 = 0.500000000f;
@@ -71,12 +73,12 @@ struct act
   // MUST be 40 bytes
   unsigned char pad_a[4];
   float flt_b;
-  unsigned char pad_c[4];
-  unsigned char pad_d[4];
-  unsigned char pad_e[4];
-  unsigned char pad_f[4];
+  float flt_c;
+  float flt_d;
+  float flt_e;
+  float flt_f;
   float flt_g;
-  unsigned char pad_h[4];
+  float flt_h;
   float flt_i;
   unsigned char pad_j[4];
 };
@@ -4389,62 +4391,43 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
 static void setacttargets__Gv(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG s0;
-  EPANOS_REG s1;
-  EPANOS_REG s2;
-  EPANOS_REG f1;
-  EPANOS_REG f3;
-  EPANOS_REG f4;
-  EPANOS_REG f5;
-  EPANOS_REG f6;
-  EPANOS_REG f7;
-  EPANOS_REG f8;
-  EPANOS_REG f9;
-  EPANOS_REG f20;
+  struct act **s0 = acttable;
+  unsigned int s1 = 0;
+  struct act *s2;
+  float f1;
+  float f3;
+  float f4;
+  float f5;
+  float f7;
+  const float f20 = 1.00000000f;
   int EPANOS_fp_cond;
-  setacttargets__Gv:
 
-  s0.u64 = (uint64_t) acttable;
-  s1.u64 = 0;
-  {
-    memcpy(&f20, &flt_100092A8, 4);
-    goto loc_10005034;
-  }
+  goto loc_10005034;
+
   loc_10005024:
-  s1.u64 = (int32_t) (s1.u32 + 1);
+  s1++;
 
-  if (((signed) s1.i64) < ((signed) 1024))
-    ARGS->v0.u64 = 1;
-  else
-    ARGS->v0.u64 = 0;
-
-  if (ARGS->v0.u64 == 0)
+  s0++;
+  if (s1 >= NELEMS(acttable))
   {
-    s0.u64 = (int32_t) (s0.u32 + 4);
-    goto loc_10005108;
+    return;
   }
-  else
-    s0.u64 = (int32_t) (s0.u32 + 4);
 
   loc_10005034:
-  s2.u64 = *((int32_t *) (s0.u32 + 0));
+  s2 = *s0;
 
-  if (s2.u64 == 0)
+  if (s2 == NULL)
   {
     ;
     goto loc_10005024;
   }
-  else
-    ;
 
-  ARGS->v1.u64 = *((int8_t *) (s2.u32 + 0));
+  ARGS->v1.u64 = s2->pad_a[0];
+  ARGS->a1.u64 = s2->pad_a[1];
   if (ARGS->v1.u64 == 0)
   {
-    ARGS->a1.u64 = *((int8_t *) (s2.u32 + 1));
     goto loc_10005024;
   }
-  else
-    ARGS->a1.u64 = *((int8_t *) (s2.u32 + 1));
 
   if (ARGS->a1.u64 != 0)
   {
@@ -4453,106 +4436,81 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
 
   ARGS->a0.u64 = 1;
   {
-    *((uint8_t *) (s2.u32 + 1)) = ARGS->a0.u8;
+    s2->pad_a[1] = ARGS->a0.u8;
     ARGS->f0.d = (double) drand48();
   }
-  memcpy(&f3, (char *) (s2.u32 + 12), 4);
   ARGS->f0.s = ARGS->f0.d;
-  memcpy(&f1, (char *) (s2.u32 + 16), 4);
-  ARGS->f2.s = f20.s - ARGS->f0.s;
-  ARGS->f0.s = f3.s * ARGS->f0.s;
-  f1.s = f1.s * ARGS->f2.s;
-  ARGS->f0.s = ARGS->f0.s + f1.s;
+  f1 = s2->flt_e;
+  ARGS->f2.s = f20 - ARGS->f0.s;
+  ARGS->f0.s = s2->flt_d * ARGS->f0.s;
+  f1 = f1 * ARGS->f2.s;
+  ARGS->f0.s = ARGS->f0.s + f1;
   {
-    memcpy((char *) (s2.u32 + 8), &ARGS->f0, 4);
+    s2->flt_c = ARGS->f0.s;
   }
-  memcpy(&f6, &flt_100092AC, 4);
-  memcpy(&ARGS->f2, (char *) (s2.u32 + 32), 4);
-  memcpy(&f1, (char *) (s2.u32 + 28), 4);
-  f3.s = exprand__Gf(f20.s) * f6.s;
-  f4.s = f20.s - ARGS->f2.s;
-  f3.s = f1.s * f3.s;
-  f1.s = f1.s * f4.s;
-  ARGS->f2.s = ARGS->f2.s * f3.s;
-  f1.s = f1.s + ARGS->f2.s;
-  if (f1.s < f20.s)
+  ARGS->f2.s = s2->flt_i;
+  f1 = s2->flt_h;
+  f3 = exprand__Gf(f20) * 2.00000000f;
+  f4 = f20 - ARGS->f2.s;
+  f3 = f1 * f3;
+  f1 = f1 * f4;
+  ARGS->f2.s = ARGS->f2.s * f3;
+  f1 = f1 + ARGS->f2.s;
+  f5 = f20;
+  if (f1 < f20)
+    ;
+  else
+  {
+    f7 = s2->flt_i;
+    f5 = s2->flt_h;
+    float f8 = exprand__Gf(f20) * 2.00000000f;
+    float f9 = f20 - f7;
+    f8 = f5 * f8;
+    f5 = f5 * f9;
+    f7 = f7 * f8;
+    f5 = f5 + f7;
+  }
+
+  f7 = s2->flt_f;
+
+  f4 = s2->flt_c;
+  f4 = f4 - f7;
+  f4 = f4 / f5;
+  f7 = 0;
+  ;
+  if (f7 < f4)
     EPANOS_fp_cond = 1;
   else
     EPANOS_fp_cond = 0;
 
-  ;
+  s0++;
+  ARGS->a2.u64 = s1 + 1;
+  s2->flt_f = f4;
+
   if (!EPANOS_fp_cond)
   {
-    f5.s = f20.s;
-    goto loc_10005128;
+    f4 = -1.00000000f;
   }
   else
-    f5.s = f20.s;
+  {
+    f4 = f20;
+  }
 
-  loc_100050C0:
-  memcpy(&f7, (char *) (s2.u32 + 20), 4);
+  s2->flt_b = f4;
 
-  memcpy(&f4, (char *) (s2.u32 + 8), 4);
-  f4.s = f4.s - f7.s;
-  f4.s = f4.s / f5.s;
-  f7.u32 = 0;
-  ;
-  if (f7.s < f4.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  s0.u64 = (int32_t) (s0.u32 + 4);
-  ARGS->a2.u64 = (int32_t) (s1.u32 + 1);
-  if (((signed) s1.i64) < ((signed) 1023))
+  if (s1 < NELEMS(acttable)-1)
+  {
     ARGS->a1.u64 = 1;
-  else
-    ARGS->a1.u64 = 0;
+    s1 = ARGS->a2.u64;
 
-  s1.u64 = ARGS->a2.u64;
-  if (!EPANOS_fp_cond)
-  {
-    memcpy((char *) (s2.u32 + 20), &f4, 4);
-    goto loc_100050FC;
-  }
-  else
-    memcpy((char *) (s2.u32 + 20), &f4, 4);
-
-  {
-    f4.s = f20.s;
-    goto loc_10005100;
-  }
-  loc_100050FC:
-  memcpy(&f4, &flt_100092B4, 4);
-
-  loc_10005100:
-  if (ARGS->a1.u64 != 0)
-  {
-    memcpy((char *) (s2.u32 + 4), &f4, 4);
     goto loc_10005034;
   }
   else
-    memcpy((char *) (s2.u32 + 4), &f4, 4);
-
-
-  loc_10005108:
-
   {
+    ARGS->a1.u64 = 0;
+    s1 = ARGS->a2.u64;
+
     return;
-  }
-  loc_10005128:
-
-  memcpy(&f6, &flt_100092AC, 4);
-  memcpy(&f7, (char *) (s2.u32 + 32), 4);
-  memcpy(&f5, (char *) (s2.u32 + 28), 4);
-  f8.s = exprand__Gf(f20.s) * f6.s;
-  f9.s = f20.s - f7.s;
-  f8.s = f5.s * f8.s;
-  f5.s = f5.s * f9.s;
-  f7.s = f7.s * f8.s;
-  {
-    f5.s = f5.s + f7.s;
-    goto loc_100050C0;
   }
 }
 

@@ -4392,7 +4392,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 static void setacttargets__Gv(EPANOS_ARGS *ARGS)
 {
   struct act **s0 = acttable;
-  unsigned int s1 = 0;
   struct act *s2;
   float f1;
   float f3;
@@ -4402,115 +4401,104 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS)
   const float f20 = 1.00000000f;
   int EPANOS_fp_cond;
 
-  goto loc_10005034;
-
-  loc_10005024:
-  s1++;
-
-  s0++;
-  if (s1 >= NELEMS(acttable))
-  {
-    return;
-  }
-
   loc_10005034:
-  s2 = *s0;
-
-  if (s2 == NULL)
+  for (unsigned int s1=0; s1 < NELEMS(acttable); s1++,s0++)
   {
+    s2 = *s0;
+
+    if (s2 == NULL)
+    {
+      continue;
+    }
+
+    ARGS->v1.u64 = s2->pad_a[0];
+    ARGS->a1.u64 = s2->pad_a[1];
+    if (ARGS->v1.u64 == 0)
+    {
+      continue;
+    }
+
+    if (ARGS->a1.u64 != 0)
+    {
+      continue;
+    }
+
+    ARGS->a0.u64 = 1;
+    {
+      s2->pad_a[1] = ARGS->a0.u8;
+      ARGS->f0.d = (double) drand48();
+    }
+    ARGS->f0.s = ARGS->f0.d;
+    f1 = s2->flt_e;
+    ARGS->f2.s = f20 - ARGS->f0.s;
+    ARGS->f0.s = s2->flt_d * ARGS->f0.s;
+    f1 = f1 * ARGS->f2.s;
+    ARGS->f0.s = ARGS->f0.s + f1;
+    {
+      s2->flt_c = ARGS->f0.s;
+    }
+    ARGS->f2.s = s2->flt_i;
+    f1 = s2->flt_h;
+    f3 = exprand__Gf(f20) * 2.00000000f;
+    f4 = f20 - ARGS->f2.s;
+    f3 = f1 * f3;
+    f1 = f1 * f4;
+    ARGS->f2.s = ARGS->f2.s * f3;
+    f1 = f1 + ARGS->f2.s;
+    f5 = f20;
+    if (f1 < f20)
+      ;
+    else
+    {
+      f7 = s2->flt_i;
+      f5 = s2->flt_h;
+      float f8 = exprand__Gf(f20) * 2.00000000f;
+      float f9 = f20 - f7;
+      f8 = f5 * f8;
+      f5 = f5 * f9;
+      f7 = f7 * f8;
+      f5 = f5 + f7;
+    }
+
+    f7 = s2->flt_f;
+
+    f4 = s2->flt_c;
+    f4 = f4 - f7;
+    f4 = f4 / f5;
+    f7 = 0;
     ;
-    goto loc_10005024;
-  }
+    if (f7 < f4)
+      EPANOS_fp_cond = 1;
+    else
+      EPANOS_fp_cond = 0;
 
-  ARGS->v1.u64 = s2->pad_a[0];
-  ARGS->a1.u64 = s2->pad_a[1];
-  if (ARGS->v1.u64 == 0)
-  {
-    goto loc_10005024;
-  }
+    s0++;
+    ARGS->a2.u64 = s1 + 1;
+    s2->flt_f = f4;
 
-  if (ARGS->a1.u64 != 0)
-  {
-    goto loc_10005024;
-  }
+    if (!EPANOS_fp_cond)
+    {
+      f4 = -1.00000000f;
+    }
+    else
+    {
+      f4 = f20;
+    }
 
-  ARGS->a0.u64 = 1;
-  {
-    s2->pad_a[1] = ARGS->a0.u8;
-    ARGS->f0.d = (double) drand48();
-  }
-  ARGS->f0.s = ARGS->f0.d;
-  f1 = s2->flt_e;
-  ARGS->f2.s = f20 - ARGS->f0.s;
-  ARGS->f0.s = s2->flt_d * ARGS->f0.s;
-  f1 = f1 * ARGS->f2.s;
-  ARGS->f0.s = ARGS->f0.s + f1;
-  {
-    s2->flt_c = ARGS->f0.s;
-  }
-  ARGS->f2.s = s2->flt_i;
-  f1 = s2->flt_h;
-  f3 = exprand__Gf(f20) * 2.00000000f;
-  f4 = f20 - ARGS->f2.s;
-  f3 = f1 * f3;
-  f1 = f1 * f4;
-  ARGS->f2.s = ARGS->f2.s * f3;
-  f1 = f1 + ARGS->f2.s;
-  f5 = f20;
-  if (f1 < f20)
-    ;
-  else
-  {
-    f7 = s2->flt_i;
-    f5 = s2->flt_h;
-    float f8 = exprand__Gf(f20) * 2.00000000f;
-    float f9 = f20 - f7;
-    f8 = f5 * f8;
-    f5 = f5 * f9;
-    f7 = f7 * f8;
-    f5 = f5 + f7;
-  }
+    s2->flt_b = f4;
 
-  f7 = s2->flt_f;
+    if (s1 < NELEMS(acttable)-1)
+    {
+      ARGS->a1.u64 = 1;
+      s1 = ARGS->a2.u64;
+    }
+    else
+    {
+      ARGS->a1.u64 = 0;
+      s1 = ARGS->a2.u64;
 
-  f4 = s2->flt_c;
-  f4 = f4 - f7;
-  f4 = f4 / f5;
-  f7 = 0;
-  ;
-  if (f7 < f4)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  s0++;
-  ARGS->a2.u64 = s1 + 1;
-  s2->flt_f = f4;
-
-  if (!EPANOS_fp_cond)
-  {
-    f4 = -1.00000000f;
-  }
-  else
-  {
-    f4 = f20;
-  }
-
-  s2->flt_b = f4;
-
-  if (s1 < NELEMS(acttable)-1)
-  {
-    ARGS->a1.u64 = 1;
-    s1 = ARGS->a2.u64;
-
-    goto loc_10005034;
-  }
-  else
-  {
-    ARGS->a1.u64 = 0;
-    s1 = ARGS->a2.u64;
-
-    return;
+      return;
+    }
   }
 }
 

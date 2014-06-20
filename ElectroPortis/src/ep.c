@@ -120,7 +120,7 @@ static int theWindow;
 static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount);
 static void addToSeq__GP7animSeqP11animCommand(EPANOS_ARGS *ARGS);
 static void animateacts__Gv(void);
-static void stopAnimation__Gv(EPANOS_ARGS *ARGS);
+static void stopAnimation__Gv(void);
 static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS);
 static void drawshape__GiT1(char poly, wincount_t wincount);
@@ -1130,46 +1130,29 @@ static void animateacts__Gv(void)
   }
 }
 
-static void stopAnimation__Gv(EPANOS_ARGS *ARGS)
+static void stopAnimation__Gv(void)
 {
-  stopAnimation__Gv:
-  ARGS->v0.u64 = 51120;
+  unsigned int a3 = 0;
+  struct act **a2 = acttable;
+  struct act *act = *a2;
 
-  ARGS->a3.u64 = 0;
-  ARGS->a2.u64 = acttable;
-  ARGS->a5.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
   loc_10004804:
-  ARGS->a2.u64 = (int32_t) (ARGS->a2.u32 + 4);
+  a2++;
 
-  ARGS->a3.u64 = (int32_t) (ARGS->a3.u32 + 1);
-  if (ARGS->a5.u64 == 0)
+  a3++;
+
+  if (act != NULL)
   {
-    if (((signed) ARGS->a3.i64) < ((signed) 1024))
-      ARGS->a4.u64 = 1;
-    else
-      ARGS->a4.u64 = 0;
-
-    goto loc_10004818;
+    act->pad_a[0] = 0;
   }
-  else
-    if (((signed) ARGS->a3.i64) < ((signed) 1024))
-    ARGS->a4.u64 = 1;
-  else
-    ARGS->a4.u64 = 0;
 
-
-  *((uint8_t *) (ARGS->a5.u32 + 0)) = 0;
-  loc_10004818:
-  if (ARGS->a4.u64 != 0)
+  if (a3 < NELEMS(acttable))
   {
-    ARGS->a5.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
+    act = *a2;
     goto loc_10004804;
-    ARGS->a5.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
   }
-
-
+  else
   {
-    ;
     return;
   }
 }
@@ -3533,7 +3516,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
 
   {
     ;
-    stopAnimation__Gv(ARGS);
+    stopAnimation__Gv();
   }
   ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
   at.u64 = *((int32_t *) (ARGS->v0.u32 + 28));

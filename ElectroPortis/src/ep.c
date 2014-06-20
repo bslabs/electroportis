@@ -119,7 +119,7 @@ static int theWindow;
 
 static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount);
 static void addToSeq__GP7animSeqP11animCommand(EPANOS_ARGS *ARGS);
-static void animateacts__Gv(EPANOS_ARGS *ARGS);
+static void animateacts__Gv(void);
 static void stopAnimation__Gv(EPANOS_ARGS *ARGS);
 static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS);
@@ -1092,107 +1092,42 @@ static void addToSeq__GP7animSeqP11animCommand(EPANOS_ARGS *ARGS)
   }
 }
 
-static void animateacts__Gv(EPANOS_ARGS *ARGS)
+static void animateacts__Gv(void)
 {
-  EPANOS_REG f4;
-  EPANOS_REG f5;
-  EPANOS_REG f6;
-  EPANOS_REG f7;
-  EPANOS_REG f8;
-  EPANOS_REG f9;
-  int EPANOS_fp_cond;
-  animateacts__Gv:
-  ARGS->v0.u64 = 45932;
+  struct act **a4 = acttable;
 
-  f9.u64 = 0;
-  ARGS->a3.u64 = 0;
+  for (unsigned int a3 = 1; a3 < NELEMS(acttable); a3++)
   {
-    ARGS->a4.u64 = acttable;
-    goto loc_10005C54;
-  }
-  loc_10005C4C:
-  memcpy((char *) (ARGS->a2.u32 + 24), &f5, 4);
+    struct act *act = *a4;
+    a4++;
 
-  loc_10005C50:
-  if (ARGS->a5.u64 == 0)
-  {
-    ARGS->a3.u64 = (int32_t) (ARGS->a3.u32 + 1);
-    goto locret_10005CB8;
-  }
-  else
-    loc_10005C54:
-  ARGS->a3.u64 = (int32_t) (ARGS->a3.u32 + 1);
+    if (act == NULL)
+    {
+      continue;
+    }
 
+    if (act->pad_a[0] == 0)
+    {
+      continue;
+    }
 
+    if (act->pad_a[1] == 0)
+    {
+      continue;
+    }
 
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a4.u32 + 0));
-  ARGS->a4.u64 = (int32_t) (ARGS->a4.u32 + 4);
-  if (ARGS->a2.u64 == 0)
-  {
-    if (((signed) ARGS->a3.i64) < ((signed) 1024))
-      ARGS->a5.u64 = 1;
+    float f0 = act->flt_c - (act->flt_f + act->flt_g);
+    f0 = act->flt_b * f0;
+    if (f0 < 0)
+    {
+      act->flt_g = act->flt_c;
+      act->pad_a[1] = 0;
+    }
     else
-      ARGS->a5.u64 = 0;
-
-    goto loc_10005C50;
+    {
+      act->flt_g = act->flt_f + act->flt_g;
+    }
   }
-  else
-    if (((signed) ARGS->a3.i64) < ((signed) 1024))
-    ARGS->a5.u64 = 1;
-  else
-    ARGS->a5.u64 = 0;
-
-
-  memcpy(&f8, (char *) (ARGS->a2.u32 + 24), 4);
-  memcpy(&f7, (char *) (ARGS->a2.u32 + 4), 4);
-  ARGS->v1.u64 = *((int8_t *) (ARGS->a2.u32 + 0));
-  memcpy(&f4, (char *) (ARGS->a2.u32 + 8), 4);
-  ARGS->a6.u64 = *((int8_t *) (ARGS->a2.u32 + 1));
-  if (ARGS->v1.u64 == 0)
-  {
-    memcpy(&f6, (char *) (ARGS->a2.u32 + 20), 4);
-    goto loc_10005C50;
-  }
-  else
-    memcpy(&f6, (char *) (ARGS->a2.u32 + 20), 4);
-
-  if (ARGS->a6.u64 == 0)
-  {
-    ;
-    goto loc_10005C50;
-  }
-  else
-    ;
-
-  f5.s = f6.s + f8.s;
-  ARGS->f0.s = f4.s - f5.s;
-  ARGS->f0.s = f7.s * ARGS->f0.s;
-  ARGS->f0.d = ARGS->f0.s;
-  if (ARGS->f0.d < f9.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    ;
-    goto loc_10005C4C;
-  }
-  else
-    ;
-
-  f5.s = f4.s;
-  {
-    *((uint8_t *) (ARGS->a2.u32 + 1)) = 0;
-    goto loc_10005C4C;
-  }
-  locret_10005CB8:
-  {
-    ;
-    return;
-  }
-
 }
 
 static void stopAnimation__Gv(EPANOS_ARGS *ARGS)
@@ -4173,8 +4108,7 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   t9.u64 = (uint64_t) animateacts__Gv;
   {
-    ;
-    animateacts__Gv(ARGS);
+    animateacts__Gv();
   }
   loc_10005FB8:
   t9.u64 = (uint64_t) floor;

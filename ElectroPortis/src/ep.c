@@ -1132,28 +1132,14 @@ static void animateacts__Gv(void)
 
 static void stopAnimation__Gv(void)
 {
-  unsigned int a3 = 0;
-  struct act **a2 = acttable;
-  struct act *act = *a2;
-
-  loc_10004804:
-  a2++;
-
-  a3++;
-
-  if (act != NULL)
+  for (unsigned int i = 0; i < NELEMS(acttable); i++)
   {
-    act->pad_a[0] = 0;
-  }
+    struct act *act = acttable[i];
 
-  if (a3 < NELEMS(acttable))
-  {
-    act = *a2;
-    goto loc_10004804;
-  }
-  else
-  {
-    return;
+    if (act != NULL)
+    {
+      act->pad_a[0] = 0;
+    }
   }
 }
 

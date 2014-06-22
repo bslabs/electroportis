@@ -1,7 +1,18 @@
 #pragma once
-#include <GL/gl.h>
 
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
+
+#ifdef _WIN32
 #include "saver.hpp"
+#else
+typedef unsigned long wincount_t;
+#endif
 
 typedef union EPANOS_REG {
     uint8_t u8;

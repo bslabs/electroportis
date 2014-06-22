@@ -4,12 +4,13 @@
  * Tristram Visual, a sole proprietorship operating in California.  Inquiries
  * may be directed to info@tristram.com and www.tristram.com.
  */
-#include "stdafx.h"
 #include "ep.h"
 #include "replay_draw.hpp"
-#include "saver.hpp"
 
 #ifdef _MSC_VER
+#include "stdafx.h"
+#include "saver.hpp"
+
 #if _MSC_VER < 1800
 #include "vs2012_math/vs2012_math.h"
 #endif
@@ -17,8 +18,12 @@
 #include "rand48.h"
 #pragma warning (disable:4101 4102 4700)
 #else /* !_MSC_VER */
+#include <assert.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #endif /* !_MSC_VER */
 
 static float flt_100092A0 = 180.000000f;
@@ -154,7 +159,7 @@ static void setacttargets__Gv(EPANOS_ARGS *ARGS);
 static void twixt__GiPff(EPANOS_ARGS *ARGS);
 static void exprand__Gf(EPANOS_ARGS *ARGS);
 
-#if _MSC_VER < 1800
+#if defined(_MSC_VER) && (_MSC_VER < 1800)
 static double
 trunc(double d)
 {

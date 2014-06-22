@@ -1,7 +1,14 @@
 #pragma once
-#include <GL/gl.h>
 
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
+
+#ifdef _WIN32
 #include "saver.hpp"
+#endif
 
 typedef enum gl_cmd {
     GLCOLOR3F,

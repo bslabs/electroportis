@@ -10,6 +10,34 @@
 
 int mainwinid;
 
+#ifdef TEST
+#include <stdio.h>
+static GLubyte imageData[1024*768*4];
+
+void write_sshot(void)
+{
+  static unsigned int num = 0;
+
+  if (num == 10000)
+    exit(0);
+
+  char name[20];
+  sprintf(name, "shot%05u.rgba", num);
+  FILE *fp = fopen(name, "wb");
+
+  fwrite(imageData, sizeof(imageData), 1, fp);
+
+  fclose(fp);
+
+  // 'convert' is from ImageMagick
+  char cmd[200];
+  sprintf(cmd, "convert -size 1024x768 -depth 8 -define png:exclude-chunk=date ephemeral:shot%05u.rgba shot%05u.png &", num, num);
+  system(cmd);
+
+  num++;
+}
+#endif
+
 void menuhandler(int value)
 {
   switch (value)
@@ -30,6 +58,11 @@ void drawfunc(void)
 
   display__Gv(&ARGS, 0);
   glutSwapBuffers();
+
+#ifdef TEST
+  glReadPixels(0, 0, 1024, 768, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+  write_sshot();
+#endif
 }
 
 void iterate(void)

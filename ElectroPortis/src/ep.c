@@ -191,7 +191,12 @@ init_ep(void)
         readAnimation__Gv(&ARGS);
 
     srand48(0);
+
+// If in test mode, don't seed the RNG (so it'll do the same show every time)
+#ifndef TEST
     srand48(time(NULL));
+#endif
+
     nlimit = 52;
     wheel = 0.0f;
 }

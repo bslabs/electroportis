@@ -17,10 +17,13 @@ OBJS=$(COBJS)
 electroportis_glut: $(OBJS)
 	$(CC) -Wall $(CFLAGS) $^ $(LIBS) -o $@
 
+test: CFLAGS+=-DTEST
+test: electroportis_glut
+
 $(COBJS): %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f electroportis_glut $(COBJS)
 
-.PHONY: clean
+.PHONY: clean test

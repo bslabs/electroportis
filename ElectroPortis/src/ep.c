@@ -122,7 +122,7 @@ static void addToSeq__GP7animSeqP11animCommand(EPANOS_ARGS *ARGS);
 static void animateacts__Gv(void);
 static void stopAnimation__Gv(void);
 static void readAnimation__Gv(EPANOS_ARGS *ARGS);
-static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS);
+static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, wincount_t wincount);
 static void tasteQueue__Gv(EPANOS_ARGS *ARGS);
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS);
@@ -182,7 +182,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG t5;
   EPANOS_REG t6;
   EPANOS_REG s0;
-  const EPANOS_REG s1 = { .u64 = &t };
   EPANOS_REG s2;
   EPANOS_REG s3;
   EPANOS_REG s4;
@@ -201,16 +200,16 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG f28;
   EPANOS_REG f30;
   int EPANOS_fp_cond;
-  double var_110;
+  float var_110;
   uint64_t var_90;
-  double var_108;
+  float var_108;
   float var_100;
   uint64_t var_78;
   float var_F0;
   float var_E8;
-  double var_E0;
+  float var_E0;
   uint64_t var_88;
-  double var_D8;
+  float var_D8;
   float var_D0;
   float var_C8;
   uint64_t var_80;
@@ -396,49 +395,26 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     f28.s = twixt__GiPff(s0.u64, wrist, t);
   }
   {
-    f26.s = twixt__GiPff(s0.u64, size, t);
+    var_108 = twixt__GiPff(s0.u64, size, t);
   }
-  memcpy(&f24, &flt_10009290, 4);
-  ARGS->a1.u64 = (uint64_t) spin;
-  ARGS->a0.u64 = s0.u64;
-  memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
   {
-    ARGS->f15.s = f24.s;
-    foldtwixt__GiPffT3(ARGS);
+    var_E0 = foldtwixt__GiPffT3(s0.u64, spin, t, 360.0f);
   }
-  memcpy(&var_E0, &ARGS->f0, 8);
-  ARGS->a1.u64 = (uint64_t) flip;
-  memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
-  ARGS->a0.u64 = s0.u64;
-  ARGS->f15.s = f24.s;
   {
-    memcpy(&var_108, &f26, 8);
-    foldtwixt__GiPffT3(ARGS);
+    var_D8 = foldtwixt__GiPffT3(s0.u64, flip, t, 360.0f);
   }
-  memcpy(&var_D8, &ARGS->f0, 8);
   {
-    f24.s = twixt__GiPff(s0.u64, dtwist, t);
+    var_110 = twixt__GiPff(s0.u64, dtwist, t);
   }
-  ARGS->a1.u64 = (uint64_t) hue;
-  ARGS->a0.u64 = s0.u64;
-  memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
   {
-    ARGS->f15.s = f22.s;
-    foldtwixt__GiPffT3(ARGS);
+    f26.s = foldtwixt__GiPffT3(s0.u64, hue, t, f22.s);
   }
-  f26.s = ARGS->f0.s;
   {
-    memcpy(&var_110, &f24, 8);
     var_E8 = twixt__GiPff(s0.u64, alpha, t);
   }
-  ARGS->a1.u64 = (uint64_t) light;
-  ARGS->a0.u64 = s0.u64;
-  memcpy(&ARGS->f14, (char *) (s1.u32 + 0), 4);
   {
-    ARGS->f15.s = f22.s;
-    foldtwixt__GiPffT3(ARGS);
+    f24.s = foldtwixt__GiPffT3(s0.u64, light, t, f22.s);
   }
-  f24.s = ARGS->f0.s;
   {
     var_F0 = twixt__GiPff(s0.u64, alphaout, t);
   }
@@ -493,10 +469,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f20.s;
   {
@@ -505,10 +480,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f22.s;
-  memcpy(&ARGS->f12, &var_D8, 8);
   {
     ARGS->f15.s = f20.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
   ARGS->f13.s = f20.s;
@@ -636,10 +610,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f20.s;
   {
@@ -648,10 +621,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f22.s;
-  memcpy(&ARGS->f12, &var_D8, 8);
   {
     ARGS->f15.s = f20.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
   ARGS->f13.s = f20.s;
@@ -659,11 +631,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->f14.s = f20.s;
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  memcpy(&ARGS->f13, &var_108, 8);
   ARGS->f14.s = f22.s;
   {
-    ARGS->f12.s = ARGS->f13.s;
-    wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
+    wrap_glScalef(var_108, var_108, (float) ARGS->f14.s, wincount);
   }
   ARGS->a1.u64 = var_78;
   ARGS->a1.u64 = *((int8_t *) (ARGS->a1.u32 + 0));
@@ -726,10 +696,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f20.s;
   {
@@ -738,10 +707,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f22.s;
-  memcpy(&ARGS->f12, &var_D8, 8);
   {
     ARGS->f15.s = f20.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
   ARGS->f13.s = f20.s;
@@ -749,11 +717,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->f14.s = f20.s;
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  memcpy(&ARGS->f13, &var_108, 8);
   ARGS->f14.s = f22.s;
   {
-    ARGS->f12.s = ARGS->f13.s;
-    wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
+    wrap_glScalef(var_108, var_108, (float) ARGS->f14.s, wincount);
   }
   ARGS->a3.u64 = var_78;
   ARGS->a3.u64 = *((int8_t *) (ARGS->a3.u32 + 0));
@@ -812,10 +778,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &var_E0, 8);
   {
     ARGS->f15.s = f22.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f20.s;
   {
@@ -824,10 +789,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f22.s;
-  memcpy(&ARGS->f12, &var_D8, 8);
   {
     ARGS->f15.s = f20.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f28.s;
   ARGS->f13.s = f20.s;
@@ -835,11 +799,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->f14.s = f20.s;
     wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
   }
-  memcpy(&ARGS->f13, &var_108, 8);
   ARGS->f14.s = f22.s;
   {
-    ARGS->f12.s = ARGS->f13.s;
-    wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
+    wrap_glScalef(var_108, var_108, (float) ARGS->f14.s, wincount);
   }
   ARGS->a5.u64 = var_78;
   ARGS->a5.u64 = *((int8_t *) (ARGS->a5.u32 + 0));
@@ -883,10 +845,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   ARGS->f13.s = f20.s;
   ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &var_110, 8);
   {
     ARGS->f15.s = f22.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(var_110, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
   }
   ARGS->f12.s = f20.s;
   ARGS->f13.s = f20.s;
@@ -2405,90 +2366,54 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 }
 
-static void foldtwixt__GiPffT3(EPANOS_ARGS *ARGS)
+static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)
 {
-  EPANOS_REG f1;
-  EPANOS_REG f4;
-  EPANOS_REG f5;
-  EPANOS_REG f6;
-  EPANOS_REG f7;
-  EPANOS_REG f8;
-  EPANOS_REG f9;
-  EPANOS_REG f10;
-  int EPANOS_fp_cond;
-  foldtwixt__GiPffT3:
-  ARGS->a4.u64 = (int32_t) (ARGS->a0.u32 + -1);
+  float f0;
+  float f4;
+  float f5;
+  float f6;
+  float f7;
+  float f8;
+  float f10;
 
-  ARGS->v0.u64 = (int32_t) (1 << 16);
-  ARGS->a5.u64 = (int32_t) (ARGS->a0.u32 << 2);
-  ARGS->v0.u64 = 48628;
-  if (ARGS->a0.i64 <= 0)
+  int a4 = a0 - 1;
+
+  if (a0 <= 0)
   {
-    ARGS->a4.u64 = (int32_t) (ARGS->a4.u32 + 128);
-    goto loc_100051C0;
+    a4 = a4 + 128;
   }
 
-  loc_100051C0:
-  ARGS->a2.u64 = (int32_t) (ARGS->a5.u32 + ARGS->a1.u32);
+  f5 = a1[a0];
+  f6 = a1[a4];
+  f8 = f15 * 0.5f;
+  f4 = f5 - f6;
+  f7 = 1.0f - f14;
 
-  memcpy(&f5, (char *) (ARGS->a2.u32 + 0), 4);
-  ARGS->v1.u64 = (int32_t) (ARGS->a4.u32 << 2);
-  memcpy(&f8, &flt_100092B8, 4);
-  ARGS->v1.u64 = (int32_t) (ARGS->v1.u32 + ARGS->a1.u32);
-  memcpy(&f6, (char *) (ARGS->v1.u32 + 0), 4);
-  f8.s = ARGS->f15.s * f8.s;
-  f4.s = f5.s - f6.s;
-  memcpy(&f7, &flt_100092A8, 4);
-  if (f8.s < f4.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  memcpy(&f9, &flt_100092BC, 4);
-  if (EPANOS_fp_cond)
+  if (f8 < f4)
   {
-    f7.s = f7.s - ARGS->f14.s;
-    goto loc_10005224;
+    f0 = f6 + f15;
+
+    float f1 = f5 * f14;
+    f0 = f7 * f0;
+    f0 = f0 + f1;
+    return f0;
+  }
+
+  f10 = f15 * -0.5f;
+  f8 = f7 * f6;
+
+  if (f4 < f10)
+  {
+    f0 = f5 + f15;
+    f0 = f14 * f0;
+    f0 = f8 + f0;
+    return f0;
   }
   else
-    f7.s = f7.s - ARGS->f14.s;
-
-  f10.s = ARGS->f15.s * f9.s;
-  if (f4.s < f10.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
   {
-    f8.s = f7.s * f6.s;
-    goto loc_10005218;
-  }
-  else
-    f8.s = f7.s * f6.s;
-
-  ARGS->f0.s = f5.s + ARGS->f15.s;
-  ARGS->f0.s = ARGS->f14.s * ARGS->f0.s;
-  {
-    ARGS->f0.s = f8.s + ARGS->f0.s;
-    return;
-  }
-  loc_10005218:
-  ARGS->f0.s = f5.s * ARGS->f14.s;
-
-  {
-    ARGS->f0.s = f8.s + ARGS->f0.s;
-    return;
-  }
-  loc_10005224:
-  ARGS->f0.s = f6.s + ARGS->f15.s;
-
-  f1.s = f5.s * ARGS->f14.s;
-  ARGS->f0.s = f7.s * ARGS->f0.s;
-  {
-    ARGS->f0.s = ARGS->f0.s + f1.s;
-    return;
+    f0 = f5 * f14;
+    f0 = f8 + f0;
+    return f0;
   }
 }
 

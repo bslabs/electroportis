@@ -30,7 +30,6 @@
 
 static float flt_100092A0 = 180.000000f;
 static float flt_100092A8 = 1.00000000f;
-static float flt_100092B8 = 0.500000000f;
 static double dbl_10009300 = 1.0000000000000000;
 static float flt_100092B0 = 300.000000f;
 static double dbl_100092D0 = 60.000000000000000;
@@ -178,114 +177,67 @@ init_ep(void)
 
 static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 {
-  EPANOS_REG t4;
   EPANOS_REG t5;
-  EPANOS_REG t6;
   EPANOS_REG s0;
-  EPANOS_REG s2;
   EPANOS_REG s3;
-  EPANOS_REG s4;
-  EPANOS_REG s5;
-  EPANOS_REG s6;
-  EPANOS_REG s7;
-  EPANOS_REG at;
-  EPANOS_REG fp;
   EPANOS_REG f5;
-  EPANOS_REG f6;
-  EPANOS_REG f7;
-  EPANOS_REG f20;
-  EPANOS_REG f22;
+  const EPANOS_REG f20 = {.s = 0.0f};
+  const EPANOS_REG f22 = {.s = 1.0f};
   EPANOS_REG f24;
   EPANOS_REG f26;
   EPANOS_REG f28;
   EPANOS_REG f30;
-  int EPANOS_fp_cond;
   float var_110;
-  uint64_t var_90;
+  const float *var_90 = &(outlinecolRGBA[1]);
   float var_108;
   float var_100;
-  uint64_t var_78;
+  char *var_78;
   float var_F0;
   float var_E8;
   float var_E0;
-  uint64_t var_88;
+  const float *var_88 = &(outlinecolRGBA[2]);
   float var_D8;
   float var_D0;
   float var_C8;
-  uint64_t var_80;
+  const float *var_80 = &(colRGBA[1]);
   uint64_t var_A8;
-  uint64_t var_A0;
-  uint64_t var_98;
-  drawit__Gv:
+  char *var_A0;
+  const float *var_98 = &(colRGBA[2]);
 
-  at.u64 = (int32_t) (1 << 16);
-  at.u64 = 48152;
-  memcpy(&f22, &flt_100092A8, 4);
-  s0.u64 = (uint64_t) glColor3f;
-  ARGS->f12.s = f22.s;
-  ARGS->f13.s = f22.s;
+  wrap_glColor3f(1.0f, 1.0f, 1.0f, wincount);
+  wrap_glPushMatrix(wincount);
+
   {
-    ARGS->f14.s = f22.s;
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
-    wrap_glPushMatrix(wincount);
-  }
-  f20.u32 = 0;
-  fp.u64 = (uint64_t) glRotatef;
-  ARGS->f13.s = f22.s;
-  ARGS->v0.u64 = (uint64_t) (&wheel);
-  ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &wheel, 4);
-  {
-    ARGS->f15.s = f20.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
+    wrap_glRotatef(wheel, f22.s, f20.s, f20.s, wincount);
   }
   memcpy(&f24, &flt_100092BC, 4);
   ARGS->a3.u64 = (uint64_t) (&nlimit);
   ARGS->a1.u64 = (uint64_t) (&n);
-  ARGS->v1.u64 = nlimit;
   ARGS->a4.u64 = n;
-  if (((signed) 0) < ((signed) ARGS->v1.i64))
-    ARGS->v1.u64 = 1;
-  else
-    ARGS->v1.u64 = 0;
-
-  var_A8 = ARGS->v1.u64;
-  if (ARGS->v1.u64 == 0)
+  s3.u64 = ARGS->a4.u64;
+  if (0 < nlimit)
   {
-    s3.u64 = ARGS->a4.u64;
-    goto loc_100054E4;
-  }
-  else
-    s3.u64 = ARGS->a4.u64;
-
-  s2.u64 = (uint64_t) twixt__GiPff;
-  s4.u64 = (uint64_t) glTranslatef;
-  s5.u64 = (uint64_t) dzoom;
-  {
+    var_A8 = 1;
     goto loc_100054B8;
   }
-  loc_1000545C:
-  if (((signed) s0.i64) < ((signed) 128))
-    ARGS->a0.u64 = 1;
   else
-    ARGS->a0.u64 = 0;
-
-
-  if (ARGS->a0.u64 != 0)
   {
-    goto loc_10005470;
+    var_A8 = 0;
+    goto loc_100054E4;
   }
 
-  s0.u64 = (int32_t) (s0.u32 + -128);
-  loc_10005470:
-
-  ARGS->f12.s = f20.s;
-  ARGS->f13.s = f20.s;
+  loc_1000545C:
+  if (((signed) s0.i64) < ((signed) 128))
   {
-    ARGS->f14.s = twixt__GiPff(s0.u64, s5.u64, t) * f24.s;
-    wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
+  }
+  else
+  {
+    s0.u64 = (int32_t) (s0.u32 + -128);
+  }
+
+  {
+    ARGS->f14.s = twixt__GiPff(s0.u64, dzoom, t) * f24.s;
+    wrap_glTranslatef(f20.s, f20.s, (float) ARGS->f14.s, wincount);
   }
   ARGS->a3.u64 = (uint64_t) (&nlimit);
   ARGS->a1.u64 = (uint64_t) (&n);
@@ -325,44 +277,33 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   if (ARGS->a0.i64 >= 0)
   {
     s0.u64 = ARGS->a0.u64;
-    goto loc_1000545C;
   }
   else
-    s0.u64 = ARGS->a0.u64;
-
   {
     s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
-    goto loc_1000545C;
   }
+  goto loc_1000545C;
+
   loc_100054E0:
   var_A8 = ARGS->a2.u64;
 
   loc_100054E4:
-  s5.u64 = (uint64_t) foldtwixt__GiPffT3;
-
-  s4.u64 = (uint64_t) glTranslatef;
-  at.u64 = var_A8;
-  s2.u64 = (uint64_t) twixt__GiPff;
-  s7.u64 = (uint64_t) colRGBA;
-  s6.u64 = (uint64_t) outlinecolRGBA;
-  if (at.u64 == 0)
+  s3.u64 = ARGS->a4.u64;
+  if (var_A8 == 0)
   {
-    s3.u64 = ARGS->a4.u64;
-    goto loc_10005858;
+    wrap_glPopMatrix(wincount);
+    return;
   }
-  else
-    s3.u64 = ARGS->a4.u64;
 
-  ARGS->a4.u64 = (uint64_t) (&colRGBA[2]);
-  var_98 = ARGS->a4.u64;
-  ARGS->a2.u64 = (uint64_t) (&colRGBA[1]);
-  var_80 = ARGS->a2.u64;
-  ARGS->v1.u64 = (uint64_t) (&outlinecolRGBA[2]);
-  var_88 = ARGS->v1.u64;
-  ARGS->v0.u64 = (uint64_t) (&outlinecolRGBA[1]);
   {
-    var_90 = ARGS->v0.u64;
-    goto loc_10005C10;
+    ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
+
+    ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
+    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
+    ARGS->a0.u64 = ARGS->a0.u64 & 127;
+    ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
+    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
+    goto loc_10005848;
   }
   loc_1000552C:
   if (((signed) s0.i64) < ((signed) 128))
@@ -371,505 +312,191 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->a5.u64 = 0;
 
 
-  if (ARGS->a5.u64 != 0)
+  if (ARGS->a5.u64 == 0)
   {
-    goto loc_10005540;
+    s0.u64 = (int32_t) (s0.u32 + -128);
   }
 
-  s0.u64 = (int32_t) (s0.u32 + -128);
-  loc_10005540:
+  f30.s = twixt__GiPff(s0.u64, x, t);
+  var_D0 = twixt__GiPff(s0.u64, y, t);
+  var_100 = twixt__GiPff(s0.u64, dzoom, t);
+  var_C8 = twixt__GiPff(s0.u64, arm, t);
+  f28.s = twixt__GiPff(s0.u64, wrist, t);
+  var_108 = twixt__GiPff(s0.u64, size, t);
+  var_E0 = foldtwixt__GiPffT3(s0.u64, spin, t, 360.0f);
+  var_D8 = foldtwixt__GiPffT3(s0.u64, flip, t, 360.0f);
+  var_110 = twixt__GiPff(s0.u64, dtwist, t);
+  f26.s = foldtwixt__GiPffT3(s0.u64, hue, t, f22.s);
+  var_E8 = twixt__GiPff(s0.u64, alpha, t);
+  f24.s = foldtwixt__GiPffT3(s0.u64, light, t, f22.s);
+  var_F0 = twixt__GiPff(s0.u64, alphaout, t);
 
-  {
-    f30.s = twixt__GiPff(s0.u64, x, t);
-  }
-  {
-    var_D0 = twixt__GiPff(s0.u64, y, t);
-  }
-  {
-    var_100 = twixt__GiPff(s0.u64, dzoom, t);
-  }
-  {
-    var_C8 = twixt__GiPff(s0.u64, arm, t);
-  }
-  {
-    f28.s = twixt__GiPff(s0.u64, wrist, t);
-  }
-  {
-    var_108 = twixt__GiPff(s0.u64, size, t);
-  }
-  {
-    var_E0 = foldtwixt__GiPffT3(s0.u64, spin, t, 360.0f);
-  }
-  {
-    var_D8 = foldtwixt__GiPffT3(s0.u64, flip, t, 360.0f);
-  }
-  {
-    var_110 = twixt__GiPff(s0.u64, dtwist, t);
-  }
-  {
-    f26.s = foldtwixt__GiPffT3(s0.u64, hue, t, f22.s);
-  }
-  {
-    var_E8 = twixt__GiPff(s0.u64, alpha, t);
-  }
-  {
-    f24.s = foldtwixt__GiPffT3(s0.u64, light, t, f22.s);
-  }
-  {
-    var_F0 = twixt__GiPff(s0.u64, alphaout, t);
-  }
   ARGS->f12.s = f26.s;
   ARGS->f13.s = f24.s;
   ARGS->a4.u64 = var_80;
   ARGS->f14.s = f22.s;
-  ARGS->a3.u64 = s7.u64;
+  ARGS->a3.u64 = colRGBA;
   {
     ARGS->a5.u64 = var_98;
     hls_to_rgb__GfN21PfN24(ARGS);
   }
-  memcpy(&f7, &flt_100092B8, 4);
-  f5.s = f26.s + f7.s;
-  memcpy(&f6, &dbl_10009300, 8);
+  f5.s = f26.s + 0.5f;
   ARGS->f2.d = f5.s;
-  if (f6.d < ARGS->f2.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
+  outlinecolRGBA[3] = var_F0;
+  colRGBA[3] = var_E8;
+  ARGS->f12.s = f5.s;
 
-  memcpy((char *) (s6.u32 + 12), &var_F0, 4);
-  memcpy((char *) (s7.u32 + 12), &var_E8, 4);
-  if (!EPANOS_fp_cond)
+  if ((double)1.0 < ARGS->f2.d)
   {
-    ARGS->f12.s = f5.s;
-    goto loc_100056E8;
+    memcpy(&ARGS->f12, &flt_100092B4, 4);
+    ARGS->f12.s = f5.s + ARGS->f12.s;
   }
-  else
-    ARGS->f12.s = f5.s;
-
-  memcpy(&ARGS->f12, &flt_100092B4, 4);
-  ARGS->f12.s = f5.s + ARGS->f12.s;
-  loc_100056E8:
 
   ARGS->f13.s = f22.s - f24.s;
   ARGS->a4.u64 = var_90;
   ARGS->f14.s = f22.s;
-  ARGS->a3.u64 = s6.u64;
+  ARGS->a3.u64 = outlinecolRGBA;
   {
     ARGS->a5.u64 = var_88;
     hls_to_rgb__GfN21PfN24(ARGS);
   }
-  {
-    ;
-    wrap_glPushMatrix(wincount);
-  }
-  ARGS->f12.s = f30.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_D0, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f20.s;
-  {
-    ARGS->f15.s = f22.s;
-    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_C8, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f22.s;
-  {
-    ARGS->f15.s = f20.s;
-    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f28.s;
-  ARGS->f13.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->a6.u64 = (uint64_t) fill;
-  ARGS->a6.u64 = (int32_t) (s0.u32 + ARGS->a6.u32);
-  var_78 = ARGS->a6.u64;
-  ARGS->a6.u64 = *((int8_t *) (ARGS->a6.u32 + 0));
-  if (ARGS->a6.u64 == 0)
-  {
-    ARGS->a7.u64 = (uint64_t) outline;
-    goto loc_100057BC;
-  }
-  else
-    ARGS->a7.u64 = (uint64_t) outline;
 
-  memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
+  wrap_glPushMatrix(wincount);
+  wrap_glTranslatef(f30.s, var_D0, f20.s, wincount);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
+  wrap_glTranslatef(f28.s, f20.s, f20.s, wincount);
+
+  var_78 = &(fill[s0.u32]);
+  if (*var_78 != 0)
   {
-    memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
     drawshape__GiT1(1, wincount);
   }
-  ARGS->a7.u64 = (uint64_t) outline;
-  loc_100057BC:
-  ARGS->a7.u64 = (int32_t) (s0.u32 + ARGS->a7.u32);
 
-  var_A0 = ARGS->a7.u64;
-  ARGS->a7.u64 = *((int8_t *) (ARGS->a7.u32 + 0));
-  if (ARGS->a7.u64 == 0)
+  var_A0 = &(outline[s0.u32]);
+  if (*var_A0 != 0)
   {
-    goto loc_100057F8;
-  }
-
-  memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
-  {
-    memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
     drawshape__GiT1(0, wincount);
   }
-  loc_100057F8:
-  {
-    ;
-    wrap_glPopMatrix(wincount);
-  }
+
+  wrap_glPopMatrix(wincount);
 
   ARGS->a1.u64 = (uint64_t) (&n);
   ARGS->a3.u64 = (uint64_t) (&nlimit);
-  t4.u64 = (uint64_t) (&sflag);
-  t4.u64 = sflag;
-  if (t4.u64 == 0)
+  if (sflag == 0)
   {
     goto loc_100058AC;
   }
 
   loc_10005818:
-  t6.u64 = nlimit;
-
   s3.u64 = (int32_t) (s3.u32 + -1);
   t5.u64 = n;
   ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
   ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
-  t5.u64 = (int32_t) (t5.u32 - t6.u32);
+  t5.u64 = (int32_t) (t5.u32 - nlimit);
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
+  ARGS->a0.u64 = ARGS->a0.u64 & 127;
+  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
+  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
+
   if (((signed) t5.i64) < ((signed) s3.i64))
     t5.u64 = 1;
   else
     t5.u64 = 0;
 
-  ARGS->a0.u64 = ARGS->a0.u64 & 127;
-  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
   if (t5.u64 == 0)
   {
-    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-    goto loc_10005858;
-  }
-  else
-    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-
-  loc_10005848:
-  if (ARGS->a0.i64 >= 0)
-  {
-    s0.u64 = ARGS->a0.u64;
-    goto loc_1000552C;
-  }
-  else
-    s0.u64 = ARGS->a0.u64;
-
-
-  {
-    s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
-    goto loc_1000552C;
-  }
-  loc_10005858:
-  {
     wrap_glPopMatrix(wincount);
-  }
-  {
     return;
   }
+
+  loc_10005848:
+  s0.u64 = ARGS->a0.u64;
+  if (ARGS->a0.i64 >= 0)
+  {
+    goto loc_1000552C;
+  }
+
+  s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
+  goto loc_1000552C;
+
   loc_100058AC:
-  ARGS->f12.s = f22.s;
+  wrap_glScalef(f22.s, -1.0f, f22.s, wincount);
+  wrap_glPushMatrix(wincount);
+  wrap_glTranslatef(f30.s, var_D0, f20.s, wincount);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
+  wrap_glTranslatef(f28.s, f20.s, f20.s, wincount);
+  wrap_glScalef(var_108, var_108, f22.s, wincount);
 
-  memcpy(&ARGS->f13, &flt_100092B4, 4);
+  if (*var_78 != 0)
   {
-    ARGS->f14.s = f22.s;
-    wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
-    ;
-    wrap_glPushMatrix(wincount);
-  }
-  ARGS->f12.s = f30.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_D0, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f20.s;
-  {
-    ARGS->f15.s = f22.s;
-    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_C8, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f22.s;
-  {
-    ARGS->f15.s = f20.s;
-    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f28.s;
-  ARGS->f13.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f14.s = f22.s;
-  {
-    wrap_glScalef(var_108, var_108, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->a1.u64 = var_78;
-  ARGS->a1.u64 = *((int8_t *) (ARGS->a1.u32 + 0));
-  if (ARGS->a1.u64 == 0)
-  {
-    ARGS->a2.u64 = var_A0;
-    goto loc_10005980;
-  }
-  else
-    ARGS->a2.u64 = var_A0;
-
-  memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
-  {
-    memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
     drawshape__GiT1(1, wincount);
   }
-  ARGS->a2.u64 = var_A0;
-  loc_10005980:
-  ARGS->a2.u64 = *((int8_t *) (ARGS->a2.u32 + 0));
 
-  if (ARGS->a2.u64 == 0)
+  if (*var_A0 != 0)
   {
-    goto loc_100059B4;
-  }
-
-  memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
-  {
-    memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
     drawshape__GiT1(0, wincount);
   }
-  loc_100059B4:
-  {
-    ;
-    wrap_glPopMatrix(wincount);
-  }
 
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f20.s;
-  memcpy(&ARGS->f12, &flt_100092A0, 4);
-  {
-    ARGS->f15.s = f22.s;
-    wrap_glRotatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  {
-    ;
-    wrap_glPushMatrix(wincount);
-  }
-  ARGS->f12.s = f30.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_D0, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f20.s;
-  {
-    ARGS->f15.s = f22.s;
-    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_C8, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f22.s;
-  {
-    ARGS->f15.s = f20.s;
-    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f28.s;
-  ARGS->f13.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f14.s = f22.s;
-  {
-    wrap_glScalef(var_108, var_108, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->a3.u64 = var_78;
-  ARGS->a3.u64 = *((int8_t *) (ARGS->a3.u32 + 0));
-  if (ARGS->a3.u64 == 0)
-  {
-    goto loc_10005A90;
-  }
+  wrap_glPopMatrix(wincount);
+  wrap_glRotatef(180.0f, f20.s, f20.s, f22.s, wincount);
+  wrap_glPushMatrix(wincount);
+  wrap_glTranslatef(f30.s, var_D0, f20.s, wincount);
 
-  memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
+  wrap_glTranslatef(f28.s, f20.s, f20.s, wincount);
+  wrap_glScalef(var_108, var_108, f22.s, wincount);
+
+  if (*var_78 != 0)
   {
-    memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
     drawshape__GiT1(1, wincount);
   }
-  loc_10005A90:
-  ARGS->a4.u64 = var_A0;
 
-  ARGS->a4.u64 = *((int8_t *) (ARGS->a4.u32 + 0));
-  if (ARGS->a4.u64 == 0)
+  if (*var_A0 != 0)
   {
-    goto loc_10005AC0;
-  }
-
-  memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
-  {
-    memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
     drawshape__GiT1(0, wincount);
   }
-  loc_10005AC0:
 
-  {
-    ;
-    wrap_glPopMatrix(wincount);
-  }
-  ARGS->f12.s = f22.s;
-  memcpy(&ARGS->f13, &flt_100092B4, 4);
-  {
-    ARGS->f14.s = f22.s;
-    wrap_glScalef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
-    ;
-    wrap_glPushMatrix(wincount);
-  }
-  ARGS->f12.s = f30.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_D0, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f20.s;
-  {
-    ARGS->f15.s = f22.s;
-    wrap_glRotatef(var_E0, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, var_C8, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f22.s;
-  {
-    ARGS->f15.s = f20.s;
-    wrap_glRotatef(var_D8, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f28.s;
-  ARGS->f13.s = f20.s;
-  {
-    ARGS->f14.s = f20.s;
-    wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->f14.s = f22.s;
-  {
-    wrap_glScalef(var_108, var_108, (float) ARGS->f14.s, wincount);
-  }
-  ARGS->a5.u64 = var_78;
-  ARGS->a5.u64 = *((int8_t *) (ARGS->a5.u32 + 0));
-  if (ARGS->a5.u64 == 0)
-  {
-    goto loc_10005B9C;
-  }
+  wrap_glPopMatrix(wincount);
+  wrap_glScalef(f22.s, -1.0f, f22.s, wincount);
+  wrap_glPushMatrix(wincount);
+  wrap_glTranslatef(f30.s, var_D0, f20.s, wincount);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
+  wrap_glTranslatef(f28.s, f20.s, f20.s, wincount);
+  wrap_glScalef(var_108, var_108, f22.s, wincount);
 
-  memcpy(&ARGS->f12, (char *) (s7.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s7.u32 + 4), 4);
+  if (*var_78 != 0)
   {
-    memcpy(&ARGS->f14, (char *) (s7.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
     drawshape__GiT1(1, wincount);
   }
-  loc_10005B9C:
-  ARGS->a6.u64 = var_A0;
 
-  ARGS->a6.u64 = *((int8_t *) (ARGS->a6.u32 + 0));
-  if (ARGS->a6.u64 == 0)
+  if (*var_A0 != 0)
   {
-    goto loc_10005BCC;
-  }
-
-  memcpy(&ARGS->f12, (char *) (s6.u32 + 0), 4);
-  memcpy(&ARGS->f13, (char *) (s6.u32 + 4), 4);
-  {
-    memcpy(&ARGS->f14, (char *) (s6.u32 + 8), 4);
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
-  }
-  {
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
     drawshape__GiT1(0, wincount);
   }
-  loc_10005BCC:
 
-  {
-    ;
-    wrap_glPopMatrix(wincount);
-  }
-  ARGS->f13.s = f20.s;
-  ARGS->f14.s = f20.s;
-  {
-    ARGS->f15.s = f22.s;
-    wrap_glRotatef(var_110, (float) ARGS->f13.s, (float) ARGS->f14.s, (float) ARGS->f15.s, wincount);
-  }
-  ARGS->f12.s = f20.s;
-  ARGS->f13.s = f20.s;
-  {
-    wrap_glTranslatef((float) ARGS->f12.s, (float) ARGS->f13.s, var_100, wincount);
-  }
+  wrap_glPopMatrix(wincount);
+  wrap_glRotatef(var_110, f20.s, f20.s, f22.s, wincount);
+  wrap_glTranslatef(f20.s, f20.s, var_100, wincount);
   ARGS->a1.u64 = (uint64_t) (&n);
   {
     ARGS->a3.u64 = (uint64_t) (&nlimit);
     goto loc_10005818;
-  }
-  loc_10005C10:
-  ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
-
-  ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-  ARGS->a0.u64 = ARGS->a0.u64 & 127;
-  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-  {
-    ;
-    goto loc_10005848;
   }
 }
 
@@ -999,7 +626,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG s0;
   EPANOS_REG s2;
   EPANOS_REG s4;
-  EPANOS_REG s6;
   EPANOS_REG s7;
   EPANOS_REG t8;
   EPANOS_REG ra;

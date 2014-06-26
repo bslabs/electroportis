@@ -878,121 +878,65 @@ static void addToSeq__GP7animSeqP11animCommand(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG f1;
   EPANOS_REG f4;
-  int EPANOS_fp_cond;
-  addToSeq__GP7animSeqP11animCommand:
+
   *((uint32_t *) (ARGS->a1.u32 + 16)) = ARGS->a0.u32;
 
   ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
+  memcpy(&f4, (char *) (ARGS->a1.u32 + 8), 4);
   if (ARGS->a4.u64 == 0)
   {
-    memcpy(&f4, (char *) (ARGS->a1.u32 + 8), 4);
-    goto loc_10003994;
+    *((uint32_t *) (ARGS->a0.u32 + 32)) = ARGS->a1.u32;
+    *((uint32_t *) (ARGS->a0.u32 + 24)) = ARGS->a1.u32;
+    return;
   }
-  else
-    memcpy(&f4, (char *) (ARGS->a1.u32 + 8), 4);
 
   memcpy(&ARGS->f0, (char *) (ARGS->a4.u32 + 8), 4);
-  if (f4.s < ARGS->f0.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
+  ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 20));
 
-  ;
-  if (EPANOS_fp_cond)
+  if (f4.s < ARGS->f0.s)
   {
-    ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 20));
-    goto loc_10003988;
+    *((uint32_t *) (ARGS->a1.u32 + 20)) = ARGS->a4.u32;
+    *((uint32_t *) (ARGS->a0.u32 + 24)) = ARGS->a1.u32;
+    return;
   }
-  else
-    ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 20));
 
   if (ARGS->a3.u64 == 0)
   {
-    ;
-    goto loc_100039A0;
+    *((uint32_t *) (ARGS->a4.u32 + 20)) = ARGS->a1.u32;
+    *((uint32_t *) (ARGS->a0.u32 + 32)) = ARGS->a1.u32;
+    return;
   }
-  else
-    ;
 
   loc_10003930:
   memcpy(&f1, (char *) (ARGS->a3.u32 + 8), 4);
 
   if (f4.s < f1.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (EPANOS_fp_cond)
   {
-    ;
-    goto loc_1000395C;
+    *((uint32_t *) (ARGS->a1.u32 + 20)) = ARGS->a3.u32;
+
+    *((uint32_t *) (ARGS->a4.u32 + 20)) = ARGS->a1.u32;
   }
   else
-    ;
-
-  ARGS->a4.u64 = ARGS->a3.u64;
-  ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
-  if (ARGS->a3.u64 != 0)
   {
-    ;
-    goto loc_10003930;
+    ARGS->a4.u64 = ARGS->a3.u64;
+    ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
+    if (ARGS->a3.u64 != 0)
+    {
+      goto loc_10003930;
+    }
   }
-  else
-    ;
 
-  {
-    at.u64 = *((int32_t *) (ARGS->a1.u32 + 20));
-    goto loc_10003968;
-  }
-  loc_1000395C:
-  *((uint32_t *) (ARGS->a1.u32 + 20)) = ARGS->a3.u32;
-
-  *((uint32_t *) (ARGS->a4.u32 + 20)) = ARGS->a1.u32;
   at.u64 = *((int32_t *) (ARGS->a1.u32 + 20));
-  loc_10003968:
+
   if (at.u64 != 0)
   {
-    ;
-    goto locret_10003980;
+    return;
   }
-  else
-    ;
-
 
   ARGS->v0.u64 = *((int32_t *) (ARGS->a0.u32 + 32));
   *((uint32_t *) (ARGS->v0.u32 + 20)) = ARGS->a1.u32;
-  {
-    *((uint32_t *) (ARGS->a0.u32 + 32)) = ARGS->a1.u32;
-    return;
-  }
-  locret_10003980:
-  {
-    ;
-    return;
-  }
-
-  loc_10003988:
-  *((uint32_t *) (ARGS->a1.u32 + 20)) = ARGS->a4.u32;
-
-  {
-    *((uint32_t *) (ARGS->a0.u32 + 24)) = ARGS->a1.u32;
-    return;
-  }
-  loc_10003994:
   *((uint32_t *) (ARGS->a0.u32 + 32)) = ARGS->a1.u32;
-
-  {
-    *((uint32_t *) (ARGS->a0.u32 + 24)) = ARGS->a1.u32;
-    return;
-  }
-  loc_100039A0:
-  *((uint32_t *) (ARGS->a4.u32 + 20)) = ARGS->a1.u32;
-
-  {
-    *((uint32_t *) (ARGS->a0.u32 + 32)) = ARGS->a1.u32;
-    return;
-  }
+  return;
 }
 
 static void animateacts__Gv(void)
@@ -1664,14 +1608,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   ARGS->a0.u64 = editSeq;
   if (ARGS->a0.u64 == 0)
   {
-    s4.u64 = (uint64_t) addToSeq__GP7animSeqP11animCommand;
     goto loc_1000445C;
   }
-  else
-    loc_10003DB0:
-  s4.u64 = (uint64_t) addToSeq__GP7animSeqP11animCommand;
 
-
+  loc_10003DB0:
   {
     ARGS->a1.u64 = s2.u64;
     addToSeq__GP7animSeqP11animCommand(ARGS);

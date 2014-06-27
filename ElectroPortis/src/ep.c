@@ -32,7 +32,6 @@ static float flt_100092A8 = 1.00000000f;
 static double dbl_10009300 = 1.0000000000000000;
 static float flt_100092B0 = 300.000000f;
 static float flt_100092BC = -0.500000000f;
-static double dbl_100092D8 = 0.50000000000000000;
 static float flt_100092B4 = -1.00000000f;
 static float flt_10009290 = 360.000000f;
 static float flt_10009294 = -360.000000f;
@@ -1997,9 +1996,7 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
 {
   EPANOS_REG s0;
   EPANOS_REG s1;
-  EPANOS_REG s2;
   EPANOS_REG at;
-  EPANOS_REG f1;
   EPANOS_REG f4;
   EPANOS_REG f5;
   EPANOS_REG f6;
@@ -2007,43 +2004,31 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG f8;
   EPANOS_REG f9;
   EPANOS_REG f20;
-  int EPANOS_fp_cond;
-  tasteQueue__Gv:
 
-  ARGS->v0.u64 = (int32_t) (1 << 16);
-  ARGS->v0.u64 = 49368;
-  memcpy(&f1, &flt_100092A8, 4);
   s1.u64 = (uint64_t) (&currentFrame);
   at.u64 = (uint64_t) seqList;
-  memcpy(&ARGS->f0, &currentFrame, 4);
   at.u64 = seqList;
-  s2.u64 = (uint64_t) processCommand__GP11animCommand;
-  memcpy(&f20, &dbl_100092D8, 8);
-  ARGS->f0.s = ARGS->f0.s + f1.s;
+  f20.d = 0.50000000000000000;
+  ARGS->f0.s = currentFrame + 1.0f;
   s0.u64 = at.u64;
+  memcpy(&currentFrame, &ARGS->f0, 4);
   if (at.u64 == 0)
   {
-    memcpy(&currentFrame, &ARGS->f0, 4);
-    goto loc_10004FCC;
+    return;
   }
-  else
-    memcpy(&currentFrame, &ARGS->f0, 4);
 
-  {
-    memcpy(&f4, &currentFrame, 4);
-    goto loc_10004F2C;
-  }
+  memcpy(&f4, &currentFrame, 4);
+  goto loc_10004F2C;
+
   loc_10004F20:
   s0.u64 = *((int32_t *) (s0.u32 + 36));
 
   loc_10004F24:
+  memcpy(&f4, (char *) (s1.u32 + 0), 4);
   if (s0.u64 == 0)
   {
-    memcpy(&f4, (char *) (s1.u32 + 0), 4);
-    goto loc_10004FCC;
+    return;
   }
-  else
-    memcpy(&f4, (char *) (s1.u32 + 0), 4);
 
 
   loc_10004F2C:
@@ -2052,77 +2037,55 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   f4.d = f4.s;
   ARGS->f2.d = f5.s;
   f4.d = f4.d + f20.d;
-  if (ARGS->f2.d < f4.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
   ARGS->a0.u64 = *((int32_t *) (s0.u32 + 28));
-  if (!EPANOS_fp_cond)
+  ARGS->a2.u64 = *((int8_t *) (s0.u32 + 4));
+  if (ARGS->f2.d < f4.d)
   {
-    ARGS->a2.u64 = *((int8_t *) (s0.u32 + 4));
-    goto loc_10004F20;
+    ;
   }
   else
-    ARGS->a2.u64 = *((int8_t *) (s0.u32 + 4));
+  {
+    goto loc_10004F20;
+  }
 
   if (ARGS->a2.u64 == 0)
   {
-    ;
     goto loc_10004F20;
   }
-  else
-    ;
 
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004F20;
   }
-  else
-    ;
 
   memcpy(&f6, (char *) (ARGS->a0.u32 + 8), 4);
   f6.s = f6.s + f5.s;
   f6.d = f6.s;
   if (f6.d < f4.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
   {
     ;
+  }
+  else
+  {
     goto loc_10004F20;
   }
-  else
-    ;
 
   loc_10004F7C:
-  {
-    ;
-    processCommand__GP11animCommand(ARGS);
-  }
+  processCommand__GP11animCommand(ARGS);
 
   ARGS->v1.u64 = *((int8_t *) (s0.u32 + 4));
   memcpy(&f9, (char *) (s0.u32 + 8), 4);
   memcpy(&f8, (char *) (s1.u32 + 0), 4);
+  ARGS->a0.u64 = *((int32_t *) (s0.u32 + 28));
   if (ARGS->v1.u64 == 0)
   {
-    ARGS->a0.u64 = *((int32_t *) (s0.u32 + 28));
     goto loc_10004FC4;
   }
-  else
-    ARGS->a0.u64 = *((int32_t *) (s0.u32 + 28));
 
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004FC4;
   }
-  else
-    ;
 
   memcpy(&f7, (char *) (ARGS->a0.u32 + 8), 4);
   f8.d = f8.s;
@@ -2130,27 +2093,11 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   f8.d = f8.d + f20.d;
   f7.d = f7.s;
   if (f7.d < f8.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (EPANOS_fp_cond)
-  {
     goto loc_10004F7C;
-  }
 
   loc_10004FC4:
-  {
-    s0.u64 = *((int32_t *) (s0.u32 + 36));
-    goto loc_10004F24;
-  }
-
-  loc_10004FCC:
-
-  {
-    return;
-  }
+  s0.u64 = *((int32_t *) (s0.u32 + 36));
+  goto loc_10004F24;
 }
 
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5, float f12, float f13, float f14)
@@ -3350,48 +3297,25 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
   ARGS->a1.u64 = aflag;
   ARGS->f0.u32 = 0;
-  if (!EPANOS_fp_cond)
+  ARGS->a0.u64 = ARGS->a0.u64 & 127;
+  if (EPANOS_fp_cond)
   {
-    ARGS->a0.u64 = ARGS->a0.u64 & 127;
-    goto loc_10005F8C;
-  }
-  else
-    ARGS->a0.u64 = ARGS->a0.u64 & 127;
-
-  memcpy(&t, &ARGS->f0, 4);
-  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
-  {
+    memcpy(&t, &ARGS->f0, 4);
+    ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
+    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
     n = ARGS->a0.u32;
-    goto loc_10005F90;
-  }
-  loc_10005F8C:
-  s3.u64 = 0;
-
-  loc_10005F90:
-  if (ARGS->a1.u64 == 0)
-  {
-    t9.u64 = (uint64_t) tasteQueue__Gv;
-    goto loc_10005FB8;
   }
   else
-    t9.u64 = (uint64_t) tasteQueue__Gv;
-
-
   {
-    ;
+    s3.u64 = 0;
+  }
+
+  if (ARGS->a1.u64 != 0)
+  {
     tasteQueue__Gv(ARGS);
-  }
-  t9.u64 = (uint64_t) setacttargets__Gv;
-  {
     setacttargets__Gv();
-  }
-  t9.u64 = (uint64_t) animateacts__Gv;
-  {
     animateacts__Gv();
   }
-  loc_10005FB8:
-  t9.u64 = (uint64_t) floor;
 
   ARGS->a2.u64 = (uint64_t) dtwist;
   ARGS->a4.u64 = (uint64_t) (&dwheel);

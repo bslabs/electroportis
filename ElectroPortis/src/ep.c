@@ -36,7 +36,6 @@ static double dbl_100092D0 = 60.000000000000000;
 static float flt_100092BC = -0.500000000f;
 static double dbl_100092D8 = 0.50000000000000000;
 static float flt_100092B4 = -1.00000000f;
-static float flt_100092AC = 2.00000000f;
 static float flt_10009290 = 360.000000f;
 static float flt_10009294 = -360.000000f;
 static const char *aD = "%d";
@@ -124,7 +123,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, wincount_t wincount);
 static void tasteQueue__Gv(EPANOS_ARGS *ARGS);
-static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS);
+static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5);
 static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS);
 static struct act *createBlankActAnim__Gv(void);
 static void value__GfN21(EPANOS_ARGS *ARGS);
@@ -188,21 +187,17 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   EPANOS_REG f28;
   EPANOS_REG f30;
   float var_110;
-  const float *var_90 = &(outlinecolRGBA[1]);
   float var_108;
   float var_100;
   char *var_78;
   float var_F0;
   float var_E8;
   float var_E0;
-  const float *var_88 = &(outlinecolRGBA[2]);
   float var_D8;
   float var_D0;
   float var_C8;
-  const float *var_80 = &(colRGBA[1]);
   uint64_t var_A8;
   char *var_A0;
-  const float *var_98 = &(colRGBA[2]);
 
   wrap_glColor3f(1.0f, 1.0f, 1.0f, wincount);
   wrap_glPushMatrix(wincount);
@@ -333,12 +328,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   ARGS->f12.s = f26.s;
   ARGS->f13.s = f24.s;
-  ARGS->a4.u64 = var_80;
   ARGS->f14.s = f22.s;
-  ARGS->a3.u64 = colRGBA;
   {
-    ARGS->a5.u64 = var_98;
-    hls_to_rgb__GfN21PfN24(ARGS);
+    hls_to_rgb__GfN21PfN24(ARGS, colRGBA, &(colRGBA[1]), &(colRGBA[2]));
   }
   f5.s = f26.s + 0.5f;
   ARGS->f2.d = f5.s;
@@ -353,12 +345,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
 
   ARGS->f13.s = f22.s - f24.s;
-  ARGS->a4.u64 = var_90;
   ARGS->f14.s = f22.s;
-  ARGS->a3.u64 = outlinecolRGBA;
   {
-    ARGS->a5.u64 = var_88;
-    hls_to_rgb__GfN21PfN24(ARGS);
+    hls_to_rgb__GfN21PfN24(ARGS, outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]));
   }
 
   wrap_glPushMatrix(wincount);
@@ -2170,92 +2159,57 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   }
 }
 
-static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
+static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5)
 {
   EPANOS_REG s0;
   EPANOS_REG s1;
   EPANOS_REG s2;
-  EPANOS_REG f1;
-  EPANOS_REG f4;
-  EPANOS_REG f5;
-  EPANOS_REG f6;
-  EPANOS_REG f20;
-  EPANOS_REG f21;
-  EPANOS_REG f23;
-  int EPANOS_fp_cond;
+  float f4;
+  float f5;
+  float f20;
   double var_50;
   double var_48;
   double var_40;
-  hls_to_rgb__GfN21PfN24:
 
-  memcpy(&f1, &dbl_100092D8, 8);
+  f4 = ARGS->f13.s;
+  f5 = ARGS->f12.s;
+  s1.u64 = a5;
+  s0.u64 = a4;
+  s2.u64 = a3;
+
   ARGS->f0.d = ARGS->f13.s;
-  if (ARGS->f0.d <= f1.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  f4.s = ARGS->f13.s;
-  f5.s = ARGS->f12.s;
-  s1.u64 = ARGS->a5.u64;
-  s0.u64 = ARGS->a4.u64;
-  s2.u64 = ARGS->a3.u64;
-  if (!EPANOS_fp_cond)
+  if (ARGS->f0.d <= 0.5)
   {
-    memcpy(&f6, &flt_100092A8, 4);
-    goto loc_10003748;
+    f20 = ARGS->f14.s + 1.0f;
+    f20 = ARGS->f13.s * f20;
   }
   else
-    memcpy(&f6, &flt_100092A8, 4);
-
-  f20.s = ARGS->f14.s + f6.s;
   {
-    f20.s = ARGS->f13.s * f20.s;
-    goto loc_10003754;
-  }
-  loc_10003748:
-  f21.s = ARGS->f13.s * ARGS->f14.s;
+    float f21 = ARGS->f13.s * ARGS->f14.s;
 
-  f20.s = ARGS->f13.s + ARGS->f14.s;
-  f20.s = f20.s - f21.s;
-  loc_10003754:
-  f23.u32 = 0;
-
-  ;
-  if (ARGS->f14.s == f23.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    goto loc_10003794;
+    f20 = ARGS->f13.s + ARGS->f14.s;
+    f20 = f20 - f21;
   }
 
-  memcpy((char *) (s1.u32 + 0), &f4, 4);
-  memcpy((char *) (s0.u32 + 0), &f4, 4);
-  memcpy((char *) (s2.u32 + 0), &f4, 4);
-  loc_10003778:
-
+  if (ARGS->f14.s == 0.0f)
   {
+    *a5 = f4;
+    *a4 = f4;
+    *a3 = f4;
     return;
   }
-  loc_10003794:
-  ARGS->f15.d = 360.00000000000000;
 
-  ARGS->f14.d = f5.s;
-  ARGS->f14.d = ARGS->f14.d * ARGS->f15.d;
-  memcpy(&ARGS->f12, &flt_100092AC, 4);
+  ARGS->f14.d = f5;
+  ARGS->f14.d = ARGS->f14.d * 360.00000000000000;
+  ARGS->f12.s = 2.0f;
   ARGS->f14.s = ARGS->f14.d;
-  ARGS->f15.d = 120.00000000000000;
   memcpy(&var_50, &ARGS->f14, 8);
   ARGS->f14.d = ARGS->f14.s;
-  ARGS->f12.s = f4.s * ARGS->f12.s;
+  ARGS->f12.s = f4 * ARGS->f12.s;
   memcpy(&var_48, &ARGS->f14, 8);
-  ARGS->f14.d = ARGS->f14.d + ARGS->f15.d;
-  ARGS->f12.s = ARGS->f12.s - f20.s;
-  ARGS->f13.s = f20.s;
+  ARGS->f14.d = ARGS->f14.d + 120.00000000000000;
+  ARGS->f12.s = ARGS->f12.s - f20;
+  ARGS->f13.s = f20;
   memcpy(&var_40, &ARGS->f12, 8);
   {
     ARGS->f14.s = ARGS->f14.d;
@@ -2263,24 +2217,23 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS)
   }
   memcpy((char *) (s2.u32 + 0), &ARGS->f0, 4);
   memcpy(&ARGS->f12, &var_40, 8);
-  ARGS->f13.s = f20.s;
+  ARGS->f13.s = f20;
   {
     memcpy(&ARGS->f14, &var_50, 8);
     value__GfN21(ARGS);
   }
-  ARGS->f15.d = -120.00000000000000;
   memcpy(&ARGS->f14, &var_48, 8);
-  ARGS->f14.d = ARGS->f14.d + ARGS->f15.d;
+  ARGS->f14.d = ARGS->f14.d + -120.00000000000000;
   memcpy(&ARGS->f12, &var_40, 8);
   memcpy((char *) (s0.u32 + 0), &ARGS->f0, 4);
-  ARGS->f13.s = f20.s;
+  ARGS->f13.s = f20;
   {
     ARGS->f14.s = ARGS->f14.d;
     value__GfN21(ARGS);
   }
   {
     memcpy((char *) (s1.u32 + 0), &ARGS->f0, 4);
-    goto loc_10003778;
+    return;
   }
 }
 

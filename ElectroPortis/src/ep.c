@@ -35,13 +35,6 @@ static float flt_100092BC = -0.500000000f;
 static float flt_100092B4 = -1.00000000f;
 static float flt_10009290 = 360.000000f;
 static float flt_10009294 = -360.000000f;
-static const char *aD = "%d";
-static const char *aF = "%f";
-static const char *aSDF = "%s %d, %f";
-static const char *aSF = "%s %f";
-static const char *aSD = "%s %d";
-static const char *aS = "%s";
-static const char *aDF = "%d, %f";
 
 /* swapBuffers__Q2_10GLXWrapper6windowGv: no regmap info, emitting empty stmt at .text:100061FC */
 /* sginap: no regmap info, emitting empty stmt at .text:10006208 */
@@ -610,7 +603,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG s4;
   EPANOS_REG s7;
   EPANOS_REG t8;
-  EPANOS_REG ra;
   EPANOS_REG fp;
   EPANOS_REG f1;
   EPANOS_REG f3;
@@ -622,7 +614,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG f9;
   EPANOS_REG f10;
   EPANOS_REG f11;
-  EPANOS_REG f20;
+  const EPANOS_REG f20 = { .s = 0 };
   EPANOS_REG f21;
   EPANOS_REG f23;
   EPANOS_REG f25;
@@ -646,7 +638,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_70;
   uint64_t var_68;
   char var_1D8[256];
-  readAnimation__Gv:
 
   s0.u64 = (uint64_t) defaultScript;
   if (oflag != 0)
@@ -655,9 +646,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     printf("\n");
   }
 
-
-
-  f20.u32 = 0;
   ARGS->a1.u64 = var_2E0;
   {
     var_A8 = ARGS->a1.u64;
@@ -693,8 +681,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   loc_10003A90:
   ARGS->a3.u64 = var_60;
-
-  loc_10003A94:
   var_68 = ARGS->a3.u64;
 
   loc_10003A98:
@@ -703,27 +689,23 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   loc_10003A9C:
   var_70 = ARGS->a4.u64;
 
-  ARGS->a5.u64 = var_70;
   loc_10003AA4:
+  ARGS->a5.u64 = var_70;
   var_78 = ARGS->a5.u64;
 
   loc_10003AA8:
   ARGS->a6.u64 = var_78;
-
-  loc_10003AAC:
   var_80 = ARGS->a6.u64;
 
-  ARGS->a7.u64 = var_80;
   loc_10003AB4:
+  ARGS->a7.u64 = var_80;
   var_88 = ARGS->a7.u64;
 
   loc_10003AB8:
   fp.u64 = var_88;
-
-  loc_10003ABC:
+  loc_10003AC0:
   s7.u64 = fp.u64;
 
-  loc_10003AC0:
   s4.u64 = s7.u64;
 
   loc_10003AC4:
@@ -758,22 +740,14 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   loc_10003AE8:
   {
-    ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%[^\n]\n", var_1D8);
+    sscanf((const char *) s0.u64, "%[^\n]\n", var_1D8);
   }
-  t4.u64 = oflag;
-  if (t4.u64 == 0)
-  {
-    t5.u64 = (uint64_t) (&bflag);
-    goto loc_10003B18;
-  }
-  else
-    t5.u64 = (uint64_t) (&bflag);
-
+  t5.u64 = (uint64_t) (&bflag);
+  if (oflag != 0)
   {
     printf("%s\n", var_1D8);
   }
-  t5.u64 = (uint64_t) (&bflag);
-  loc_10003B18:
+
   t5.u64 = bflag;
 
   s2.u64 = (uint64_t) strlen;
@@ -792,13 +766,11 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     ARGS->a0.u64 = s0.u64;
     ARGS->v0.u64 = (unsigned int) strlen((const char *) ARGS->a0.u64);
   }
+  ARGS->a1.u64 = (uint64_t) seqList;
   if (ARGS->v0.u64 == 0)
   {
-    ARGS->a1.u64 = (uint64_t) seqList;
     goto loc_100041A4;
   }
-  else
-    ARGS->a1.u64 = (uint64_t) seqList;
 
   loc_10003B54:
   var_58 = 0;
@@ -818,17 +790,13 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   var_B0 = 0;
   s4.u64 = 0;
   var_B8 = 0;
-  ARGS->a0.u64 = s0.u64;
-  ARGS->a2.u64 = (uint64_t) (&var_2D8[0]);
   var_D8 = 0;
   {
-    ARGS->a1.u64 = (uint64_t) aS;
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (char *) ARGS->a2.u64);
+    ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%s", var_2D8);
   }
-  ARGS->a0.u64 = s0.u64;
   {
     var_28 = s2.u64;
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
   }
   ARGS->a0.u64 = 24;
   {
@@ -857,39 +825,28 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
 
-    ARGS->a1.u64 = (uint64_t) aF;
-    ARGS->a0.u64 = s0.u64;
-    s4.u64 = 1;
     {
-      *((uint32_t *) (s2.u32 + 0)) = s4.u32;
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (float *) ARGS->a2.u64);
+      *((uint32_t *) (s2.u32 + 0)) = 1;
+      ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%f", (float *) ARGS->a2.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-    ARGS->v0.u64 = (unsigned int)strcspn((const char *)ARGS->a0.u64, " \t\n");
+    ARGS->v0.u64 = (unsigned int)strcspn((const char *)s0.u64, " \t\n");
     }
-    ARGS->a7.u64 = oflag;
-    if (ARGS->a7.u64 == 0)
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
     {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003F24;
+      memcpy(&f10, (char *) (s2.u32 + 12), 4);
+      f10.d = f10.s;
+      ARGS->a2.u64 = f10.u64;
+      {
+        printf("%s %f", var_2D8, (double) ARGS->a2.d);
+      }
     }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-    memcpy(&f10, (char *) (s2.u32 + 12), 4);
-    f10.d = f10.s;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->a2.u64 = f10.u64;
-    {
-      ARGS->a0.u64 = (uint64_t) aSF;
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (double) ARGS->a2.d);
-    }
-    loc_10003F24:
     t6.u64 = (uint64_t) (&relFrame);
 
     t5.u64 = (uint64_t) (&baseFrame);
-    memcpy(&relFrame, &f20, 4);
+    relFrame = 0.0f;
     memcpy(&ARGS->f12, (char *) (s2.u32 + 12), 4);
     t4.u64 = (uint64_t) (&absFrame);
     memcpy(&baseFrame, &ARGS->f12, 4);
@@ -905,298 +862,196 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
 
-    ARGS->a1.u64 = (uint64_t) aF;
-    ARGS->a0.u64 = s0.u64;
-    s4.u64 = 103;
     {
-      *((uint32_t *) (s2.u32 + 0)) = s4.u32;
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (float *) ARGS->a2.u64);
-    }
-    ARGS->a0.u64 = s0.u64;
-    {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
-    }
-    t7.u64 = oflag;
-    if (t7.u64 == 0)
-    {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003AD8;
-    }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-    memcpy(&ARGS->f13, (char *) (s2.u32 + 12), 4);
-    ARGS->f13.d = ARGS->f13.s;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->a2.u64 = ARGS->f13.u64;
-    {
-      ARGS->a0.u64 = (uint64_t) aSF;
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (double) ARGS->a2.d);
+      *((uint32_t *) (s2.u32 + 0)) = 103;
+      sscanf((const char *) s0.u64, "%f", (float *) ARGS->a2.u64);
     }
     {
-      s7.u64 = fp.u64;
-      goto loc_10003ADC;
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
+    {
+      memcpy(&ARGS->f13, (char *) (s2.u32 + 12), 4);
+      ARGS->f13.d = ARGS->f13.s;
+      ARGS->a2.u64 = ARGS->f13.u64;
+      printf("%s %f", var_2D8, (double) ARGS->a2.d);
+    }
+    goto loc_10003AD8;
   }
 
   fp.u64 = var_B0;
   if (strcmp("duration:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
     s7.u64 = var_28;
-    ARGS->a1.u64 = (uint64_t) aF;
-    s4.u64 = 101;
-    *((uint32_t *) (s2.u32 + 0)) = s4.u32;
+    *((uint32_t *) (s2.u32 + 0)) = 101;
     {
       ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (float *) ARGS->a2.u64);
+      sscanf((const char *) s0.u64, "%f", (float *) ARGS->a2.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a3.u64 = oflag;
-    if (ARGS->a3.u64 == 0)
-    {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003AD4;
-    }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-    memcpy(&ARGS->f14, (char *) (s2.u32 + 12), 4);
-    ARGS->f14.d = ARGS->f14.s;
-    ARGS->a0.u64 = (uint64_t) aSF;
-    ARGS->a2.u64 = ARGS->f14.u64;
+    if (oflag != 0)
     {
-      ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (double) ARGS->a2.d);
+      memcpy(&ARGS->f14, (char *) (s2.u32 + 12), 4);
+      ARGS->f14.d = ARGS->f14.s;
+      ARGS->a2.u64 = ARGS->f14.u64;
+      printf("%s %f", var_2D8, (double) ARGS->a2.d);
     }
-    {
-      fp.u64 = s7.u64;
-      goto loc_10003AD8;
-    }
+
+    goto loc_10003AD4;
   }
 
   if (strcmp("variance:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = (uint64_t) aF;
-    s7.u64 = 102;
-    *((uint32_t *) (s2.u32 + 0)) = s7.u32;
+    *((uint32_t *) (s2.u32 + 0)) = 102;
     {
       ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (float *) ARGS->a2.u64);
+      sscanf((const char *) s0.u64, "%f", (float *) ARGS->a2.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a4.u64 = oflag;
-    if (ARGS->a4.u64 == 0)
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
     {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003AD0;
+      memcpy(&ARGS->f15, (char *) (s2.u32 + 12), 4);
+      ARGS->f15.d = ARGS->f15.s;
+      ARGS->a2.u64 = ARGS->f15.u64;
+      printf("%s %f", var_2D8, (double) ARGS->a2.d);
     }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-    memcpy(&ARGS->f15, (char *) (s2.u32 + 12), 4);
-    ARGS->f15.d = ARGS->f15.s;
-    ARGS->a0.u64 = (uint64_t) aSF;
-    ARGS->a2.u64 = ARGS->f15.u64;
-    {
-      ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (double) ARGS->a2.d);
-    }
-    {
-      s7.u64 = s4.u64;
-      goto loc_10003AD4;
-    }
+    goto loc_10003AD0;
   }
 
   s4.u64 = var_A0;
   if (strcmp("actlim1:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = (uint64_t) aDF;
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-    s4.u64 = 2;
-    *((uint32_t *) (s2.u32 + 0)) = s4.u32;
+    *((uint32_t *) (s2.u32 + 0)) = 2;
     {
       ARGS->a3.u64 = (int32_t) (s2.u32 + 12);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64, (float *) ARGS->a3.u64);
+      sscanf((const char *) s0.u64, "%d, %f", (int32_t *) ARGS->a2.u64, (float *) ARGS->a3.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a5.u64 = oflag;
-    if (ARGS->a5.u64 == 0)
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
     {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003ACC;
+      memcpy(&ARGS->f16, (char *) (s2.u32 + 12), 4);
+      ARGS->f16.d = ARGS->f16.s;
+      ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
+      ARGS->a3.u64 = ARGS->f16.u64;
+      printf("%s %d, %f", var_2D8, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
     }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-    memcpy(&ARGS->f16, (char *) (s2.u32 + 12), 4);
-    ARGS->f16.d = ARGS->f16.s;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-    ARGS->a3.u64 = ARGS->f16.u64;
-    {
-      ARGS->a0.u64 = (uint64_t) (&aSDF[0]);
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
-    }
-    {
-      s4.u64 = s7.u64;
-      goto loc_10003AD0;
-    }
+    goto loc_10003ACC;
   }
 
   s7.u64 = var_98;
   if (strcmp("actlim2:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = (uint64_t) aDF;
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-    s4.u64 = 3;
-    *((uint32_t *) (s2.u32 + 0)) = s4.u32;
+    *((uint32_t *) (s2.u32 + 0)) = 3;
     {
       ARGS->a3.u64 = (int32_t) (s2.u32 + 12);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64, (float *) ARGS->a3.u64);
+      sscanf((const char *) s0.u64, "%d, %f", (int32_t *) ARGS->a2.u64, (float *) ARGS->a3.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a1.u64 = oflag;
-    if (ARGS->a1.u64 == 0)
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
     {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003AC8;
+      memcpy(&ARGS->f17, (char *) (s2.u32 + 12), 4);
+      ARGS->f17.d = ARGS->f17.s;
+      ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
+      ARGS->a3.u64 = ARGS->f17.u64;
+      printf("%s %d, %f", var_2D8, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
     }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-    memcpy(&ARGS->f17, (char *) (s2.u32 + 12), 4);
-    ARGS->f17.d = ARGS->f17.s;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-    ARGS->a3.u64 = ARGS->f17.u64;
-    {
-      ARGS->a0.u64 = (uint64_t) (&aSDF[0]);
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
-    }
-    {
-      s7.u64 = fp.u64;
-      goto loc_10003ACC;
-    }
+    goto loc_10003AC8;
   }
 
   fp.u64 = var_90;
   if (strcmp("actset:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = (uint64_t) aDF;
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-    s7.u64 = 4;
-    *((uint32_t *) (s2.u32 + 0)) = s7.u32;
+    *((uint32_t *) (s2.u32 + 0)) = 4;
     {
       ARGS->a3.u64 = (int32_t) (s2.u32 + 12);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64, (float *) ARGS->a3.u64);
-    }
-    ARGS->a0.u64 = s0.u64;
-    {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
-    }
-    ARGS->a1.u64 = oflag;
-    if (ARGS->a1.u64 == 0)
-    {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003AC4;
-    }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-    memcpy(&f21, (char *) (s2.u32 + 12), 4);
-    f21.d = f21.s;
-    ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-    ARGS->a3.u64 = f21.u64;
-    {
-      ARGS->v0.u64 = (int) printf("%s %d, %f", var_2D8, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
+      sscanf((const char *) s0.u64, "%d, %f", (int32_t *) ARGS->a2.u64, (float *) ARGS->a3.u64);
     }
     {
-      fp.u64 = s4.u64;
-      goto loc_10003AC8;
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
+    {
+      memcpy(&f21, (char *) (s2.u32 + 12), 4);
+      f21.d = f21.s;
+      ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
+      ARGS->a3.u64 = f21.u64;
+      printf("%s %d, %f", var_2D8, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
+    }
+    goto loc_10003AC4;
   }
 
   if (strcmp("actreset:", var_2D8) == 0)
   {
-    goto loc_100043B4;
-  }
-
-  if (strcmp("actresetall:", var_2D8) != 0)
-  {
-    goto loc_10003DFC;
-  }
-
-  ARGS->a2.u64 = 6;
-  *((uint32_t *) (s2.u32 + 0)) = ARGS->a2.u32;
-  ARGS->a1.u64 = oflag;
-  if (ARGS->a1.u64 == 0)
-  {
-    s7.u64 = fp.u64;
+    *((uint32_t *) (s2.u32 + 0)) = 5;
+    {
+      ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
+      sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
+    }
+    {
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+    }
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
+    {
+      ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
+      printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
+    }
     goto loc_10003AC0;
   }
-  else
-    s7.u64 = fp.u64;
 
-  ARGS->a0.u64 = (uint64_t) aS;
+  if (strcmp("actresetall:", var_2D8) == 0)
   {
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
-  }
-  {
-    s7.u64 = fp.u64;
+    *((uint32_t *) (s2.u32 + 0)) = 6;
+    if (oflag != 0)
+      printf("%s", var_2D8);
+
     goto loc_10003AC0;
   }
+
+  goto loc_10003DFC;
+
   loc_10003D30:
   ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
 
-  ARGS->a1.u64 = (uint64_t) aF;
-  ARGS->a0.u64 = s0.u64;
   {
     *((uint32_t *) (s2.u32 + 0)) = 0;
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (float *) ARGS->a2.u64);
+    sscanf((const char *) s0.u64, "%f", (float *) ARGS->a2.u64);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-	ARGS->v0.u64 = (unsigned int)strcspn((const char *)ARGS->a0.u64, " \t\n");
+	ARGS->v0.u64 = (unsigned int)strcspn((const char *)s0.u64, " \t\n");
   }
-  ARGS->a3.u64 = oflag;
-  if (ARGS->a3.u64 == 0)
+  s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+  if (oflag == 0)
   {
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
     goto loc_10003D7C;
   }
-  else
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
   memcpy(&f1, (char *) (s2.u32 + 12), 4);
   f1.d = f1.s;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
   ARGS->a2.u64 = f1.u64;
   {
-    ARGS->a0.u64 = (uint64_t) aSF;
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (double) ARGS->a2.d);
+    printf("%s %f", var_2D8, (double) ARGS->a2.d);
   }
   loc_10003D7C:
   memcpy(&f4, (char *) (s2.u32 + 12), 4);
@@ -1238,14 +1093,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   {
     ARGS->v0.u64 = (int) scanf("%[^\n]\n", (char *) var_A8);
   }
+  ARGS->a1.u64 = (uint64_t) seqList;
   if (ARGS->v0.u64 == s0.u64)
   {
-    ARGS->a1.u64 = (uint64_t) seqList;
     goto loc_100041A4;
   }
   else
-    ARGS->a1.u64 = (uint64_t) seqList;
-
   {
     s0.u64 = var_A8;
     goto loc_10003B54;
@@ -1254,7 +1107,21 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   if (strcmp("actstop:", var_2D8) == 0)
   {
-    goto loc_10004408;
+    *((uint32_t *) (s2.u32 + 0)) = 7;
+    {
+      ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
+      sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
+    }
+    {
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+    }
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
+    {
+      ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
+      printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
+    }
+    goto loc_10003AB8;
   }
 
   if (strcmp("actstopall:", var_2D8) != 0)
@@ -1266,117 +1133,64 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     if (strcmp("seqdo:", var_2D8) == 0)
     {
-      ARGS->a0.u64 = s0.u64;
-
-      ARGS->a1.u64 = (uint64_t) aD;
-      ra.u64 = 10;
-      *((uint32_t *) (s2.u32 + 0)) = ra.u32;
+      *((uint32_t *) (s2.u32 + 0)) = 10;
       {
         ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-        ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
+        ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
       }
-      ARGS->a0.u64 = s0.u64;
       {
-        ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+        ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
       }
-      if (oflag == 0)
-      {
-        s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-        goto loc_10003AA8;
-      }
-      else
-        s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-      ARGS->a0.u64 = (uint64_t) aSD;
-      ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
+      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      if (oflag != 0)
       {
         ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-        ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
+        printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
       }
+
+      goto loc_10003AA8;
+    }
+
+    if (strcmp("seqloop:", var_2D8) == 0)
+    {
+      *((uint32_t *) (s2.u32 + 0)) = 12;
+      if (oflag != 0)
       {
-        ARGS->a6.u64 = var_78;
-        goto loc_10003AAC;
+        ARGS->v0.u64 = (int) printf("%s", var_2D8);
       }
-    }
 
-    if (strcmp("seqloop:", var_2D8) != 0)
-    {
-      goto loc_10004328;
-    }
-
-    ARGS->a2.u64 = 12;
-    *((uint32_t *) (s2.u32 + 0)) = ARGS->a2.u32;
-    ARGS->a1.u64 = oflag;
-    if (ARGS->a1.u64 == 0)
-    {
-      ARGS->a5.u64 = var_70;
       goto loc_10003AA4;
     }
-    else
-      ARGS->a5.u64 = var_70;
 
-    ARGS->a0.u64 = (uint64_t) aS;
-    {
-      ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
-    }
-    {
-      ARGS->a5.u64 = var_70;
-      goto loc_10003AA4;
-    }
+    goto loc_10004328;
   }
 
-  ARGS->a2.u64 = 8;
-  *((uint32_t *) (s2.u32 + 0)) = ARGS->a2.u32;
-  ARGS->a1.u64 = oflag;
-  if (ARGS->a1.u64 == 0)
+  *((uint32_t *) (s2.u32 + 0)) = 8;
+  if (oflag != 0)
   {
-    ARGS->a7.u64 = var_80;
-    goto loc_10003AB4;
+    printf("%s", var_2D8);
   }
-  else
-    ARGS->a7.u64 = var_80;
 
-  ARGS->a0.u64 = (uint64_t) aS;
-  {
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
-  }
-  {
-    ARGS->a7.u64 = var_80;
-    goto loc_10003AB4;
-  }
+  goto loc_10003AB4;
   loc_10003E58:
   ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
 
-  ARGS->a1.u64 = (uint64_t) aF;
-  ARGS->a0.u64 = s0.u64;
   {
     *((uint32_t *) (s2.u32 + 0)) = 0;
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (float *) ARGS->a2.u64);
+    sscanf((const char *) s0.u64, "%f", (float *) ARGS->a2.u64);
   }
-  ARGS->a0.u64 = s0.u64;
   {
-	ARGS->v0.u64 = (unsigned int)strcspn((const char *)ARGS->a0.u64, " \t\n");
+	ARGS->v0.u64 = (unsigned int)strcspn((const char *)s0.u64, " \t\n");
   }
-  ARGS->a3.u64 = oflag;
-  if (ARGS->a3.u64 == 0)
+  s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+  if (oflag != 0)
   {
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-    goto loc_10003EA4;
+    memcpy(&f6, (char *) (s2.u32 + 12), 4);
+    f6.d = f6.s;
+    ARGS->a2.u64 = f6.u64;
+    printf("%s %f", var_2D8, (double) ARGS->a2.d);
   }
-  else
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-  memcpy(&f6, (char *) (s2.u32 + 12), 4);
-  f6.d = f6.s;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  ARGS->a2.u64 = f6.u64;
-  {
-    ARGS->a0.u64 = (uint64_t) aSF;
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (double) ARGS->a2.d);
-  }
-  loc_10003EA4:
   memcpy(&f9, (char *) (s2.u32 + 12), 4);
 
   ARGS->a5.u64 = (uint64_t) (&relFrame);
@@ -1395,13 +1209,11 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   loc_100041A4:
   ARGS->a1.u64 = seqList;
 
+  s4.u64 = ARGS->a1.u64;
   if (ARGS->a1.u64 == 0)
   {
-    s4.u64 = ARGS->a1.u64;
     goto loc_100041C4;
   }
-  else
-    s4.u64 = ARGS->a1.u64;
 
   loc_100041B0:
   ARGS->a2.u64 = *((int32_t *) (s4.u32 + 0));
@@ -1415,27 +1227,15 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   s4.u64 = *((int32_t *) (s4.u32 + 36));
   if (s4.u64 != 0)
   {
-    ARGS->a3.u64 = oflag;
     goto loc_100041B0;
   }
-  else
-    loc_100041C4:
-  ARGS->a3.u64 = oflag;
 
-
-  if (ARGS->a3.u64 == 0)
-  {
-    ARGS->a1.u64 = (uint64_t) seqList;
-    goto loc_100041E4;
-  }
-  else
-    ARGS->a1.u64 = (uint64_t) seqList;
-
+  loc_100041C4:
+  if (oflag != 0)
   {
     printf("# done reading animation\n");
   }
-  ARGS->a1.u64 = (uint64_t) seqList;
-  loc_100041E4:
+
   ARGS->a1.u64 = seqList;
 
   if (ARGS->a1.u64 == 0)
@@ -1445,29 +1245,21 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   else
     s4.u64 = ARGS->a1.u64;
 
-  {
-    goto loc_1000424C;
-  }
+  goto loc_1000424C;
+
   loc_100041FC:
   s0.u64 = *((int32_t *) (s0.u32 + 20));
 
   if (s0.u64 == 0)
   {
-    ;
     goto loc_10004240;
   }
-  else
-    ;
 
   loc_10004208:
-  if (ARGS->a0.u64 == 0)
+  if (oflag == 0)
   {
-    ;
     goto loc_100041FC;
   }
-  else
-    ;
-
 
   memcpy(&ARGS->f18, (char *) (s0.u32 + 12), 4);
   ARGS->f18.d = ARGS->f18.s;
@@ -1480,11 +1272,8 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   s0.u64 = *((int32_t *) (s0.u32 + 20));
   if (s0.u64 != 0)
   {
-    ;
     goto loc_10004280;
   }
-  else
-    ;
 
   loc_10004240:
   s4.u64 = *((int32_t *) (s4.u32 + 36));
@@ -1495,23 +1284,17 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 
   loc_1000424C:
-  if (oflag == 0)
+  if (oflag != 0)
   {
-    ;
-    goto loc_10004274;
+    memcpy(&ARGS->f19, (char *) (s4.u32 + 8), 4);
+    ARGS->f19.d = ARGS->f19.s;
+    ARGS->a1.u64 = *((int32_t *) (s4.u32 + 0));
+    ARGS->a2.u64 = ARGS->f19.u64;
+    {
+      printf("seq %d at %.2f\n", (int32_t) ARGS->a1.u64, (double) ARGS->a2.d);
+    }
   }
-  else
-    ;
 
-
-  memcpy(&ARGS->f19, (char *) (s4.u32 + 8), 4);
-  ARGS->f19.d = ARGS->f19.s;
-  ARGS->a1.u64 = *((int32_t *) (s4.u32 + 0));
-  ARGS->a2.u64 = ARGS->f19.u64;
-  {
-    ARGS->v0.u64 = (int) printf("seq %d at %.2f\n", (int32_t) ARGS->a1.u64, (double) ARGS->a2.d);
-  }
-  loc_10004274:
   s0.u64 = *((int32_t *) (s4.u32 + 24));
 
   if (s0.u64 == 0)
@@ -1521,7 +1304,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   loc_10004280:
   {
-    ARGS->a0.u64 = oflag;
     goto loc_10004208;
   }
 
@@ -1532,33 +1314,23 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   if (strcmp("seqstop:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = (uint64_t) aD;
-    ARGS->v1.u64 = 11;
-    *((uint32_t *) (s2.u32 + 0)) = ARGS->v1.u32;
+    *((uint32_t *) (s2.u32 + 0)) = 11;
     {
       ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
+      ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a0.u64 = oflag;
-    if (ARGS->a0.u64 == 0)
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag == 0)
     {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
       goto loc_10003A98;
     }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
 
-    ARGS->a0.u64 = (uint64_t) aSD;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
     {
       ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
+      ARGS->v0.u64 = (int) printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
     }
     {
       ARGS->a4.u64 = var_68;
@@ -1568,77 +1340,44 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   if (strcmp("seqrepeat:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = 13;
-    *((uint32_t *) (s2.u32 + 0)) = ARGS->a1.u32;
-    ARGS->a1.u64 = (uint64_t) aD;
+    *((uint32_t *) (s2.u32 + 0)) = 13;
     {
       ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
+      sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a2.u64 = oflag;
     s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-    if (ARGS->a2.u64 == 0)
-    {
-      goto loc_10004758;
-    }
-
-    ARGS->a0.u64 = (uint64_t) aSD;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
+    if (oflag != 0)
     {
       ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
-    }
-    ARGS->a3.u64 = oflag;
-    if (ARGS->a3.u64 != 0)
-    {
+      printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
+
       printf("warning: %s not implemented\n", var_2D8);
     }
 
-    loc_10004758:
     free((void *) s2.u64);
     goto loc_10003AE8;
   }
 
   if (strcmp("seqkill:", var_2D8) == 0)
   {
-    ARGS->a0.u64 = s0.u64;
-
-    ARGS->a1.u64 = 14;
-    *((uint32_t *) (s2.u32 + 0)) = ARGS->a1.u32;
-    ARGS->a1.u64 = (uint64_t) aD;
+    *((uint32_t *) (s2.u32 + 0)) = 14;
     {
       ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-      ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
+      ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
     }
-    ARGS->a0.u64 = s0.u64;
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     }
-    ARGS->a2.u64 = oflag;
-    if (ARGS->a2.u64 == 0)
-    {
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-      goto loc_10003A90;
-    }
-    else
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-    ARGS->a0.u64 = (uint64_t) aSD;
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
+    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    if (oflag != 0)
     {
       ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-      ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
+      printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
     }
-    {
-      ARGS->a3.u64 = var_60;
-      goto loc_10003A94;
-    }
+    goto loc_10003A90;
   }
 
   if (strcmp("seqkillall:", var_2D8) != 0)
@@ -1646,92 +1385,14 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003A40;
   }
 
-  ARGS->a2.u64 = 15;
-  *((uint32_t *) (s2.u32 + 0)) = ARGS->a2.u32;
-  ARGS->a1.u64 = oflag;
-  if (ARGS->a1.u64 == 0)
+  *((uint32_t *) (s2.u32 + 0)) = 15;
+  ARGS->a2.u64 = var_58;
+  if (oflag != 0)
   {
-    ARGS->a2.u64 = var_58;
-    goto loc_10003A8C;
+    ARGS->v0.u64 = (int) printf("%s", var_2D8);
   }
-  else
-    ARGS->a2.u64 = var_58;
+  goto loc_10003A8C;
 
-  ARGS->a0.u64 = (uint64_t) aS;
-  {
-    ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64);
-  }
-  {
-    ARGS->a2.u64 = var_58;
-    goto loc_10003A8C;
-  }
-  loc_100043B4:
-  ARGS->a0.u64 = s0.u64;
-
-  ARGS->a1.u64 = (uint64_t) aD;
-  ARGS->a3.u64 = 5;
-  *((uint32_t *) (s2.u32 + 0)) = ARGS->a3.u32;
-  {
-    ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
-  }
-  ARGS->a0.u64 = s0.u64;
-  {
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
-  }
-  ARGS->a4.u64 = oflag;
-  if (ARGS->a4.u64 == 0)
-  {
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-    goto loc_10003AC0;
-  }
-  else
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-  ARGS->a0.u64 = (uint64_t) aSD;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
-  }
-  {
-    s4.u64 = s7.u64;
-    goto loc_10003AC4;
-  }
-  loc_10004408:
-  ARGS->a0.u64 = s0.u64;
-
-  ARGS->a1.u64 = (uint64_t) aD;
-  ARGS->a5.u64 = 7;
-  *((uint32_t *) (s2.u32 + 0)) = ARGS->a5.u32;
-  {
-    ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
-  }
-  ARGS->a0.u64 = s0.u64;
-  {
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
-  }
-  ARGS->a6.u64 = oflag;
-  if (ARGS->a6.u64 == 0)
-  {
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-    goto loc_10003AB8;
-  }
-  else
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-  ARGS->a0.u64 = (uint64_t) aSD;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
-  {
-    ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
-  }
-  {
-    fp.u64 = var_88;
-    goto loc_10003ABC;
-  }
   loc_1000445C:
 
   {
@@ -1767,65 +1428,47 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   ARGS->a0.u64 = (uint64_t) seqList;
   *((uint32_t *) (ARGS->a1.u32 + 36)) = 0;
   ARGS->a0.u64 = seqList;
-  if (ARGS->a0.u64 == 0)
+  ARGS->a4.u64 = editSeq;
+  if (ARGS->a0.u64 != 0)
   {
-    ARGS->a4.u64 = editSeq;
-    goto loc_100044E8;
+    *((uint32_t *) (ARGS->a4.u32 + 36)) = ARGS->a0.u32;
   }
-  else
-    ARGS->a4.u64 = editSeq;
 
-  *((uint32_t *) (ARGS->a4.u32 + 36)) = ARGS->a0.u32;
-  loc_100044E8:
   ARGS->a0.u64 = (uint64_t) editSeq;
 
   ARGS->a0.u64 = editSeq;
-  {
-    seqList = ARGS->a0.u32;
-    goto loc_10003DB0;
-  }
-  loc_100044F8:
-  ARGS->a0.u64 = s0.u64;
+  seqList = ARGS->a0.u32;
+  goto loc_10003DB0;
 
-  ARGS->a1.u64 = 9;
-  *((uint32_t *) (s2.u32 + 0)) = ARGS->a1.u32;
-  ARGS->a1.u64 = (uint64_t) aD;
+  loc_100044F8:
+  *((uint32_t *) (s2.u32 + 0)) = 9;
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
-    ARGS->v0.u64 = (int) sscanf((const char *) ARGS->a0.u64, (const char *) ARGS->a1.u64, (int32_t *) ARGS->a2.u64);
+    sscanf((const char *) s0.u64, "%d", (int32_t *) ARGS->a2.u64);
   }
   ARGS->a0.u64 = s0.u64;
   {
     ARGS->v0.u64 = (unsigned int) strcspn((const char *) ARGS->a0.u64, " \t\n");
   }
-  ARGS->a2.u64 = oflag;
-  if (ARGS->a2.u64 == 0)
-  {
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-    goto loc_10004544;
-  }
-  else
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-
-  ARGS->a0.u64 = (uint64_t) aSD;
-  ARGS->a1.u64 = (uint64_t) (&var_2D8[0]);
+  s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+  if (oflag != 0)
   {
     ARGS->a2.u64 = *((int32_t *) (s2.u32 + 4));
-    ARGS->v0.u64 = (int) printf((const char *) ARGS->a0.u64, (char *) ARGS->a1.u64, (int32_t) ARGS->a2.u64);
+    printf("%s %d", var_2D8, (int32_t) ARGS->a2.u64);
   }
-  loc_10004544:
+
   ARGS->a4.u64 = (uint64_t) (&relFrame);
 
   ARGS->a5.u64 = (uint64_t) (&absFrame);
   ARGS->a3.u64 = (uint64_t) seqList;
   ARGS->a6.u64 = (uint64_t) (&baseFrame);
   ARGS->a3.u64 = seqList;
-  memcpy(&baseFrame, &f20, 4);
-  memcpy(&absFrame, &f20, 4);
-  memcpy(&relFrame, &f20, 4);
+  baseFrame = 0.0f;
+  absFrame = 0.0f;
+  relFrame = 0.0f;
+  s4.u64 = ARGS->a3.u64;
   if (ARGS->a3.u64 == 0)
   {
-    s4.u64 = ARGS->a3.u64;
     if (s4.u64 != 0)
     {
       goto loc_10004614;
@@ -1835,8 +1478,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
       goto loc_10004588;
     }
   }
-  else
-    s4.u64 = ARGS->a3.u64;
 
   ARGS->v0.u64 = *((int32_t *) (s2.u32 + 4));
   loc_10004570:
@@ -1890,16 +1531,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   *((uint32_t *) (ARGS->a1.u32 + 36)) = 0;
   ARGS->a0.u64 = seqList;
   t8.u64 = (uint64_t) editSeq;
-  if (ARGS->a0.u64 == 0)
+  ARGS->a4.u64 = editSeq;
+  if (ARGS->a0.u64 != 0)
   {
-    ARGS->a4.u64 = editSeq;
-    goto loc_10004608;
+    *((uint32_t *) (ARGS->a4.u32 + 36)) = ARGS->a0.u32;
   }
-  else
-    ARGS->a4.u64 = editSeq;
 
-  *((uint32_t *) (ARGS->a4.u32 + 36)) = ARGS->a0.u32;
-  loc_10004608:
   t8.u64 = editSeq;
 
   seqList = t8.u32;

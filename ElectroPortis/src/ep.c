@@ -622,15 +622,8 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG f21;
   int var_2E0;
   uint64_t var_60;
-  uint64_t var_D8;
   uint64_t var_58;
-  uint64_t var_B8;
-  uint64_t var_B0;
   char var_2D8[256];
-  uint64_t var_A0;
-  uint64_t var_98;
-  uint64_t var_90;
-  uint64_t var_28;
   uint64_t var_88;
   uint64_t var_80;
   uint64_t var_78;
@@ -779,21 +772,14 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   var_78 = 0;
   var_80 = 0;
   var_88 = 0;
-  var_90 = 0;
-  var_98 = 0;
   s2.u64 = 0;
-  var_A0 = 0;
   fp.u64 = 0;
   s7.u64 = 0;
-  var_B0 = 0;
   s4.u64 = 0;
-  var_B8 = 0;
-  var_D8 = 0;
   {
     ARGS->v0.u64 = (int) sscanf((const char *) s0.u64, "%s", var_2D8);
   }
   {
-    var_28 = s2.u64;
     ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
     s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
   }
@@ -889,7 +875,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AE0;
   }
 
-  s4.u64 = var_D8;
+  s4.u64 = 0;
   if (strcmp("absframe:", var_2D8) == 0)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
@@ -922,7 +908,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     }
   }
 
-  s7.u64 = var_B8;
+  s7.u64 = 0;
   if (strcmp("randdelay:", var_2D8) == 0)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
@@ -945,10 +931,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AD8;
   }
 
-  fp.u64 = var_B0;
+  fp.u64 = 0;
   if (strcmp("duration:", var_2D8) == 0)
   {
-    s7.u64 = var_28;
+    s7.u64 = 0;
     *((uint32_t *) (s2.u32 + 0)) = 101;
     {
       ARGS->a2.u64 = (int32_t) (s2.u32 + 12);
@@ -992,7 +978,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AD0;
   }
 
-  s4.u64 = var_A0;
+  s4.u64 = 0;
   if (strcmp("actlim1:", var_2D8) == 0)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
@@ -1017,7 +1003,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003ACC;
   }
 
-  s7.u64 = var_98;
+  s7.u64 = 0;
   if (strcmp("actlim2:", var_2D8) == 0)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);
@@ -1042,7 +1028,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AC8;
   }
 
-  fp.u64 = var_90;
+  fp.u64 = 0;
   if (strcmp("actset:", var_2D8) == 0)
   {
     ARGS->a2.u64 = (int32_t) (s2.u32 + 4);

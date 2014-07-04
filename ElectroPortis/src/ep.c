@@ -1847,7 +1847,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   EPANOS_REG at;
   EPANOS_REG t8;
   EPANOS_REG t9;
-  EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f3;
   EPANOS_REG f4;
@@ -1858,122 +1857,447 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   EPANOS_REG f9;
   EPANOS_REG f10;
   EPANOS_REG f11;
-  int EPANOS_fp_cond;
-  uint64_t var_10;
-  processCommand__GP11animCommand:
   ARGS->v0.u64 = (int32_t) (1 << 16);
 
   ARGS->v0.u64 = 50812;
-  at.u64 = (uint64_t) (&oflag);
-  at.u64 = oflag;
   s0.u64 = ARGS->a0.u64;
-  if (at.u64 == 0)
+  if (oflag != 0)
   {
-    var_10 = ra.u64;
-    goto loc_10004990;
+    memcpy(&ARGS->f2, (char *) (ARGS->a0.u32 + 8), 4);
+    ARGS->a2.u64 = *((int32_t *) (ARGS->a0.u32 + 16));
+    ARGS->a3.u64 = (uint64_t) (&currentFrame);
+    memcpy(&f1, (char *) (ARGS->a2.u32 + 8), 4);
+    memcpy(&ARGS->f0, &currentFrame, 4);
+    ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+    ARGS->f2.d = ARGS->f2.s;
+    t9.u64 = (uint64_t) printf;
+    f1.d = f1.s;
+    ARGS->a5.u64 = ARGS->f2.u64;
+    ARGS->f0.d = ARGS->f0.s;
+    ARGS->a3.u64 = f1.u64;
+    ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
+    {
+      printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
+          ARGS->f0.d, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d, (int32_t) ARGS->a4.u64, (double) ARGS->a5.d);
+    }
   }
-  else
-    var_10 = ra.u64;
-
-  memcpy(&ARGS->f2, (char *) (ARGS->a0.u32 + 8), 4);
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a0.u32 + 16));
-  ARGS->a3.u64 = (uint64_t) (&currentFrame);
-  memcpy(&f1, (char *) (ARGS->a2.u32 + 8), 4);
-  memcpy(&ARGS->f0, &currentFrame, 4);
-  ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-  ARGS->f2.d = ARGS->f2.s;
-  t9.u64 = (uint64_t) printf;
-  f1.d = f1.s;
-  ARGS->a5.u64 = ARGS->f2.u64;
-  ARGS->f0.d = ARGS->f0.s;
-  ARGS->a3.u64 = f1.u64;
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
-  ARGS->a1.u64 = ARGS->f0.u64;
-  {
-    printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
-        (double) ARGS->a1.d, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d, (int32_t) ARGS->a4.u64, (double) ARGS->a5.d);
-  }
-  loc_10004990:
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
 
-  ;
-  ;
-//  ARGS->a0.u64 = (uint64_t) (&jpt_100049B4[0]);
   ARGS->a4.u64 = (uint64_t) (&currentFrame);
-  ;
-  ;
-  ;
   {
     switch (ARGS->a1.u64)
     {
       case 0:
-        goto loc_10004A00;
+      {
+        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
+        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        return;
+      }
+      break;
 
       case 1:
-        goto loc_10004CF8;
+      {
+        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
+        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        return;
+      }
+      break;
 
       case 2:
-        goto loc_10004CBC;
+      {
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+
+        ARGS->a0.u64 = (uint64_t) acttable;
+        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
+        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
+        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+        if (ARGS->a0.u64 != 0)
+        {
+          memcpy(&f5, (char *) (s0.u32 + 12), 4);
+          memcpy(&f4, (char *) (ARGS->a0.u32 + 16), 4);
+          if (f4.s < f5.s)
+          {
+            f5.s = f4.s;
+          }
+          memcpy((char *) (ARGS->a0.u32 + 16), &f5, 4);
+        }
+
+        t6.u64 = *((int32_t *) (s0.u32 + 16));
+
+        t5.u64 = *((int32_t *) (t6.u32 + 28));
+        t5.u64 = *((int32_t *) (t5.u32 + 20));
+        *((uint32_t *) (t6.u32 + 28)) = t5.u32;
+        return;
+      }
+      break;
 
       case 3:
-        goto loc_10004C70;
+      {
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+
+        ARGS->a0.u64 = (uint64_t) acttable;
+        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
+        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
+        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+        if (ARGS->a0.u64 != 0)
+        {
+          memcpy(&f5, (char *) (s0.u32 + 12), 4);
+          memcpy(&f4, (char *) (ARGS->a0.u32 + 16), 4);
+          memcpy(&f6, (char *) (ARGS->a0.u32 + 12), 4);
+          if (f4.s < f5.s)
+          {
+            if (f5.s < f6.s)
+            {
+              f5.s = f6.s;
+            }
+
+            memcpy((char *) (ARGS->a0.u32 + 12), &f5, 4);
+          }
+          else
+          {
+            f5.s = f4.s;
+            if (f4.s < f6.s)
+            {
+              f5.s = f6.s;
+            }
+
+            memcpy((char *) (ARGS->a0.u32 + 12), &f5, 4);
+
+            memcpy(&f6, (char *) (s0.u32 + 12), 4);
+            f5.s = f6.s;
+            if (f4.s < f6.s)
+            {
+              f5.s = f4.s;
+            }
+
+            memcpy((char *) (ARGS->a0.u32 + 16), &f5, 4);
+          }
+
+          ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
+
+          memcpy(&ARGS->f13, (char *) (ARGS->v0.u32 + 16), 4);
+          memcpy((char *) (ARGS->a0.u32 + 28), &ARGS->f13, 4);
+          at.u64 = *((int32_t *) (s0.u32 + 16));
+          memcpy(&ARGS->f12, (char *) (at.u32 + 20), 4);
+          *((uint8_t *) (ARGS->a0.u32 + 0)) = 1;
+          memcpy((char *) (ARGS->a0.u32 + 32), &ARGS->f12, 4);
+        }
+        ARGS->a0.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->v1.u64 = *((int32_t *) (ARGS->a0.u32 + 28));
+        ARGS->v1.u64 = *((int32_t *) (ARGS->v1.u32 + 20));
+        *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->v1.u32;
+        return;
+      }
+      break;
 
       case 4:
-        goto loc_10004C38;
+      {
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+
+        ARGS->a0.u64 = (uint64_t) acttable;
+        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
+        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
+        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+        if (ARGS->a0.u64 != 0)
+        {
+          memcpy(&f8, (char *) (s0.u32 + 12), 4);
+          memcpy((char *) (ARGS->a0.u32 + 24), &f8, 4);
+        }
+
+        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
+        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        return;
+      }
+      break;
 
       case 101:
-        goto loc_10004AA4;
+      {
+        memcpy(&f4, (char *) (s0.u32 + 12), 4);
+
+        memcpy(&f5, &dbl_10009300, 8);
+        f4.d = f4.s;
+        if (f4.d < f5.d)
+        {
+          f4.d = f5.d;
+        }
+
+        t7.u64 = *((int32_t *) (s0.u32 + 16));
+
+        f10.s = f4.d;
+        memcpy((char *) (t7.u32 + 16), &f10, 4);
+        t7.u64 = *((int32_t *) (s0.u32 + 16));
+        t6.u64 = *((int32_t *) (t7.u32 + 28));
+        t6.u64 = *((int32_t *) (t6.u32 + 20));
+        *((uint32_t *) (t7.u32 + 28)) = t6.u32;
+        return;
+      }
+      break;
 
       case 102:
-        goto loc_10004A80;
+      {
+        memcpy(&f4, (char *) (s0.u32 + 12), 4);
+
+        f6.u64 = 0;
+        f4.d = f4.s;
+        memcpy(&f5, &dbl_10009300, 8);
+
+        if (f4.d < f6.d)
+        {
+          f4.d = f6.d;
+        }
+        else
+        {
+          if (f5.d < f4.d)
+          {
+            f4.d = f5.d;
+          }
+        }
+
+        t9.u64 = *((int32_t *) (s0.u32 + 16));
+
+        f11.s = f4.d;
+        memcpy((char *) (t9.u32 + 20), &f11, 4);
+        t9.u64 = *((int32_t *) (s0.u32 + 16));
+        t8.u64 = *((int32_t *) (t9.u32 + 28));
+        t8.u64 = *((int32_t *) (t8.u32 + 20));
+        *((uint32_t *) (t9.u32 + 28)) = t8.u32;
+        return;
+      }
+      break;
 
       case 103:
-        goto loc_10004A14;
+      {
+        memcpy(&f8, &flt_100092A8, 4);
+        memcpy(&f4, (char *) (s0.u32 + 12), 4);
+        ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
+        f9.d = 2.0000000000000000;
+        f7.d = exprand__Gf(flt_100092A8);
+        memcpy(&f5, (char *) (ARGS->a4.u32 + 20), 4);
+        f7.d = f7.d * f9.d;
+        f6.d = f4.s;
+        f8.s = f8.s - f5.s;
+        f6.d = f6.d * f7.d;
+        memcpy(&f3, (char *) (ARGS->a4.u32 + 8), 4);
+        f5.d = f5.s;
+        f4.s = f4.s * f8.s;
+        f5.d = f5.d * f6.d;
+        f4.d = f4.s;
+        f3.d = f3.s;
+        f4.d = f4.d + f5.d;
+        f3.d = f3.d + f4.d;
+        f3.s = f3.d;
+        memcpy((char *) (ARGS->a4.u32 + 8), &f3, 4);
+        ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
+        ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 28));
+        ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
+        *((uint32_t *) (ARGS->a4.u32 + 28)) = ARGS->a3.u32;
+        return;
+      }
+      break;
 
       case 8:
-        goto loc_10004B98;
+      {
+        t9.u64 = (uint64_t) stopAnimation__Gv;
+
+        stopAnimation__Gv();
+        ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
+        at.u64 = *((int32_t *) (ARGS->v0.u32 + 28));
+        at.u64 = *((int32_t *) (at.u32 + 20));
+        *((uint32_t *) (ARGS->v0.u32 + 28)) = at.u32;
+        return;
+      }
+      break;
 
       case 9:
-        goto loc_10004B84;
+      {
+        EPANOS_REG ra;
+        at.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ra.u64 = *((int32_t *) (at.u32 + 28));
+        ra.u64 = *((int32_t *) (ra.u32 + 20));
+        *((uint32_t *) (at.u32 + 28)) = ra.u32;
+        return;
+      }
+      break;
 
       case 10:
-        goto loc_10004B6C;
+      {
+        t9.u64 = seqList;
+        ARGS->a0.u64 = t9.u64;
+        if (t9.u64 == 0)
+        {
+          goto loc_10004DA0;
+        }
+        else
+        {
+          ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+          goto loc_10004D94;
+        }
+      }
+      break;
 
       case 11:
-        goto loc_10004B54;
+      {
+        t8.u64 = seqList;
+        ARGS->a0.u64 = t8.u64;
+        if (t8.u64 == 0)
+        {
+          goto loc_10004D60;
+        }
+
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+        goto loc_10004D54;
+      }
+      break;
 
       case 12:
-        goto loc_10004B30;
+      {
+        t7.u64 = *((int32_t *) (s0.u32 + 16));
+
+        t6.u64 = *((int32_t *) (t7.u32 + 24));
+        *((uint32_t *) (t7.u32 + 28)) = t6.u32;
+        t5.u64 = *((int32_t *) (s0.u32 + 16));
+        memcpy(&f6, (char *) (t5.u32 + 12), 4);
+        memcpy(&f5, (char *) (t5.u32 + 8), 4);
+        f5.s = f5.s + f6.s;
+        memcpy((char *) (t5.u32 + 8), &f5, 4);
+        return;
+      }
+      break;
 
       case 13:
-        goto loc_10004B1C;
+      {
+        t5.u64 = *((int32_t *) (s0.u32 + 16));
+
+        t4.u64 = *((int32_t *) (t5.u32 + 28));
+        t4.u64 = *((int32_t *) (t4.u32 + 20));
+        *((uint32_t *) (t5.u32 + 28)) = t4.u32;
+        return;
+      }
+      break;
 
       case 14:
-        goto loc_10004B04;
+      {
+        ARGS->a7.u64 = seqList;
+        ARGS->a0.u64 = ARGS->a7.u64;
+
+        if (ARGS->a7.u64 == 0)
+        {
+          goto loc_10004D24;
+        }
+
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+        goto loc_10004D18;
+      }
+      break;
 
       case 15:
-        goto loc_10004AC8;
+      {
+        ARGS->a5.u64 = (uint64_t) seqList;
+
+        ARGS->a5.u64 = seqList;
+        ARGS->a0.u64 = ARGS->a5.u64;
+        if (ARGS->a5.u64 == 0)
+        {
+          goto def_100049B4;
+        }
+
+        loc_10004AD8:
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
+
+        t9.u64 = (uint64_t) killSeq__GP7animSeq;
+        if (ARGS->a1.u64 != ARGS->a0.u64)
+        {
+          goto loc_100049BC;
+        }
+
+        ARGS->a6.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
+        ARGS->a6.u64 = *((int32_t *) (ARGS->a6.u32 + 20));
+        *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a6.u32;
+        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
+        if (ARGS->a0.u64 != 0)
+        {
+          goto loc_10004AD8;
+        }
+
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
+        goto def_100049B4;
+      }
+      break;
 
       case 7:
-        goto loc_10004BB8;
+      {
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+
+        ARGS->a0.u64 = (uint64_t) acttable;
+        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
+        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
+        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+        if (ARGS->a0.u64 != 0)
+        {
+          *((uint8_t *) (ARGS->a0.u32 + 0)) = 0;
+        }
+        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
+        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        return;
+      }
+      break;
 
       case 6:
-        goto loc_10004BEC;
+      {
+        ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 28));
+        ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
+        *((uint32_t *) (ARGS->a4.u32 + 28)) = ARGS->a3.u32;
+        return;
+      }
+      break;
 
       case 5:
-        goto loc_10004C00;
+      {
+        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+
+        ARGS->a0.u64 = (uint64_t) acttable;
+        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
+        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
+        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+        if (ARGS->a0.u64 == 0)
+        {
+          goto loc_10004C24;
+        }
+
+        memcpy(&f7, (char *) (ARGS->a0.u32 + 36), 4);
+        memcpy((char *) (ARGS->a0.u32 + 24), &f7, 4);
+        loc_10004C24:
+        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
+
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
+        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
+        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        return;
+      }
+      break;
 
       default:
         goto def_100049B4;
-
     }
-
   }
   loc_100049BC:
-  {
-    ;
-    killSeq__GP7animSeq(ARGS);
-  }
+  killSeq__GP7animSeq(ARGS);
 
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
   def_100049B4:
@@ -1987,488 +2311,69 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   ARGS->a1.u64 = *((int32_t *) (ARGS->a2.u32 + 28));
   ARGS->a1.u64 = *((int32_t *) (ARGS->a1.u32 + 20));
   *((uint32_t *) (ARGS->a2.u32 + 28)) = ARGS->a1.u32;
-  loc_100049EC:
-  ra.u64 = var_10;
 
-  loc_100049F0:
+  return;
 
-  {
-    return;
-  }
-  loc_10004A00:
-  ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
 
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-    goto loc_100049EC;
-  }
-  loc_10004A14:
 
-  memcpy(&f8, &flt_100092A8, 4);
-  memcpy(&f4, (char *) (s0.u32 + 12), 4);
-  ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-  f9.d = 2.0000000000000000;
-  f7.d = exprand__Gf(flt_100092A8);
-  memcpy(&f5, (char *) (ARGS->a4.u32 + 20), 4);
-  f7.d = f7.d * f9.d;
-  f6.d = f4.s;
-  f8.s = f8.s - f5.s;
-  f6.d = f6.d * f7.d;
-  memcpy(&f3, (char *) (ARGS->a4.u32 + 8), 4);
-  f5.d = f5.s;
-  f4.s = f4.s * f8.s;
-  f5.d = f5.d * f6.d;
-  f4.d = f4.s;
-  f3.d = f3.s;
-  f4.d = f4.d + f5.d;
-  f3.d = f3.d + f4.d;
-  f3.s = f3.d;
-  memcpy((char *) (ARGS->a4.u32 + 8), &f3, 4);
-  ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-  ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 28));
-  ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a4.u32 + 28)) = ARGS->a3.u32;
-    goto loc_100049EC;
-  }
-  loc_10004A80:
-  memcpy(&f4, (char *) (s0.u32 + 12), 4);
-
-  f6.u64 = 0;
-  f4.d = f4.s;
-  if (f4.d < f6.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    memcpy(&f5, &dbl_10009300, 8);
-    goto loc_10004E0C;
-  }
-  else
-    memcpy(&f5, &dbl_10009300, 8);
-
-  {
-    f4.d = f6.d;
-    goto loc_10004E20;
-  }
-  loc_10004AA4:
-  memcpy(&f4, (char *) (s0.u32 + 12), 4);
-
-  memcpy(&f5, &dbl_10009300, 8);
-  f4.d = f4.s;
-  if (f4.d < f5.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    ;
-    goto loc_10004DEC;
-  }
-  else
-    ;
-
-  {
-    f4.d = f5.d;
-    goto loc_10004DEC;
-  }
-  loc_10004AC8:
-  ARGS->a5.u64 = (uint64_t) seqList;
-
-  ARGS->a5.u64 = seqList;
-  if (ARGS->a5.u64 == 0)
-  {
-    ARGS->a0.u64 = ARGS->a5.u64;
-    goto def_100049B4;
-  }
-  else
-    ARGS->a0.u64 = ARGS->a5.u64;
-
-  loc_10004AD8:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
-
-  if (ARGS->a1.u64 != ARGS->a0.u64)
-  {
-    t9.u64 = (uint64_t) killSeq__GP7animSeq;
-    goto loc_100049BC;
-  }
-  else
-    t9.u64 = (uint64_t) killSeq__GP7animSeq;
-
-  ARGS->a6.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
-  ARGS->a6.u64 = *((int32_t *) (ARGS->a6.u32 + 20));
-  *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a6.u32;
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
-  if (ARGS->a0.u64 != 0)
-  {
-    ;
-    goto loc_10004AD8;
-  }
-  else
-    ;
-
-  {
-    ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
-    goto def_100049B4;
-  }
-  loc_10004B04:
-  ARGS->a7.u64 = (uint64_t) seqList;
-
-  ARGS->a7.u64 = seqList;
-  if (ARGS->a7.u64 == 0)
-  {
-    ARGS->a0.u64 = ARGS->a7.u64;
-    goto loc_10004D24;
-  }
-  else
-    ARGS->a0.u64 = ARGS->a7.u64;
-
-  {
-    ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-    goto loc_10004D18;
-  }
-  loc_10004B1C:
-  t5.u64 = *((int32_t *) (s0.u32 + 16));
-
-  t4.u64 = *((int32_t *) (t5.u32 + 28));
-  t4.u64 = *((int32_t *) (t4.u32 + 20));
-  {
-    *((uint32_t *) (t5.u32 + 28)) = t4.u32;
-    goto loc_100049EC;
-  }
-  loc_10004B30:
-  t7.u64 = *((int32_t *) (s0.u32 + 16));
-
-  t6.u64 = *((int32_t *) (t7.u32 + 24));
-  *((uint32_t *) (t7.u32 + 28)) = t6.u32;
-  t5.u64 = *((int32_t *) (s0.u32 + 16));
-  memcpy(&f6, (char *) (t5.u32 + 12), 4);
-  memcpy(&f5, (char *) (t5.u32 + 8), 4);
-  f5.s = f5.s + f6.s;
-  {
-    memcpy((char *) (t5.u32 + 8), &f5, 4);
-    goto loc_100049EC;
-  }
-  loc_10004B54:
-  t8.u64 = (uint64_t) seqList;
-
-  t8.u64 = seqList;
-  if (t8.u64 == 0)
-  {
-    ARGS->a0.u64 = t8.u64;
-    goto loc_10004D60;
-  }
-  else
-    ARGS->a0.u64 = t8.u64;
-
-  {
-    ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-    goto loc_10004D54;
-  }
-  loc_10004B6C:
-  t9.u64 = (uint64_t) seqList;
-
-  t9.u64 = seqList;
-  if (t9.u64 == 0)
-  {
-    ARGS->a0.u64 = t9.u64;
-    goto loc_10004DA0;
-  }
-  else
-    ARGS->a0.u64 = t9.u64;
-
-  {
-    ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-    goto loc_10004D94;
-  }
-  loc_10004B84:
-  at.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ra.u64 = *((int32_t *) (at.u32 + 28));
-  ra.u64 = *((int32_t *) (ra.u32 + 20));
-  {
-    *((uint32_t *) (at.u32 + 28)) = ra.u32;
-    goto loc_100049EC;
-  }
-  loc_10004B98:
-  t9.u64 = (uint64_t) stopAnimation__Gv;
-
-  {
-    ;
-    stopAnimation__Gv();
-  }
-  ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
-  at.u64 = *((int32_t *) (ARGS->v0.u32 + 28));
-  at.u64 = *((int32_t *) (at.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->v0.u32 + 28)) = at.u32;
-    goto loc_100049EC;
-  }
-  loc_10004BB8:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-  ARGS->a0.u64 = (uint64_t) acttable;
-  ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-  if (ARGS->a0.u64 == 0)
-  {
-    ;
-    goto loc_10004BD8;
-  }
-  else
-    ;
-
-  *((uint8_t *) (ARGS->a0.u32 + 0)) = 0;
-  loc_10004BD8:
-  ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-    goto loc_100049EC;
-  }
-  loc_10004BEC:
-  ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 28));
-  ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a4.u32 + 28)) = ARGS->a3.u32;
-    goto loc_100049EC;
-  }
-  loc_10004C00:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-  ARGS->a0.u64 = (uint64_t) acttable;
-  ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-  if (ARGS->a0.u64 == 0)
-  {
-    ;
-    goto loc_10004C24;
-  }
-  else
-    ;
-
-  memcpy(&f7, (char *) (ARGS->a0.u32 + 36), 4);
-  memcpy((char *) (ARGS->a0.u32 + 24), &f7, 4);
-  loc_10004C24:
-  ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-    goto loc_100049EC;
-  }
-  loc_10004C38:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-  ARGS->a0.u64 = (uint64_t) acttable;
-  ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-  if (ARGS->a0.u64 == 0)
-  {
-    ;
-    goto loc_10004C5C;
-  }
-  else
-    ;
-
-  memcpy(&f8, (char *) (s0.u32 + 12), 4);
-  memcpy((char *) (ARGS->a0.u32 + 24), &f8, 4);
-  loc_10004C5C:
-  ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-    goto loc_100049EC;
-  }
-  loc_10004C70:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-  ARGS->a0.u64 = (uint64_t) acttable;
-  ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-  if (ARGS->a0.u64 == 0)
-  {
-    ;
-    goto loc_10004E6C;
-  }
-  else
-    ;
-
-  memcpy(&f5, (char *) (s0.u32 + 12), 4);
-  memcpy(&f4, (char *) (ARGS->a0.u32 + 16), 4);
-  if (f4.s < f5.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    memcpy(&f6, (char *) (ARGS->a0.u32 + 12), 4);
-    goto loc_10004E80;
-  }
-  else
-    memcpy(&f6, (char *) (ARGS->a0.u32 + 12), 4);
-
-  if (f5.s < f6.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    ;
-    goto loc_10004E40;
-  }
-  else
-    ;
-
-  {
-    f5.s = f6.s;
-    goto loc_10004E40;
-  }
-  loc_10004CBC:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-  ARGS->a0.u64 = (uint64_t) acttable;
-  ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-  if (ARGS->a0.u64 == 0)
-  {
-    ;
-    goto loc_10004DD8;
-  }
-  else
-    ;
-
-  memcpy(&f5, (char *) (s0.u32 + 12), 4);
-  memcpy(&f4, (char *) (ARGS->a0.u32 + 16), 4);
-  if (f4.s < f5.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    ;
-    goto loc_10004DD4;
-  }
-  else
-    ;
-
-  {
-    f5.s = f4.s;
-    goto loc_10004DD4;
-  }
-  loc_10004CF8:
-  ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-    goto loc_100049EC;
-  }
   loc_10004D0C:
   ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
 
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004D24;
   }
-  else
-    ;
 
   loc_10004D18:
   ARGS->a3.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
 
   if (ARGS->a3.u64 != ARGS->a1.u64)
   {
-    ;
     goto loc_10004D0C;
   }
-  else
-    ;
 
   loc_10004D24:
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
 
   if (ARGS->a1.u64 != ARGS->a0.u64)
   {
-    ra.u64 = var_10;
-    goto loc_100049F0;
+    return;
   }
-  else
-    ra.u64 = var_10;
 
+  t9.u64 = (uint64_t) killSeq__GP7animSeq;
   if (ARGS->a0.u64 == 0)
   {
-    t9.u64 = (uint64_t) killSeq__GP7animSeq;
-    goto loc_10004EB4;
-  }
-  else
-    t9.u64 = (uint64_t) killSeq__GP7animSeq;
+    ARGS->a0.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
 
-  {
-    ;
-    killSeq__GP7animSeq(ARGS);
+    ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 20));
+    *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a0.u32;
+    return;
   }
-  {
-    ra.u64 = var_10;
-    goto loc_100049F0;
-  }
+
+  killSeq__GP7animSeq(ARGS);
+  return;
+
   loc_10004D48:
   ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
 
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004D6C;
   }
-  else
-    ;
 
   loc_10004D54:
   ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
 
   if (ARGS->a4.u64 != ARGS->a1.u64)
   {
-    ;
     goto loc_10004D48;
   }
-  else
-    ;
 
   loc_10004D60:
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004D6C;
   }
-  else
-    ;
 
 
   *((uint32_t *) (ARGS->a0.u32 + 28)) = 0;
@@ -2477,49 +2382,36 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
 
   if (ARGS->a1.u64 == ARGS->a0.u64)
   {
-    ra.u64 = var_10;
-    goto loc_100049F0;
+    return;
   }
-  else
-    ra.u64 = var_10;
 
   ARGS->a5.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
   ARGS->a5.u64 = *((int32_t *) (ARGS->a5.u32 + 20));
   {
     *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a5.u32;
-    goto loc_100049EC;
+    return;
   }
   loc_10004D88:
   ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
 
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004DB8;
   }
-  else
-    ;
 
   loc_10004D94:
   ARGS->a6.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
 
   if (ARGS->a6.u64 != ARGS->a1.u64)
   {
-    ;
     goto loc_10004D88;
   }
-  else
-    ;
 
   loc_10004DA0:
   if (ARGS->a0.u64 == 0)
   {
-    ;
     goto loc_10004DB8;
   }
-  else
-    ;
-
 
   ARGS->a7.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
   *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->a7.u32;
@@ -2530,146 +2422,14 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
 
   if (ARGS->a1.u64 == ARGS->a0.u64)
   {
-    ra.u64 = var_10;
-    goto loc_100049F0;
+    return;
   }
-  else
-    ra.u64 = var_10;
 
   t4.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
   t4.u64 = *((int32_t *) (t4.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a1.u32 + 28)) = t4.u32;
-    goto loc_100049EC;
-  }
-  loc_10004DD4:
-  memcpy((char *) (ARGS->a0.u32 + 16), &f5, 4);
+  *((uint32_t *) (ARGS->a1.u32 + 28)) = t4.u32;
+  return;
 
-  loc_10004DD8:
-  t6.u64 = *((int32_t *) (s0.u32 + 16));
-
-  t5.u64 = *((int32_t *) (t6.u32 + 28));
-  t5.u64 = *((int32_t *) (t5.u32 + 20));
-  {
-    *((uint32_t *) (t6.u32 + 28)) = t5.u32;
-    goto loc_100049EC;
-  }
-  loc_10004DEC:
-  t7.u64 = *((int32_t *) (s0.u32 + 16));
-
-  f10.s = f4.d;
-  memcpy((char *) (t7.u32 + 16), &f10, 4);
-  t7.u64 = *((int32_t *) (s0.u32 + 16));
-  t6.u64 = *((int32_t *) (t7.u32 + 28));
-  t6.u64 = *((int32_t *) (t6.u32 + 20));
-  {
-    *((uint32_t *) (t7.u32 + 28)) = t6.u32;
-    goto loc_100049EC;
-  }
-  loc_10004E0C:
-  if (f5.d < f4.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    ;
-    goto loc_10004E20;
-  }
-  else
-    ;
-
-  f4.d = f5.d;
-  loc_10004E20:
-  t9.u64 = *((int32_t *) (s0.u32 + 16));
-
-  f11.s = f4.d;
-  memcpy((char *) (t9.u32 + 20), &f11, 4);
-  t9.u64 = *((int32_t *) (s0.u32 + 16));
-  t8.u64 = *((int32_t *) (t9.u32 + 28));
-  t8.u64 = *((int32_t *) (t8.u32 + 20));
-  {
-    *((uint32_t *) (t9.u32 + 28)) = t8.u32;
-    goto loc_100049EC;
-  }
-  loc_10004E40:
-  {
-    memcpy((char *) (ARGS->a0.u32 + 12), &f5, 4);
-    goto loc_10004E4C;
-  }
-
-  loc_10004E48:
-  memcpy((char *) (ARGS->a0.u32 + 16), &f5, 4);
-
-  loc_10004E4C:
-  ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
-
-  memcpy(&ARGS->f13, (char *) (ARGS->v0.u32 + 16), 4);
-  memcpy((char *) (ARGS->a0.u32 + 28), &ARGS->f13, 4);
-  at.u64 = *((int32_t *) (s0.u32 + 16));
-  memcpy(&ARGS->f12, (char *) (at.u32 + 20), 4);
-  ra.u64 = 1;
-  *((uint8_t *) (ARGS->a0.u32 + 0)) = ra.u8;
-  memcpy((char *) (ARGS->a0.u32 + 32), &ARGS->f12, 4);
-  loc_10004E6C:
-  ARGS->a0.u64 = *((int32_t *) (s0.u32 + 16));
-
-  ARGS->v1.u64 = *((int32_t *) (ARGS->a0.u32 + 28));
-  ARGS->v1.u64 = *((int32_t *) (ARGS->v1.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->v1.u32;
-    goto loc_100049EC;
-  }
-  loc_10004E80:
-  if (f4.s < f6.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    f5.s = f4.s;
-    goto loc_10004E94;
-  }
-  else
-    f5.s = f4.s;
-
-  f5.s = f6.s;
-  loc_10004E94:
-  memcpy((char *) (ARGS->a0.u32 + 12), &f5, 4);
-
-  memcpy(&f6, (char *) (s0.u32 + 12), 4);
-  if (f4.s < f6.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-  ;
-  if (!EPANOS_fp_cond)
-  {
-    f5.s = f6.s;
-    goto loc_10004E48;
-  }
-  else
-    f5.s = f6.s;
-
-  {
-    f5.s = f4.s;
-    goto loc_10004E48;
-  }
-  loc_10004EB4:
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
-
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a0.u32;
-    goto loc_100049EC;
-  }
 }
 
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)

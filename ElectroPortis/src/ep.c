@@ -93,7 +93,7 @@ struct animCommand
   float flt_c;
   float flt_d;
   struct animSeq *seq_e;
-  struct animCommand *cmd_f;
+  struct animCommand *next;
 };
 #pragma pack ()
 static struct act *acttable[1024];
@@ -513,18 +513,18 @@ static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct a
     return;
   }
 
-  struct animCommand *a3 = a4->cmd_f;
+  struct animCommand *a3 = a4->next;
 
   if (animCommand->flt_c < a4->flt_c)
   {
-    animCommand->cmd_f = animSeq->cmd_g;
+    animCommand->next = animSeq->cmd_g;
     animSeq->cmd_g = animCommand;
     return;
   }
 
-  if (a4->cmd_f == NULL)
+  if (a4->next == NULL)
   {
-    a4->cmd_f = animCommand;
+    a4->next = animCommand;
     animSeq->cmd_i = animCommand;
     return;
   }
@@ -533,23 +533,23 @@ static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct a
 
   if (animCommand->flt_c < a3->flt_c)
   {
-    animCommand->cmd_f = a3;
-    a4->cmd_f = animCommand;
+    animCommand->next = a3;
+    a4->next = animCommand;
   }
   else
   {
     a4 = a3;
-    a3 = a3->cmd_f;
+    a3 = a3->next;
     if (a3 != NULL)
     {
       goto loc_10003930;
     }
   }
 
-  if (animCommand->cmd_f != NULL)
+  if (animCommand->next != NULL)
     return;
 
-  animSeq->cmd_i->cmd_f = animCommand;
+  animSeq->cmd_i->next = animCommand;
   animSeq->cmd_i = animCommand;
   return;
 }

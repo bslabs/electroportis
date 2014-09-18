@@ -1441,7 +1441,7 @@ static void drawshape__GiT1(char poly, wincount_t wincount)
 
 static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
 {
-  struct animSeq *s0;
+  struct animSeq *seq;
   EPANOS_REG f6;
   EPANOS_REG f7;
   EPANOS_REG f8;
@@ -1449,11 +1449,11 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   
   currentFrame = currentFrame + 1.0f;
 
-  for (s0 = seqList; s0 != NULL; s0 = s0->next)
+  for (seq = seqList; seq != NULL; seq = seq->next)
   {
     double f4 = (double)currentFrame + 0.5;
-    ARGS->a0.u64 = s0->pad_h;
-    if ((double)s0->flt_c < f4)
+    ARGS->a0.u64 = seq->pad_h;
+    if ((double)seq->flt_c < f4)
     {
       ;
     }
@@ -1462,7 +1462,7 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
       continue;
     }
 
-    if (s0->pad_b[0] == 0)
+    if (seq->pad_b[0] == 0)
     {
       continue;
     }
@@ -1473,7 +1473,7 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
     }
 
     memcpy(&f6, (char *) (ARGS->a0.u32 + 8), 4);
-    f6.s = f6.s + s0->flt_c;
+    f6.s = f6.s + seq->flt_c;
     f6.d = f6.s;
     if (f6.d < f4)
     {
@@ -1487,10 +1487,10 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
     loc_10004F7C:
     processCommand__GP11animCommand(ARGS);
 
-    ARGS->v1.u64 = s0->pad_b[0];
-    f9.s = s0->flt_c;
+    ARGS->v1.u64 = seq->pad_b[0];
+    f9.s = seq->flt_c;
     f8.s = currentFrame;
-    ARGS->a0.u64 = s0->pad_h;
+    ARGS->a0.u64 = seq->pad_h;
     if (ARGS->v1.u64 == 0)
     {
       continue;

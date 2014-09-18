@@ -79,7 +79,7 @@ struct animSeq
   float flt_e;
   float flt_f;
   struct animCommand *cmd_g;
-  uint32_t pad_h; // another ptr, maybe a cmd?
+  struct animCommand *cmd_h;
   struct animCommand *cmd_i;
   struct animSeq *next;
 };
@@ -89,7 +89,7 @@ struct animCommand
   // MUST be 24 bytes
   uint32_t type;
   uint32_t pad_b; // looks like 32b int
-  float flt_c;
+  float cmdFrame;
   float flt_d;
   struct animSeq *seq_e;
   struct animCommand *next;
@@ -132,12 +132,12 @@ static void stopAnimation__Gv(void);
 static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, wincount_t wincount);
-static void tasteQueue__Gv(EPANOS_ARGS *ARGS);
+static void tasteQueue__Gv(void);
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5, float f12, float f13, float f14);
 static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS);
 static struct act *createBlankActAnim__Gv(void);
 static void value__GfN21(EPANOS_ARGS *ARGS);
-static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS);
+static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animCommand *cmd);
 static void setacttargets__Gv(void);
 static float twixt__GiPff(int a0, const float *a1, float f14);
 static float exprand__Gf(float arg);
@@ -510,7 +510,7 @@ static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct a
 
   struct animCommand *a3 = a4->next;
 
-  if (animCommand->flt_c < a4->flt_c)
+  if (animCommand->cmdFrame < a4->cmdFrame)
   {
     animCommand->next = animSeq->cmd_g;
     animSeq->cmd_g = animCommand;
@@ -526,7 +526,7 @@ static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct a
 
   loc_10003930:
 
-  if (animCommand->flt_c < a3->flt_c)
+  if (animCommand->cmdFrame < a3->cmdFrame)
   {
     animCommand->next = a3;
     a4->next = animCommand;
@@ -779,7 +779,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     cmd = calloc(1, sizeof(struct animCommand));
   }
   {
-    cmd->flt_c = absFrame;
+    cmd->cmdFrame = absFrame;
   }
   if (strcmp("frame:", var_2D8) == 0)
   {
@@ -815,7 +815,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
       editSeq->flt_e = 300.0f;
       editSeq->flt_f = 1.0f;
       editSeq->cmd_i = NULL;
-      editSeq->pad_h = 0;
+      editSeq->cmd_h = NULL;
       editSeq->cmd_g = NULL;
       editSeq->next = NULL;
 
@@ -1339,7 +1339,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   editSeq->flt_e = 300.0f;
   editSeq->flt_f = 1.0f;
   editSeq->cmd_g = NULL;
-  editSeq->pad_h = 0;
+  editSeq->cmd_h = NULL;
   editSeq->cmd_i = NULL;
 
   editSeq->next = NULL;
@@ -1439,9 +1439,11 @@ static void drawshape__GiT1(char poly, wincount_t wincount)
   return;
 }
 
-static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
+static void tasteQueue__Gv(void)
 {
   struct animSeq *seq;
+  struct animCommand *cmd;
+  EPANOS_ARGS ARGS;
   EPANOS_REG f6;
   EPANOS_REG f7;
   EPANOS_REG f8;
@@ -1452,7 +1454,7 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
   for (seq = seqList; seq != NULL; seq = seq->next)
   {
     double f4 = (double)currentFrame + 0.5;
-    ARGS->a0.u64 = seq->pad_h;
+    cmd = seq->cmd_h;
     if ((double)seq->flt_c < f4)
     {
       ;
@@ -1467,12 +1469,12 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
       continue;
     }
 
-    if (ARGS->a0.u64 == 0)
+    if (cmd == NULL)
     {
       continue;
     }
 
-    memcpy(&f6, (char *) (ARGS->a0.u32 + 8), 4);
+    f6.s = cmd->cmdFrame;
     f6.s = f6.s + seq->flt_c;
     f6.d = f6.s;
     if (f6.d < f4)
@@ -1485,23 +1487,22 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
     }
 
     loc_10004F7C:
-    processCommand__GP11animCommand(ARGS);
+    processCommand__GP11animCommand(&ARGS, cmd);
 
-    ARGS->v1.u64 = seq->pad_b[0];
     f9.s = seq->flt_c;
     f8.s = currentFrame;
-    ARGS->a0.u64 = seq->pad_h;
-    if (ARGS->v1.u64 == 0)
+    cmd = seq->cmd_h;
+    if (seq->pad_b[0] == 0)
     {
       continue;
     }
 
-    if (ARGS->a0.u64 == 0)
+    if (cmd == NULL)
     {
       continue;
     }
 
-    memcpy(&f7, (char *) (ARGS->a0.u32 + 8), 4);
+    f7.s = cmd->cmdFrame;
     f8.d = f8.s;
     f7.s = f7.s + f9.s;
     f8.d = f8.d + 0.5;
@@ -1808,7 +1809,7 @@ static void value__GfN21(EPANOS_ARGS *ARGS)
   }
 }
 
-static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
+static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animCommand *cmd)
 {
   EPANOS_REG t4;
   EPANOS_REG t5;
@@ -1831,25 +1832,20 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
   ARGS->v0.u64 = (int32_t) (1 << 16);
 
   ARGS->v0.u64 = 50812;
+  ARGS->a0.u64 = cmd;
   s0.u64 = ARGS->a0.u64;
   if (oflag != 0)
   {
     memcpy(&ARGS->f2, (char *) (ARGS->a0.u32 + 8), 4);
     ARGS->a2.u64 = *((int32_t *) (ARGS->a0.u32 + 16));
-    ARGS->a3.u64 = (uint64_t) (&currentFrame);
     memcpy(&f1, (char *) (ARGS->a2.u32 + 8), 4);
-    memcpy(&ARGS->f0, &currentFrame, 4);
     ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
     ARGS->f2.d = ARGS->f2.s;
-    t9.u64 = (uint64_t) printf;
     f1.d = f1.s;
-    ARGS->a5.u64 = ARGS->f2.u64;
-    ARGS->f0.d = ARGS->f0.s;
-    ARGS->a3.u64 = f1.u64;
     ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
     {
       printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
-          ARGS->f0.d, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d, (int32_t) ARGS->a4.u64, (double) ARGS->a5.d);
+          currentFrame, (int32_t) ARGS->a2.u64, f1.d, (int32_t) ARGS->a4.u64, (double) ARGS->f2.d);
     }
   }
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
@@ -2437,7 +2433,7 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   if (aflag != 0)
   {
-    tasteQueue__Gv(ARGS);
+    tasteQueue__Gv();
     setacttargets__Gv();
     animateacts__Gv();
   }

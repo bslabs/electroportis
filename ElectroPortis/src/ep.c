@@ -28,12 +28,11 @@
 
 #define NELEMS(x)  (sizeof(x) / sizeof(x[0]))
 
-static float flt_100092A8 = 1.00000000f;
-static double dbl_10009300 = 1.0000000000000000;
-static float flt_100092BC = -0.500000000f;
-static float flt_100092B4 = -1.00000000f;
-static float flt_10009290 = 360.000000f;
-static float flt_10009294 = -360.000000f;
+static const float flt_100092A8 = 1.00000000f;
+static const double dbl_10009300 = 1.0000000000000000;
+static const float flt_100092BC = -0.500000000f;
+static const float flt_100092B4 = -1.00000000f;
+static const float flt_10009294 = -360.000000f;
 
 /* swapBuffers__Q2_10GLXWrapper6windowGv: no regmap info, emitting empty stmt at .text:100061FC */
 /* sginap: no regmap info, emitting empty stmt at .text:10006208 */
@@ -103,7 +102,6 @@ static float relFrame;
 static float baseFrame;
 static float absFrame;
 static float wheel;
-static float dwheel;
 static float x[128];
 static float y[128];
 static float dzoom[128];
@@ -128,7 +126,6 @@ static int nlimit;
 static float t;
 static struct animSeq *seqList;
 static struct animSeq *editSeq;
-static int theWindow;
 
 static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount);
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand);
@@ -2434,270 +2431,149 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS)
 
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 {
-  EPANOS_REG t4;
-  EPANOS_REG t5;
-  EPANOS_REG t6;
-  EPANOS_REG t7;
   EPANOS_REG s0;
   EPANOS_REG s1;
   EPANOS_REG s2;
   EPANOS_REG s3;
   EPANOS_REG at;
-  EPANOS_REG t8;
   EPANOS_REG t9;
   EPANOS_REG ra;
   EPANOS_REG f1;
   EPANOS_REG f5;
   EPANOS_REG f6;
-  EPANOS_REG f20;
   EPANOS_REG f21;
-  EPANOS_REG f23;
-  EPANOS_REG f25;
-  EPANOS_REG f27;
-  EPANOS_REG f29;
-  int EPANOS_fp_cond;
-  double var_50;
+  float var_50;
   double var_48;
   double var_40;
-  display__Gv:
-  at.u64 = (int32_t) (1 << 16);
 
-  at.u64 = 45256;
-  t9.u64 = (uint64_t) glClear;
-  ARGS->a0.u64 = 16384;
+  wrap_glClear(GL_COLOR_BUFFER_BIT, wincount);
   {
-    wrap_glClear((unsigned int) ARGS->a0.u64, wincount);
-  }
-  memcpy(&f20, &flt_100092A8, 4);
-  t9.u64 = (uint64_t) glColor3f;
-  ARGS->f14.s = f20.s;
-  ARGS->f13.s = f20.s;
-  {
-    ARGS->f12.s = f20.s;
-    wrap_glColor3f((float) ARGS->f12.s, (float) ARGS->f13.s, (float) ARGS->f14.s, wincount);
+    wrap_glColor3f(1.0f, 1.0f, 1.0f, wincount);
   }
   s0.u64 = (uint64_t) acttable;
   ARGS->v1.u64 = (uint64_t) (&t);
-  ARGS->v0.u64 = acttable[45];
   memcpy(&f1, &t, 4);
-  memcpy(&ARGS->f2, (char *) (ARGS->v0.u32 + 24), 4);
-  s1.u64 = (uint64_t) (&n);
-  memcpy(&ARGS->f0, &dbl_10009300, 8);
+  ARGS->f2.s = acttable[45]->flt_g;
   f1.s = f1.s + ARGS->f2.s;
   ARGS->a0.u64 = n;
   f1.d = f1.s;
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + 1);
   ARGS->a3.u64 = (int32_t) (ARGS->a0.i32 >> 31);
-  if (ARGS->f0.d <= f1.d)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
 
-  ARGS->a2.u64 = (uint64_t) (&aflag);
   ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
-  s3.u64 = 1;
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
-  ARGS->a1.u64 = aflag;
   ARGS->f0.u32 = 0;
   ARGS->a0.u64 = ARGS->a0.u64 & 127;
-  if (EPANOS_fp_cond)
+  if ((double)1.0 <= f1.d)
   {
     memcpy(&t, &ARGS->f0, 4);
     ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
     ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
     n = ARGS->a0.u32;
+    s3.u64 = 1;
   }
   else
   {
     s3.u64 = 0;
   }
 
-  if (ARGS->a1.u64 != 0)
+  if (aflag != 0)
   {
     tasteQueue__Gv(ARGS);
     setacttargets__Gv();
     animateacts__Gv();
   }
 
-  ARGS->a2.u64 = (uint64_t) dtwist;
-  ARGS->a4.u64 = (uint64_t) (&dwheel);
-  ARGS->a6.u64 = (uint64_t) wrist;
-  t4.u64 = (uint64_t) arm;
-  s2.u64 = (uint64_t) (&n);
-  t6.u64 = (uint64_t) dzoom;
   s2.u64 = n;
-  ARGS->f18.u32 = 0;
-  t8.u64 = (uint64_t) y;
-  ra.u64 = (uint64_t) x;
   s1.u64 = (int32_t) (s2.u32 << 2);
-  t7.u64 = acttable[31];
-  t8.u64 = (int32_t) (s1.u32 + t8.u32);
-  ra.u64 = (int32_t) (s1.u32 + ra.u32);
-  memcpy((char *) (t8.u32 + 0), &ARGS->f18, 4);
-  memcpy((char *) (ra.u32 + 0), &ARGS->f18, 4);
-  memcpy(&ARGS->f17, (char *) (t7.u32 + 24), 4);
-  t5.u64 = acttable[94];
-  t6.u64 = (int32_t) (s1.u32 + t6.u32);
-  memcpy((char *) (t6.u32 + 0), &ARGS->f17, 4);
-  memcpy(&ARGS->f16, (char *) (t5.u32 + 24), 4);
-  ARGS->a7.u64 = acttable[101];
-  t4.u64 = (int32_t) (s1.u32 + t4.u32);
-  memcpy((char *) (t4.u32 + 0), &ARGS->f16, 4);
-  memcpy(&ARGS->f15, (char *) (ARGS->a7.u32 + 24), 4);
-  ARGS->a5.u64 = acttable[73];
-  ARGS->a6.u64 = (int32_t) (s1.u32 + ARGS->a6.u32);
-  memcpy((char *) (ARGS->a6.u32 + 0), &ARGS->f15, 4);
-  memcpy(&ARGS->f14, (char *) (ARGS->a5.u32 + 24), 4);
-  ARGS->a3.u64 = acttable[38];
-  memcpy(&dwheel, &ARGS->f14, 4);
-  memcpy(&ARGS->f13, (char *) (ARGS->a3.u32 + 24), 4);
-  ARGS->a1.u64 = acttable[52];
-  ARGS->a2.u64 = (int32_t) (s1.u32 + ARGS->a2.u32);
-  memcpy((char *) (ARGS->a2.u32 + 0), &ARGS->f13, 4);
-  memcpy(&ARGS->f12, (char *) (ARGS->a1.u32 + 24), 4);
-  memcpy(&var_50, &ARGS->f14, 8);
+  y[n] = 0;
+  x[n] = 0;
+  dzoom[n] = acttable[31]->flt_g;
+  arm[n] = acttable[94]->flt_g;
+  wrist[n] = acttable[101]->flt_g;
+
+  var_50 = acttable[73]->flt_g;
+
+  dtwist[n] = acttable[38]->flt_g;
+
+  ARGS->f12.s = acttable[52]->flt_g;
   {
     ARGS->f12.d = ARGS->f12.s;
     ARGS->f0.d = (double) floor((double) ARGS->f12.d);
   }
-  ARGS->a6.u64 = (uint64_t) (&nlimit);
-  f23.i32 = trunc_w_d(ARGS->f0.d);
-  memcpy(&nlimit, &f23, 4);
-  ARGS->a5.u64 = acttable[18];
-  memcpy(&f21, (char *) (ARGS->a5.u32 + 24), 4);
+  nlimit = trunc_w_d(ARGS->f0.d);
+  f21.s = acttable[18]->flt_g;
   ARGS->f19.u64 = 0;
   f21.d = f21.s;
-  ARGS->a4.u64 = (uint64_t) outline;
   if (ARGS->f19.d < f21.d)
-    EPANOS_fp_cond = 1;
+    outline[n] = 1;
   else
-    EPANOS_fp_cond = 0;
+    outline[n] = 0;
 
-  ARGS->a3.u64 = 1;
-  ARGS->a4.u64 = (int32_t) (s2.u32 + ARGS->a4.u32);
-  ARGS->a2.u64 = acttable[123];
-  if (EPANOS_fp_cond)
-  {
-    ;
-    goto loc_10006094;
-  }
-  else
-    ;
-
-  ARGS->a3.u64 = 0;
-  loc_10006094:
-  *((uint8_t *) (ARGS->a4.u32 + 0)) = ARGS->a3.u8;
-
-  memcpy(&f5, (char *) (ARGS->a2.u32 + 24), 4);
+  f5.s = acttable[123]->flt_g;
   memcpy(&f6, &flt_100092B4, 4);
   ARGS->a1.u64 = (uint64_t) hue;
-  if (f20.s <= f5.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
 
-  ARGS->a3.u64 = (uint64_t) light;
   ARGS->a1.u64 = (int32_t) (s1.u32 + ARGS->a1.u32);
-  ARGS->a2.u64 = acttable[130];
-  ARGS->a7.u64 = (int32_t) (s1.u32 + ARGS->a3.u32);
-  if (!EPANOS_fp_cond)
+  hue[n] = acttable[123]->flt_g;
+
+  if (1.0f <= acttable[123]->flt_g)
   {
+    f5.s = f5.s + f6.s;
     memcpy((char *) (ARGS->a1.u32 + 0), &f5, 4);
-    goto loc_100060C8;
   }
-  else
-    memcpy((char *) (ARGS->a1.u32 + 0), &f5, 4);
 
-  f5.s = f5.s + f6.s;
-  memcpy((char *) (ARGS->a1.u32 + 0), &f5, 4);
-  loc_100060C8:
-  if (f5.s <= f20.s)
-    EPANOS_fp_cond = 1;
-  else
-    EPANOS_fp_cond = 0;
-
-
-  ;
-  if (!EPANOS_fp_cond)
+  if (f5.s <= 1.0f)
   {
-    ;
-    goto loc_100060E0;
+    float f25 = f5.s + 1.0f;
+    memcpy((char *) (ARGS->a1.u32 + 0), &f25, 4);
   }
-  else
-    ;
 
-  f25.s = f5.s + f20.s;
-  memcpy((char *) (ARGS->a1.u32 + 0), &f25, 4);
-  loc_100060E0:
-  memcpy(&f27, (char *) (ARGS->a2.u32 + 24), 4);
+  light[n] = acttable[130]->flt_g;
 
-  memcpy(&f20, &flt_10009290, 4);
-  if (s3.u64 == 0)
+  if (s3.u64 != 0)
   {
-    memcpy((char *) (ARGS->a7.u32 + 0), &f27, 4);
-    goto loc_10006194;
+    ARGS->f13.s = acttable[87]->flt_g;
+    memcpy(&ARGS->f12, &gflip, 4);
+    memcpy(&dflip, &ARGS->f13, 4);
+    EPANOS_REG f29;
+    f29.s = acttable[80]->flt_g;
+    memcpy(&var_48, &f29, 8);
+    ARGS->f12.s = ARGS->f12.s + ARGS->f13.s;
+    {
+      memcpy(&dspin, &f29, 4);
+      ARGS->f0.s = (float) fmodf((float) ARGS->f12.s, 360.0f);
+    }
+    memcpy(&ARGS->f13, &var_48, 8);
+    memcpy(&ARGS->f12, &gspin, 4);
+    memcpy(&var_40, &ARGS->f0, 8);
+    memcpy(&gflip, &ARGS->f0, 4);
+    ARGS->f12.s = ARGS->f12.s + ARGS->f13.s;
+    {
+      ARGS->f0.s = (float) fmodf((float) ARGS->f12.s, 360.0f);
+    }
+    ra.u64 = (int32_t) (s2.i32 >> 31);
+    t9.u64 = s2.u64 ^ ra.u64;
+    t9.u64 = (int32_t) (t9.u32 - ra.u32);
+    t9.u64 = t9.u64 & 127;
+    memcpy(&ARGS->f15, &var_40, 8);
+    t9.u64 = t9.u64 ^ ra.u64;
+    at.u64 = (uint64_t) flip;
+    t9.u64 = (int32_t) (t9.u32 - ra.u32);
+    ra.u64 = (uint64_t) spin;
+    t9.u64 = (int32_t) (t9.u32 << 2);
+    memcpy(&gspin, &ARGS->f0, 4);
+    at.u64 = (int32_t) (t9.u32 + at.u32);
+    t9.u64 = (int32_t) (t9.u32 + ra.u32);
+    memcpy((char *) (at.u32 + 0), &ARGS->f15, 4);
+    memcpy((char *) (t9.u32 + 0), &ARGS->f0, 4);
   }
-  else
-    memcpy((char *) (ARGS->a7.u32 + 0), &f27, 4);
 
-  t5.u64 = *((int32_t *) (s0.u32 + 320));
-  t6.u64 = (uint64_t) (&dflip);
-  t7.u64 = *((int32_t *) (s0.u32 + 348));
-  s3.u64 = (uint64_t) (&gflip);
-  memcpy(&ARGS->f13, (char *) (t7.u32 + 24), 4);
-  memcpy(&ARGS->f12, &gflip, 4);
-//  s3.u64 = (uint64_t) fmodf;
-  memcpy(&dflip, &ARGS->f13, 4);
-  memcpy(&f29, (char *) (t5.u32 + 24), 4);
-  t4.u64 = (uint64_t) (&dspin);
-  t9.u64 = s3.u64;
-  memcpy(&var_48, &f29, 8);
-  ARGS->f12.s = ARGS->f12.s + ARGS->f13.s;
-  ARGS->f13.s = f20.s;
-  {
-    memcpy(&dspin, &f29, 4);
-    ARGS->f0.s = (float) fmodf((float) ARGS->f12.s, (float) ARGS->f13.s);
-  }
-  s1.u64 = (uint64_t) (&gspin);
-  memcpy(&ARGS->f13, &var_48, 8);
-  memcpy(&ARGS->f12, &gspin, 4);
-  t9.u64 = s3.u64;
-  t8.u64 = (uint64_t) (&gflip);
-  memcpy(&var_40, &ARGS->f0, 8);
-  memcpy(&gflip, &ARGS->f0, 4);
-  ARGS->f12.s = ARGS->f12.s + ARGS->f13.s;
-  {
-    ARGS->f13.s = f20.s;
-    ARGS->f0.s = (float) fmodf((float) ARGS->f12.s, (float) ARGS->f13.s);
-  }
-  ra.u64 = (int32_t) (s2.i32 >> 31);
-  t9.u64 = s2.u64 ^ ra.u64;
-  t9.u64 = (int32_t) (t9.u32 - ra.u32);
-  t9.u64 = t9.u64 & 127;
-  memcpy(&ARGS->f15, &var_40, 8);
-  t9.u64 = t9.u64 ^ ra.u64;
-  at.u64 = (uint64_t) flip;
-  t9.u64 = (int32_t) (t9.u32 - ra.u32);
-  ra.u64 = (uint64_t) spin;
-  t9.u64 = (int32_t) (t9.u32 << 2);
-  memcpy(&gspin, &ARGS->f0, 4);
-  at.u64 = (int32_t) (t9.u32 + at.u32);
-  t9.u64 = (int32_t) (t9.u32 + ra.u32);
-  memcpy((char *) (at.u32 + 0), &ARGS->f15, 4);
-  memcpy((char *) (t9.u32 + 0), &ARGS->f0, 4);
-  loc_10006194:
-//  t9.u64 = (uint64_t) fmodf;
-
-  ra.u64 = (uint64_t) (&wheel);
-  memcpy(&ARGS->f13, &var_50, 8);
   memcpy(&ARGS->f12, &wheel, 4);
-  ARGS->f12.s = ARGS->f12.s - ARGS->f13.s;
+  ARGS->f12.s = ARGS->f12.s - var_50;
   {
-    ARGS->f13.s = f20.s;
-    ARGS->f0.s = (float) fmodf((float) ARGS->f12.s, (float) ARGS->f13.s);
+    ARGS->f0.s = (float) fmodf((float) ARGS->f12.s, 360.0f);
   }
-  t9.u64 = (uint64_t) drawit__Gv;
-  at.u64 = (uint64_t) (&wheel);
   {
     memcpy(&wheel, &ARGS->f0, 4);
     drawit__Gv(ARGS, wincount);
@@ -2705,33 +2581,20 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   ARGS->v1.u64 = *((int32_t *) (s0.u32 + 180));
   ARGS->v0.u64 = (uint64_t) (&t);
   memcpy(&ARGS->f15, (char *) (ARGS->v1.u32 + 24), 4);
-  memcpy(&ARGS->f14, &t, 4);
-  t9.u64 = (uint64_t) glFinish;
-  ARGS->f14.s = ARGS->f14.s + ARGS->f15.s;
+  t = t + ARGS->f15.s;
   {
-    memcpy(&t, &ARGS->f14, 4);
     wrap_glFinish(wincount);
   }
   //t9.u64 = (uint64_t) swapBuffers__Q2_10GLXWrapper6windowGv;
-  ARGS->a0.u64 = (uint64_t) (&theWindow);
-  {
-    ARGS->a0.u64 = theWindow;
-    ;
-  }
-  //t9.u64 = (uint64_t) (&sginap);
-  {
-    ARGS->a0.u64 = 0;
-    ;
-  }
-  {
-    return;
-  }
+
+  ARGS->a0.u64 = 0;
+
+  return;
 }
 
 static void setacttargets__Gv(void)
 {
   struct act **s0 = acttable;
-  float f0;
   float f1;
   float f5;
   const float f20 = 1.00000000f;

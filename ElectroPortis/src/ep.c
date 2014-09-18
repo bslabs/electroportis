@@ -1452,89 +1452,75 @@ static void tasteQueue__Gv(EPANOS_ARGS *ARGS)
 
   f20.d = 0.50000000000000000;
   currentFrame = currentFrame + 1.0f;
-  s0 = seqList;
-  if (seqList == NULL)
+
+  for (s0 = seqList; s0 != NULL; s0 = s0->next)
   {
-    return;
+    f4.s = currentFrame;
+    f5.s = s0->flt_c;
+
+    f4.d = f4.s;
+    ARGS->f2.d = f5.s;
+    f4.d = f4.d + f20.d;
+    ARGS->a0.u64 = s0->pad_h;
+    ARGS->a2.u64 = s0->pad_b[0];
+    if (ARGS->f2.d < f4.d)
+    {
+      ;
+    }
+    else
+    {
+      continue;
+    }
+
+    if (ARGS->a2.u64 == 0)
+    {
+      continue;
+    }
+
+    if (ARGS->a0.u64 == 0)
+    {
+      continue;
+    }
+
+    memcpy(&f6, (char *) (ARGS->a0.u32 + 8), 4);
+    f6.s = f6.s + f5.s;
+    f6.d = f6.s;
+    if (f6.d < f4.d)
+    {
+      ;
+    }
+    else
+    {
+      continue;
+    }
+
+    loc_10004F7C:
+    processCommand__GP11animCommand(ARGS);
+
+    ARGS->v1.u64 = s0->pad_b[0];
+    f9.s = s0->flt_c;
+    f8.s = currentFrame;
+    ARGS->a0.u64 = s0->pad_h;
+    if (ARGS->v1.u64 == 0)
+    {
+      continue;
+    }
+
+    if (ARGS->a0.u64 == 0)
+    {
+      continue;
+    }
+
+    memcpy(&f7, (char *) (ARGS->a0.u32 + 8), 4);
+    f8.d = f8.s;
+    f7.s = f7.s + f9.s;
+    f8.d = f8.d + f20.d;
+    f7.d = f7.s;
+    if (f7.d < f8.d)
+    {
+      goto loc_10004F7C;
+    }
   }
-
-  f4.s = currentFrame;
-  goto loc_10004F2C;
-
-  loc_10004F20:
-  s0 = s0->next;
-  f4.s = currentFrame;
-  if (s0 == NULL)
-  {
-    return;
-  }
-
-
-  loc_10004F2C:
-  f5.s = s0->flt_c;
-
-  f4.d = f4.s;
-  ARGS->f2.d = f5.s;
-  f4.d = f4.d + f20.d;
-  ARGS->a0.u64 = s0->pad_h;
-  ARGS->a2.u64 = s0->pad_b[0];
-  if (ARGS->f2.d < f4.d)
-  {
-    ;
-  }
-  else
-  {
-    goto loc_10004F20;
-  }
-
-  if (ARGS->a2.u64 == 0)
-  {
-    goto loc_10004F20;
-  }
-
-  if (ARGS->a0.u64 == 0)
-  {
-    goto loc_10004F20;
-  }
-
-  memcpy(&f6, (char *) (ARGS->a0.u32 + 8), 4);
-  f6.s = f6.s + f5.s;
-  f6.d = f6.s;
-  if (f6.d < f4.d)
-  {
-    ;
-  }
-  else
-  {
-    goto loc_10004F20;
-  }
-
-  loc_10004F7C:
-  processCommand__GP11animCommand(ARGS);
-
-  ARGS->v1.u64 = s0->pad_b[0];
-  f9.s = s0->flt_c;
-  f8.s = currentFrame;
-  ARGS->a0.u64 = s0->pad_h;
-  if (ARGS->v1.u64 == 0)
-  {
-    goto loc_10004F20;
-  }
-
-  if (ARGS->a0.u64 == 0)
-  {
-    goto loc_10004F20;
-  }
-
-  memcpy(&f7, (char *) (ARGS->a0.u32 + 8), 4);
-  f8.d = f8.s;
-  f7.s = f7.s + f9.s;
-  f8.d = f8.d + f20.d;
-  f7.d = f7.s;
-  if (f7.d < f8.d)
-    goto loc_10004F7C;
-
-  goto loc_10004F20;
 }
 
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5, float f12, float f13, float f14)

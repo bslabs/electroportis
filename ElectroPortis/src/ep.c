@@ -1826,7 +1826,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   EPANOS_REG f7;
   EPANOS_REG f8;
   EPANOS_REG f9;
-  EPANOS_REG f10;
   EPANOS_REG f11;
 
   ARGS->a0.u64 = cmd;
@@ -1843,11 +1842,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
     {
       case 0:
       {
-        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
@@ -1976,23 +1971,12 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 101:
       {
-        memcpy(&f4, (char *) (s0.u32 + 12), 4);
+        if ((double)cmd->flt_d < 1.0)
+          cmd->seq_e->flt_e = 1.0;
+        else
+          cmd->seq_e->flt_e = cmd->flt_d;
 
-        memcpy(&f5, &dbl_10009300, 8);
-        f4.d = f4.s;
-        if (f4.d < f5.d)
-        {
-          f4.d = f5.d;
-        }
-
-        t7.u64 = *((int32_t *) (s0.u32 + 16));
-
-        f10.s = f4.d;
-        memcpy((char *) (t7.u32 + 16), &f10, 4);
-        t7.u64 = *((int32_t *) (s0.u32 + 16));
-        t6.u64 = *((int32_t *) (t7.u32 + 28));
-        t6.u64 = *((int32_t *) (t6.u32 + 20));
-        *((uint32_t *) (t7.u32 + 28)) = t6.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
@@ -2061,8 +2045,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 8:
       {
-        t9.u64 = (uint64_t) stopAnimation__Gv;
-
         stopAnimation__Gv();
         ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
         at.u64 = *((int32_t *) (ARGS->v0.u32 + 28));
@@ -2086,9 +2068,8 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 10:
       {
-        t9.u64 = seqList;
-        ARGS->a0.u64 = t9.u64;
-        if (t9.u64 == 0)
+        ARGS->a0.u64 = seqList;
+        if (seqList == 0)
         {
           goto loc_10004DA0;
         }
@@ -2102,9 +2083,8 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 11:
       {
-        t8.u64 = seqList;
-        ARGS->a0.u64 = t8.u64;
-        if (t8.u64 == 0)
+        ARGS->a0.u64 = seqList;
+        if (seqList == 0)
         {
           goto loc_10004D60;
         }
@@ -2169,7 +2149,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
         loc_10004AD8:
         ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
 
-        t9.u64 = (uint64_t) killSeq__GP7animSeq;
         if (ARGS->a1.u64 != ARGS->a0.u64)
         {
           goto loc_100049BC;
@@ -2229,14 +2208,12 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
         ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
         ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
         ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-        if (ARGS->a0.u64 == 0)
+        if (ARGS->a0.u64 != 0)
         {
-          goto loc_10004C24;
+          memcpy(&f7, (char *) (ARGS->a0.u32 + 36), 4);
+          memcpy((char *) (ARGS->a0.u32 + 24), &f7, 4);
         }
 
-        memcpy(&f7, (char *) (ARGS->a0.u32 + 36), 4);
-        memcpy((char *) (ARGS->a0.u32 + 24), &f7, 4);
-        loc_10004C24:
         ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
 
         ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
@@ -2255,7 +2232,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
   def_100049B4:
-  t9.u64 = (uint64_t) printf;
 
   ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
   {
@@ -2294,7 +2270,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
     return;
   }
 
-  t9.u64 = (uint64_t) killSeq__GP7animSeq;
   if (ARGS->a0.u64 == 0)
   {
     ARGS->a0.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
@@ -2310,28 +2285,23 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   loc_10004D48:
   ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
 
-  if (ARGS->a0.u64 == 0)
+  if (ARGS->a0.u64 != 0)
   {
-    goto loc_10004D6C;
+    loc_10004D54:
+    ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
+
+    if (ARGS->a4.u64 != ARGS->a1.u64)
+    {
+      goto loc_10004D48;
+    }
+
+    loc_10004D60:
+    if (ARGS->a0.u64 != 0)
+    {
+      *((uint32_t *) (ARGS->a0.u32 + 28)) = 0;
+    }
   }
 
-  loc_10004D54:
-  ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-
-  if (ARGS->a4.u64 != ARGS->a1.u64)
-  {
-    goto loc_10004D48;
-  }
-
-  loc_10004D60:
-  if (ARGS->a0.u64 == 0)
-  {
-    goto loc_10004D6C;
-  }
-
-
-  *((uint32_t *) (ARGS->a0.u32 + 28)) = 0;
-  loc_10004D6C:
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
 
   if (ARGS->a1.u64 == ARGS->a0.u64)
@@ -2341,10 +2311,9 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
   ARGS->a5.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
   ARGS->a5.u64 = *((int32_t *) (ARGS->a5.u32 + 20));
-  {
-    *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a5.u32;
-    return;
-  }
+  *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a5.u32;
+  return;
+
   loc_10004D88:
   ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
 
@@ -2362,15 +2331,14 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   }
 
   loc_10004DA0:
-  if (ARGS->a0.u64 == 0)
+  if (ARGS->a0.u64 != 0)
   {
-    goto loc_10004DB8;
+    ARGS->a7.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
+    *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->a7.u32;
+    memcpy(&f9, (char *) (ARGS->a4.u32 + 0), 4);
+    memcpy((char *) (ARGS->a0.u32 + 8), &f9, 4);
   }
 
-  ARGS->a7.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
-  *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->a7.u32;
-  memcpy(&f9, (char *) (ARGS->a4.u32 + 0), 4);
-  memcpy((char *) (ARGS->a0.u32 + 8), &f9, 4);
   loc_10004DB8:
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
 

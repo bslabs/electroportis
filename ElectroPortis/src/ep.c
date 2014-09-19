@@ -72,9 +72,9 @@ struct act
 struct animSeq
 {
   // MUST be 40 bytes
-  uint32_t pad_a;   // some kind of 32-bit (could be ptr or int or flt)
+  uint32_t seq;   // maybe a signed int? probably doesn't matter
   unsigned char pad_b[4];
-  float flt_c;
+  float seqFrame;
   float flt_d;
   float flt_e;
   float flt_f;
@@ -87,7 +87,7 @@ struct animSeq
 struct animCommand
 {
   // MUST be 24 bytes
-  uint32_t type;
+  uint32_t type;  // maybe this is a signed int? probably doesn't matter
   uint32_t pad_b; // looks like 32b int
   float cmdFrame;
   float flt_d;
@@ -810,8 +810,8 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
       editSeq = calloc(sizeof(struct animSeq), 1);
 
       editSeq->pad_b[0] = 1;
-      editSeq->pad_a = 0;
-      editSeq->flt_c = 0.0f;
+      editSeq->seq = 0;
+      editSeq->seqFrame = 0.0f;
       editSeq->flt_e = 300.0f;
       editSeq->flt_f = 1.0f;
       editSeq->cmd_i = NULL;
@@ -1333,9 +1333,9 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   ARGS->a4.u64 = (uint64_t) editSeq;
 
-  editSeq->pad_a = cmd->pad_b;
+  editSeq->seq = cmd->pad_b;
   editSeq->pad_b[0] = 1;
-  editSeq->flt_c = 0.0f;
+  editSeq->seqFrame = 0.0f;
   editSeq->flt_e = 300.0f;
   editSeq->flt_f = 1.0f;
   editSeq->cmd_g = NULL;
@@ -1455,7 +1455,7 @@ static void tasteQueue__Gv(void)
   {
     double f4 = (double)currentFrame + 0.5;
     cmd = seq->cmd_h;
-    if ((double)seq->flt_c < f4)
+    if ((double)seq->seqFrame < f4)
     {
       ;
     }
@@ -1475,7 +1475,7 @@ static void tasteQueue__Gv(void)
     }
 
     f6.s = cmd->cmdFrame;
-    f6.s = f6.s + seq->flt_c;
+    f6.s = f6.s + seq->seqFrame;
     f6.d = f6.s;
     if (f6.d < f4)
     {
@@ -1489,7 +1489,7 @@ static void tasteQueue__Gv(void)
     loc_10004F7C:
     processCommand__GP11animCommand(&ARGS, cmd);
 
-    f9.s = seq->flt_c;
+    f9.s = seq->seqFrame;
     f8.s = currentFrame;
     cmd = seq->cmd_h;
     if (seq->pad_b[0] == 0)
@@ -1819,7 +1819,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   EPANOS_REG at;
   EPANOS_REG t8;
   EPANOS_REG t9;
-  EPANOS_REG f1;
   EPANOS_REG f3;
   EPANOS_REG f4;
   EPANOS_REG f5;
@@ -1829,30 +1828,18 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   EPANOS_REG f9;
   EPANOS_REG f10;
   EPANOS_REG f11;
-  ARGS->v0.u64 = (int32_t) (1 << 16);
 
-  ARGS->v0.u64 = 50812;
   ARGS->a0.u64 = cmd;
   s0.u64 = ARGS->a0.u64;
   if (oflag != 0)
   {
-    memcpy(&ARGS->f2, (char *) (ARGS->a0.u32 + 8), 4);
-    ARGS->a2.u64 = *((int32_t *) (ARGS->a0.u32 + 16));
-    memcpy(&f1, (char *) (ARGS->a2.u32 + 8), 4);
-    ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-    ARGS->f2.d = ARGS->f2.s;
-    f1.d = f1.s;
-    ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 0));
-    {
-      printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
-          currentFrame, (int32_t) ARGS->a2.u64, f1.d, (int32_t) ARGS->a4.u64, (double) ARGS->f2.d);
-    }
+    printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
+        currentFrame, cmd->seq_e->seq, cmd->seq_e->seqFrame, cmd->type, cmd->cmdFrame);
   }
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
 
   ARGS->a4.u64 = (uint64_t) (&currentFrame);
   {
-    switch (ARGS->a1.u64)
+    switch (cmd->type)
     {
       case 0:
       {
@@ -2272,7 +2259,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
   ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
   {
-    printf("warning: bad command type (%d) in sequence cmd->seq\n", (int32_t) ARGS->a1.u64);
+    printf("warning: bad command type (%d) in sequence cmd->seq\n", cmd->type);
   }
   ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
   ARGS->a1.u64 = *((int32_t *) (ARGS->a2.u32 + 28));

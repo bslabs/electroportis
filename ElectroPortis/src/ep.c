@@ -134,7 +134,7 @@ static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, wincount_t wincount);
 static void tasteQueue__Gv(void);
 static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5, float f12, float f13, float f14);
-static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS, struct animSeq *seq);
+static void killSeq__GP7animSeq(struct animSeq *seq);
 static struct act *createBlankActAnim__Gv(void);
 static void value__GfN21(EPANOS_ARGS *ARGS);
 static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animCommand *cmd);
@@ -1586,89 +1586,68 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, floa
   }
 }
 
-static void killSeq__GP7animSeq(EPANOS_ARGS *ARGS, struct animSeq *seq)
+static void killSeq__GP7animSeq(struct animSeq *seq)
 {
-  const EPANOS_REG s0 = { .u64 = seq };
-  EPANOS_REG s1;
-
   if (seq == NULL)
   {
     return;
   }
 
-  s1.u64 = (uint64_t) seqList;
   seq->pad_b[0] = 0;
-  ARGS->a3.u64 = seqList;
   if (seq == seqList)
   {
-    ARGS->a0.u64 = *((int32_t *) (ARGS->a3.u32 + 36));
-    seqList = ARGS->a0.u32;
-    ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
-    if (ARGS->a0.u64 != 0)
+    seqList = seqList->next;
+    struct animCommand *cmd = seqList->cmd_g;
+    while (cmd != NULL)
     {
-      loc_1000487C:
+      struct animCommand *next = cmd->next;
+      free(cmd);
 
-      s1.u64 = *((int32_t *) (ARGS->a0.u32 + 20));
-      free((void *) ARGS->a0.u64);
-
-      ARGS->a0.u64 = s1.u64;
-      if (s1.u64 != 0)
-      {
-        goto loc_1000487C;
-      }
+      cmd = next;
     }
 
-    s1.u64 = (uint64_t) seqList;
-
-    ARGS->a0.u64 = s0.u64;
-    free((void *) ARGS->a0.u64);
-
-    ARGS->a3.u64 = seqList;
+    free(seq);
   }
 
-  ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 36));
+  struct animSeq *a3 = seqList;
 
-  if (ARGS->a2.u64 == 0)
   {
-    return;
-  }
+    struct animSeq *a2 = seqList->next;
 
-  loc_100048B0:
-  if (ARGS->a2.u64 != s0.u64)
-  {
-    ARGS->a3.u64 = ARGS->a2.u64;
-    ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 36));
-    if (ARGS->a2.u64 != 0)
-    {
-      goto loc_100048B0;
-    }
-    else
+    if (a2 == NULL)
     {
       return;
     }
-  }
 
-  ARGS->a2.u64 = *((int32_t *) (s0.u32 + 36));
-
-  *((uint32_t *) (ARGS->a3.u32 + 36)) = ARGS->a2.u32;
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 24));
-  ARGS->a0.u64 = ARGS->a1.u64;
-  if (ARGS->a1.u64 != 0)
-  {
-    loc_100048E4:
-
-    s1.u64 = *((int32_t *) (ARGS->a0.u32 + 20));
-    free((void *) ARGS->a0.u64);
-
-    ARGS->a0.u64 = s1.u64;
-    if (s1.u64 != 0)
+    while (a2 != seq)
     {
-      goto loc_100048E4;
+      a3 = a2;
+      a2 = a2->next;
+      if (a2 != NULL)
+      {
+        continue;
+      }
+      else
+      {
+        return;
+      }
     }
   }
 
-  ARGS->a0.u64 = s0.u64;
-  free((void *) ARGS->a0.u64);
+  a3->next = seq->next;
+
+  {
+    struct animCommand *cmd = seq->cmd_g;
+    while (cmd != NULL)
+    {
+      struct animCommand *next = cmd->next;
+      free(cmd);
+
+      cmd = next;
+    }
+  }
+
+  free(seq);
 
   return;
 }
@@ -2192,7 +2171,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
     }
   }
   loc_100049BC:
-  killSeq__GP7animSeq(ARGS, ARGS->a0.u64);
+  killSeq__GP7animSeq(ARGS->a0.u64);
 
   ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
   def_100049B4:
@@ -2243,7 +2222,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   }
   else
   {
-    killSeq__GP7animSeq(ARGS, ARGS->a0.u64);
+    killSeq__GP7animSeq(ARGS->a0.u64);
   }
   return;
 

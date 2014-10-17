@@ -132,7 +132,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, wincount_t wincount);
 static void tasteQueue__Gv(void);
-static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5, float f12, float f13, float f14);
+static void hls_to_rgb__GfN21PfN24(float *a3, float *a4, float *a5, float f12, float f13, float f14);
 static void killSeq__GP7animSeq(struct animSeq *seq);
 static struct act *createBlankActAnim__Gv(void);
 static float value__GfN21(float f12, float f13, float f14);
@@ -336,7 +336,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   var_F0 = twixt__GiPff(s0.u64, alphaout, t);
 
   {
-    hls_to_rgb__GfN21PfN24(ARGS, colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26.s, f24.s, f22.s);
+    hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26.s, f24.s, f22.s);
   }
   f5.s = f26.s + 0.5f;
   ARGS->f2.d = f5.s;
@@ -351,7 +351,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
 
   {
-    hls_to_rgb__GfN21PfN24(ARGS, outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]),
+    hls_to_rgb__GfN21PfN24(outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]),
         ARGS->f12.s, f22.s - f24.s, f22.s);
   }
 
@@ -1513,20 +1513,11 @@ static void tasteQueue__Gv(void)
   }
 }
 
-static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, float *a5, float f12, float f13, float f14)
+static void hls_to_rgb__GfN21PfN24(float *a3, float *a4, float *a5, float f12, float f13, float f14)
 {
-  float f4;
-  float f5;
   float f20;
-  float var_50;
-  double var_48;
-  float var_40;
 
-  f4 = f13;
-  f5 = f12;
-
-  ARGS->f0.d = f13;
-  if (ARGS->f0.d <= 0.5)
+  if ((double)f13 <= 0.5)
   {
     f20 = f14 + 1.0f;
     f20 = f13 * f20;
@@ -1541,40 +1532,26 @@ static void hls_to_rgb__GfN21PfN24(EPANOS_ARGS *ARGS, float *a3, float *a4, floa
 
   if (f14 == 0.0f)
   {
-    *a5 = f4;
-    *a4 = f4;
-    *a3 = f4;
+    *a5 = f13;
+    *a4 = f13;
+    *a3 = f13;
     return;
   }
 
-  ARGS->f14.d = f5;
-  ARGS->f14.d = ARGS->f14.d * 360.00000000000000;
-  ARGS->f12.s = 2.0f;
-  ARGS->f14.s = ARGS->f14.d;
-  var_50 = ARGS->f14.s;
-  ARGS->f14.d = ARGS->f14.s;
-  ARGS->f12.s = f4 * ARGS->f12.s;
-  var_48 = ARGS->f14.d;
-  ARGS->f14.d = ARGS->f14.d + 120.00000000000000;
-  ARGS->f12.s = ARGS->f12.s - f20;
-  ARGS->f13.s = f20;
-  var_40 = ARGS->f12.s;
-  {
-    ARGS->f14.s = ARGS->f14.d;
-    *a3 = value__GfN21(ARGS->f12.s, ARGS->f13.s, ARGS->f14.s);
-  }
-  ARGS->f12.s = var_40;
-  ARGS->f13.s = f20;
-  {
-    ARGS->f14.s = var_50;
-    *a4 = value__GfN21(ARGS->f12.s, ARGS->f13.s, ARGS->f14.s);
-  }
-  ARGS->f14.d = var_48;
-  ARGS->f14.d = ARGS->f14.d + -120.00000000000000;
-  ARGS->f12.s = var_40;
-  ARGS->f13.s = f20;
-  ARGS->f14.s = ARGS->f14.d;
-  *a5 = value__GfN21(ARGS->f12.s, ARGS->f13.s, ARGS->f14.s);
+  float val_arg_1 = (f13 * 2.0f) - f20;
+
+  double val_arg_3 = f12 * 360.00000000000000;
+
+  // there used to be a conversion to single-precision for val_arg_3 (to copy to var_50, used as
+  // arg 3 to the *a4 call below) and then it would be converted back to double-precision.
+  // necessarily there would be a loss of precision for subsequent calculations
+  // (adding -120 for the *a5 call), but I haven't seen any visual sign of it
+
+  *a3 = value__GfN21(val_arg_1, f20, val_arg_3 + 120.00000000000000);
+
+  *a4 = value__GfN21(val_arg_1, f20, val_arg_3);
+
+  *a5 = value__GfN21(val_arg_1, f20, val_arg_3 + -120.00000000000000);
 
   return;
 }

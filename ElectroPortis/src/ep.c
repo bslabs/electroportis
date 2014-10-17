@@ -29,9 +29,6 @@
 #define NELEMS(x)  (sizeof(x) / sizeof(x[0]))
 
 static const float flt_100092A8 = 1.00000000f;
-static const double dbl_10009300 = 1.0000000000000000;
-static const float flt_100092BC = -0.500000000f;
-static const float flt_100092B4 = -1.00000000f;
 
 /* swapBuffers__Q2_10GLXWrapper6windowGv: no regmap info, emitting empty stmt at .text:100061FC */
 /* sginap: no regmap info, emitting empty stmt at .text:10006208 */
@@ -214,7 +211,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   {
     wrap_glRotatef(wheel, f22.s, f20.s, f20.s, wincount);
   }
-  memcpy(&f24, &flt_100092BC, 4);
+  f24.s = -0.500000000f;
   ARGS->a3.u64 = (uint64_t) (&nlimit);
   ARGS->a1.u64 = (uint64_t) (&n);
   ARGS->a4.u64 = n;
@@ -346,7 +343,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   if ((double)1.0 < ARGS->f2.d)
   {
-    memcpy(&ARGS->f12, &flt_100092B4, 4);
+    ARGS->f12.s = -1.00000000f;
     ARGS->f12.s = f5.s + ARGS->f12.s;
   }
 
@@ -1881,7 +1878,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
         f6.u64 = 0;
         f4.d = f4.s;
-        memcpy(&f5, &dbl_10009300, 8);
+        f5.d = 1.0000000000000000;
 
         if (f4.d < f6.d)
         {
@@ -1909,7 +1906,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 103:
       {
-        memcpy(&f8, &flt_100092A8, 4);
+        f8.s = flt_100092A8;
         memcpy(&f4, (char *) (s0.u32 + 12), 4);
         ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
         f9.d = 2.0000000000000000;

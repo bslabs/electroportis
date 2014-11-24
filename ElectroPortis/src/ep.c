@@ -1954,32 +1954,19 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 15:
       {
-        ARGS->a5.u64 = (uint64_t) seqList;
+        struct animSeq *seq = seqList;
 
-        ARGS->a5.u64 = seqList;
-        ARGS->a0.u64 = ARGS->a5.u64;
-        if (ARGS->a5.u64 != 0)
+        for (; seq != NULL; seq = seq->next)
         {
-          loc_10004AD8:
-          ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
-
-          if (ARGS->a1.u64 != ARGS->a0.u64)
+          if (cmd->seq_e != seq)
           {
-            goto loc_100049BC;
+            killSeq__GP7animSeq(seq);
+            break;
           }
 
-          ARGS->a6.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
-          ARGS->a6.u64 = *((int32_t *) (ARGS->a6.u32 + 20));
-          *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a6.u32;
-          ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
-          if (ARGS->a0.u64 != 0)
-          {
-            goto loc_10004AD8;
-          }
-
-          ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
+          // I think this is redundant--the default/"bad command type" block already does this
+          cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         }
-
         goto def_100049B4;
       }
       break;
@@ -2011,21 +1998,10 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
         goto def_100049B4;
     }
   }
-  loc_100049BC:
-  killSeq__GP7animSeq(ARGS->a0.u64);
-
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
   def_100049B4:
 
-  ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
-  {
-    printf("warning: bad command type (%d) in sequence cmd->seq\n", cmd->type);
-  }
-  ARGS->a2.u64 = *((int32_t *) (s0.u32 + 16));
-  ARGS->a1.u64 = *((int32_t *) (ARGS->a2.u32 + 28));
-  ARGS->a1.u64 = *((int32_t *) (ARGS->a1.u32 + 20));
-  *((uint32_t *) (ARGS->a2.u32 + 28)) = ARGS->a1.u32;
-
+  printf("warning: bad command type (%d) in sequence cmd->seq\n", cmd->type);
+  cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
   return;
 
 

@@ -1760,63 +1760,31 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 3:
       {
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-        ARGS->a0.u64 = (uint64_t) acttable;
-        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
         struct act *act = acttable[cmd->pad_b];
 
         if (act != NULL)
         {
-          f5.s = cmd->flt_d;
-          f4.s = act->flt_e;
-          f6.s = act->flt_d;
           if (act->flt_e < cmd->flt_d)
           {
-            if (cmd->flt_d < act->flt_d)
-            {
-            }
-            else
-            {
+            if (cmd->flt_d >= act->flt_d)
               act->flt_d = cmd->flt_d;
-            }
           }
           else
           {
-            if (act->flt_e < act->flt_d)
-            {
-            }
-            else
-            {
+            if (act->flt_e >= act->flt_d)
               act->flt_d = act->flt_e;
-            }
 
-
-            f5.s = cmd->flt_d;
-            if (f4.s < cmd->flt_d)
+            if (act->flt_e >= cmd->flt_d)
             {
-              f5.s = f4.s;
+              act->flt_e = cmd->flt_d;
             }
-
-            act->flt_e = f5.s;
           }
 
-          ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
-
-          memcpy(&ARGS->f13, (char *) (ARGS->v0.u32 + 16), 4);
-          memcpy((char *) (ARGS->a0.u32 + 28), &ARGS->f13, 4);
-          at.u64 = *((int32_t *) (s0.u32 + 16));
-          memcpy(&ARGS->f12, (char *) (at.u32 + 20), 4);
-          *((uint8_t *) (ARGS->a0.u32 + 0)) = 1;
-          memcpy((char *) (ARGS->a0.u32 + 32), &ARGS->f12, 4);
+          act->flt_h = cmd->seq_e->flt_e;
+          act->pad_a[0] = 1;
+          act->flt_i = cmd->seq_e->flt_f;
         }
-        ARGS->a0.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ARGS->v1.u64 = *((int32_t *) (ARGS->a0.u32 + 28));
-        ARGS->v1.u64 = *((int32_t *) (ARGS->v1.u32 + 20));
-        *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->v1.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;

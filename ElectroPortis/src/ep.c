@@ -62,7 +62,7 @@ struct act
   float flt_g;
   float flt_h;
   float flt_i;
-  unsigned char pad_j[4];
+  float flt_j;
 };
 
 struct animSeq
@@ -1956,15 +1956,8 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 12:
       {
-        t7.u64 = *((int32_t *) (s0.u32 + 16));
-
-        t6.u64 = *((int32_t *) (t7.u32 + 24));
-        *((uint32_t *) (t7.u32 + 28)) = t6.u32;
-        t5.u64 = *((int32_t *) (s0.u32 + 16));
-        memcpy(&f6, (char *) (t5.u32 + 12), 4);
-        memcpy(&f5, (char *) (t5.u32 + 8), 4);
-        f5.s = f5.s + f6.s;
-        memcpy((char *) (t5.u32 + 8), &f5, 4);
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_g;
+        cmd->seq_e->seqFrame += cmd->seq_e->flt_d;
         return;
       }
       break;
@@ -2030,23 +2023,11 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 5:
       {
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+        struct act *act = acttable[cmd->pad_b];
+        if (act != NULL)
+          act->flt_g = act->flt_j;
 
-        ARGS->a0.u64 = (uint64_t) acttable;
-        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-        if (ARGS->a0.u64 != 0)
-        {
-          memcpy(&f7, (char *) (ARGS->a0.u32 + 36), 4);
-          memcpy((char *) (ARGS->a0.u32 + 24), &f7, 4);
-        }
-
-        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;

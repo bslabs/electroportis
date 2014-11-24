@@ -1791,23 +1791,11 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 4:
       {
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+        struct act *act = acttable[cmd->pad_b];
+        if (act != NULL)
+          act->flt_g = cmd->flt_d;
 
-        ARGS->a0.u64 = (uint64_t) acttable;
-        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-        if (ARGS->a0.u64 != 0)
-        {
-          memcpy(&f8, (char *) (s0.u32 + 12), 4);
-          memcpy((char *) (ARGS->a0.u32 + 24), &f8, 4);
-        }
-
-        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
@@ -1826,62 +1814,40 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 102:
       {
-        memcpy(&f4, (char *) (s0.u32 + 12), 4);
+        double f4 = cmd->flt_d;
 
-        f6.u64 = 0;
-        f4.d = f4.s;
-        f5.d = 1.0000000000000000;
-
-        if (f4.d < f6.d)
+        if (f4 < 0)
         {
-          f4.d = f6.d;
+          f4 = 0;
         }
         else
         {
-          if (f5.d < f4.d)
+          if (1.0 < f4)
           {
-            f4.d = f5.d;
+            f4 = 1.0;
           }
         }
 
-        t9.u64 = *((int32_t *) (s0.u32 + 16));
+        cmd->seq_e->flt_f = f4;
 
-        f11.s = f4.d;
-        memcpy((char *) (t9.u32 + 20), &f11, 4);
-        t9.u64 = *((int32_t *) (s0.u32 + 16));
-        t8.u64 = *((int32_t *) (t9.u32 + 28));
-        t8.u64 = *((int32_t *) (t8.u32 + 20));
-        *((uint32_t *) (t9.u32 + 28)) = t8.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
 
       case 103:
       {
-        f8.s = flt_100092A8;
-        memcpy(&f4, (char *) (s0.u32 + 12), 4);
-        ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-        f9.d = 2.0000000000000000;
-        f7.d = exprand__Gf(flt_100092A8);
-        memcpy(&f5, (char *) (ARGS->a4.u32 + 20), 4);
-        f7.d = f7.d * f9.d;
-        f6.d = f4.s;
-        f8.s = f8.s - f5.s;
-        f6.d = f6.d * f7.d;
-        memcpy(&f3, (char *) (ARGS->a4.u32 + 8), 4);
-        f5.d = f5.s;
-        f4.s = f4.s * f8.s;
-        f5.d = f5.d * f6.d;
+        EPANOS_REG f4;
+
+        f7.d = (double)exprand__Gf(1.0f) * 2.0;
+        f6.d = (double)cmd->flt_d * f7.d;
+        f4.s = cmd->flt_d * (1.0f - cmd->seq_e->flt_f);
         f4.d = f4.s;
-        f3.d = f3.s;
-        f4.d = f4.d + f5.d;
-        f3.d = f3.d + f4.d;
-        f3.s = f3.d;
-        memcpy((char *) (ARGS->a4.u32 + 8), &f3, 4);
-        ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-        ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 28));
-        ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
-        *((uint32_t *) (ARGS->a4.u32 + 28)) = ARGS->a3.u32;
+        f4.d += (double)cmd->seq_e->flt_f * f6.d;
+
+        cmd->seq_e->seqFrame = (double)cmd->seq_e->seqFrame + f4.d;
+
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
@@ -2118,18 +2084,13 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   }
 
   loc_10004DB8:
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
-
-  if (ARGS->a1.u64 == ARGS->a0.u64)
+  if (cmd->seq_e == ARGS->a0.u64)
   {
     return;
   }
 
-  t4.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
-  t4.u64 = *((int32_t *) (t4.u32 + 20));
-  *((uint32_t *) (ARGS->a1.u32 + 28)) = t4.u32;
+  cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
   return;
-
 }
 
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)

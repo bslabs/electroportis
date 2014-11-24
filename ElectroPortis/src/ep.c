@@ -1877,14 +1877,55 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 11:
       {
-        ARGS->a0.u64 = seqList;
-        if (seqList == 0)
+        struct animSeq *seq = seqList;
+
+#if 0
+        // Turned this very confusing block into the code below, hopefully it works
+        if (seq != NULL)
         {
-          goto loc_10004D60;
+          if (seq->seq != cmd->pad_b)
+          {
+            seq = seq->next;
+            loc_10004D48:
+
+            if (seq != NULL)
+            {
+              if (seq->seq == cmd->pad_b)
+              {
+                seq->cmd_h = NULL;
+              }
+              else
+              {
+                seq = seq->next;
+                goto loc_10004D48;
+              }
+            }
+            goto loc_10004D60;
+          }
         }
 
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-        goto loc_10004D54;
+        if (seq != NULL)
+        {
+          seq->cmd_h = NULL;
+        }
+#endif
+
+        for (; seq != NULL; seq = seq->next)
+        {
+          if (seq->seq == cmd->pad_b)
+          {
+            seq->cmd_h = NULL;
+          }
+        }
+
+        loc_10004D60:
+        if (cmd->seq_e == seq)
+        {
+          return;
+        }
+
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
+        return;
       }
       break;
 
@@ -2024,38 +2065,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   {
     killSeq__GP7animSeq(ARGS->a0.u64);
   }
-  return;
-
-  loc_10004D48:
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
-
-  if (ARGS->a0.u64 != 0)
-  {
-    loc_10004D54:
-    ARGS->a4.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-
-    if (ARGS->a4.u64 != ARGS->a1.u64)
-    {
-      goto loc_10004D48;
-    }
-
-    loc_10004D60:
-    if (ARGS->a0.u64 != 0)
-    {
-      *((uint32_t *) (ARGS->a0.u32 + 28)) = 0;
-    }
-  }
-
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
-
-  if (ARGS->a1.u64 == ARGS->a0.u64)
-  {
-    return;
-  }
-
-  ARGS->a5.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
-  ARGS->a5.u64 = *((int32_t *) (ARGS->a5.u32 + 20));
-  *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a5.u32;
   return;
 
   loc_10004D88:

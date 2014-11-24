@@ -1706,7 +1706,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   EPANOS_REG t5;
   EPANOS_REG t6;
   EPANOS_REG t7;
-  EPANOS_REG s0;
+  const EPANOS_REG s0 = {.u64 = cmd};
   EPANOS_REG at;
   EPANOS_REG t8;
   EPANOS_REG t9;
@@ -1720,7 +1720,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   EPANOS_REG f11;
 
   ARGS->a0.u64 = cmd;
-  s0.u64 = ARGS->a0.u64;
   if (oflag != 0)
   {
     printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
@@ -1733,6 +1732,9 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
     {
       case 0:
       case 1:   // fallthrough intended: these handlers had the same code
+      case 6:
+      case 9:
+      case 13:
       {
         cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
@@ -1764,38 +1766,41 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
         ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
         ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
         ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-        if (ARGS->a0.u64 != 0)
-        {
-          memcpy(&f5, (char *) (s0.u32 + 12), 4);
-          memcpy(&f4, (char *) (ARGS->a0.u32 + 16), 4);
-          memcpy(&f6, (char *) (ARGS->a0.u32 + 12), 4);
-          if (f4.s < f5.s)
-          {
-            if (f5.s < f6.s)
-            {
-              f5.s = f6.s;
-            }
+        struct act *act = acttable[cmd->pad_b];
 
-            memcpy((char *) (ARGS->a0.u32 + 12), &f5, 4);
+        if (act != NULL)
+        {
+          f5.s = cmd->flt_d;
+          f4.s = act->flt_e;
+          f6.s = act->flt_d;
+          if (act->flt_e < cmd->flt_d)
+          {
+            if (cmd->flt_d < act->flt_d)
+            {
+            }
+            else
+            {
+              act->flt_d = cmd->flt_d;
+            }
           }
           else
           {
-            f5.s = f4.s;
-            if (f4.s < f6.s)
+            if (act->flt_e < act->flt_d)
             {
-              f5.s = f6.s;
+            }
+            else
+            {
+              act->flt_d = act->flt_e;
             }
 
-            memcpy((char *) (ARGS->a0.u32 + 12), &f5, 4);
 
-            memcpy(&f6, (char *) (s0.u32 + 12), 4);
-            f5.s = f6.s;
-            if (f4.s < f6.s)
+            f5.s = cmd->flt_d;
+            if (f4.s < cmd->flt_d)
             {
               f5.s = f4.s;
             }
 
-            memcpy((char *) (ARGS->a0.u32 + 16), &f5, 4);
+            act->flt_e = f5.s;
           }
 
           ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
@@ -1916,22 +1921,7 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
       case 8:
       {
         stopAnimation__Gv();
-        ARGS->v0.u64 = *((int32_t *) (s0.u32 + 16));
-        at.u64 = *((int32_t *) (ARGS->v0.u32 + 28));
-        at.u64 = *((int32_t *) (at.u32 + 20));
-        *((uint32_t *) (ARGS->v0.u32 + 28)) = at.u32;
-        return;
-      }
-      break;
-
-      case 9:
-      {
-        EPANOS_REG ra;
-        at.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ra.u64 = *((int32_t *) (at.u32 + 28));
-        ra.u64 = *((int32_t *) (ra.u32 + 20));
-        *((uint32_t *) (at.u32 + 28)) = ra.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
@@ -1979,17 +1969,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
       }
       break;
 
-      case 13:
-      {
-        t5.u64 = *((int32_t *) (s0.u32 + 16));
-
-        t4.u64 = *((int32_t *) (t5.u32 + 28));
-        t4.u64 = *((int32_t *) (t4.u32 + 20));
-        *((uint32_t *) (t5.u32 + 28)) = t4.u32;
-        return;
-      }
-      break;
-
       case 14:
       {
         ARGS->a7.u64 = seqList;
@@ -2011,61 +1990,40 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
         ARGS->a5.u64 = seqList;
         ARGS->a0.u64 = ARGS->a5.u64;
-        if (ARGS->a5.u64 == 0)
+        if (ARGS->a5.u64 != 0)
         {
-          goto def_100049B4;
+          loc_10004AD8:
+          ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
+
+          if (ARGS->a1.u64 != ARGS->a0.u64)
+          {
+            goto loc_100049BC;
+          }
+
+          ARGS->a6.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
+          ARGS->a6.u64 = *((int32_t *) (ARGS->a6.u32 + 20));
+          *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a6.u32;
+          ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
+          if (ARGS->a0.u64 != 0)
+          {
+            goto loc_10004AD8;
+          }
+
+          ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
         }
 
-        loc_10004AD8:
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 16));
-
-        if (ARGS->a1.u64 != ARGS->a0.u64)
-        {
-          goto loc_100049BC;
-        }
-
-        ARGS->a6.u64 = *((int32_t *) (ARGS->a1.u32 + 28));
-        ARGS->a6.u64 = *((int32_t *) (ARGS->a6.u32 + 20));
-        *((uint32_t *) (ARGS->a1.u32 + 28)) = ARGS->a6.u32;
-        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
-        if (ARGS->a0.u64 != 0)
-        {
-          goto loc_10004AD8;
-        }
-
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
         goto def_100049B4;
       }
       break;
 
       case 7:
       {
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
-
-        ARGS->a0.u64 = (uint64_t) acttable;
-        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-        if (ARGS->a0.u64 != 0)
+        if (acttable[cmd->pad_b] != NULL)
         {
-          *((uint8_t *) (ARGS->a0.u32 + 0)) = 0;
+          acttable[cmd->pad_b]->pad_a[0] = 0;
         }
-        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
 
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-        return;
-      }
-      break;
-
-      case 6:
-      {
-        ARGS->a4.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ARGS->a3.u64 = *((int32_t *) (ARGS->a4.u32 + 28));
-        ARGS->a3.u64 = *((int32_t *) (ARGS->a3.u32 + 20));
-        *((uint32_t *) (ARGS->a4.u32 + 28)) = ARGS->a3.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;

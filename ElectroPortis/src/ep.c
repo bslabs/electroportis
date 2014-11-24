@@ -1732,47 +1732,26 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
     switch (cmd->type)
     {
       case 0:
+      case 1:   // fallthrough intended: these handlers had the same code
       {
         cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;
 
-      case 1:
-      {
-        ARGS->a3.u64 = *((int32_t *) (s0.u32 + 16));
-
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a3.u32 + 28));
-        ARGS->a2.u64 = *((int32_t *) (ARGS->a2.u32 + 20));
-        *((uint32_t *) (ARGS->a3.u32 + 28)) = ARGS->a2.u32;
-        return;
-      }
-      break;
-
       case 2:
       {
-        ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
+        struct act *act = acttable[cmd->pad_b];
 
-        ARGS->a0.u64 = (uint64_t) acttable;
-        ARGS->a1.u64 = (int32_t) (ARGS->a1.u32 << 2);
-        ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + ARGS->a1.u32);
-        ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-        if (ARGS->a0.u64 != 0)
+        if (act != NULL)
         {
-          memcpy(&f5, (char *) (s0.u32 + 12), 4);
-          memcpy(&f4, (char *) (ARGS->a0.u32 + 16), 4);
-          if (f4.s < f5.s)
+          if (act->flt_e >= cmd->flt_d)
           {
-            f5.s = f4.s;
+            act->flt_e = cmd->flt_d;
           }
-          memcpy((char *) (ARGS->a0.u32 + 16), &f5, 4);
         }
 
-        t6.u64 = *((int32_t *) (s0.u32 + 16));
-
-        t5.u64 = *((int32_t *) (t6.u32 + 28));
-        t5.u64 = *((int32_t *) (t5.u32 + 20));
-        *((uint32_t *) (t6.u32 + 28)) = t5.u32;
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
         return;
       }
       break;

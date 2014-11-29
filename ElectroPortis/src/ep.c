@@ -1726,7 +1726,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
         currentFrame, cmd->seq_e->seq, cmd->seq_e->seqFrame, cmd->type, cmd->cmdFrame);
   }
 
-  ARGS->a4.u64 = (uint64_t) (&currentFrame);
   {
     switch (cmd->type)
     {
@@ -1862,16 +1861,45 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
 
       case 10:
       {
-        ARGS->a0.u64 = seqList;
-        if (seqList == 0)
+        struct animSeq *seq = seqList;
+        if (seq == NULL)
         {
           goto loc_10004DA0;
         }
         else
         {
-          ARGS->a1.u64 = *((int32_t *) (s0.u32 + 4));
           goto loc_10004D94;
         }
+
+        loc_10004D88:
+        seq = seq->next;
+
+        if (seq == NULL)
+        {
+          goto loc_10004DB8;
+        }
+
+        loc_10004D94:
+        if (seq->seq != cmd->pad_b)
+        {
+          goto loc_10004D88;
+        }
+
+        loc_10004DA0:
+        if (seq != NULL)
+        {
+          seq->cmd_h = seq->cmd_g;
+          seq->seqFrame = currentFrame;
+        }
+
+        loc_10004DB8:
+        if (cmd->seq_e == seq)
+        {
+          return;
+        }
+
+        cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
+        return;
       }
       break;
 
@@ -2021,39 +2049,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   return;
 
 
-  loc_10004D88:
-  ARGS->a0.u64 = *((int32_t *) (ARGS->a0.u32 + 36));
-
-  if (ARGS->a0.u64 == 0)
-  {
-    goto loc_10004DB8;
-  }
-
-  loc_10004D94:
-  ARGS->a6.u64 = *((int32_t *) (ARGS->a0.u32 + 0));
-
-  if (ARGS->a6.u64 != ARGS->a1.u64)
-  {
-    goto loc_10004D88;
-  }
-
-  loc_10004DA0:
-  if (ARGS->a0.u64 != 0)
-  {
-    ARGS->a7.u64 = *((int32_t *) (ARGS->a0.u32 + 24));
-    *((uint32_t *) (ARGS->a0.u32 + 28)) = ARGS->a7.u32;
-    memcpy(&f9, (char *) (ARGS->a4.u32 + 0), 4);
-    memcpy((char *) (ARGS->a0.u32 + 8), &f9, 4);
-  }
-
-  loc_10004DB8:
-  if (cmd->seq_e == ARGS->a0.u64)
-  {
-    return;
-  }
-
-  cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
-  return;
 }
 
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)

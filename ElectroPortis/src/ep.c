@@ -1862,37 +1862,25 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
       case 10:
       {
         struct animSeq *seq = seqList;
-        if (seq == NULL)
+        while (seq != NULL)
         {
-          goto loc_10004DA0;
-        }
-        else
-        {
-          goto loc_10004D94;
-        }
-
-        loc_10004D88:
-        seq = seq->next;
-
-        if (seq == NULL)
-        {
-          goto loc_10004DB8;
+          if (seq->seq != cmd->pad_b)
+          {
+            seq = seq->next;
+            continue;
+          }
+          else
+          {
+            break;
+          }
         }
 
-        loc_10004D94:
-        if (seq->seq != cmd->pad_b)
-        {
-          goto loc_10004D88;
-        }
-
-        loc_10004DA0:
         if (seq != NULL)
         {
           seq->cmd_h = seq->cmd_g;
           seq->seqFrame = currentFrame;
         }
 
-        loc_10004DB8:
         if (cmd->seq_e == seq)
         {
           return;

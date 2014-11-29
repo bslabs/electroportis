@@ -133,7 +133,7 @@ static void hls_to_rgb__GfN21PfN24(float *a3, float *a4, float *a5, float f12, f
 static void killSeq__GP7animSeq(struct animSeq *seq);
 static struct act *createBlankActAnim__Gv(void);
 static float value__GfN21(float f12, float f13, float f14);
-static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animCommand *cmd);
+static void processCommand__GP11animCommand(struct animCommand *cmd);
 static void setacttargets__Gv(void);
 static float twixt__GiPff(int a0, const float *a1, float f14);
 static float exprand__Gf(float arg);
@@ -1439,7 +1439,6 @@ static void tasteQueue__Gv(void)
 {
   struct animSeq *seq;
   struct animCommand *cmd;
-  EPANOS_ARGS ARGS;
   EPANOS_REG f6;
   EPANOS_REG f7;
   EPANOS_REG f8;
@@ -1483,7 +1482,7 @@ static void tasteQueue__Gv(void)
     }
 
     loc_10004F7C:
-    processCommand__GP11animCommand(&ARGS, cmd);
+    processCommand__GP11animCommand(cmd);
 
     f9.s = seq->seqFrame;
     f8.s = currentFrame;
@@ -1700,26 +1699,8 @@ static float value__GfN21(float f12, float f13, float f14)
   return f0;
 }
 
-static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animCommand *cmd)
+static void processCommand__GP11animCommand(struct animCommand *cmd)
 {
-  EPANOS_REG t4;
-  EPANOS_REG t5;
-  EPANOS_REG t6;
-  EPANOS_REG t7;
-  const EPANOS_REG s0 = {.u64 = cmd};
-  EPANOS_REG at;
-  EPANOS_REG t8;
-  EPANOS_REG t9;
-  EPANOS_REG f3;
-  EPANOS_REG f4;
-  EPANOS_REG f5;
-  EPANOS_REG f6;
-  EPANOS_REG f7;
-  EPANOS_REG f8;
-  EPANOS_REG f9;
-  EPANOS_REG f11;
-
-  ARGS->a0.u64 = cmd;
   if (oflag != 0)
   {
     printf("proc: currentFrame %.2f, seq %d,\tseqFrame %f, cmdtype %d, cmdFrame %f\n",
@@ -1837,6 +1818,8 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
       case 103:
       {
         EPANOS_REG f4;
+        EPANOS_REG f6;
+        EPANOS_REG f7;
 
         f7.d = (double)exprand__Gf(1.0f) * 2.0;
         f6.d = (double)cmd->flt_d * f7.d;
@@ -2035,8 +2018,6 @@ static void processCommand__GP11animCommand(EPANOS_ARGS *ARGS, struct animComman
   printf("warning: bad command type (%d) in sequence cmd->seq\n", cmd->type);
   cmd->seq_e->cmd_h = cmd->seq_e->cmd_h->next;
   return;
-
-
 }
 
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)

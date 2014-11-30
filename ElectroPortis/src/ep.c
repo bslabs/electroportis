@@ -1118,9 +1118,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   loc_100041C4:
   if (oflag != 0)
-  {
     printf("# done reading animation\n");
-  }
 
   if (seqList == NULL)
   {
@@ -1131,53 +1129,38 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     seq = seqList;
   }
 
-  goto loc_1000424C;
-
-  loc_100041FC:
-  s0.u64 = *((int32_t *) (s0.u32 + 20));
-
-  if (s0.u64 == 0)
-  {
-    goto loc_10004240;
-  }
-
-  loc_10004208:
-  if (oflag == 0)
-  {
-    goto loc_100041FC;
-  }
-
-  memcpy(&ARGS->f18, (char *) (s0.u32 + 12), 4);
-  ARGS->f18.d = ARGS->f18.s;
-  ARGS->a1.u64 = *((int32_t *) (s0.u32 + 0));
-  ARGS->a2.u64 = *((int32_t *) (s0.u32 + 4));
-  ARGS->a3.u64 = ARGS->f18.u64;
-
-  printf("  cmd %d,\t%d\t%f\n", (int32_t) ARGS->a1.u64, (int32_t) ARGS->a2.u64, (double) ARGS->a3.d);
-  s0.u64 = *((int32_t *) (s0.u32 + 20));
-  if (s0.u64 != 0)
-  {
-    goto loc_10004208;
-  }
-
-  loc_10004240:
-  seq = seq->next;
-
-  if (seq == NULL)
-  {
-    return;
-  }
-
-  loc_1000424C:
   if (oflag != 0)
     printf("seq %d at %.2f\n", seq->seq, seq->seqFrame);
 
-  s0.u64 = seq->cmd_g;
+  struct animCommand *s0cmd = seq->cmd_g;
 
-  if (s0.u64 == 0)
-    goto loc_10004240;
-  else
-    goto loc_10004208;
+  while (1)
+  {
+    if (s0cmd != NULL)
+    {
+      if (oflag != 0)
+        printf("  cmd %d,\t%d\t%f\n", s0cmd->type, s0cmd->pad_b, s0cmd->flt_d);
+
+      s0cmd = s0cmd->next;
+      continue;
+    }
+    else
+    {
+      seq = seq->next;
+
+      if (seq == NULL)
+      {
+        return;
+      }
+
+      if (oflag != 0)
+        printf("seq %d at %.2f\n", seq->seq, seq->seqFrame);
+
+      s0cmd = seq->cmd_g;
+
+      continue;
+    }
+  }
 }
 
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)

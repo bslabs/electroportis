@@ -898,167 +898,165 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AB4;
   }
 
+  if (strcmp("seqname:", var_2D8) == 0)
   {
-    if (strcmp("seqname:", var_2D8) == 0)
-    {
-      cmd->type = 9;
+    cmd->type = 9;
 
-      sscanf(s0, "%d", &(cmd->pad_b));
+    sscanf(s0, "%d", &(cmd->pad_b));
 
-      s0 += strcspn(s0, " \t\n");
-
-      if (oflag != 0)
-        printf("%s %d", var_2D8, cmd->pad_b);
-
-      baseFrame = 0.0f;
-      absFrame = 0.0f;
-      relFrame = 0.0f;
-      seq = seqList;
-      if (seqList == NULL)
-      {
-        goto loc_10004588;
-      }
-
-      ARGS->v0.u64 = cmd->pad_b;
-      loc_10004570:
-      if (seq->seq == ARGS->v0.u64)
-      {
-        ARGS->v0.u64 = (uint64_t) editSeq;
-
-        editSeq = seq;
-
-        return;
-      }
-
-      seq = seq->next;
-      if (seq != NULL)
-      {
-        goto loc_10004570;
-      }
-
-      loc_10004588:
-      editSeq = calloc(sizeof(struct animSeq), 1);
-
-      editSeq->seq = cmd->pad_b;
-      editSeq->pad_b[0] = 1;
-      editSeq->seqFrame = 0.0f;
-      editSeq->flt_e = 300.0f;
-      editSeq->flt_f = 1.0f;
-      editSeq->cmd_g = NULL;
-      editSeq->cmd_h = NULL;
-      editSeq->cmd_i = NULL;
-
-      editSeq->next = NULL;
-
-      if (seqList != NULL)
-      {
-        editSeq->next = seqList;
-      }
-
-      seqList = editSeq;
-
-      free(cmd);
-
-      goto loc_10003AE8;
-    }
-
-    if (strcmp("seqdo:", var_2D8) == 0)
-    {
-      cmd->type = 10;
-      sscanf(s0, "%d", &(cmd->pad_b));
-
-      s0 += strcspn(s0, " \t\n");
-
-      if (oflag != 0)
-        printf("%s %d", var_2D8, cmd->pad_b);
-
-      goto loc_10003AA8;
-    }
-
-    if (strcmp("seqloop:", var_2D8) == 0)
-    {
-      cmd->type = 12;
-
-      if (oflag != 0)
-        printf("%s", var_2D8);
-
-      goto loc_10003AA4;
-    }
-
-    if (strcmp("seqstop:", var_2D8) == 0)
-    {
-      cmd->type = 11;
-      sscanf(s0, "%d", &(cmd->pad_b));
-
-      s0 += strcspn(s0, " \t\n");
-
-      if (oflag != 0)
-        printf("%s %d", var_2D8, cmd->pad_b);
-
-      goto loc_10003A98;
-    }
-
-    if (strcmp("seqrepeat:", var_2D8) == 0)
-    {
-      cmd->type = 13;
-      sscanf(s0, "%d", &(cmd->pad_b));
-
-      s0 += strcspn(s0, " \t\n");
-
-      if (oflag != 0)
-      {
-        printf("%s %d", var_2D8, cmd->pad_b);
-
-        printf("warning: %s not implemented\n", var_2D8);
-      }
-
-      free(cmd);
-      goto loc_10003AE8;
-    }
-
-    if (strcmp("seqkill:", var_2D8) == 0)
-    {
-      cmd->type = 14;
-      sscanf(s0, "%d", &(cmd->pad_b));
-
-      s0 += strcspn(s0, " \t\n");
-
-      if (oflag != 0)
-        printf("%s %d", var_2D8, cmd->pad_b);
-
-      goto loc_10003A90;
-    }
-
-    if (strcmp("seqkillall:", var_2D8) == 0)
-    {
-      cmd->type = 15;
-      ARGS->a2.u64 = var_58;
-
-      if (oflag != 0)
-        printf("%s", var_2D8);
-
-      goto loc_10003A8C;
-    }
-
-    if (strncmp("#", var_2D8, 1) == 0)
-    {
-      if (oflag != 0)
-        printf("%s", var_2D8);
-
-      free(cmd);
-
-      goto loc_10003AE8;
-    }
+    s0 += strcspn(s0, " \t\n");
 
     if (oflag != 0)
-      printf("bad command: %s", var_2D8);
+      printf("%s %d", var_2D8, cmd->pad_b);
+
+    baseFrame = 0.0f;
+    absFrame = 0.0f;
+    relFrame = 0.0f;
+    seq = seqList;
+    if (seqList == NULL)
+    {
+      goto loc_10004588;
+    }
+
+    ARGS->v0.u64 = cmd->pad_b;
+    loc_10004570:
+    if (seq->seq == ARGS->v0.u64)
+    {
+      ARGS->v0.u64 = (uint64_t) editSeq;
+
+      editSeq = seq;
+
+      return;
+    }
+
+    seq = seq->next;
+    if (seq != NULL)
+    {
+      goto loc_10004570;
+    }
+
+    loc_10004588:
+    editSeq = calloc(sizeof(struct animSeq), 1);
+
+    editSeq->seq = cmd->pad_b;
+    editSeq->pad_b[0] = 1;
+    editSeq->seqFrame = 0.0f;
+    editSeq->flt_e = 300.0f;
+    editSeq->flt_f = 1.0f;
+    editSeq->cmd_g = NULL;
+    editSeq->cmd_h = NULL;
+    editSeq->cmd_i = NULL;
+
+    editSeq->next = NULL;
+
+    if (seqList != NULL)
+    {
+      editSeq->next = seqList;
+    }
+
+    seqList = editSeq;
 
     free(cmd);
 
-    var_58 = 1;
+    goto loc_10003AE8;
+  }
+
+  if (strcmp("seqdo:", var_2D8) == 0)
+  {
+    cmd->type = 10;
+    sscanf(s0, "%d", &(cmd->pad_b));
+
+    s0 += strcspn(s0, " \t\n");
+
+    if (oflag != 0)
+      printf("%s %d", var_2D8, cmd->pad_b);
+
+    goto loc_10003AA8;
+  }
+
+  if (strcmp("seqloop:", var_2D8) == 0)
+  {
+    cmd->type = 12;
+
+    if (oflag != 0)
+      printf("%s", var_2D8);
+
+    goto loc_10003AA4;
+  }
+
+  if (strcmp("seqstop:", var_2D8) == 0)
+  {
+    cmd->type = 11;
+    sscanf(s0, "%d", &(cmd->pad_b));
+
+    s0 += strcspn(s0, " \t\n");
+
+    if (oflag != 0)
+      printf("%s %d", var_2D8, cmd->pad_b);
+
+    goto loc_10003A98;
+  }
+
+  if (strcmp("seqrepeat:", var_2D8) == 0)
+  {
+    cmd->type = 13;
+    sscanf(s0, "%d", &(cmd->pad_b));
+
+    s0 += strcspn(s0, " \t\n");
+
+    if (oflag != 0)
+    {
+      printf("%s %d", var_2D8, cmd->pad_b);
+
+      printf("warning: %s not implemented\n", var_2D8);
+    }
+
+    free(cmd);
+    goto loc_10003AE8;
+  }
+
+  if (strcmp("seqkill:", var_2D8) == 0)
+  {
+    cmd->type = 14;
+    sscanf(s0, "%d", &(cmd->pad_b));
+
+    s0 += strcspn(s0, " \t\n");
+
+    if (oflag != 0)
+      printf("%s %d", var_2D8, cmd->pad_b);
+
+    goto loc_10003A90;
+  }
+
+  if (strcmp("seqkillall:", var_2D8) == 0)
+  {
+    cmd->type = 15;
     ARGS->a2.u64 = var_58;
+
+    if (oflag != 0)
+      printf("%s", var_2D8);
+
     goto loc_10003A8C;
   }
+
+  if (strncmp("#", var_2D8, 1) == 0)
+  {
+    if (oflag != 0)
+      printf("%s", var_2D8);
+
+    free(cmd);
+
+    goto loc_10003AE8;
+  }
+
+  if (oflag != 0)
+    printf("bad command: %s", var_2D8);
+
+  free(cmd);
+
+  var_58 = 1;
+  ARGS->a2.u64 = var_58;
+  goto loc_10003A8C;
 
   loc_100041A4:
   seq = seqList;

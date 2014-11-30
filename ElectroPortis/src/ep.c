@@ -574,6 +574,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 {
   EPANOS_REG s0;
   struct animCommand *cmd;
+  struct animSeq *seq;
   EPANOS_REG s4;
   EPANOS_REG s7;
   EPANOS_REG fp;
@@ -598,8 +599,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   var_60 = ARGS->a2.u64;
 
   loc_10003A90:
-  ARGS->a3.u64 = var_60;
-  var_68 = ARGS->a3.u64;
+  var_68 = var_60;
 
   loc_10003A98:
   var_70 = var_68;
@@ -611,8 +611,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   var_80 = var_78;
 
   loc_10003AB4:
-  ARGS->a7.u64 = var_80;
-  var_88 = ARGS->a7.u64;
+  var_88 = var_80;
 
   loc_10003AB8:
   fp.u64 = var_88;
@@ -652,13 +651,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
 
   loc_10003AE8:
-  {
-    sscanf((const char *) s0.u64, "%[^\n]\n", var_1D8);
-  }
+  sscanf((const char *) s0.u64, "%[^\n]\n", var_1D8);
+
   if (oflag != 0)
-  {
     printf("%s\n", var_1D8);
-  }
 
   var_1D8[0] = 0;
   if (bflag == 0)
@@ -940,38 +936,28 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
       if (oflag != 0)
         printf("%s %d", var_2D8, cmd->pad_b);
 
-      ARGS->a3.u64 = seqList;
       baseFrame = 0.0f;
       absFrame = 0.0f;
       relFrame = 0.0f;
-      s4.u64 = ARGS->a3.u64;
-      if (ARGS->a3.u64 == 0)
+      seq = seqList;
+      if (seqList == NULL)
       {
-        if (s4.u64 != 0)
-        {
-          goto loc_10004614;
-        }
-        else
-        {
-          goto loc_10004588;
-        }
+        goto loc_10004588;
       }
 
       ARGS->v0.u64 = cmd->pad_b;
       loc_10004570:
-      ARGS->a7.u64 = *((int32_t *) (s4.u32 + 0));
-
-      if (ARGS->a7.u64 == ARGS->v0.u64)
+      if (seq->seq == ARGS->v0.u64)
       {
         ARGS->v0.u64 = (uint64_t) editSeq;
 
-        editSeq = s4.u32;
+        editSeq = seq;
 
         return;
       }
 
-      s4.u64 = *((int32_t *) (s4.u32 + 36));
-      if (s4.u64 != 0)
+      seq = seq->next;
+      if (seq != NULL)
       {
         goto loc_10004570;
       }
@@ -996,7 +982,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
       }
 
       seqList = editSeq;
-      loc_10004614:
+
       free(cmd);
 
       goto loc_10003AE8;
@@ -1111,23 +1097,21 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 
   loc_100041A4:
-  s4.u64 = seqList;
+  seq = seqList;
   if (seqList == NULL)
   {
     goto loc_100041C4;
   }
 
   loc_100041B0:
-  ARGS->a2.u64 = *((int32_t *) (s4.u32 + 0));
-
-  if (ARGS->a2.u64 == 0)
+  if (seq->seq == 0)
   {
-    *((uint32_t *) (s4.u32 + 28)) = *((int32_t *) (s4.u32 + 24));
+    seq->cmd_h = seq->cmd_g;
     goto loc_100041C4;
   }
 
-  s4.u64 = *((int32_t *) (s4.u32 + 36));
-  if (s4.u64 != 0)
+  seq = seq->next;
+  if (seq != NULL)
   {
     goto loc_100041B0;
   }
@@ -1144,7 +1128,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
   else
   {
-    s4.u64 = seqList;
+    seq = seqList;
   }
 
   goto loc_1000424C;
@@ -1177,26 +1161,18 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 
   loc_10004240:
-  s4.u64 = *((int32_t *) (s4.u32 + 36));
+  seq = seq->next;
 
-  if (s4.u64 == 0)
+  if (seq == NULL)
   {
     return;
   }
 
   loc_1000424C:
   if (oflag != 0)
-  {
-    memcpy(&ARGS->f19, (char *) (s4.u32 + 8), 4);
-    ARGS->f19.d = ARGS->f19.s;
-    ARGS->a1.u64 = *((int32_t *) (s4.u32 + 0));
-    ARGS->a2.u64 = ARGS->f19.u64;
-    {
-      printf("seq %d at %.2f\n", (int32_t) ARGS->a1.u64, (double) ARGS->a2.d);
-    }
-  }
+    printf("seq %d at %.2f\n", seq->seq, seq->seqFrame);
 
-  s0.u64 = *((int32_t *) (s4.u32 + 24));
+  s0.u64 = seq->cmd_g;
 
   if (s0.u64 == 0)
     goto loc_10004240;

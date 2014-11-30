@@ -572,7 +572,7 @@ static void stopAnimation__Gv(void)
 
 static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 {
-  EPANOS_REG s0;
+  const char *s0;
   struct animCommand *cmd;
   struct animSeq *seq;
   EPANOS_REG s4;
@@ -589,7 +589,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_68;
   char var_1D8[256];
 
-  s0.u64 = (uint64_t) defaultScript;
+  s0 = defaultScript;
   if (oflag != 0)
     printf("# reading animation...\n");
 
@@ -651,7 +651,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
 
   loc_10003AE8:
-  sscanf((const char *) s0.u64, "%[^\n]\n", var_1D8);
+  sscanf(s0, "%[^\n]\n", var_1D8);
 
   if (oflag != 0)
     printf("%s\n", var_1D8);
@@ -665,15 +665,15 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     }
     else
     {
-      s0.u64 = var_2E0;
+      s0 = var_2E0;
       goto loc_10003B54;
     }
   }
 
-  ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, "\n");
-  s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-  s0.u64 = (int32_t) (s0.u32 + 1);
-  ARGS->v0.u64 = (unsigned int) strlen((const char *) s0.u64);
+  ARGS->v0.u64 = (unsigned int) strcspn(s0, "\n");
+  s0 = ARGS->v0.u32 + s0;
+  s0++;
+  ARGS->v0.u64 = (unsigned int) strlen(s0);
 
   if (ARGS->v0.u64 == 0)
   {
@@ -694,20 +694,20 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   s7.u64 = 0;
   s4.u64 = 0;
 
-  sscanf((const char *) s0.u64, "%s", var_2D8);
+  sscanf(s0, "%s", var_2D8);
 
-  ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-  s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+  ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+  s0 = ARGS->v0.u32 + s0;
   cmd = calloc(1, sizeof(struct animCommand));
   cmd->cmdFrame = absFrame;
 
   if (strcmp("frame:", var_2D8) == 0)
   {
     cmd->type = 0;
-    sscanf((const char *) s0.u64, "%f", &(cmd->flt_d));
+    sscanf(s0, "%f", &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int)strcspn((const char *)s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int)strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %f", var_2D8, cmd->flt_d);
@@ -747,10 +747,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("relframe:", var_2D8) == 0)
   {
     cmd->type = 0;
-    sscanf((const char *) s0.u64, "%f", &(cmd->flt_d));
+    sscanf(s0, "%f", &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int)strcspn((const char *)s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int)strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %f", var_2D8, cmd->flt_d);
@@ -765,10 +765,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("absframe:", var_2D8) == 0)
   {
     cmd->type = 1;
-    sscanf((const char *) s0.u64, "%f", &(cmd->flt_d));
+    sscanf(s0, "%f", &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int)strcspn((const char *)s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int)strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %f", var_2D8, cmd->flt_d);
@@ -784,10 +784,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("randdelay:", var_2D8) == 0)
   {
     cmd->type = 103;
-    sscanf((const char *) s0.u64, "%f", &(cmd->flt_d));
+    sscanf(s0, "%f", &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
     {
@@ -802,12 +802,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     s7.u64 = 0;
     cmd->type = 101;
     {
-      sscanf((const char *) s0.u64, "%f", &(cmd->flt_d));
+      sscanf(s0, "%f", &(cmd->flt_d));
     }
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
     }
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %f", var_2D8, cmd->flt_d);
@@ -819,12 +819,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   {
     cmd->type = 102;
     {
-      sscanf((const char *) s0.u64, "%f", &(cmd->flt_d));
+      sscanf(s0, "%f", &(cmd->flt_d));
     }
     {
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+      ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
     }
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %f", var_2D8, cmd->flt_d);
@@ -836,10 +836,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("actlim1:", var_2D8) == 0)
   {
     cmd->type = 2;
-    sscanf((const char *) s0.u64, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
+    sscanf(s0, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %d, %f", var_2D8, cmd->pad_b, cmd->flt_d);
@@ -851,10 +851,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("actlim2:", var_2D8) == 0)
   {
     cmd->type = 3;
-    sscanf((const char *) s0.u64, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
+    sscanf(s0, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %d, %f", var_2D8, cmd->pad_b, cmd->flt_d);
@@ -866,10 +866,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("actset:", var_2D8) == 0)
   {
     cmd->type = 4;
-    sscanf((const char *) s0.u64, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
+    sscanf(s0, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
 
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %d, %f", var_2D8, cmd->pad_b, cmd->flt_d);
@@ -880,10 +880,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("actreset:", var_2D8) == 0)
   {
     cmd->type = 5;
-    sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+    sscanf(s0, "%d", &(cmd->pad_b));
 
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %d", var_2D8, cmd->pad_b);
@@ -903,10 +903,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   if (strcmp("actstop:", var_2D8) == 0)
   {
     cmd->type = 7;
-    sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+    sscanf(s0, "%d", &(cmd->pad_b));
 
-    ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-    s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+    ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+    s0 = ARGS->v0.u32 + s0;
 
     if (oflag != 0)
       printf("%s %d", var_2D8, cmd->pad_b);
@@ -929,10 +929,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     {
       cmd->type = 9;
 
-      sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+      sscanf(s0, "%d", &(cmd->pad_b));
 
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+      s0 = ARGS->v0.u32 + s0;
       if (oflag != 0)
         printf("%s %d", var_2D8, cmd->pad_b);
 
@@ -992,12 +992,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     {
       cmd->type = 10;
       {
-        sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+        sscanf(s0, "%d", &(cmd->pad_b));
       }
       {
-        ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+        ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
       }
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      s0 = ARGS->v0.u32 + s0;
       if (oflag != 0)
         printf("%s %d", var_2D8, cmd->pad_b);
 
@@ -1017,12 +1017,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     {
       cmd->type = 11;
       {
-        sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+        sscanf(s0, "%d", &(cmd->pad_b));
       }
       {
-        ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+        ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
       }
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      s0 = ARGS->v0.u32 + s0;
       if (oflag != 0)
         printf("%s %d", var_2D8, cmd->pad_b);
 
@@ -1033,12 +1033,12 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     {
       cmd->type = 13;
       {
-        sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+        sscanf(s0, "%d", &(cmd->pad_b));
       }
       {
-        ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+        ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
       }
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      s0 = ARGS->v0.u32 + s0;
 
       if (oflag != 0)
       {
@@ -1054,10 +1054,10 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     if (strcmp("seqkill:", var_2D8) == 0)
     {
       cmd->type = 14;
-      sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+      sscanf(s0, "%d", &(cmd->pad_b));
 
-      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      ARGS->v0.u64 = (unsigned int) strcspn(s0, " \t\n");
+      s0 = ARGS->v0.u32 + s0;
 
       if (oflag != 0)
         printf("%s %d", var_2D8, cmd->pad_b);

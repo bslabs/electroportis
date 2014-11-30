@@ -35,11 +35,7 @@ typedef struct EPANOS_ARGS {
     EPANOS_REG f0;
     EPANOS_REG f2;
     EPANOS_REG f12;
-    EPANOS_REG f13;
     EPANOS_REG f14;
-    EPANOS_REG f15;
-    EPANOS_REG f16;
-    EPANOS_REG f17;
     EPANOS_REG f18;
     EPANOS_REG f19;
 } EPANOS_ARGS;

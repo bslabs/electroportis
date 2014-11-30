@@ -115,13 +115,12 @@ static char outline[128];
 static char fill[128];
 static float gflip;
 static float gspin;
-static int n;
 static int nlimit;
 static float t;
 static struct animSeq *seqList;
 static struct animSeq *editSeq;
 
-static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount);
+static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount);
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand);
 static void animateacts__Gv(void);
 static void stopAnimation__Gv(void);
@@ -180,9 +179,8 @@ init_ep(void)
     wheel = 0.0f;
 }
 
-static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
+static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
 {
-  EPANOS_REG t5;
   EPANOS_REG s0;
   EPANOS_REG s3;
   EPANOS_REG f5;
@@ -212,10 +210,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     wrap_glRotatef(wheel, f22.s, f20.s, f20.s, wincount);
   }
   f24.s = -0.500000000f;
-  ARGS->a3.u64 = (uint64_t) (&nlimit);
-  ARGS->a1.u64 = (uint64_t) (&n);
-  ARGS->a4.u64 = n;
-  s3.u64 = ARGS->a4.u64;
+  s3.u64 = n;
   if (0 < nlimit)
   {
     var_A8 = 1;
@@ -240,12 +235,9 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     ARGS->f14.s = twixt__GiPff(s0.u64, dzoom, t) * f24.s;
     wrap_glTranslatef(f20.s, f20.s, (float) ARGS->f14.s, wincount);
   }
-  ARGS->a3.u64 = (uint64_t) (&nlimit);
-  ARGS->a1.u64 = (uint64_t) (&n);
   ARGS->a0.u64 = nlimit;
-  ARGS->a4.u64 = n;
   s3.u64 = (int32_t) (s3.u32 + -1);
-  ARGS->a0.u64 = (int32_t) (ARGS->a4.u32 - ARGS->a0.u32);
+  ARGS->a0.u64 = (int32_t) (n - ARGS->a0.u32);
   if (((signed) ARGS->a0.i64) < ((signed) s3.i64))
     ARGS->a2.u64 = 1;
   else
@@ -253,15 +245,16 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   if (ARGS->a2.u64 == 0)
   {
-    if (((signed) ARGS->a0.i64) < ((signed) ARGS->a4.i64))
+    if (((signed) ARGS->a0.i64) < n)
       ARGS->a2.u64 = 1;
     else
       ARGS->a2.u64 = 0;
 
-    goto loc_100054E0;
+    var_A8 = ARGS->a2.u64;
+    goto loc_100054E4;
   }
   else
-    if (((signed) ARGS->a0.i64) < ((signed) ARGS->a4.i64))
+    if (((signed) ARGS->a0.i64) < n)
     ARGS->a2.u64 = 1;
   else
     ARGS->a2.u64 = 0;
@@ -285,11 +278,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   }
   goto loc_1000545C;
 
-  loc_100054E0:
-  var_A8 = ARGS->a2.u64;
-
   loc_100054E4:
-  s3.u64 = ARGS->a4.u64;
+  s3.u64 = n;
   if (var_A8 == 0)
   {
     wrap_glPopMatrix(wincount);
@@ -307,13 +297,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     goto loc_10005848;
   }
   loc_1000552C:
-  if (((signed) s0.i64) < ((signed) 128))
-    ARGS->a5.u64 = 1;
-  else
-    ARGS->a5.u64 = 0;
-
-
-  if (ARGS->a5.u64 == 0)
+  if (((signed) s0.i64) >= ((signed) 128))
   {
     s0.u64 = (int32_t) (s0.u32 + -128);
   }
@@ -336,15 +320,17 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26.s, f24.s, f22.s);
   }
   f5.s = f26.s + 0.5f;
-  ARGS->f2.d = f5.s;
   outlinecolRGBA[3] = var_F0;
   colRGBA[3] = var_E8;
-  ARGS->f12.s = f5.s;
 
-  if ((double)1.0 < ARGS->f2.d)
+  if ((double)1.0 < (double)f5.s)
   {
     ARGS->f12.s = -1.00000000f;
     ARGS->f12.s = f5.s + ARGS->f12.s;
+  }
+  else
+  {
+    ARGS->f12.s = f5.s;
   }
 
   {
@@ -375,8 +361,6 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   wrap_glPopMatrix(wincount);
 
-  ARGS->a1.u64 = (uint64_t) (&n);
-  ARGS->a3.u64 = (uint64_t) (&nlimit);
   if (sflag == 0)
   {
     goto loc_100058AC;
@@ -384,21 +368,14 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   loc_10005818:
   s3.u64 = (int32_t) (s3.u32 + -1);
-  t5.u64 = n;
   ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
   ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
-  t5.u64 = (int32_t) (t5.u32 - nlimit);
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
   ARGS->a0.u64 = ARGS->a0.u64 & 127;
   ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
   ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
 
-  if (((signed) t5.i64) < ((signed) s3.i64))
-    t5.u64 = 1;
-  else
-    t5.u64 = 0;
-
-  if (t5.u64 == 0)
+  if ((n - nlimit) >= ((signed) s3.i64))
   {
     wrap_glPopMatrix(wincount);
     return;
@@ -406,12 +383,11 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   loc_10005848:
   s0.u64 = ARGS->a0.u64;
-  if (ARGS->a0.i64 >= 0)
+  if (ARGS->a0.i64 < 0)
   {
-    goto loc_1000552C;
+    s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
   }
 
-  s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
   goto loc_1000552C;
 
   loc_100058AC:
@@ -484,9 +460,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   wrap_glPopMatrix(wincount);
   wrap_glRotatef(var_110, f20.s, f20.s, f22.s, wincount);
   wrap_glTranslatef(f20.s, f20.s, var_100, wincount);
-  ARGS->a1.u64 = (uint64_t) (&n);
   {
-    ARGS->a3.u64 = (uint64_t) (&nlimit);
     goto loc_10005818;
   }
 }
@@ -2022,6 +1996,8 @@ static void processCommand__GP11animCommand(struct animCommand *cmd)
 
 void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 {
+  static int n;
+
   EPANOS_REG s2;
   EPANOS_REG s3;
   EPANOS_REG t9;
@@ -2112,7 +2088,7 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   wheel = fmodf(wheel - var_50, 360.0f);
 
-  drawit__Gv(ARGS, wincount);
+  drawit__Gv(ARGS, n, wincount);
 
   t = t + acttable[45]->flt_g;
 

@@ -734,8 +734,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AE0;
   }
-
-  if (strcmp("relframe:", var_2D8) == 0)
+  else if (strcmp("relframe:", var_2D8) == 0)
   {
     cmd->type = 0;
     sscanf(s0, "%f", &(cmd->flt_d));
@@ -750,8 +749,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AE0;
   }
-
-  if (strcmp("absframe:", var_2D8) == 0)
+  else if (strcmp("absframe:", var_2D8) == 0)
   {
     cmd->type = 1;
     sscanf(s0, "%f", &(cmd->flt_d));
@@ -767,8 +765,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003ADC;
   }
-
-  if (strcmp("randdelay:", var_2D8) == 0)
+  else if (strcmp("randdelay:", var_2D8) == 0)
   {
     cmd->type = 103;
     sscanf(s0, "%f", &(cmd->flt_d));
@@ -780,8 +777,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AD8;
   }
-
-  if (strcmp("duration:", var_2D8) == 0)
+  else if (strcmp("duration:", var_2D8) == 0)
   {
     s7.u64 = 0;
     cmd->type = 101;
@@ -794,8 +790,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AD4;
   }
-
-  if (strcmp("variance:", var_2D8) == 0)
+  else if (strcmp("variance:", var_2D8) == 0)
   {
     cmd->type = 102;
     sscanf(s0, "%f", &(cmd->flt_d));
@@ -807,8 +802,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AD0;
   }
-
-  if (strcmp("actlim1:", var_2D8) == 0)
+  else if (strcmp("actlim1:", var_2D8) == 0)
   {
     cmd->type = 2;
     sscanf(s0, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
@@ -820,8 +814,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003ACC;
   }
-
-  if (strcmp("actlim2:", var_2D8) == 0)
+  else if (strcmp("actlim2:", var_2D8) == 0)
   {
     cmd->type = 3;
     sscanf(s0, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
@@ -833,8 +826,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AC8;
   }
-
-  if (strcmp("actset:", var_2D8) == 0)
+  else if (strcmp("actset:", var_2D8) == 0)
   {
     cmd->type = 4;
     sscanf(s0, "%d, %f", &(cmd->pad_b), &(cmd->flt_d));
@@ -846,8 +838,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AC4;
   }
-
-  if (strcmp("actreset:", var_2D8) == 0)
+  else if (strcmp("actreset:", var_2D8) == 0)
   {
     cmd->type = 5;
     sscanf(s0, "%d", &(cmd->pad_b));
@@ -859,8 +850,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AC0;
   }
-
-  if (strcmp("actresetall:", var_2D8) == 0)
+  else if (strcmp("actresetall:", var_2D8) == 0)
   {
     cmd->type = 6;
     if (oflag != 0)
@@ -868,8 +858,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AC0;
   }
-
-  if (strcmp("actstop:", var_2D8) == 0)
+  else if (strcmp("actstop:", var_2D8) == 0)
   {
     cmd->type = 7;
     sscanf(s0, "%d", &(cmd->pad_b));
@@ -881,8 +870,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AB8;
   }
-
-  if (strcmp("actstopall:", var_2D8) == 0)
+  else if (strcmp("actstopall:", var_2D8) == 0)
   {
     cmd->type = 8;
 
@@ -891,8 +879,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AB4;
   }
-
-  if (strcmp("seqname:", var_2D8) == 0)
+  else if (strcmp("seqname:", var_2D8) == 0)
   {
     cmd->type = 9;
 
@@ -954,8 +941,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AE8;
   }
-
-  if (strcmp("seqdo:", var_2D8) == 0)
+  else if (strcmp("seqdo:", var_2D8) == 0)
   {
     cmd->type = 10;
     sscanf(s0, "%d", &(cmd->pad_b));
@@ -967,8 +953,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AA8;
   }
-
-  if (strcmp("seqloop:", var_2D8) == 0)
+  else if (strcmp("seqloop:", var_2D8) == 0)
   {
     cmd->type = 12;
 
@@ -977,8 +962,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AA4;
   }
-
-  if (strcmp("seqstop:", var_2D8) == 0)
+  else if (strcmp("seqstop:", var_2D8) == 0)
   {
     cmd->type = 11;
     sscanf(s0, "%d", &(cmd->pad_b));
@@ -990,8 +974,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003A98;
   }
-
-  if (strcmp("seqrepeat:", var_2D8) == 0)
+  else if (strcmp("seqrepeat:", var_2D8) == 0)
   {
     cmd->type = 13;
     sscanf(s0, "%d", &(cmd->pad_b));
@@ -1008,8 +991,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     free(cmd);
     goto loc_10003AE8;
   }
-
-  if (strcmp("seqkill:", var_2D8) == 0)
+  else if (strcmp("seqkill:", var_2D8) == 0)
   {
     cmd->type = 14;
     sscanf(s0, "%d", &(cmd->pad_b));
@@ -1021,8 +1003,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003A90;
   }
-
-  if (strcmp("seqkillall:", var_2D8) == 0)
+  else if (strcmp("seqkillall:", var_2D8) == 0)
   {
     cmd->type = 15;
     ARGS->a2.u64 = var_58;
@@ -1032,8 +1013,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003A8C;
   }
-
-  if (strncmp("#", var_2D8, 1) == 0)
+  else if (strncmp("#", var_2D8, 1) == 0)
   {
     if (oflag != 0)
       printf("%s", var_2D8);
@@ -1042,15 +1022,17 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
     goto loc_10003AE8;
   }
+  else
+  {
+    if (oflag != 0)
+      printf("bad command: %s", var_2D8);
 
-  if (oflag != 0)
-    printf("bad command: %s", var_2D8);
+    free(cmd);
 
-  free(cmd);
-
-  var_58 = 1;
-  ARGS->a2.u64 = var_58;
-  goto loc_10003A8C;
+    var_58 = 1;
+    ARGS->a2.u64 = var_58;
+    goto loc_10003A8C;
+  }
 
   loc_100041A4:
   seq = seqList;

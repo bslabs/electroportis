@@ -751,7 +751,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AE0;
   }
 
-  s4.u64 = 0;
   if (strcmp("absframe:", var_2D8) == 0)
   {
     cmd->type = 1;
@@ -769,7 +768,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003ADC;
   }
 
-  s7.u64 = 0;
   if (strcmp("randdelay:", var_2D8) == 0)
   {
     cmd->type = 103;
@@ -783,7 +781,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AD8;
   }
 
-  fp.u64 = 0;
   if (strcmp("duration:", var_2D8) == 0)
   {
     s7.u64 = 0;
@@ -811,7 +808,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AD0;
   }
 
-  s4.u64 = 0;
   if (strcmp("actlim1:", var_2D8) == 0)
   {
     cmd->type = 2;
@@ -825,7 +821,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003ACC;
   }
 
-  s7.u64 = 0;
   if (strcmp("actlim2:", var_2D8) == 0)
   {
     cmd->type = 3;
@@ -839,7 +834,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AC8;
   }
 
-  fp.u64 = 0;
   if (strcmp("actset:", var_2D8) == 0)
   {
     cmd->type = 4;

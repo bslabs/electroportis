@@ -980,11 +980,91 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003AB8;
   }
 
-  if (strcmp("actstopall:", var_2D8) != 0)
+  if (strcmp("actstopall:", var_2D8) == 0)
+  {
+    cmd->type = 8;
+    if (oflag != 0)
+    {
+      printf("%s", var_2D8);
+    }
+
+    goto loc_10003AB4;
+  }
+
   {
     if (strcmp("seqname:", var_2D8) == 0)
     {
-      goto loc_100044F8;
+      cmd->type = 9;
+
+      sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
+
+      ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
+      s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
+      if (oflag != 0)
+      {
+        printf("%s %d", var_2D8, cmd->pad_b);
+      }
+
+      ARGS->a3.u64 = seqList;
+      baseFrame = 0.0f;
+      absFrame = 0.0f;
+      relFrame = 0.0f;
+      s4.u64 = ARGS->a3.u64;
+      if (ARGS->a3.u64 == 0)
+      {
+        if (s4.u64 != 0)
+        {
+          goto loc_10004614;
+        }
+        else
+        {
+          goto loc_10004588;
+        }
+      }
+
+      ARGS->v0.u64 = cmd->pad_b;
+      loc_10004570:
+      ARGS->a7.u64 = *((int32_t *) (s4.u32 + 0));
+
+      if (ARGS->a7.u64 == ARGS->v0.u64)
+      {
+        ARGS->v0.u64 = (uint64_t) editSeq;
+
+        editSeq = s4.u32;
+
+        return;
+      }
+
+      s4.u64 = *((int32_t *) (s4.u32 + 36));
+      if (s4.u64 != 0)
+      {
+        goto loc_10004570;
+      }
+
+      loc_10004588:
+      editSeq = calloc(sizeof(struct animSeq), 1);
+
+      editSeq->seq = cmd->pad_b;
+      editSeq->pad_b[0] = 1;
+      editSeq->seqFrame = 0.0f;
+      editSeq->flt_e = 300.0f;
+      editSeq->flt_f = 1.0f;
+      editSeq->cmd_g = NULL;
+      editSeq->cmd_h = NULL;
+      editSeq->cmd_i = NULL;
+
+      editSeq->next = NULL;
+
+      if (seqList != NULL)
+      {
+        editSeq->next = seqList;
+      }
+
+      seqList = editSeq;
+      loc_10004614:
+      free(cmd);
+
+      goto loc_10003AE8;
     }
 
     if (strcmp("seqdo:", var_2D8) == 0)
@@ -1108,15 +1188,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10003A8C;
   }
 
-  cmd->type = 8;
-  if (oflag != 0)
-  {
-    printf("%s", var_2D8);
-  }
-
-  goto loc_10003AB4;
-
-
   loc_100041A4:
   s4.u64 = seqList;
   if (seqList == NULL)
@@ -1209,79 +1280,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     goto loc_10004240;
   else
     goto loc_10004208;
-
-  loc_100044F8:
-  cmd->type = 9;
-
-  sscanf((const char *) s0.u64, "%d", &(cmd->pad_b));
-
-  ARGS->v0.u64 = (unsigned int) strcspn((const char *) s0.u64, " \t\n");
-  s0.u64 = (int32_t) (ARGS->v0.u32 + s0.u32);
-  if (oflag != 0)
-  {
-    printf("%s %d", var_2D8, cmd->pad_b);
-  }
-
-  ARGS->a3.u64 = seqList;
-  baseFrame = 0.0f;
-  absFrame = 0.0f;
-  relFrame = 0.0f;
-  s4.u64 = ARGS->a3.u64;
-  if (ARGS->a3.u64 == 0)
-  {
-    if (s4.u64 != 0)
-    {
-      goto loc_10004614;
-    }
-    else
-    {
-      goto loc_10004588;
-    }
-  }
-
-  ARGS->v0.u64 = cmd->pad_b;
-  loc_10004570:
-  ARGS->a7.u64 = *((int32_t *) (s4.u32 + 0));
-
-  if (ARGS->a7.u64 == ARGS->v0.u64)
-  {
-    ARGS->v0.u64 = (uint64_t) editSeq;
-
-    editSeq = s4.u32;
-
-    return;
-  }
-
-  s4.u64 = *((int32_t *) (s4.u32 + 36));
-  if (s4.u64 != 0)
-  {
-    goto loc_10004570;
-  }
-
-  loc_10004588:
-  editSeq = calloc(sizeof(struct animSeq), 1);
-
-  editSeq->seq = cmd->pad_b;
-  editSeq->pad_b[0] = 1;
-  editSeq->seqFrame = 0.0f;
-  editSeq->flt_e = 300.0f;
-  editSeq->flt_f = 1.0f;
-  editSeq->cmd_g = NULL;
-  editSeq->cmd_h = NULL;
-  editSeq->cmd_i = NULL;
-
-  editSeq->next = NULL;
-
-  if (seqList != NULL)
-  {
-    editSeq->next = seqList;
-  }
-
-  seqList = editSeq;
-  loc_10004614:
-  free(cmd);
-
-  goto loc_10003AE8;
 }
 
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)

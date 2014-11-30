@@ -33,8 +33,6 @@ typedef struct EPANOS_ARGS {
     EPANOS_REG a3;
     EPANOS_REG f0;
     EPANOS_REG f2;
-    EPANOS_REG f12;
-    EPANOS_REG f14;
 } EPANOS_ARGS;
 
 #ifdef __cplusplus

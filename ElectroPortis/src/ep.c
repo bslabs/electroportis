@@ -587,7 +587,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   uint64_t var_78;
   uint64_t var_70;
   uint64_t var_68;
-  char var_1D8[256];
 
   s0 = defaultScript;
   if (oflag != 0)
@@ -644,19 +643,42 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   loc_10003AE0:
   if (s4.u64 == 0)
   {
-    goto loc_10003DA4;
+    if (editSeq == NULL)
+    {
+      editSeq = calloc(sizeof(struct animSeq), 1);
+
+      editSeq->pad_b[0] = 1;
+      editSeq->seq = 0;
+      editSeq->seqFrame = 0.0f;
+      editSeq->flt_e = 300.0f;
+      editSeq->flt_f = 1.0f;
+      editSeq->cmd_i = NULL;
+      editSeq->cmd_h = NULL;
+      editSeq->cmd_g = NULL;
+      editSeq->next = NULL;
+
+      if (seqList != NULL)
+      {
+        editSeq->next = seqList;
+      }
+
+      seqList = editSeq;
+    }
+
+    addToSeq__GP7animSeqP11animCommand(editSeq, cmd);
+
+    editSeq->flt_d = relFrame;
+    goto loc_10003AE8;
   }
-    loc_10003AE4:
-
-
 
   loc_10003AE8:
-  sscanf(s0, "%[^\n]\n", var_1D8);
-
   if (oflag != 0)
+  {
+    char var_1D8[256];
+    sscanf(s0, "%[^\n]\n", var_1D8);
     printf("%s\n", var_1D8);
+  }
 
-  var_1D8[0] = 0;
   if (bflag == 0)
   {
     if (scanf("%[^\n]\n", var_2E0) == EOF)
@@ -687,7 +709,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   var_78 = 0;
   var_80 = 0;
   var_88 = 0;
-  cmd = NULL;
   fp.u64 = 0;
   s7.u64 = 0;
   s4.u64 = 0;
@@ -711,33 +732,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     relFrame = relFrame + cmd->flt_d;
     absFrame = baseFrame + relFrame;
 
-    loc_10003DA4:
-    if (editSeq == NULL)
-    {
-      editSeq = calloc(sizeof(struct animSeq), 1);
-
-      editSeq->pad_b[0] = 1;
-      editSeq->seq = 0;
-      editSeq->seqFrame = 0.0f;
-      editSeq->flt_e = 300.0f;
-      editSeq->flt_f = 1.0f;
-      editSeq->cmd_i = NULL;
-      editSeq->cmd_h = NULL;
-      editSeq->cmd_g = NULL;
-      editSeq->next = NULL;
-
-      if (seqList != NULL)
-      {
-        editSeq->next = seqList;
-      }
-
-      seqList = editSeq;
-    }
-
-    addToSeq__GP7animSeqP11animCommand(editSeq, cmd);
-
-    editSeq->flt_d = relFrame;
-    goto loc_10003AE4;
+    goto loc_10003AE0;
   }
 
   if (strcmp("relframe:", var_2D8) == 0)
@@ -783,9 +778,8 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     s0 += strcspn(s0, " \t\n");
 
     if (oflag != 0)
-    {
       printf("%s %f", var_2D8, cmd->flt_d);
-    }
+
     goto loc_10003AD8;
   }
 

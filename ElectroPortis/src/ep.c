@@ -1753,29 +1753,19 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 {
   static int n;
 
-  EPANOS_REG s2;
   EPANOS_REG s3;
-  EPANOS_REG t9;
-  EPANOS_REG ra;
-  EPANOS_REG f5;
+  float f5;
   float var_50;
 
   wrap_glClear(GL_COLOR_BUFFER_BIT, wincount);
   wrap_glColor3f(1.0f, 1.0f, 1.0f, wincount);
 
-  ARGS->a0.u64 = n;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 + 1);
-  ARGS->a3.u64 = (int32_t) (ARGS->a0.i32 >> 31);
-
-  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
-  ARGS->a0.u64 = ARGS->a0.u64 & 127;
   if ((double)1.0 <= (double)(t + acttable[45]->flt_g))
   {
     t = 0;
-    ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a3.u64;
-    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a3.u32);
-    n = ARGS->a0.u32;
+
+    n = (n + 1) & 127; // range of 'n' is 0 to 127
+
     s3.u64 = 1;
   }
   else
@@ -1807,19 +1797,19 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   else
     outline[n] = 0;
 
-  f5.s = acttable[123]->flt_g;
+  f5 = acttable[123]->flt_g;
 
   hue[n] = acttable[123]->flt_g;
 
   if (1.0f <= acttable[123]->flt_g)
   {
-    f5.s = f5.s + -1.0f;
-    hue[n] = f5.s;
+    f5 = f5 + -1.0f;
+    hue[n] = f5;
   }
 
-  if (f5.s <= 1.0f)
+  if (f5 <= 1.0f)
   {
-    hue[n] = f5.s + 1.0f;
+    hue[n] = f5 + 1.0f;
   }
 
   light[n] = acttable[130]->flt_g;
@@ -1829,16 +1819,8 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
     gflip = fmodf(gflip + acttable[87]->flt_g, 360.0f);
     gspin = fmodf(gspin + acttable[80]->flt_g, 360.0f);
 
-    s2.u64 = n;
-    ra.u64 = (int32_t) (s2.i32 >> 31);
-    t9.u64 = s2.u64 ^ ra.u64;
-    t9.u64 = (int32_t) (t9.u32 - ra.u32);
-    t9.u64 = t9.u64 & 127;
-    t9.u64 = t9.u64 ^ ra.u64;
-    t9.u64 = (int32_t) (t9.u32 - ra.u32);
-
-    flip[t9.u32] = gflip;
-    spin[t9.u32] = gspin;
+    flip[n] = gflip;
+    spin[n] = gspin;
   }
 
   wheel = fmodf(wheel - var_50, 360.0f);

@@ -1744,7 +1744,7 @@ static void processCommand__GP11animCommand(struct animCommand *cmd)
   return;
 }
 
-void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
+void display__Gv(wincount_t wincount)
 {
   static int n;
 
@@ -1827,8 +1827,6 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
   wrap_glFinish(wincount);
 
   //t9.u64 = (uint64_t) swapBuffers__Q2_10GLXWrapper6windowGv;
-
-  ARGS->a0.u64 = 0;
 
   return;
 }

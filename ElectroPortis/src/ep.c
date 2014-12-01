@@ -247,13 +247,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   }
 
   loc_100054B8:
-  ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
+  // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
+  if (s3.i32 < 0)
+    ARGS->a0.u64 = (abs(s3.i32) & 127) * -1;
+  else
+    ARGS->a0.u64 = s3.i32 & 127;
 
-  ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-  ARGS->a0.u64 = ARGS->a0.u64 & 127;
-  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
   if (ARGS->a0.i64 >= 0)
   {
     s0.u64 = ARGS->a0.u64;
@@ -272,16 +271,14 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
     return;
   }
 
-  {
-    ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
+  // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
+  if (s3.i32 < 0)
+    ARGS->a0.u64 = (abs(s3.i32) & 127) * -1;
+  else
+    ARGS->a0.u64 = s3.i32 & 127;
 
-    ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
-    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-    ARGS->a0.u64 = ARGS->a0.u64 & 127;
-    ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
-    ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-    goto loc_10005848;
-  }
+  goto loc_10005848;
+
   loc_1000552C:
   if (((signed) s0.i64) >= ((signed) 128))
   {
@@ -353,12 +350,12 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
 
   loc_10005818:
   s3.u64 = (int32_t) (s3.u32 + -1);
-  ARGS->a2.u64 = (int32_t) (s3.i32 >> 31);
-  ARGS->a0.u64 = s3.u64 ^ ARGS->a2.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
-  ARGS->a0.u64 = ARGS->a0.u64 & 127;
-  ARGS->a0.u64 = ARGS->a0.u64 ^ ARGS->a2.u64;
-  ARGS->a0.u64 = (int32_t) (ARGS->a0.u32 - ARGS->a2.u32);
+
+  // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
+  if (s3.i32 < 0)
+    ARGS->a0.u64 = (abs(s3.i32) & 127) * -1;
+  else
+    ARGS->a0.u64 = s3.i32 & 127;
 
   if ((n - nlimit) >= ((signed) s3.i64))
   {

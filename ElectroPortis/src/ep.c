@@ -181,7 +181,7 @@ init_ep(void)
 
 static void drawit__Gv(int n, wincount_t wincount)
 {
-  EPANOS_REG s0;
+  int s0;
   int a0;
   int s3;
   float f5;
@@ -224,13 +224,13 @@ static void drawit__Gv(int n, wincount_t wincount)
   }
 
   loc_1000545C:
-  if (((signed) s0.i64) >= ((signed) 128))
+  if (s0 >= 128)
   {
-    s0.u64 = (int32_t) (s0.u32 + -128);
+    s0 -= 128;
   }
 
   {
-    float f14 = twixt__GiPff(s0.u64, dzoom, t) * -0.5f;
+    float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
     wrap_glTranslatef(f20.s, f20.s, f14, wincount);
   }
   s3--;
@@ -253,11 +253,11 @@ static void drawit__Gv(int n, wincount_t wincount)
 
   if (a0 >= 0)
   {
-    s0.u64 = a0;
+    s0 = a0;
   }
   else
   {
-    s0.u64 = (int32_t) (a0 + 128);
+    s0 = a0 + 128;
   }
   goto loc_1000545C;
 
@@ -278,24 +278,24 @@ static void drawit__Gv(int n, wincount_t wincount)
   goto loc_10005848;
 
   loc_1000552C:
-  if (((signed) s0.i64) >= ((signed) 128))
+  if (s0 >= 128)
   {
-    s0.u64 = (int32_t) (s0.u32 + -128);
+    s0 -= 128;
   }
 
-  f30 = twixt__GiPff(s0.u64, x, t);
-  var_D0 = twixt__GiPff(s0.u64, y, t);
-  var_100 = twixt__GiPff(s0.u64, dzoom, t);
-  var_C8 = twixt__GiPff(s0.u64, arm, t);
-  f28 = twixt__GiPff(s0.u64, wrist, t);
-  var_108 = twixt__GiPff(s0.u64, size, t);
-  var_E0 = foldtwixt__GiPffT3(s0.u64, spin, t, 360.0f);
-  var_D8 = foldtwixt__GiPffT3(s0.u64, flip, t, 360.0f);
-  var_110 = twixt__GiPff(s0.u64, dtwist, t);
-  f26 = foldtwixt__GiPffT3(s0.u64, hue, t, f22.s);
-  var_E8 = twixt__GiPff(s0.u64, alpha, t);
-  f24 = foldtwixt__GiPffT3(s0.u64, light, t, f22.s);
-  var_F0 = twixt__GiPff(s0.u64, alphaout, t);
+  f30 = twixt__GiPff(s0, x, t);
+  var_D0 = twixt__GiPff(s0, y, t);
+  var_100 = twixt__GiPff(s0, dzoom, t);
+  var_C8 = twixt__GiPff(s0, arm, t);
+  f28 = twixt__GiPff(s0, wrist, t);
+  var_108 = twixt__GiPff(s0, size, t);
+  var_E0 = foldtwixt__GiPffT3(s0, spin, t, 360.0f);
+  var_D8 = foldtwixt__GiPffT3(s0, flip, t, 360.0f);
+  var_110 = twixt__GiPff(s0, dtwist, t);
+  f26 = foldtwixt__GiPffT3(s0, hue, t, f22.s);
+  var_E8 = twixt__GiPff(s0, alpha, t);
+  f24 = foldtwixt__GiPffT3(s0, light, t, f22.s);
+  var_F0 = twixt__GiPff(s0, alphaout, t);
 
   {
     hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26, f24, f22.s);
@@ -325,14 +325,14 @@ static void drawit__Gv(int n, wincount_t wincount)
   wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
   wrap_glTranslatef(f28, f20.s, f20.s, wincount);
 
-  var_78 = &(fill[s0.u32]);
+  var_78 = &(fill[s0]);
   if (*var_78 != 0)
   {
     wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
     drawshape__GiT1(1, wincount);
   }
 
-  var_A0 = &(outline[s0.u32]);
+  var_A0 = &(outline[s0]);
   if (*var_A0 != 0)
   {
     wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
@@ -362,10 +362,10 @@ static void drawit__Gv(int n, wincount_t wincount)
   }
 
   loc_10005848:
-  s0.u64 = a0;
+  s0 = a0;
   if (a0 < 0)
   {
-    s0.u64 = (int32_t) (a0 + 128);
+    s0 = a0 + 128;
   }
 
   goto loc_1000552C;

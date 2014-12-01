@@ -182,7 +182,7 @@ init_ep(void)
 static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
 {
   EPANOS_REG s0;
-  EPANOS_REG s3;
+  int s3;
   float f5;
   float f12;
   const EPANOS_REG f20 = {.s = 0.0f};
@@ -210,7 +210,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   {
     wrap_glRotatef(wheel, f22.s, f20.s, f20.s, wincount);
   }
-  s3.u64 = n;
+  s3 = n;
   if (0 < nlimit)
   {
     var_A8 = 1;
@@ -235,8 +235,8 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
     float f14 = twixt__GiPff(s0.u64, dzoom, t) * -0.5f;
     wrap_glTranslatef(f20.s, f20.s, f14, wincount);
   }
-  s3.u64 = (int32_t) (s3.u32 + -1);
-  if ((n - nlimit) >= ((signed) s3.i64))
+  s3--;
+  if ((n - nlimit) >= s3)
   {
     if ((n - nlimit) < n)
       var_A8 = 1;
@@ -248,10 +248,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
 
   loc_100054B8:
   // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
-  if (s3.i32 < 0)
-    ARGS->a0.u64 = (abs(s3.i32) & 127) * -1;
+  if (s3 < 0)
+    ARGS->a0.u64 = (abs(s3) & 127) * -1;
   else
-    ARGS->a0.u64 = s3.i32 & 127;
+    ARGS->a0.u64 = s3 & 127;
 
   if (ARGS->a0.i64 >= 0)
   {
@@ -264,7 +264,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   goto loc_1000545C;
 
   loc_100054E4:
-  s3.u64 = n;
+  s3 = n;
   if (var_A8 == 0)
   {
     wrap_glPopMatrix(wincount);
@@ -272,10 +272,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   }
 
   // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
-  if (s3.i32 < 0)
-    ARGS->a0.u64 = (abs(s3.i32) & 127) * -1;
+  if (s3 < 0)
+    ARGS->a0.u64 = (abs(s3) & 127) * -1;
   else
-    ARGS->a0.u64 = s3.i32 & 127;
+    ARGS->a0.u64 = s3 & 127;
 
   goto loc_10005848;
 
@@ -349,15 +349,15 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   }
 
   loc_10005818:
-  s3.u64 = (int32_t) (s3.u32 + -1);
+  s3 = (int32_t) (s3 + -1);
 
   // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
-  if (s3.i32 < 0)
-    ARGS->a0.u64 = (abs(s3.i32) & 127) * -1;
+  if (s3 < 0)
+    ARGS->a0.u64 = (abs(s3) & 127) * -1;
   else
-    ARGS->a0.u64 = s3.i32 & 127;
+    ARGS->a0.u64 = s3 & 127;
 
-  if ((n - nlimit) >= ((signed) s3.i64))
+  if ((n - nlimit) >= s3)
   {
     wrap_glPopMatrix(wincount);
     return;

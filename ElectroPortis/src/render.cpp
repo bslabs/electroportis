@@ -56,7 +56,6 @@ render_loop(saver_t * const ctx)
 {
     using namespace saver::timeutil;
 
-    EPANOS_ARGS ARGS;
     MSG msg;
     LARGE_INTEGER freq, drawstart, drawend;
     long long error = 0;
@@ -76,7 +75,7 @@ render_loop(saver_t * const ctx)
             if (1 < ctx->wincount)
                 clear_replay_list();
             QueryPerformanceCounter(&drawstart);
-            display__Gv(&ARGS, ctx->wincount);
+            display__Gv(ctx->wincount);
             QueryPerformanceCounter(&drawend);
             g_replay_list_lock.releaseLockExclusive();
         } else {

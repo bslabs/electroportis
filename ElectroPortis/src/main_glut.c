@@ -54,9 +54,7 @@ void menuhandler(int value)
 
 void drawfunc(void)
 {
-  static EPANOS_ARGS ARGS;
-
-  display__Gv(&ARGS, 0);
+  display__Gv(0);
   glutSwapBuffers();
 
 #ifdef TEST

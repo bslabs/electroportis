@@ -1,5 +1,8 @@
 #pragma once
 
+/* On non-Windows, make this an empty file */
+#ifdef _WIN32
+
 #include "targetver.h"
 
 #define WIN32_LEAN_AND_MEAN
@@ -32,3 +35,5 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "wglext.h"
+
+#endif /* _WIN32 */

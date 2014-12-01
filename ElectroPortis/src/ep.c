@@ -13,11 +13,12 @@
  * appearance, I think that's okay as long as you share the modified source with
  * me. All this includes decompiled source recovered from the binaries."
  */
+
+#include "stdafx.h"
 #include "ep.h"
 #include "replay_draw.hpp"
 
 #ifdef _MSC_VER
-#include "stdafx.h"
 #include "saver.hpp"
 
 #if _MSC_VER < 1800

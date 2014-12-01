@@ -120,7 +120,7 @@ static float t;
 static struct animSeq *seqList;
 static struct animSeq *editSeq;
 
-static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount);
+static void drawit__Gv(int n, wincount_t wincount);
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand);
 static void animateacts__Gv(void);
 static void stopAnimation__Gv(void);
@@ -179,9 +179,10 @@ init_ep(void)
     wheel = 0.0f;
 }
 
-static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
+static void drawit__Gv(int n, wincount_t wincount)
 {
   EPANOS_REG s0;
+  int a0;
   int s3;
   float f5;
   float f12;
@@ -223,10 +224,7 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   }
 
   loc_1000545C:
-  if (((signed) s0.i64) < ((signed) 128))
-  {
-  }
-  else
+  if (((signed) s0.i64) >= ((signed) 128))
   {
     s0.u64 = (int32_t) (s0.u32 + -128);
   }
@@ -247,19 +245,19 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   }
 
   loc_100054B8:
-  // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
+  // Set a0 to s3, but ensure it falls within -127 and 127
   if (s3 < 0)
-    ARGS->a0.u64 = (abs(s3) & 127) * -1;
+    a0 = (abs(s3) & 127) * -1;
   else
-    ARGS->a0.u64 = s3 & 127;
+    a0 = s3 & 127;
 
-  if (ARGS->a0.i64 >= 0)
+  if (a0 >= 0)
   {
-    s0.u64 = ARGS->a0.u64;
+    s0.u64 = a0;
   }
   else
   {
-    s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
+    s0.u64 = (int32_t) (a0 + 128);
   }
   goto loc_1000545C;
 
@@ -271,11 +269,11 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
     return;
   }
 
-  // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
+  // Set a0 to s3, but ensure it falls within -127 and 127
   if (s3 < 0)
-    ARGS->a0.u64 = (abs(s3) & 127) * -1;
+    a0 = (abs(s3) & 127) * -1;
   else
-    ARGS->a0.u64 = s3 & 127;
+    a0 = s3 & 127;
 
   goto loc_10005848;
 
@@ -351,11 +349,11 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   loc_10005818:
   s3 = (int32_t) (s3 + -1);
 
-  // Set ARGS->a0 to s3, but ensure it falls within -127 and 127
+  // Set a0 to s3, but ensure it falls within -127 and 127
   if (s3 < 0)
-    ARGS->a0.u64 = (abs(s3) & 127) * -1;
+    a0 = (abs(s3) & 127) * -1;
   else
-    ARGS->a0.u64 = s3 & 127;
+    a0 = s3 & 127;
 
   if ((n - nlimit) >= s3)
   {
@@ -364,10 +362,10 @@ static void drawit__Gv(EPANOS_ARGS *ARGS, int n, wincount_t wincount)
   }
 
   loc_10005848:
-  s0.u64 = ARGS->a0.u64;
-  if (ARGS->a0.i64 < 0)
+  s0.u64 = a0;
+  if (a0 < 0)
   {
-    s0.u64 = (int32_t) (ARGS->a0.u32 + 128);
+    s0.u64 = (int32_t) (a0 + 128);
   }
 
   goto loc_1000552C;
@@ -1822,7 +1820,7 @@ void display__Gv(EPANOS_ARGS *ARGS, wincount_t wincount)
 
   wheel = fmodf(wheel - var_50, 360.0f);
 
-  drawit__Gv(ARGS, n, wincount);
+  drawit__Gv(n, wincount);
 
   t = t + acttable[45]->flt_g;
 

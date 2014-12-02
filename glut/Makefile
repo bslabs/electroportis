@@ -2,7 +2,7 @@ all: electroportis_glut
 
 CC=cc
 COBJS=main_glut.o ../src/ep.o
-CFLAGS+=-I../ElectroPortis/include -I../include -Wall -Os -Wno-int-conversion
+CFLAGS+=-I../windows/ElectroPortis/include -I../include -Wall -Os -Wno-int-conversion
 
 ifeq ($(shell uname),Darwin)
 	# Mac

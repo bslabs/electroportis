@@ -56,7 +56,7 @@
       <SDLCheck>true</SDLCheck>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
-      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)ext\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;%(ProjectDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)ext\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;%(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -87,7 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ext\SHRWLocks\SHRWLocks.hpp" />
-    <ClInclude Include="..\include\ep.h" />
+    <ClInclude Include="..\..\include\ep.h" />
     <ClInclude Include="ext\vs2012_math\vs2012_math.h" />
     <ClInclude Include="ext\vs2012_math\vs2012_math_private.h" />
     <ClInclude Include="ext\rand48\rand48.h" />
@@ -102,7 +102,7 @@
     <ClInclude Include="include\saver.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ep.c" />
+    <ClCompile Include="..\..\src\ep.c" />
     <ClCompile Include="src\main.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)$(TargetName)_cpp.pch</PrecompiledHeaderOutputFile>

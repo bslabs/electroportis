@@ -5,3 +5,7 @@ Debug
 Release
 ipch
 ElectroPortis/build
+*.o
+*.swp
+*~
+.DS_Store

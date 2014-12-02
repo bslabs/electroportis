@@ -90,7 +90,7 @@
     <ClInclude Include="include\saver.hpp">
       <Filter>Header Files\saver</Filter>
     </ClInclude>
-    <ClInclude Include="include\ep.h">
+    <ClInclude Include="..\include\ep.h">
       <Filter>Header Files\saver</Filter>
     </ClInclude>
     <ClInclude Include="ext\SHRWLocks\SHRWLocks.hpp">
@@ -119,7 +119,7 @@
     <ClCompile Include="ext\vs2012_math\s_expm1.c">
       <Filter>Source Files\ext\vs2012_math</Filter>
     </ClCompile>
-    <ClCompile Include="src\ep.c">
+    <ClCompile Include="..\src\ep.c">
       <Filter>Source Files\saver</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">

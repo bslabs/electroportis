@@ -21,6 +21,7 @@
  */
 #include "stdafx.hpp"
 #include "replay_draw.hpp"
+#include "gl_wrap.h"
 #include "saver.hpp"
 
 SHRW2 g_replay_list_lock;

@@ -16,7 +16,7 @@
 
 #include "stdafx.h"
 #include "ep.h"
-#include "replay_draw.hpp"
+#include "gl_wrap.h"
 
 #ifdef _MSC_VER
 #include "saver.hpp"

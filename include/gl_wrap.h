@@ -37,38 +37,36 @@
 
 #ifdef _WIN32
 
-#include "saver.hpp" // for wincount_t
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-void wrap_glColor3f(GLfloat r, GLfloat g, GLfloat b, const wincount_t wincount);
-void wrap_glPushMatrix(const wincount_t wincount);
-void wrap_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const wincount_t wincount);
-void wrap_glTranslatef(GLfloat x, GLfloat y, GLfloat z, const wincount_t wincount);
-void wrap_glPopMatrix(const wincount_t wincount);
-void wrap_glScalef(GLfloat x, GLfloat y, GLfloat z, const wincount_t wincount);
-void wrap_glBegin(GLenum mode, const wincount_t wincount);
-void wrap_glVertex2f(GLfloat x, GLfloat y, const wincount_t wincount);
-void wrap_glEnd(const wincount_t wincount);
-void wrap_glClear(GLbitfield mask, const wincount_t wincount);
-void wrap_glFinish(const wincount_t wincount);
+void wrap_glColor3f(GLfloat r, GLfloat g, GLfloat b, const void *context);
+void wrap_glPushMatrix(const void *context);
+void wrap_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const void *context);
+void wrap_glTranslatef(GLfloat x, GLfloat y, GLfloat z, const void *context);
+void wrap_glPopMatrix(const void *context);
+void wrap_glScalef(GLfloat x, GLfloat y, GLfloat z, const void *context);
+void wrap_glBegin(GLenum mode, const void *context);
+void wrap_glVertex2f(GLfloat x, GLfloat y, const void *context);
+void wrap_glEnd(const void *context);
+void wrap_glClear(GLbitfield mask, const void *context);
+void wrap_glFinish(const void *context);
 #ifdef __cplusplus
 }
 #endif
 
 #else /* !_WIN32 */
 
-#define wrap_glColor3f(r, g, b, wincount)        glColor3f(r, g, b)
-#define wrap_glPushMatrix(wincount)              glPushMatrix()
-#define wrap_glRotatef(angle, x, y, z, wincount) glRotatef(angle, x, y, z)
-#define wrap_glTranslatef(x, y, z, wincount)     glTranslatef(x, y, z)
-#define wrap_glPopMatrix(wincount)               glPopMatrix()
-#define wrap_glScalef(x, y, z, wincount)         glScalef(x, y, z)
-#define wrap_glBegin(mode, wincount)             glBegin(mode)
-#define wrap_glVertex2f(x, y, wincount)          glVertex2f(x, y)
-#define wrap_glEnd(wincount)                     glEnd()
-#define wrap_glClear(mask, wincount)             glClear(mask)
-#define wrap_glFinish(wincount)                  glFinish()
+#define wrap_glColor3f(r, g, b, context)        glColor3f(r, g, b)
+#define wrap_glPushMatrix(context)              glPushMatrix()
+#define wrap_glRotatef(angle, x, y, z, context) glRotatef(angle, x, y, z)
+#define wrap_glTranslatef(x, y, z, context)     glTranslatef(x, y, z)
+#define wrap_glPopMatrix(context)               glPopMatrix()
+#define wrap_glScalef(x, y, z, context)         glScalef(x, y, z)
+#define wrap_glBegin(mode, context)             glBegin(mode)
+#define wrap_glVertex2f(x, y, context)          glVertex2f(x, y)
+#define wrap_glEnd(context)                     glEnd()
+#define wrap_glClear(mask, context)             glClear(mask)
+#define wrap_glFinish(context)                  glFinish()
 
 #endif /* !_WIN32 */

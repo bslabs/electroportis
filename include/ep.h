@@ -23,12 +23,6 @@
 #include <GL/glu.h>
 #endif
 
-#ifdef _WIN32
-#include "saver.hpp"
-#else
-typedef unsigned long wincount_t;
-#endif
-
 typedef union EPANOS_REG {
     uint8_t u8;
     int32_t i32;
@@ -58,7 +52,7 @@ extern char oflag, bflag;
 void init_ep(void);
 void reshape__GiT1(const GLuint width, const GLuint height);
 void createActTable__Gv(void);
-void display__Gv(wincount_t wincount);
+void display__Gv(const void *context);
 #ifdef __cplusplus
 }
 #endif

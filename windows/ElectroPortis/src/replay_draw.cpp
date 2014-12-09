@@ -29,16 +29,18 @@ std::vector<gl_record_t> g_replay_list;
 
 extern "C" {
 void
-wrap_glColor3f(GLfloat r, GLfloat g, GLfloat b, const wincount_t wincount)
+wrap_glColor3f(GLfloat r, GLfloat g, GLfloat b, const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glColor3f(r, g, b);
     if (1 < wincount)
         g_replay_list.push_back({ GLCOLOR3F, { r, g, b } });
 }
 
 void
-wrap_glPushMatrix(const wincount_t wincount)
+wrap_glPushMatrix(const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glPushMatrix();
     if (1 < wincount)
         g_replay_list.push_back({ GLPUSHMATRIX, {} });
@@ -46,8 +48,9 @@ wrap_glPushMatrix(const wincount_t wincount)
 
 void
 wrap_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z,
-               const wincount_t wincount)
+               const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glRotatef(angle, x, y, z);
     if (1 < wincount)
         g_replay_list.push_back({ GLROTATEF, { angle, x, y, z } });
@@ -55,64 +58,72 @@ wrap_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z,
 
 void
 wrap_glTranslatef(GLfloat x, GLfloat y, GLfloat z,
-                  const wincount_t wincount)
+                  const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glTranslatef(x, y, z);
     if (1 < wincount)
         g_replay_list.push_back({ GLTRANSLATEF, { x, y, z } });
 }
 
 void
-wrap_glPopMatrix(const wincount_t wincount)
+wrap_glPopMatrix(const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glPopMatrix();
     if (1 < wincount)
         g_replay_list.push_back({ GLPOPMATRIX, {} });
 }
 
 void
-wrap_glScalef(GLfloat x, GLfloat y, GLfloat z, const wincount_t wincount)
+wrap_glScalef(GLfloat x, GLfloat y, GLfloat z, const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glScalef(x, y, z);
     if (1 < wincount)
         g_replay_list.push_back({ GLSCALEF, { x, y, z } });
 }
 
 void
-wrap_glBegin(GLenum mode, const wincount_t wincount)
+wrap_glBegin(GLenum mode, const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glBegin(mode);
     if (1 < wincount)
         g_replay_list.push_back({ GLBEGIN, { mode } });
 }
 
 void
-wrap_glVertex2f(GLfloat x, GLfloat y, const wincount_t wincount)
+wrap_glVertex2f(GLfloat x, GLfloat y, const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glVertex2f(x, y);
     if (1 < wincount)
         g_replay_list.push_back({ GLVERTEX2F, { x, y } });
 }
 
 void
-wrap_glEnd(const wincount_t wincount)
+wrap_glEnd(const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glEnd();
     if (1 < wincount)
         g_replay_list.push_back({ GLEND, {} });
 }
 
 void
-wrap_glClear(GLbitfield mask, const wincount_t wincount)
+wrap_glClear(GLbitfield mask, const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glClear(mask);
     if (1 < wincount)
         g_replay_list.push_back({ GLCLEAR, { mask } });
 }
 
 void
-wrap_glFinish(const wincount_t wincount)
+wrap_glFinish(const void *context)
 {
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
     glFinish();
     if (1 < wincount)
         g_replay_list.push_back({ GLFINISH, {} });

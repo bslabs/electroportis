@@ -19,7 +19,6 @@
 #include "gl_wrap.h"
 
 #ifdef _MSC_VER
-#include "saver.hpp"
 
 #if _MSC_VER < 1800
 #include "vs2012_math/vs2012_math.h"
@@ -130,13 +129,13 @@ static float t;
 static struct animSeq *seqList;
 static struct animSeq *editSeq;
 
-static void drawit__Gv(int n, wincount_t wincount);
+static void drawit__Gv(int n, const void *context);
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand);
 static void animateacts__Gv(void);
 static void stopAnimation__Gv(void);
 static void readAnimation__Gv(EPANOS_ARGS *ARGS);
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
-static void drawshape__GiT1(char poly, wincount_t wincount);
+static void drawshape__GiT1(char poly, const void *context);
 static void tasteQueue__Gv(void);
 static void hls_to_rgb__GfN21PfN24(float *a3, float *a4, float *a5, float f12, float f13, float f14);
 static void killSeq__GP7animSeq(struct animSeq *seq);
@@ -189,7 +188,7 @@ init_ep(void)
     wheel = 0.0f;
 }
 
-static void drawit__Gv(int n, wincount_t wincount)
+static void drawit__Gv(int n, const void *context)
 {
   int s0;
   int a0;
@@ -215,11 +214,11 @@ static void drawit__Gv(int n, wincount_t wincount)
   uint64_t var_A8;
   char *var_A0;
 
-  wrap_glColor3f(1.0f, 1.0f, 1.0f, wincount);
-  wrap_glPushMatrix(wincount);
+  wrap_glColor3f(1.0f, 1.0f, 1.0f, context);
+  wrap_glPushMatrix(context);
 
   {
-    wrap_glRotatef(wheel, f22.s, f20.s, f20.s, wincount);
+    wrap_glRotatef(wheel, f22.s, f20.s, f20.s, context);
   }
   s3 = n;
   if (0 < nlimit)
@@ -241,7 +240,7 @@ static void drawit__Gv(int n, wincount_t wincount)
 
   {
     float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
-    wrap_glTranslatef(f20.s, f20.s, f14, wincount);
+    wrap_glTranslatef(f20.s, f20.s, f14, context);
   }
   s3--;
   if ((n - nlimit) >= s3)
@@ -275,7 +274,7 @@ static void drawit__Gv(int n, wincount_t wincount)
   s3 = n;
   if (var_A8 == 0)
   {
-    wrap_glPopMatrix(wincount);
+    wrap_glPopMatrix(context);
     return;
   }
 
@@ -328,28 +327,28 @@ static void drawit__Gv(int n, wincount_t wincount)
         f12, f22.s - f24, f22.s);
   }
 
-  wrap_glPushMatrix(wincount);
-  wrap_glTranslatef(f30, var_D0, f20.s, wincount);
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
-  wrap_glTranslatef(f28, f20.s, f20.s, wincount);
+  wrap_glPushMatrix(context);
+  wrap_glTranslatef(f30, var_D0, f20.s, context);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
+  wrap_glTranslatef(f28, f20.s, f20.s, context);
 
   var_78 = &(fill[s0]);
   if (*var_78 != 0)
   {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
-    drawshape__GiT1(1, wincount);
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+    drawshape__GiT1(1, context);
   }
 
   var_A0 = &(outline[s0]);
   if (*var_A0 != 0)
   {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
-    drawshape__GiT1(0, wincount);
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+    drawshape__GiT1(0, context);
   }
 
-  wrap_glPopMatrix(wincount);
+  wrap_glPopMatrix(context);
 
   if (sflag == 0)
   {
@@ -367,7 +366,7 @@ static void drawit__Gv(int n, wincount_t wincount)
 
   if ((n - nlimit) >= s3)
   {
-    wrap_glPopMatrix(wincount);
+    wrap_glPopMatrix(context);
     return;
   }
 
@@ -381,75 +380,75 @@ static void drawit__Gv(int n, wincount_t wincount)
   goto loc_1000552C;
 
   loc_100058AC:
-  wrap_glScalef(f22.s, -1.0f, f22.s, wincount);
-  wrap_glPushMatrix(wincount);
-  wrap_glTranslatef(f30, var_D0, f20.s, wincount);
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
-  wrap_glTranslatef(f28, f20.s, f20.s, wincount);
-  wrap_glScalef(var_108, var_108, f22.s, wincount);
+  wrap_glScalef(f22.s, -1.0f, f22.s, context);
+  wrap_glPushMatrix(context);
+  wrap_glTranslatef(f30, var_D0, f20.s, context);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
+  wrap_glTranslatef(f28, f20.s, f20.s, context);
+  wrap_glScalef(var_108, var_108, f22.s, context);
 
   if (*var_78 != 0)
   {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
-    drawshape__GiT1(1, wincount);
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+    drawshape__GiT1(1, context);
   }
 
   if (*var_A0 != 0)
   {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
-    drawshape__GiT1(0, wincount);
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+    drawshape__GiT1(0, context);
   }
 
-  wrap_glPopMatrix(wincount);
-  wrap_glRotatef(180.0f, f20.s, f20.s, f22.s, wincount);
-  wrap_glPushMatrix(wincount);
-  wrap_glTranslatef(f30, var_D0, f20.s, wincount);
+  wrap_glPopMatrix(context);
+  wrap_glRotatef(180.0f, f20.s, f20.s, f22.s, context);
+  wrap_glPushMatrix(context);
+  wrap_glTranslatef(f30, var_D0, f20.s, context);
 
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
-  wrap_glTranslatef(f28, f20.s, f20.s, wincount);
-  wrap_glScalef(var_108, var_108, f22.s, wincount);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
+  wrap_glTranslatef(f28, f20.s, f20.s, context);
+  wrap_glScalef(var_108, var_108, f22.s, context);
 
   if (*var_78 != 0)
   {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
-    drawshape__GiT1(1, wincount);
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+    drawshape__GiT1(1, context);
   }
 
   if (*var_A0 != 0)
   {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
-    drawshape__GiT1(0, wincount);
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+    drawshape__GiT1(0, context);
   }
 
-  wrap_glPopMatrix(wincount);
-  wrap_glScalef(f22.s, -1.0f, f22.s, wincount);
-  wrap_glPushMatrix(wincount);
-  wrap_glTranslatef(f30, var_D0, f20.s, wincount);
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, wincount);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, wincount);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, wincount);
-  wrap_glTranslatef(f28, f20.s, f20.s, wincount);
-  wrap_glScalef(var_108, var_108, f22.s, wincount);
+  wrap_glPopMatrix(context);
+  wrap_glScalef(f22.s, -1.0f, f22.s, context);
+  wrap_glPushMatrix(context);
+  wrap_glTranslatef(f30, var_D0, f20.s, context);
+  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
+  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
+  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
+  wrap_glTranslatef(f28, f20.s, f20.s, context);
+  wrap_glScalef(var_108, var_108, f22.s, context);
 
   if (*var_78 != 0)
   {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], wincount);
-    drawshape__GiT1(1, wincount);
+    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+    drawshape__GiT1(1, context);
   }
 
   if (*var_A0 != 0)
   {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], wincount);
-    drawshape__GiT1(0, wincount);
+    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+    drawshape__GiT1(0, context);
   }
 
-  wrap_glPopMatrix(wincount);
-  wrap_glRotatef(var_110, f20.s, f20.s, f22.s, wincount);
-  wrap_glTranslatef(f20.s, f20.s, var_100, wincount);
+  wrap_glPopMatrix(context);
+  wrap_glRotatef(var_110, f20.s, f20.s, f22.s, context);
+  wrap_glTranslatef(f20.s, f20.s, var_100, context);
   {
     goto loc_10005818;
   }
@@ -1142,30 +1141,30 @@ static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)
   }
 }
 
-static void drawshape__GiT1(char poly, wincount_t wincount)
+static void drawshape__GiT1(char poly, const void *context)
 {
   if (poly == 0)
   {
-    wrap_glBegin(GL_LINES, wincount);
-    wrap_glVertex2f(square[0], square[1], wincount);
-    wrap_glVertex2f(square[2], square[3], wincount);
-    wrap_glVertex2f(square[2], square[3], wincount);
-    wrap_glVertex2f(square[4], square[5], wincount);
-    wrap_glVertex2f(square[4], square[5], wincount);
-    wrap_glVertex2f(square[6], square[7], wincount);
-    wrap_glVertex2f(square[6], square[7], wincount);
-    wrap_glVertex2f(square[0], square[1], wincount);
+    wrap_glBegin(GL_LINES, context);
+	wrap_glVertex2f(square[0], square[1], context);
+	wrap_glVertex2f(square[2], square[3], context);
+	wrap_glVertex2f(square[2], square[3], context);
+    wrap_glVertex2f(square[4], square[5], context);
+    wrap_glVertex2f(square[4], square[5], context);
+    wrap_glVertex2f(square[6], square[7], context);
+    wrap_glVertex2f(square[6], square[7], context);
+    wrap_glVertex2f(square[0], square[1], context);
   }
   else
   {
-    wrap_glBegin(GL_POLYGON, wincount);
-    wrap_glVertex2f(square[0], square[1], wincount);
-    wrap_glVertex2f(square[2], square[3], wincount);
-    wrap_glVertex2f(square[4], square[5], wincount);
-    wrap_glVertex2f(square[6], square[7], wincount);
+    wrap_glBegin(GL_POLYGON, context);
+    wrap_glVertex2f(square[0], square[1], context);
+    wrap_glVertex2f(square[2], square[3], context);
+    wrap_glVertex2f(square[4], square[5], context);
+    wrap_glVertex2f(square[6], square[7], context);
   }
 
-  wrap_glEnd(wincount);
+  wrap_glEnd(context);
   return;
 }
 
@@ -1754,7 +1753,7 @@ static void processCommand__GP11animCommand(struct animCommand *cmd)
   return;
 }
 
-void display__Gv(wincount_t wincount)
+void display__Gv(const void *context)
 {
   static int n;
 
@@ -1762,8 +1761,8 @@ void display__Gv(wincount_t wincount)
   float f5;
   float var_50;
 
-  wrap_glClear(GL_COLOR_BUFFER_BIT, wincount);
-  wrap_glColor3f(1.0f, 1.0f, 1.0f, wincount);
+  wrap_glClear(GL_COLOR_BUFFER_BIT, context);
+  wrap_glColor3f(1.0f, 1.0f, 1.0f, context);
 
   if ((double)1.0 <= (double)(t + acttable[45]->flt_g))
   {
@@ -1830,11 +1829,11 @@ void display__Gv(wincount_t wincount)
 
   wheel = fmodf(wheel - var_50, 360.0f);
 
-  drawit__Gv(n, wincount);
+  drawit__Gv(n, context);
 
   t = t + acttable[45]->flt_g;
 
-  wrap_glFinish(wincount);
+  wrap_glFinish(context);
 
   //t9.u64 = (uint64_t) swapBuffers__Q2_10GLXWrapper6windowGv;
 

@@ -75,7 +75,7 @@ render_loop(saver_t * const ctx)
             if (1 < ctx->wincount)
                 clear_replay_list();
             QueryPerformanceCounter(&drawstart);
-            display__Gv(ctx->wincount);
+            display__Gv(&(ctx->wincount));
             QueryPerformanceCounter(&drawend);
             g_replay_list_lock.releaseLockExclusive();
         } else {

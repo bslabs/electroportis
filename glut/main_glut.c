@@ -8,6 +8,8 @@
 
 #include "ep.h"
 
+#include <stdlib.h>
+
 int mainwinid;
 
 #ifdef TEST
@@ -54,7 +56,7 @@ void menuhandler(int value)
 
 void drawfunc(void)
 {
-  display__Gv(0);
+  display__Gv(NULL);
   glutSwapBuffers();
 
 #ifdef TEST

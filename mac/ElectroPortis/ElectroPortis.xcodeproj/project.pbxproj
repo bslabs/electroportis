@@ -1,0 +1,300 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		324C56AE1A36DEBF00FFDD25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56AD1A36DEBF00FFDD25 /* AppDelegate.m */; };
+		324C56B01A36DEBF00FFDD25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56AF1A36DEBF00FFDD25 /* main.m */; };
+		324C56B21A36DEBF00FFDD25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 324C56B11A36DEBF00FFDD25 /* Images.xcassets */; };
+		324C56B51A36DEBF00FFDD25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 324C56B31A36DEBF00FFDD25 /* MainMenu.xib */; };
+		324C56CE1A36E11300FFDD25 /* ElectroPortisOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56CD1A36E11300FFDD25 /* ElectroPortisOpenGLView.m */; };
+		324C56D01A36E95D00FFDD25 /* ep.c in Sources */ = {isa = PBXBuildFile; fileRef = 324C56CF1A36E95D00FFDD25 /* ep.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		324C56A71A36DEBF00FFDD25 /* ElectroPortis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElectroPortis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		324C56AB1A36DEBF00FFDD25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		324C56AC1A36DEBF00FFDD25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		324C56AD1A36DEBF00FFDD25 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		324C56AF1A36DEBF00FFDD25 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		324C56B11A36DEBF00FFDD25 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		324C56B41A36DEBF00FFDD25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		324C56CC1A36E11300FFDD25 /* ElectroPortisOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectroPortisOpenGLView.h; sourceTree = "<group>"; };
+		324C56CD1A36E11300FFDD25 /* ElectroPortisOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectroPortisOpenGLView.m; sourceTree = "<group>"; };
+		324C56CF1A36E95D00FFDD25 /* ep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ep.c; path = ../../../src/ep.c; sourceTree = "<group>"; };
+		324C56D11A36E9D100FFDD25 /* ep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ep.h; path = ../../../include/ep.h; sourceTree = "<group>"; };
+		324C56D21A36E9EF00FFDD25 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = ../../../include/stdafx.h; sourceTree = "<group>"; };
+		324C56D31A36EA0300FFDD25 /* gl_wrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gl_wrap.h; path = ../../../include/gl_wrap.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		324C56A41A36DEBF00FFDD25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		324C569E1A36DEBF00FFDD25 = {
+			isa = PBXGroup;
+			children = (
+				324C56A91A36DEBF00FFDD25 /* ElectroPortis */,
+				324C56A81A36DEBF00FFDD25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		324C56A81A36DEBF00FFDD25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				324C56A71A36DEBF00FFDD25 /* ElectroPortis.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		324C56A91A36DEBF00FFDD25 /* ElectroPortis */ = {
+			isa = PBXGroup;
+			children = (
+				324C56AC1A36DEBF00FFDD25 /* AppDelegate.h */,
+				324C56AD1A36DEBF00FFDD25 /* AppDelegate.m */,
+				324C56CC1A36E11300FFDD25 /* ElectroPortisOpenGLView.h */,
+				324C56CD1A36E11300FFDD25 /* ElectroPortisOpenGLView.m */,
+				324C56CF1A36E95D00FFDD25 /* ep.c */,
+				324C56D11A36E9D100FFDD25 /* ep.h */,
+				324C56D31A36EA0300FFDD25 /* gl_wrap.h */,
+				324C56D21A36E9EF00FFDD25 /* stdafx.h */,
+				324C56B11A36DEBF00FFDD25 /* Images.xcassets */,
+				324C56B31A36DEBF00FFDD25 /* MainMenu.xib */,
+				324C56AA1A36DEBF00FFDD25 /* Supporting Files */,
+			);
+			path = ElectroPortis;
+			sourceTree = "<group>";
+		};
+		324C56AA1A36DEBF00FFDD25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				324C56AB1A36DEBF00FFDD25 /* Info.plist */,
+				324C56AF1A36DEBF00FFDD25 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		324C56A61A36DEBF00FFDD25 /* ElectroPortis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 324C56C41A36DEBF00FFDD25 /* Build configuration list for PBXNativeTarget "ElectroPortis" */;
+			buildPhases = (
+				324C56A31A36DEBF00FFDD25 /* Sources */,
+				324C56A41A36DEBF00FFDD25 /* Frameworks */,
+				324C56A51A36DEBF00FFDD25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ElectroPortis;
+			productName = ElectroPortis;
+			productReference = 324C56A71A36DEBF00FFDD25 /* ElectroPortis.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		324C569F1A36DEBF00FFDD25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Brendan Shanks";
+				TargetAttributes = {
+					324C56A61A36DEBF00FFDD25 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 324C56A21A36DEBF00FFDD25 /* Build configuration list for PBXProject "ElectroPortis" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 324C569E1A36DEBF00FFDD25;
+			productRefGroup = 324C56A81A36DEBF00FFDD25 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				324C56A61A36DEBF00FFDD25 /* ElectroPortis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		324C56A51A36DEBF00FFDD25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				324C56B21A36DEBF00FFDD25 /* Images.xcassets in Resources */,
+				324C56B51A36DEBF00FFDD25 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		324C56A31A36DEBF00FFDD25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				324C56CE1A36E11300FFDD25 /* ElectroPortisOpenGLView.m in Sources */,
+				324C56B01A36DEBF00FFDD25 /* main.m in Sources */,
+				324C56D01A36E95D00FFDD25 /* ep.c in Sources */,
+				324C56AE1A36DEBF00FFDD25 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		324C56B31A36DEBF00FFDD25 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				324C56B41A36DEBF00FFDD25 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		324C56C21A36DEBF00FFDD25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		324C56C31A36DEBF00FFDD25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		324C56C51A36DEBF00FFDD25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ElectroPortis/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		324C56C61A36DEBF00FFDD25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ElectroPortis/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		324C56A21A36DEBF00FFDD25 /* Build configuration list for PBXProject "ElectroPortis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				324C56C21A36DEBF00FFDD25 /* Debug */,
+				324C56C31A36DEBF00FFDD25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		324C56C41A36DEBF00FFDD25 /* Build configuration list for PBXNativeTarget "ElectroPortis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				324C56C51A36DEBF00FFDD25 /* Debug */,
+				324C56C61A36DEBF00FFDD25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 324C569F1A36DEBF00FFDD25 /* Project object */;
+}

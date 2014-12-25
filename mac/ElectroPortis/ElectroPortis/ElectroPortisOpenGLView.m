@@ -28,6 +28,9 @@
     GLint swapInt = 1;
     [[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval];
     
+    // Opt-in to retina
+    [self setWantsBestResolutionOpenGLSurface:YES];
+    
     // Create a display link capable of being used with all active displays
     CVDisplayLinkCreateWithActiveCGDisplays(&displayLink);
     

@@ -55,8 +55,10 @@ char bflag = 1;
 
 static const char aflag = 1;
 static const float square[8] = {-0.100000001f, -0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f};
-static float outlinecolRGBA[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
-static float colRGBA[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
+static const float outlinecolRGBA_initial[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
+static const float colRGBA_initial[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
+static float outlinecolRGBA[4];
+static float colRGBA[4];
 static const char *defaultScript = "# created by mkmaster \n#\n# mello script\n#\n#\tDave Tristram\n#\n#\tthis script moves gently on the screen, and uses wheel to maintain\n#\ta 3D look.\n#\n#\n# constants\n#\nactset: 29, 1.0\t\t# \"full\"\nactset: 17, 0.0\t\t# \"auto\"\nactset: 18, 1.0\t\t# \"outline\"\n# actset: 73, 0.107258\t# \"whl\"\nactset: 31, 0.06\t# \"zoom\"\nactset: 38, 60.0\t# \"twst\"\n#actset: 80, 0.23\t# \"spn\" slow\nactset: 108, 1.2\t# \"size\"\nactset: 52, 40.0\t# \"n\"\n#\nseqdo: 1\t# wrist\nseqdo: 2\t# color\nseqdo: 3\t# wheel\nseqdo: 4\t# spin\nseqdo: 5\t# flip\nseqdo: 6\t# arm\nseqdo: 7\t# twist\nseqdo: 8\t# outline\n#\n# \n#\n# wrst anim: gentle radius modulation\n#\nseqname: 1\n#\nduration: 160\nactlim1: 101, -1.5\t\t# wrst\nactlim2: 101,  1.5\t\t# wrst\n#\n#\n#\n# color anim: hue and lightness motion\n#\n#\tthe hues chosen attempt to minimize \"green-out\"\n#\nseqname: 2\n#\nduration: 60\nactset: 127, 0.0\t\t# hue rate chan 0\n#\nactlim1: 123, 0.544053\t\t# hue chan 0 (just near cyan)\nactlim2: 123, 1.295\t\t# hue chan 0 (deep green)\n#\n#\nduration: 80\n#\nactlim1: 130, 0.0\t\t# lightness chan 0 (black)\nactlim2: 130, 1.0\t\t# lightness chan 0 (white)\n#\n#\n#\n# wheel anim: very slow, gentle rocking\n#\nseqname: 3\n#\nduration: 120\n#\nactlim1: 73, 0.137\t\t# wheel, real slow\nactlim2: 73, -0.137\t\t# wheel, real slow\n#\n#\n#\n# spin anim: somewhat fast occasionally\n#\nseqname: 4\n#\nduration: 100\n#\nactlim1: 80,  0.23\t\t# spn slow\nactlim2: 80, -0.23\t\t# spn slow\n#\nranddelay: 1000\n#\n#\nduration: 40\n#\nactlim1: 80,  5.23\t\t# spn fast\nactlim2: 80, -5.23\t\t# spn fast\n#\n#randdelay: 100\nranddelay: 200\n#\nseqloop:\n#\n#\n#\n# flip anim: somewhat fast occasionally\n#\nseqname: 5\n#\nduration: 50\n#\nactlim1: 87,  2.0\t\t# flip slow\nactlim2: 87, -2.0\t\t# flip slow\n#\n#randdelay: 500\nranddelay: 1200\n#\n#\nactlim1: 87,  10.0\t\t# flip fast\nactlim2: 87, -10.0\t\t# flip fast\n#\n#randdelay: 80\nranddelay: 220\n#\n#\nseqloop:\n#\n#\n#\n# arm anim: gentle radius modulation\n#\nseqname: 6\n#\nduration: 90\nactlim1: 94, -2.0\t\t# arm\nactlim2: 94,  2.0\t\t# arm\n#\n#\n#\n# twist anim:\n#\nseqname: 7\n#\n#duration: 1750\nduration: 2250\nactlim1: 38, 200.0\t\t# twst\nactlim2: 38, -200.0\t\t# twst\n#\n#\n#\n# outline anim: on and off infrequently, mostly on\n#\n#\nseqname: 8\n#\nduration: 5000\n#\nactlim1: 18, 0.2\t\t# outline\nactlim2: 18, 1.0\t\t# outline\n#\n#\n#\n# end of generated script";
 #pragma pack (1)
 struct act
@@ -125,6 +127,7 @@ static char fill[128];
 static float gflip;
 static float gspin;
 static int nlimit;
+static int n;
 static float t;
 static struct animSeq *seqList;
 static struct animSeq *editSeq;
@@ -167,7 +170,36 @@ trunc_w_d(double x)
 void
 init_ep(void)
 {
-    EPANOS_ARGS ARGS;
+    // Initialize all static variables to initial values (usually 0)
+    memcpy(&outlinecolRGBA, &outlinecolRGBA_initial, sizeof(outlinecolRGBA));
+    memcpy(&colRGBA, &colRGBA_initial, sizeof(colRGBA));
+
+    currentFrame = 0.0f;
+    relFrame = 0.0f;
+    baseFrame = 0.0f;
+    absFrame = 0.0f;
+    memset(x, 0, sizeof(x));
+    memset(y, 0, sizeof(y));
+    memset(dzoom, 0, sizeof(dzoom));
+    memset(arm, 0, sizeof(arm));
+    memset(wrist, 0, sizeof(wrist));
+    memset(dtwist, 0, sizeof(dtwist));
+    memset(flip, 0, sizeof(flip));
+    memset(spin, 0, sizeof(spin));
+    memset(hue, 0, sizeof(hue));
+    memset(light, 0, sizeof(light));
+    memset(alpha, 0, sizeof(alpha));
+    memset(alphaout, 0, sizeof(alphaout));
+    memset(size, 0, sizeof(size));
+    gflip = 0.0f;
+    gspin = 0.0f;
+    n = 0;
+    t = 0.0f;
+    seqList = NULL;
+    editSeq = NULL;
+
+    // TODO: free everything in the acttable and seqList in case
+    // they aren't NULL (i.e. init_ep() is being called multiple times)
 
     memset(acttable, 0, sizeof(acttable));
     createActTable__Gv();
@@ -175,7 +207,10 @@ init_ep(void)
     memset(fill, 1, sizeof(fill));
 
     if (aflag == 1)
+    {
+        EPANOS_ARGS ARGS;
         readAnimation__Gv(&ARGS);
+    }
 
     srand48(0);
 
@@ -1755,8 +1790,6 @@ static void processCommand__GP11animCommand(struct animCommand *cmd)
 
 void display__Gv(const void *context)
 {
-  static int n;
-
   EPANOS_REG s3;
   float f5;
   float var_50;

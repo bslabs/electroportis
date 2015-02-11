@@ -253,8 +253,6 @@ static void drawit__Gv(int n, const void *context)
   int s3;
   float f5;
   float f12;
-  const EPANOS_REG f20 = {.s = 0.0f};
-  const EPANOS_REG f22 = {.s = 1.0f};
   float f24;
   float f26;
   float f28;
@@ -277,7 +275,7 @@ static void drawit__Gv(int n, const void *context)
   wrap_glPushMatrix(context);
 
   {
-    wrap_glRotatef(wheel, f22.s, f20.s, f20.s, context);
+    wrap_glRotatef(wheel, 1.0f, 0.0f, 0.0f, context);
   }
   s3 = n;
   if (0 < nlimit)
@@ -299,7 +297,7 @@ static void drawit__Gv(int n, const void *context)
 
   {
     float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
-    wrap_glTranslatef(f20.s, f20.s, f14, context);
+    wrap_glTranslatef(0.0f, 0.0f, f14, context);
   }
   s3--;
   if ((n - nlimit) >= s3)
@@ -361,13 +359,13 @@ static void drawit__Gv(int n, const void *context)
   var_E0 = foldtwixt__GiPffT3(s0, spin, t, 360.0f);
   var_D8 = foldtwixt__GiPffT3(s0, flip, t, 360.0f);
   var_110 = twixt__GiPff(s0, dtwist, t);
-  f26 = foldtwixt__GiPffT3(s0, hue, t, f22.s);
+  f26 = foldtwixt__GiPffT3(s0, hue, t, 1.0f);
   var_E8 = twixt__GiPff(s0, alpha, t);
-  f24 = foldtwixt__GiPffT3(s0, light, t, f22.s);
+  f24 = foldtwixt__GiPffT3(s0, light, t, 1.0f);
   var_F0 = twixt__GiPff(s0, alphaout, t);
 
   {
-    hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26, f24, f22.s);
+    hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26, f24, 1.0f);
   }
   f5 = f26 + 0.5f;
   outlinecolRGBA[3] = var_F0;
@@ -384,15 +382,15 @@ static void drawit__Gv(int n, const void *context)
 
   {
     hls_to_rgb__GfN21PfN24(outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]),
-        f12, f22.s - f24, f22.s);
+        f12, 1.0f - f24, 1.0f);
   }
 
   wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, f20.s, context);
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
-  wrap_glTranslatef(f28, f20.s, f20.s, context);
+  wrap_glTranslatef(f30, var_D0, 0.0f, context);
+  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
 
   var_78 = &(fill[s0]);
   if (*var_78 != 0)
@@ -441,14 +439,14 @@ static void drawit__Gv(int n, const void *context)
   goto loc_1000552C;
 
   loc_100058AC:
-  wrap_glScalef(f22.s, -1.0f, f22.s, context);
+  wrap_glScalef(1.0f, -1.0f, 1.0f, context);
   wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, f20.s, context);
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
-  wrap_glTranslatef(f28, f20.s, f20.s, context);
-  wrap_glScalef(var_108, var_108, f22.s, context);
+  wrap_glTranslatef(f30, var_D0, 0.0f, context);
+  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+  wrap_glScalef(var_108, var_108, 1.0f, context);
 
   if (*var_78 != 0)
   {
@@ -463,15 +461,15 @@ static void drawit__Gv(int n, const void *context)
   }
 
   wrap_glPopMatrix(context);
-  wrap_glRotatef(180.0f, f20.s, f20.s, f22.s, context);
+  wrap_glRotatef(180.0f, 0.0f, 0.0f, 1.0f, context);
   wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, f20.s, context);
+  wrap_glTranslatef(f30, var_D0, 0.0f, context);
 
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
-  wrap_glTranslatef(f28, f20.s, f20.s, context);
-  wrap_glScalef(var_108, var_108, f22.s, context);
+  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+  wrap_glScalef(var_108, var_108, 1.0f, context);
 
   if (*var_78 != 0)
   {
@@ -486,14 +484,14 @@ static void drawit__Gv(int n, const void *context)
   }
 
   wrap_glPopMatrix(context);
-  wrap_glScalef(f22.s, -1.0f, f22.s, context);
+  wrap_glScalef(1.0f, -1.0f, 1.0f, context);
   wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, f20.s, context);
-  wrap_glRotatef(var_E0, f20.s, f20.s, f22.s, context);
-  wrap_glTranslatef(f20.s, var_C8, f20.s, context);
-  wrap_glRotatef(var_D8, f20.s, f22.s, f20.s, context);
-  wrap_glTranslatef(f28, f20.s, f20.s, context);
-  wrap_glScalef(var_108, var_108, f22.s, context);
+  wrap_glTranslatef(f30, var_D0, 0.0f, context);
+  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+  wrap_glScalef(var_108, var_108, 1.0f, context);
 
   if (*var_78 != 0)
   {
@@ -508,8 +506,8 @@ static void drawit__Gv(int n, const void *context)
   }
 
   wrap_glPopMatrix(context);
-  wrap_glRotatef(var_110, f20.s, f20.s, f22.s, context);
-  wrap_glTranslatef(f20.s, f20.s, var_100, context);
+  wrap_glRotatef(var_110, 0.0f, 0.0f, 1.0f, context);
+  wrap_glTranslatef(0.0f, 0.0f, var_100, context);
   {
     goto loc_10005818;
   }

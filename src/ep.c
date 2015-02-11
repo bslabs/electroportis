@@ -30,12 +30,34 @@
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #endif /* !_MSC_VER */
 
 #define NELEMS(x)  (sizeof(x) / sizeof(x[0]))
+
+typedef union EPANOS_REG {
+    uint8_t u8;
+    int32_t i32;
+    uint32_t u32;
+    int64_t i64;
+    uint64_t u64;
+    float s;
+    double d;
+} EPANOS_REG;
+
+typedef struct EPANOS_ARGS {
+    EPANOS_REG v0;
+    EPANOS_REG v1;
+    EPANOS_REG a0;
+    EPANOS_REG a1;
+    EPANOS_REG a2;
+    EPANOS_REG a3;
+    EPANOS_REG f0;
+    EPANOS_REG f2;
+} EPANOS_ARGS;
 
 static const float flt_100092A8 = 1.00000000f;
 

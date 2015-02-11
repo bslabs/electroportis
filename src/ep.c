@@ -274,243 +274,201 @@ static void drawit__Gv(int n, const void *context)
   wrap_glColor3f(1.0f, 1.0f, 1.0f, context);
   wrap_glPushMatrix(context);
 
-  {
-    wrap_glRotatef(wheel, 1.0f, 0.0f, 0.0f, context);
-  }
+  wrap_glRotatef(wheel, 1.0f, 0.0f, 0.0f, context);
   s3 = n;
-  if (0 < nlimit)
+  if (0 >= nlimit)
   {
-    var_A8 = 1;
-    goto loc_100054B8;
+    var_A8 = 0;
   }
   else
   {
-    var_A8 = 0;
-    goto loc_100054E4;
-  }
+    var_A8 = 1;
 
-  loc_1000545C:
-  if (s0 >= 128)
-  {
-    s0 -= 128;
-  }
+    do
+    {
+      // Set a0 to s3, but ensure it falls within -127 and 127
+      if (s3 < 0)
+        a0 = (abs(s3) & 127) * -1;
+      else
+        a0 = s3 & 127;
 
-  {
-    float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
-    wrap_glTranslatef(0.0f, 0.0f, f14, context);
-  }
-  s3--;
-  if ((n - nlimit) >= s3)
-  {
+      if (a0 < 0)
+        s0 = a0 + 128;
+      else
+        s0 = a0;
+
+      if (s0 >= 128)
+        s0 -= 128;
+
+      float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
+      wrap_glTranslatef(0.0f, 0.0f, f14, context);
+
+      s3--;
+    } while ((n - nlimit) < s3);
+
     if ((n - nlimit) < n)
       var_A8 = 1;
     else
       var_A8 = 0;
-
-    goto loc_100054E4;
   }
 
-  loc_100054B8:
-  // Set a0 to s3, but ensure it falls within -127 and 127
-  if (s3 < 0)
-    a0 = (abs(s3) & 127) * -1;
-  else
-    a0 = s3 & 127;
-
-  if (a0 >= 0)
-  {
-    s0 = a0;
-  }
-  else
-  {
-    s0 = a0 + 128;
-  }
-  goto loc_1000545C;
-
-  loc_100054E4:
   s3 = n;
-  if (var_A8 == 0)
+  if (var_A8 != 0)
   {
-    wrap_glPopMatrix(context);
-    wrap_glFinish(context);
-    return;
-  }
+    do
+    {
+      // Set a0 to s3, but ensure it falls within -127 and 127
+      if (s3 < 0)
+        a0 = (abs(s3) & 127) * -1;
+      else
+        a0 = s3 & 127;
 
-  // Set a0 to s3, but ensure it falls within -127 and 127
-  if (s3 < 0)
-    a0 = (abs(s3) & 127) * -1;
-  else
-    a0 = s3 & 127;
+      if (a0 < 0)
+        s0 = a0 + 128;
+      else
+        s0 = a0;
 
-  goto loc_10005848;
+      if (s0 >= 128)
+        s0 -= 128;
 
-  loc_1000552C:
-  if (s0 >= 128)
-  {
-    s0 -= 128;
-  }
+      f30 = twixt__GiPff(s0, x, t);
+      var_D0 = twixt__GiPff(s0, y, t);
+      var_100 = twixt__GiPff(s0, dzoom, t);
+      var_C8 = twixt__GiPff(s0, arm, t);
+      f28 = twixt__GiPff(s0, wrist, t);
+      var_108 = twixt__GiPff(s0, size, t);
+      var_E0 = foldtwixt__GiPffT3(s0, spin, t, 360.0f);
+      var_D8 = foldtwixt__GiPffT3(s0, flip, t, 360.0f);
+      var_110 = twixt__GiPff(s0, dtwist, t);
+      f26 = foldtwixt__GiPffT3(s0, hue, t, 1.0f);
+      var_E8 = twixt__GiPff(s0, alpha, t);
+      f24 = foldtwixt__GiPffT3(s0, light, t, 1.0f);
+      var_F0 = twixt__GiPff(s0, alphaout, t);
 
-  f30 = twixt__GiPff(s0, x, t);
-  var_D0 = twixt__GiPff(s0, y, t);
-  var_100 = twixt__GiPff(s0, dzoom, t);
-  var_C8 = twixt__GiPff(s0, arm, t);
-  f28 = twixt__GiPff(s0, wrist, t);
-  var_108 = twixt__GiPff(s0, size, t);
-  var_E0 = foldtwixt__GiPffT3(s0, spin, t, 360.0f);
-  var_D8 = foldtwixt__GiPffT3(s0, flip, t, 360.0f);
-  var_110 = twixt__GiPff(s0, dtwist, t);
-  f26 = foldtwixt__GiPffT3(s0, hue, t, 1.0f);
-  var_E8 = twixt__GiPff(s0, alpha, t);
-  f24 = foldtwixt__GiPffT3(s0, light, t, 1.0f);
-  var_F0 = twixt__GiPff(s0, alphaout, t);
+      {
+        hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26, f24, 1.0f);
+      }
+      f5 = f26 + 0.5f;
+      outlinecolRGBA[3] = var_F0;
+      colRGBA[3] = var_E8;
 
-  {
-    hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26, f24, 1.0f);
-  }
-  f5 = f26 + 0.5f;
-  outlinecolRGBA[3] = var_F0;
-  colRGBA[3] = var_E8;
+      if ((double)1.0 < (double)f5)
+      {
+        f12 = f5 + -1.0f;
+      }
+      else
+      {
+        f12 = f5;
+      }
 
-  if ((double)1.0 < (double)f5)
-  {
-    f12 = f5 + -1.0f;
-  }
-  else
-  {
-    f12 = f5;
-  }
+      {
+        hls_to_rgb__GfN21PfN24(outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]),
+            f12, 1.0f - f24, 1.0f);
+      }
 
-  {
-    hls_to_rgb__GfN21PfN24(outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]),
-        f12, 1.0f - f24, 1.0f);
-  }
+      wrap_glPushMatrix(context);
+      wrap_glTranslatef(f30, var_D0, 0.0f, context);
+      wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+      wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+      wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+      wrap_glTranslatef(f28, 0.0f, 0.0f, context);
 
-  wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, 0.0f, context);
-  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
-  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
-  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
-  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+      var_78 = &(fill[s0]);
+      if (*var_78 != 0)
+      {
+        wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+        drawshape__GiT1(1, context);
+      }
 
-  var_78 = &(fill[s0]);
-  if (*var_78 != 0)
-  {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
-    drawshape__GiT1(1, context);
-  }
+      var_A0 = &(outline[s0]);
+      if (*var_A0 != 0)
+      {
+        wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+        drawshape__GiT1(0, context);
+      }
 
-  var_A0 = &(outline[s0]);
-  if (*var_A0 != 0)
-  {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
-    drawshape__GiT1(0, context);
-  }
+      wrap_glPopMatrix(context);
 
-  wrap_glPopMatrix(context);
+      if (sflag == 0)
+      {
+        wrap_glScalef(1.0f, -1.0f, 1.0f, context);
+        wrap_glPushMatrix(context);
+        wrap_glTranslatef(f30, var_D0, 0.0f, context);
+        wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+        wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+        wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+        wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+        wrap_glScalef(var_108, var_108, 1.0f, context);
 
-  if (sflag == 0)
-  {
-    goto loc_100058AC;
-  }
+        if (*var_78 != 0)
+        {
+          wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+          drawshape__GiT1(1, context);
+        }
 
-  loc_10005818:
-  s3 = (int32_t) (s3 + -1);
+        if (*var_A0 != 0)
+        {
+          wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+          drawshape__GiT1(0, context);
+        }
 
-  // Set a0 to s3, but ensure it falls within -127 and 127
-  if (s3 < 0)
-    a0 = (abs(s3) & 127) * -1;
-  else
-    a0 = s3 & 127;
+        wrap_glPopMatrix(context);
+        wrap_glRotatef(180.0f, 0.0f, 0.0f, 1.0f, context);
+        wrap_glPushMatrix(context);
+        wrap_glTranslatef(f30, var_D0, 0.0f, context);
 
-  if ((n - nlimit) >= s3)
-  {
-    wrap_glPopMatrix(context);
-    wrap_glFinish(context);
-    return;
-  }
+        wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+        wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+        wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+        wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+        wrap_glScalef(var_108, var_108, 1.0f, context);
 
-  loc_10005848:
-  s0 = a0;
-  if (a0 < 0)
-  {
-    s0 = a0 + 128;
-  }
+        if (*var_78 != 0)
+        {
+          wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+          drawshape__GiT1(1, context);
+        }
 
-  goto loc_1000552C;
+        if (*var_A0 != 0)
+        {
+          wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+          drawshape__GiT1(0, context);
+        }
 
-  loc_100058AC:
-  wrap_glScalef(1.0f, -1.0f, 1.0f, context);
-  wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, 0.0f, context);
-  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
-  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
-  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
-  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
-  wrap_glScalef(var_108, var_108, 1.0f, context);
+        wrap_glPopMatrix(context);
+        wrap_glScalef(1.0f, -1.0f, 1.0f, context);
+        wrap_glPushMatrix(context);
+        wrap_glTranslatef(f30, var_D0, 0.0f, context);
+        wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
+        wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
+        wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
+        wrap_glTranslatef(f28, 0.0f, 0.0f, context);
+        wrap_glScalef(var_108, var_108, 1.0f, context);
 
-  if (*var_78 != 0)
-  {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
-    drawshape__GiT1(1, context);
-  }
+        if (*var_78 != 0)
+        {
+          wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+          drawshape__GiT1(1, context);
+        }
 
-  if (*var_A0 != 0)
-  {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
-    drawshape__GiT1(0, context);
-  }
+        if (*var_A0 != 0)
+        {
+          wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+          drawshape__GiT1(0, context);
+        }
 
-  wrap_glPopMatrix(context);
-  wrap_glRotatef(180.0f, 0.0f, 0.0f, 1.0f, context);
-  wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, 0.0f, context);
+        wrap_glPopMatrix(context);
+        wrap_glRotatef(var_110, 0.0f, 0.0f, 1.0f, context);
+        wrap_glTranslatef(0.0f, 0.0f, var_100, context);
+      }
 
-  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
-  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
-  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
-  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
-  wrap_glScalef(var_108, var_108, 1.0f, context);
-
-  if (*var_78 != 0)
-  {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
-    drawshape__GiT1(1, context);
-  }
-
-  if (*var_A0 != 0)
-  {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
-    drawshape__GiT1(0, context);
-  }
-
-  wrap_glPopMatrix(context);
-  wrap_glScalef(1.0f, -1.0f, 1.0f, context);
-  wrap_glPushMatrix(context);
-  wrap_glTranslatef(f30, var_D0, 0.0f, context);
-  wrap_glRotatef(var_E0, 0.0f, 0.0f, 1.0f, context);
-  wrap_glTranslatef(0.0f, var_C8, 0.0f, context);
-  wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
-  wrap_glTranslatef(f28, 0.0f, 0.0f, context);
-  wrap_glScalef(var_108, var_108, 1.0f, context);
-
-  if (*var_78 != 0)
-  {
-    wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
-    drawshape__GiT1(1, context);
-  }
-
-  if (*var_A0 != 0)
-  {
-    wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
-    drawshape__GiT1(0, context);
+      s3--;
+    } while ((n - nlimit) < s3);
   }
 
   wrap_glPopMatrix(context);
-  wrap_glRotatef(var_110, 0.0f, 0.0f, 1.0f, context);
-  wrap_glTranslatef(0.0f, 0.0f, var_100, context);
-  {
-    goto loc_10005818;
-  }
+  wrap_glFinish(context);
+  return;
 }
 
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand)

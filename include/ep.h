@@ -51,7 +51,6 @@ extern char oflag, bflag;
 
 void init_ep(void);
 void reshape__GiT1(const GLuint width, const GLuint height);
-void createActTable__Gv(void);
 void display__Gv(const void *context);
 #ifdef __cplusplus
 }

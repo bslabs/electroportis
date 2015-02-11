@@ -142,6 +142,7 @@ static void drawshape__GiT1(char poly, const void *context);
 static void tasteQueue__Gv(void);
 static void hls_to_rgb__GfN21PfN24(float *a3, float *a4, float *a5, float f12, float f13, float f14);
 static void killSeq__GP7animSeq(struct animSeq *seq);
+static void createActTable__Gv(void);
 static struct act *createBlankActAnim__Gv(void);
 static float value__GfN21(float f12, float f13, float f14);
 static void processCommand__GP11animCommand(struct animCommand *cmd);
@@ -1386,7 +1387,7 @@ static void killSeq__GP7animSeq(struct animSeq *seq)
   return;
 }
 
-void createActTable__Gv(void)
+static void createActTable__Gv(void)
 {
   acttable[18] = createBlankActAnim__Gv();
   acttable[73] = createBlankActAnim__Gv();

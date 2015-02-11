@@ -272,6 +272,7 @@ static void drawit__Gv(int n, const void *context)
   uint64_t var_A8;
   char *var_A0;
 
+  wrap_glClear(GL_COLOR_BUFFER_BIT, context);
   wrap_glColor3f(1.0f, 1.0f, 1.0f, context);
   wrap_glPushMatrix(context);
 
@@ -333,6 +334,7 @@ static void drawit__Gv(int n, const void *context)
   if (var_A8 == 0)
   {
     wrap_glPopMatrix(context);
+    wrap_glFinish(context);
     return;
   }
 
@@ -425,6 +427,7 @@ static void drawit__Gv(int n, const void *context)
   if ((n - nlimit) >= s3)
   {
     wrap_glPopMatrix(context);
+    wrap_glFinish(context);
     return;
   }
 
@@ -1817,9 +1820,6 @@ void display__Gv(const void *context)
   float f5;
   float var_50;
 
-  wrap_glClear(GL_COLOR_BUFFER_BIT, context);
-  wrap_glColor3f(1.0f, 1.0f, 1.0f, context);
-
   if ((double)1.0 <= (double)(t + acttable[45]->flt_g))
   {
     t = 0;
@@ -1888,8 +1888,6 @@ void display__Gv(const void *context)
   drawit__Gv(n, context);
 
   t = t + acttable[45]->flt_g;
-
-  wrap_glFinish(context);
 
   //t9.u64 = (uint64_t) swapBuffers__Q2_10GLXWrapper6windowGv;
 

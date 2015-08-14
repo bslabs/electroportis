@@ -40,7 +40,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-void wrap_glColor3f(GLfloat r, GLfloat g, GLfloat b, const void *context);
+void wrap_glColor4f(GLfloat r, GLfloat g, GLfloat b, GLfloat alpha, const void *context);
 void wrap_glPushMatrix(const void *context);
 void wrap_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z, const void *context);
 void wrap_glTranslatef(GLfloat x, GLfloat y, GLfloat z, const void *context);
@@ -57,7 +57,7 @@ void wrap_glFinish(const void *context);
 
 #else /* !_WIN32 */
 
-#define wrap_glColor3f(r, g, b, context)        glColor3f(r, g, b)
+#define wrap_glColor4f(r, g, b, alpha, context)        glColor4f(r, g, b, alpha)
 #define wrap_glPushMatrix(context)              glPushMatrix()
 #define wrap_glRotatef(angle, x, y, z, context) glRotatef(angle, x, y, z)
 #define wrap_glTranslatef(x, y, z, context)     glTranslatef(x, y, z)

@@ -27,7 +27,7 @@
 #include "saver.hpp"
 
 typedef enum gl_cmd {
-    GLCOLOR3F,
+    GLCOLOR4F,
     GLPUSHMATRIX,
     GLROTATEF,
     GLTRANSLATEF,

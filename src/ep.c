@@ -271,7 +271,7 @@ static void drawit__Gv(int n, const void *context)
   char *var_A0;
 
   wrap_glClear(GL_COLOR_BUFFER_BIT, context);
-  wrap_glColor3f(1.0f, 1.0f, 1.0f, context);
+  wrap_glColor4f(1.0f, 1.0f, 1.0f, 1.0f, context);
   wrap_glPushMatrix(context);
 
   wrap_glRotatef(wheel, 1.0f, 0.0f, 0.0f, context);
@@ -376,14 +376,14 @@ static void drawit__Gv(int n, const void *context)
       var_78 = &(fill[s0]);
       if (*var_78 != 0)
       {
-        wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+        wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
         drawshape__GiT1(1, context);
       }
 
       var_A0 = &(outline[s0]);
       if (*var_A0 != 0)
       {
-        wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+        wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
         drawshape__GiT1(0, context);
       }
 
@@ -402,13 +402,13 @@ static void drawit__Gv(int n, const void *context)
 
         if (*var_78 != 0)
         {
-          wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+          wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
           drawshape__GiT1(1, context);
         }
 
         if (*var_A0 != 0)
         {
-          wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+          wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
           drawshape__GiT1(0, context);
         }
 
@@ -425,13 +425,13 @@ static void drawit__Gv(int n, const void *context)
 
         if (*var_78 != 0)
         {
-          wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+          wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
           drawshape__GiT1(1, context);
         }
 
         if (*var_A0 != 0)
         {
-          wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+          wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
           drawshape__GiT1(0, context);
         }
 
@@ -447,13 +447,13 @@ static void drawit__Gv(int n, const void *context)
 
         if (*var_78 != 0)
         {
-          wrap_glColor3f(colRGBA[0], colRGBA[1], colRGBA[2], context);
+          wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
           drawshape__GiT1(1, context);
         }
 
         if (*var_A0 != 0)
         {
-          wrap_glColor3f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], context);
+          wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
           drawshape__GiT1(0, context);
         }
 

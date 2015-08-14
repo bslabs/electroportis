@@ -29,12 +29,12 @@ std::vector<gl_record_t> g_replay_list;
 
 extern "C" {
 void
-wrap_glColor3f(GLfloat r, GLfloat g, GLfloat b, const void *context)
+wrap_glColor4f(GLfloat r, GLfloat g, GLfloat b, GLfloat alpha, const void *context)
 {
     wincount_t wincount = *(static_cast<const wincount_t *>(context));
-    glColor3f(r, g, b);
+    glColor4f(r, g, b, alpha);
     if (1 < wincount)
-        g_replay_list.push_back({ GLCOLOR3F, { r, g, b } });
+        g_replay_list.push_back({ GLCOLOR4F, { r, g, b, alpha } });
 }
 
 void
@@ -137,8 +137,8 @@ replay_draw(void)
         const auto &args = list.second;
 
         switch (list.first) {
-        case GLCOLOR3F:
-            glColor3f(args[0], args[1], args[2]);
+        case GLCOLOR4F:
+            glColor4f(args[0], args[1], args[2], args[3]);
             break;
 
         case GLPUSHMATRIX:

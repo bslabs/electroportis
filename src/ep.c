@@ -601,7 +601,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   EPANOS_REG s4;
   EPANOS_REG s7;
   EPANOS_REG fp;
-  int var_2E0;
   uint64_t var_60;
   uint64_t var_58;
   char var_2D8[256];
@@ -704,6 +703,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 
   if (bflag == 0)
   {
+    char *var_2E0;
     if (scanf("%[^\n]\n", var_2E0) == EOF)
     {
       goto loc_100041A4;

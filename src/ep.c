@@ -716,11 +716,14 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 
   s0 += strcspn(s0, "\n");
-  s0++;
 
-  if (strlen(s0) == 0)
+  if (s0[0] == '\0')
   {
     goto loc_100041A4;
+  }
+  else
+  {
+    s0++;
   }
 
   loc_10003B54:

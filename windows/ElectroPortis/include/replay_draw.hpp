@@ -37,7 +37,11 @@ typedef enum gl_cmd {
     GLVERTEX2F,
     GLEND,
     GLCLEAR,
-    GLFINISH
+    GLFINISH,
+    GLENABLECLIENTSTATE,
+    GLVERTEXPOINTER,
+    GLDRAWARRAYS,
+    GLDISABLECLIENTSTATE,
 } gl_cmd;
 
 #ifdef __cplusplus
@@ -54,8 +58,18 @@ struct gl_arg_t {
         : f(f)
     {}
 
+    gl_arg_t(const int i)
+        : i(i)
+    {}
+
+    gl_arg_t(const void *cp)
+        : cp(cp)
+    {}
+
     inline operator unsigned int() const { return ui; }
     inline operator float() const { return f; }
+    inline operator int() const { return i; }
+    inline operator const void *() const { return cp; }
     gl_arg_t operator=(gl_arg_t& x) const { return *this; }
 
     union {
@@ -63,6 +77,10 @@ struct gl_arg_t {
         unsigned int ui;
         // GLfloat, ...
         float f;
+        // GLint
+        int i;
+        // GLvoid
+        const void *cp;
     };
 };
 

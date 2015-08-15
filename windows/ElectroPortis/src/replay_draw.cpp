@@ -128,6 +128,42 @@ wrap_glFinish(const void *context)
     if (1 < wincount)
         g_replay_list.push_back({ GLFINISH, {} });
 }
+
+void
+wrap_glEnableClientState(GLenum array, void *context)
+{
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
+    glEnableClientState(array);
+    if (1 < wincount)
+        g_replay_list.push_back({ GLENABLECLIENTSTATE, { array } });
+}
+
+void
+wrap_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer, void *context)
+{
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
+    glVertexPointer(size, type, stride, pointer);
+    if (1 < wincount)
+        g_replay_list.push_back({ GLVERTEXPOINTER, { size, type, stride, pointer } });
+}
+
+void
+wrap_glDrawArrays(GLenum mode, GLint first, GLsizei count, void *context)
+{
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
+    glDrawArrays(mode, first, count);
+    if (1 < wincount)
+        g_replay_list.push_back({ GLDRAWARRAYS , { mode, first, count } });
+}
+
+void
+wrap_glDisableClientState (GLenum array, void *context)
+{
+    wincount_t wincount = *(static_cast<const wincount_t *>(context));
+    glDisableClientState(array);
+    if (1 < wincount)
+        g_replay_list.push_back({ GLDISABLECLIENTSTATE, { array } });
+}
 }
 
 void
@@ -179,6 +215,22 @@ replay_draw(void)
 
         case GLFINISH:
             glFinish();
+            break;
+
+        case GLENABLECLIENTSTATE:
+            glEnableClientState(args[0]);
+            break;
+
+        case GLVERTEXPOINTER:
+            glVertexPointer(args[0], args[1], args[2], args[3]);
+            break;
+
+        case GLDRAWARRAYS:
+            glDrawArrays(args[0], args[1], args[2]);
+            break;
+
+        case GLDISABLECLIENTSTATE:
+            glDisableClientState(args[0]);
             break;
 
         default:

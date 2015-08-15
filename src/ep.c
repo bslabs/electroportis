@@ -76,12 +76,23 @@ char oflag;
 char bflag = 1;
 
 static const char aflag = 1;
-static const float square[] =
+static const float square_polygon_vertices[] =
 {
     -0.100000001f, -0.100000001f,
     0.100000001f, -0.100000001f,
     0.100000001f, 0.100000001f,
     -0.100000001f, 0.100000001f
+};
+static const float square_line_vertices[] =
+{
+    -0.100000001f, -0.100000001f,
+     0.100000001f, -0.100000001f,
+     0.100000001f, -0.100000001f,
+     0.100000001f,  0.100000001f,
+     0.100000001f,  0.100000001f,
+    -0.100000001f,  0.100000001f,
+    -0.100000001f,  0.100000001f,
+    -0.100000001f, -0.100000001f
 };
 static const float outlinecolRGBA_initial[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
 static const float colRGBA_initial[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
@@ -1168,26 +1179,19 @@ static void drawshape__GiT1(char poly, const void *context)
 {
   if (poly == 0)
   {
-    wrap_glBegin(GL_LINES, context);
-	wrap_glVertex2f(square[0], square[1], context);
-	wrap_glVertex2f(square[2], square[3], context);
-	wrap_glVertex2f(square[2], square[3], context);
-    wrap_glVertex2f(square[4], square[5], context);
-    wrap_glVertex2f(square[4], square[5], context);
-    wrap_glVertex2f(square[6], square[7], context);
-    wrap_glVertex2f(square[6], square[7], context);
-    wrap_glVertex2f(square[0], square[1], context);
+    wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
+    wrap_glVertexPointer(2, GL_FLOAT, 0, square_line_vertices, context);
+    wrap_glDrawArrays(GL_LINES, 0, sizeof(square_line_vertices)/sizeof(square_line_vertices[0]), context);
+    wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
   else
   {
-    wrap_glBegin(GL_POLYGON, context);
-    wrap_glVertex2f(square[0], square[1], context);
-    wrap_glVertex2f(square[2], square[3], context);
-    wrap_glVertex2f(square[4], square[5], context);
-    wrap_glVertex2f(square[6], square[7], context);
+    wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
+    wrap_glVertexPointer(2, GL_FLOAT, 0, square_polygon_vertices, context);
+    wrap_glDrawArrays(GL_POLYGON, 0, sizeof(square_polygon_vertices)/sizeof(square_polygon_vertices[0]), context);
+    wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
 
-  wrap_glEnd(context);
   return;
 }
 

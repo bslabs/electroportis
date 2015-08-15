@@ -51,6 +51,10 @@ void wrap_glVertex2f(GLfloat x, GLfloat y, const void *context);
 void wrap_glEnd(const void *context);
 void wrap_glClear(GLbitfield mask, const void *context);
 void wrap_glFinish(const void *context);
+void wrap_glEnableClientState(GLenum array, void *context);
+void wrap_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer, void *context);
+void wrap_glDrawArrays(GLenum mode, GLint first, GLsizei count, void *context);
+void wrap_glDisableClientState (GLenum array, void *context);
 #ifdef __cplusplus
 }
 #endif
@@ -68,5 +72,9 @@ void wrap_glFinish(const void *context);
 #define wrap_glEnd(context)                     glEnd()
 #define wrap_glClear(mask, context)             glClear(mask)
 #define wrap_glFinish(context)                  glFinish()
+#define wrap_glEnableClientState(array, context)        glEnableClientState(array)
+#define wrap_glVertexPointer(size, type, stride, pointer, context)	glVertexPointer(size, type, stride, pointer)
+#define wrap_glDrawArrays(mode, first, count, context)	glDrawArrays(mode, first, count)
+#define wrap_glDisableClientState(array, context)       glDisableClientState(array)
 
 #endif /* !_WIN32 */

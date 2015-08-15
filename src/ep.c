@@ -76,7 +76,13 @@ char oflag;
 char bflag = 1;
 
 static const char aflag = 1;
-static const float square[8] = {-0.100000001f, -0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f, 0.100000001f, -0.100000001f, 0.100000001f};
+static const float square[] =
+{
+    -0.100000001f, -0.100000001f,
+    0.100000001f, -0.100000001f,
+    0.100000001f, 0.100000001f,
+    -0.100000001f, 0.100000001f
+};
 static const float outlinecolRGBA_initial[4] = {0.00000000f, 0.00000000f, 1.00000000f, 1.00000000f};
 static const float colRGBA_initial[4] = {1.00000000f, 0.00000000f, 0.00000000f, 1.00000000f};
 static float outlinecolRGBA[4];

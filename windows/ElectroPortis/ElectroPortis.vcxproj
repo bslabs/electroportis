@@ -75,7 +75,7 @@
       <SDLCheck>true</SDLCheck>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)ext\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)ext\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -1184,14 +1184,14 @@ static void drawshape__GiT1(char poly, const void *context)
   {
     wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
     wrap_glVertexPointer(2, GL_FLOAT, 0, square_line_vertices, context);
-    wrap_glDrawArrays(GL_LINES, 0, sizeof(square_line_vertices)/sizeof(square_line_vertices[0]), context);
+    wrap_glDrawArrays(GL_LINES, 0, sizeof(square_line_vertices)/sizeof(square_line_vertices[0]) / 2, context);
     wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
   else
   {
     wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
     wrap_glVertexPointer(2, GL_FLOAT, 0, square_polygon_vertices, context);
-    wrap_glDrawArrays(GL_POLYGON, 0, sizeof(square_polygon_vertices)/sizeof(square_polygon_vertices[0]), context);
+    wrap_glDrawArrays(GL_POLYGON, 0, sizeof(square_polygon_vertices)/sizeof(square_polygon_vertices[0]) / 2, context);
     wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
 

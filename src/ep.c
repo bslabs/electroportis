@@ -1047,26 +1047,15 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 
   loc_100041A4:
-  seq = seqList;
-  if (seqList == NULL)
+  for (seq = seqList; seq != NULL; seq = seq->next)
   {
-    goto loc_100041C4;
+    if (seq->seq == 0)
+    {
+      seq->cmd_h = seq->cmd_g;
+      break;
+    }
   }
 
-  loc_100041B0:
-  if (seq->seq == 0)
-  {
-    seq->cmd_h = seq->cmd_g;
-    goto loc_100041C4;
-  }
-
-  seq = seq->next;
-  if (seq != NULL)
-  {
-    goto loc_100041B0;
-  }
-
-  loc_100041C4:
   if (oflag != 0)
     printf("# done reading animation\n");
 

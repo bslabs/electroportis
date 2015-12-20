@@ -597,7 +597,6 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
 {
   const char *s0;
   struct animCommand *cmd;
-  struct animSeq *seq;
   EPANOS_REG s4;
   EPANOS_REG s7;
   EPANOS_REG fp;
@@ -920,7 +919,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     absFrame = 0.0f;
     relFrame = 0.0f;
 
-    for (seq = seqList; seq != NULL; seq = seq->next)
+    for (struct animSeq *seq = seqList; seq != NULL; seq = seq->next)
     {
       if (seq->seq == cmd->pad_b)
       {
@@ -1047,7 +1046,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   }
 
   loc_100041A4:
-  for (seq = seqList; seq != NULL; seq = seq->next)
+  for (struct animSeq *seq = seqList; seq != NULL; seq = seq->next)
   {
     if (seq->seq == 0)
     {
@@ -1063,14 +1062,11 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   {
     return;
   }
-  else
-  {
-    seq = seqList;
-  }
 
   if (oflag != 0)
-    printf("seq %d at %.2f\n", seq->seq, seq->seqFrame);
+    printf("seq %d at %.2f\n", seqList->seq, seqList->seqFrame);
 
+  struct animSeq *seq = seqList;
   struct animCommand *s0cmd = seq->cmd_g;
 
   while (1)

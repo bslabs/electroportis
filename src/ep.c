@@ -48,17 +48,6 @@ typedef union EPANOS_REG {
     double d;
 } EPANOS_REG;
 
-typedef struct EPANOS_ARGS {
-    EPANOS_REG v0;
-    EPANOS_REG v1;
-    EPANOS_REG a0;
-    EPANOS_REG a1;
-    EPANOS_REG a2;
-    EPANOS_REG a3;
-    EPANOS_REG f0;
-    EPANOS_REG f2;
-} EPANOS_ARGS;
-
 static const float flt_100092A8 = 1.00000000f;
 
 /* swapBuffers__Q2_10GLXWrapper6windowGv: no regmap info, emitting empty stmt at .text:100061FC */
@@ -175,7 +164,7 @@ static void drawit__Gv(int n, const void *context);
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand);
 static void animateacts__Gv(void);
 static void stopAnimation__Gv(void);
-static void readAnimation__Gv(EPANOS_ARGS *ARGS);
+static void readAnimation__Gv(void);
 static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, const void *context);
 static void tasteQueue__Gv(void);
@@ -248,8 +237,7 @@ init_ep(void)
 
     if (aflag == 1)
     {
-        EPANOS_ARGS ARGS;
-        readAnimation__Gv(&ARGS);
+        readAnimation__Gv();
     }
 
     srand48(0);
@@ -593,13 +581,14 @@ static void stopAnimation__Gv(void)
   }
 }
 
-static void readAnimation__Gv(EPANOS_ARGS *ARGS)
+static void readAnimation__Gv(void)
 {
   const char *s0;
   struct animCommand *cmd;
   EPANOS_REG s4;
   EPANOS_REG s7;
   EPANOS_REG fp;
+  uint64_t args_a2;
   uint64_t var_60;
   uint64_t var_58;
   char var_2D8[256];
@@ -616,7 +605,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   goto loc_10003B54;
 
   loc_10003A8C:
-  var_60 = ARGS->a2.u64;
+  var_60 = args_a2;
 
   loc_10003A90:
   var_68 = var_60;
@@ -1017,7 +1006,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
   else if (strcmp("seqkillall:", var_2D8) == 0)
   {
     cmd->type = 15;
-    ARGS->a2.u64 = var_58;
+    args_a2 = var_58;
 
     if (oflag != 0)
       printf("%s", var_2D8);
@@ -1041,7 +1030,7 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     free(cmd);
 
     var_58 = 1;
-    ARGS->a2.u64 = var_58;
+    args_a2 = var_58;
     goto loc_10003A8C;
   }
 

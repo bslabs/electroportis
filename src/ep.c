@@ -919,30 +919,16 @@ static void readAnimation__Gv(EPANOS_ARGS *ARGS)
     baseFrame = 0.0f;
     absFrame = 0.0f;
     relFrame = 0.0f;
-    seq = seqList;
-    if (seqList == NULL)
+
+    for (seq = seqList; seq != NULL; seq = seq->next)
     {
-      goto loc_10004588;
+      if (seq->seq == cmd->pad_b)
+      {
+        editSeq = seq;
+        return;
+      }
     }
 
-    ARGS->v0.u64 = cmd->pad_b;
-    loc_10004570:
-    if (seq->seq == ARGS->v0.u64)
-    {
-      ARGS->v0.u64 = (uint64_t) editSeq;
-
-      editSeq = seq;
-
-      return;
-    }
-
-    seq = seq->next;
-    if (seq != NULL)
-    {
-      goto loc_10004570;
-    }
-
-    loc_10004588:
     editSeq = calloc(sizeof(struct animSeq), 1);
 
     editSeq->seq = cmd->pad_b;

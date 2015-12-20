@@ -588,7 +588,6 @@ static void readAnimation__Gv(void)
   EPANOS_REG s4;
   EPANOS_REG s7;
   EPANOS_REG fp;
-  uint64_t args_a2;
   uint64_t var_60;
   uint64_t var_58;
   char var_2D8[256];
@@ -603,9 +602,6 @@ static void readAnimation__Gv(void)
     printf("# reading animation...\n");
 
   goto loc_10003B54;
-
-  loc_10003A8C:
-  var_60 = args_a2;
 
   loc_10003A90:
   var_68 = var_60;
@@ -1006,12 +1002,12 @@ static void readAnimation__Gv(void)
   else if (strcmp("seqkillall:", var_2D8) == 0)
   {
     cmd->type = 15;
-    args_a2 = var_58;
+    var_60 = var_58;
 
     if (oflag != 0)
       printf("%s", var_2D8);
 
-    goto loc_10003A8C;
+    goto loc_10003A90;
   }
   else if (strncmp("#", var_2D8, 1) == 0)
   {
@@ -1030,8 +1026,8 @@ static void readAnimation__Gv(void)
     free(cmd);
 
     var_58 = 1;
-    args_a2 = var_58;
-    goto loc_10003A8C;
+    var_60 = var_58;
+    goto loc_10003A90;
   }
 
   loc_100041A4:

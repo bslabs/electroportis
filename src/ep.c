@@ -65,12 +65,13 @@ char oflag;
 char bflag = 1;
 
 static const char aflag = 1;
-static const float square_polygon_vertices[] =
+static const float square_polygon_triangle_fan_vertices[] =
 {
-    -0.100000001f, -0.100000001f,
-    0.100000001f, -0.100000001f,
-    0.100000001f, 0.100000001f,
-    -0.100000001f, 0.100000001f
+    // Draw the polygon using two triangles: v0-v1-v2 and v0-v2-v3
+    -0.100000001f, -0.100000001f,   // v0
+    -0.100000001f, 0.100000001f,    // v1
+    0.100000001f, 0.100000001f,     // v2
+    0.100000001f, -0.100000001f,    // v3
 };
 static const float square_line_vertices[] =
 {
@@ -1146,8 +1147,8 @@ static void drawshape__GiT1(char poly, const void *context)
   else
   {
     wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
-    wrap_glVertexPointer(2, GL_FLOAT, 0, square_polygon_vertices, context);
-    wrap_glDrawArrays(GL_POLYGON, 0, sizeof(square_polygon_vertices)/sizeof(square_polygon_vertices[0]) / 2, context);
+    wrap_glVertexPointer(2, GL_FLOAT, 0, square_polygon_triangle_fan_vertices, context);
+    wrap_glDrawArrays(GL_TRIANGLE_FAN, 0, sizeof(square_polygon_triangle_fan_vertices)/sizeof(square_polygon_triangle_fan_vertices[0]) / 2, context);
     wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
 

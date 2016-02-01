@@ -1898,9 +1898,6 @@ void reshape__GiT1(const GLuint width, const GLuint height)
 
 static float twixt__GiPff(int a0, const float *a1, float f14)
 {
-  float f0;
-  float f1;
-  float f2;
   int a4 = a0 - 1;
 
   if (a0 <= 0)
@@ -1908,13 +1905,8 @@ static float twixt__GiPff(int a0, const float *a1, float f14)
     a4 = a4 + 128;
   }
 
-  f2 = 1.0f - f14;
-  f0 = a1[a0] * f14;
-  f1 = a1[a4] * f2;
-  {
-    f0 = f0 + f1;
-    return f0;
-  }
+  const float f2 = 1.0f - f14;
+  return (a1[a0] * f14) + (a1[a4] * f2);
 }
 
 static float exprand__Gf(float arg)

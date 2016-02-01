@@ -166,7 +166,7 @@ static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct a
 static void animateacts__Gv(void);
 static void stopAnimation__Gv(void);
 static void readAnimation__Gv(void);
-static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15);
+static float foldtwixt__GiPffT3(int a0, const float *a1, float f14, float f15);
 static void drawshape__GiT1(char poly, const void *context);
 static void tasteQueue__Gv(void);
 static void hls_to_rgb__GfN21PfN24(float *a3, float *a4, float *a5, float f12, float f13, float f14);
@@ -1072,16 +1072,8 @@ static void readAnimation__Gv(void)
   }
 }
 
-static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)
+static float foldtwixt__GiPffT3(int a0, const float *a1, float f14, float f15)
 {
-  float f0;
-  float f4;
-  float f5;
-  float f6;
-  float f7;
-  float f8;
-  float f10;
-
   int a4 = a0 - 1;
 
   if (a0 <= 0)
@@ -1089,15 +1081,15 @@ static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)
     a4 = a4 + 128;
   }
 
-  f5 = a1[a0];
-  f6 = a1[a4];
-  f8 = f15 * 0.5f;
-  f4 = f5 - f6;
-  f7 = 1.0f - f14;
+  const float f5 = a1[a0];
+  const float f6 = a1[a4];
+  float f8 = f15 * 0.5f;
+  const float f4 = f5 - f6;
+  const float f7 = 1.0f - f14;
 
   if (f8 < f4)
   {
-    f0 = f6 + f15;
+    float f0 = f6 + f15;
 
     float f1 = f5 * f14;
     f0 = f7 * f0;
@@ -1105,19 +1097,19 @@ static float foldtwixt__GiPffT3(int a0, float *a1, float f14, float f15)
     return f0;
   }
 
-  f10 = f15 * -0.5f;
+  const float f10 = f15 * -0.5f;
   f8 = f7 * f6;
 
   if (f4 < f10)
   {
-    f0 = f5 + f15;
+    float f0 = f5 + f15;
     f0 = f14 * f0;
     f0 = f8 + f0;
     return f0;
   }
   else
   {
-    f0 = f5 * f14;
+    float f0 = f5 * f14;
     f0 = f8 + f0;
     return f0;
   }

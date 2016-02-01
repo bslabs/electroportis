@@ -254,27 +254,8 @@ init_ep(void)
 
 static void drawit__Gv(int n, const void *context)
 {
-  int s0;
-  int a0;
   int s3;
-  float f5;
-  float f12;
-  float f24;
-  float f26;
-  float f28;
-  float f30;
-  float var_110;
-  float var_108;
-  float var_100;
-  char *var_78;
-  float var_F0;
-  float var_E8;
-  float var_E0;
-  float var_D8;
-  float var_D0;
-  float var_C8;
   uint64_t var_A8;
-  char *var_A0;
 
   wrap_glClear(GL_COLOR_BUFFER_BIT, context);
   wrap_glColor4f(1.0f, 1.0f, 1.0f, 1.0f, context);
@@ -292,6 +273,9 @@ static void drawit__Gv(int n, const void *context)
 
     do
     {
+      int s0;
+      int a0;
+
       // Set a0 to s3, but ensure it falls within -127 and 127
       if (s3 < 0)
         a0 = (abs(s3) & 127) * -1;
@@ -306,8 +290,10 @@ static void drawit__Gv(int n, const void *context)
       if (s0 >= 128)
         s0 -= 128;
 
-      float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
-      wrap_glTranslatef(0.0f, 0.0f, f14, context);
+      {
+        const float f14 = twixt__GiPff(s0, dzoom, t) * -0.5f;
+        wrap_glTranslatef(0.0f, 0.0f, f14, context);
+      }
 
       s3--;
     } while ((n - nlimit) < s3);
@@ -323,6 +309,9 @@ static void drawit__Gv(int n, const void *context)
   {
     do
     {
+      int s0;
+      int a0;
+
       // Set a0 to s3, but ensure it falls within -127 and 127
       if (s3 < 0)
         a0 = (abs(s3) & 127) * -1;
@@ -337,37 +326,38 @@ static void drawit__Gv(int n, const void *context)
       if (s0 >= 128)
         s0 -= 128;
 
-      f30 = twixt__GiPff(s0, x, t);
-      var_D0 = twixt__GiPff(s0, y, t);
-      var_100 = twixt__GiPff(s0, dzoom, t);
-      var_C8 = twixt__GiPff(s0, arm, t);
-      f28 = twixt__GiPff(s0, wrist, t);
-      var_108 = twixt__GiPff(s0, size, t);
-      var_E0 = foldtwixt__GiPffT3(s0, spin, t, 360.0f);
-      var_D8 = foldtwixt__GiPffT3(s0, flip, t, 360.0f);
-      var_110 = twixt__GiPff(s0, dtwist, t);
-      f26 = foldtwixt__GiPffT3(s0, hue, t, 1.0f);
-      var_E8 = twixt__GiPff(s0, alpha, t);
-      f24 = foldtwixt__GiPffT3(s0, light, t, 1.0f);
-      var_F0 = twixt__GiPff(s0, alphaout, t);
+      const float f30 = twixt__GiPff(s0, x, t);
+      const float var_D0 = twixt__GiPff(s0, y, t);
+      const float var_100 = twixt__GiPff(s0, dzoom, t);
+      const float var_C8 = twixt__GiPff(s0, arm, t);
+      const float f28 = twixt__GiPff(s0, wrist, t);
+      const float var_108 = twixt__GiPff(s0, size, t);
+      const float var_E0 = foldtwixt__GiPffT3(s0, spin, t, 360.0f);
+      const float var_D8 = foldtwixt__GiPffT3(s0, flip, t, 360.0f);
+      const float var_110 = twixt__GiPff(s0, dtwist, t);
+      const float f26 = foldtwixt__GiPffT3(s0, hue, t, 1.0f);
+      const float var_E8 = twixt__GiPff(s0, alpha, t);
+      const float f24 = foldtwixt__GiPffT3(s0, light, t, 1.0f);
+      const float var_F0 = twixt__GiPff(s0, alphaout, t);
 
       {
         hls_to_rgb__GfN21PfN24(colRGBA, &(colRGBA[1]), &(colRGBA[2]), f26, f24, 1.0f);
       }
-      f5 = f26 + 0.5f;
+      const float f5 = f26 + 0.5f;
       outlinecolRGBA[3] = var_F0;
       colRGBA[3] = var_E8;
 
-      if ((double)1.0 < (double)f5)
       {
-        f12 = f5 + -1.0f;
-      }
-      else
-      {
-        f12 = f5;
-      }
+        float f12;
+        if ((double)1.0 < (double)f5)
+        {
+          f12 = f5 + -1.0f;
+        }
+        else
+        {
+          f12 = f5;
+        }
 
-      {
         hls_to_rgb__GfN21PfN24(outlinecolRGBA, &(outlinecolRGBA[1]), &(outlinecolRGBA[2]),
             f12, 1.0f - f24, 1.0f);
       }
@@ -379,15 +369,13 @@ static void drawit__Gv(int n, const void *context)
       wrap_glRotatef(var_D8, 0.0f, 1.0f, 0.0f, context);
       wrap_glTranslatef(f28, 0.0f, 0.0f, context);
 
-      var_78 = &(fill[s0]);
-      if (*var_78 != 0)
+      if (fill[s0] != 0)
       {
         wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
         drawshape__GiT1(1, context);
       }
 
-      var_A0 = &(outline[s0]);
-      if (*var_A0 != 0)
+      if (outline[s0] != 0)
       {
         wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
         drawshape__GiT1(0, context);
@@ -406,13 +394,13 @@ static void drawit__Gv(int n, const void *context)
         wrap_glTranslatef(f28, 0.0f, 0.0f, context);
         wrap_glScalef(var_108, var_108, 1.0f, context);
 
-        if (*var_78 != 0)
+        if (fill[s0] != 0)
         {
           wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
           drawshape__GiT1(1, context);
         }
 
-        if (*var_A0 != 0)
+        if (outline[s0] != 0)
         {
           wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
           drawshape__GiT1(0, context);
@@ -429,13 +417,13 @@ static void drawit__Gv(int n, const void *context)
         wrap_glTranslatef(f28, 0.0f, 0.0f, context);
         wrap_glScalef(var_108, var_108, 1.0f, context);
 
-        if (*var_78 != 0)
+        if (fill[s0] != 0)
         {
           wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
           drawshape__GiT1(1, context);
         }
 
-        if (*var_A0 != 0)
+        if (outline[s0] != 0)
         {
           wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
           drawshape__GiT1(0, context);
@@ -451,13 +439,13 @@ static void drawit__Gv(int n, const void *context)
         wrap_glTranslatef(f28, 0.0f, 0.0f, context);
         wrap_glScalef(var_108, var_108, 1.0f, context);
 
-        if (*var_78 != 0)
+        if (fill[s0] != 0)
         {
           wrap_glColor4f(colRGBA[0], colRGBA[1], colRGBA[2], 1.0f, context);
           drawshape__GiT1(1, context);
         }
 
-        if (*var_A0 != 0)
+        if (outline[s0] != 0)
         {
           wrap_glColor4f(outlinecolRGBA[0], outlinecolRGBA[1], outlinecolRGBA[2], 1.0f, context);
           drawshape__GiT1(0, context);

@@ -1722,9 +1722,7 @@ static void processCommand__GP11animCommand(struct animCommand *cmd)
 
 void display__Gv(const void *context)
 {
-  EPANOS_REG s3;
-  float f5;
-  float var_50;
+  int s3 = 0;
 
   if ((double)1.0 <= (double)(t + acttable[45]->flt_g))
   {
@@ -1732,11 +1730,7 @@ void display__Gv(const void *context)
 
     n = (n + 1) & 127; // range of 'n' is 0 to 127
 
-    s3.u64 = 1;
-  }
-  else
-  {
-    s3.u64 = 0;
+    s3 = 1;
   }
 
   if (aflag != 0)
@@ -1752,7 +1746,7 @@ void display__Gv(const void *context)
   arm[n] = acttable[94]->flt_g;
   wrist[n] = acttable[101]->flt_g;
 
-  var_50 = acttable[73]->flt_g;
+  const float var_50 = acttable[73]->flt_g;
 
   dtwist[n] = acttable[38]->flt_g;
 
@@ -1763,7 +1757,7 @@ void display__Gv(const void *context)
   else
     outline[n] = 0;
 
-  f5 = acttable[123]->flt_g;
+  float f5 = acttable[123]->flt_g;
 
   hue[n] = acttable[123]->flt_g;
 
@@ -1780,7 +1774,7 @@ void display__Gv(const void *context)
 
   light[n] = acttable[130]->flt_g;
 
-  if (s3.u64 != 0)
+  if (s3 != 0)
   {
     gflip = fmodf(gflip + acttable[87]->flt_g, 360.0f);
     gspin = fmodf(gspin + acttable[80]->flt_g, 360.0f);

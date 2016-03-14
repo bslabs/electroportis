@@ -28,6 +28,8 @@
 #include <GL/gl.h>
 #endif
 
+#include "ep_gluperspective.h"
+
 /* The wrap_gl* functions exist so the OpenGL calls can be intercepted and stored
  * for later playback/execution, in multiple OpenGL contexts if desired.
  *

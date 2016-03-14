@@ -1,7 +1,7 @@
 all: electroportis_glut
 
 CC=cc
-COBJS=main_glut.o ../src/ep.o
+COBJS=main_glut.o ../src/ep.o ../src/gluperspective.o
 CFLAGS+=-I../windows/ElectroPortis/include -I../include -Wall -Os -Wno-int-conversion
 
 ifeq ($(shell uname),Darwin)

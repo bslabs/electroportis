@@ -1888,8 +1888,8 @@ void reshape__GiT1(const GLuint width, const GLuint height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(300.0,
-                   (GLdouble)((float)width / (float)height),
+    ep_gluPerspective(300.0,
+                   (double)((float)width / (float)height),
                    0.01,
                    10000.0);
     glTranslatef(0.0f, 0.0f, -4.0f);

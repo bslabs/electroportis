@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320FE73C1BF31D7100DF6767 /* gluperspective.c in Sources */ = {isa = PBXBuildFile; fileRef = 320FE73B1BF31D7100DF6767 /* gluperspective.c */; };
 		324C56AE1A36DEBF00FFDD25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56AD1A36DEBF00FFDD25 /* AppDelegate.m */; };
 		324C56B01A36DEBF00FFDD25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56AF1A36DEBF00FFDD25 /* main.m */; };
 		324C56B21A36DEBF00FFDD25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 324C56B11A36DEBF00FFDD25 /* Images.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		320FE73B1BF31D7100DF6767 /* gluperspective.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gluperspective.c; path = ../../../src/gluperspective.c; sourceTree = "<group>"; };
 		324C56A71A36DEBF00FFDD25 /* ElectroPortis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElectroPortis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		324C56AB1A36DEBF00FFDD25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		324C56AC1A36DEBF00FFDD25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				324C56CD1A36E11300FFDD25 /* ElectroPortisOpenGLView.m */,
 				324C56CF1A36E95D00FFDD25 /* ep.c */,
 				324C56D11A36E9D100FFDD25 /* ep.h */,
+				320FE73B1BF31D7100DF6767 /* gluperspective.c */,
 				324C56D31A36EA0300FFDD25 /* gl_wrap.h */,
 				324C56D21A36E9EF00FFDD25 /* stdafx.h */,
 				324C56B11A36DEBF00FFDD25 /* Images.xcassets */,
@@ -156,6 +159,7 @@
 			files = (
 				324C56CE1A36E11300FFDD25 /* ElectroPortisOpenGLView.m in Sources */,
 				324C56B01A36DEBF00FFDD25 /* main.m in Sources */,
+				320FE73C1BF31D7100DF6767 /* gluperspective.c in Sources */,
 				324C56D01A36E95D00FFDD25 /* ep.c in Sources */,
 				324C56AE1A36DEBF00FFDD25 /* AppDelegate.m in Sources */,
 			);

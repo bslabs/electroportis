@@ -23,7 +23,12 @@
 #pragma once
 
 #ifdef __APPLE__
+#include "TargetConditionals.h"
+#if TARGET_OS_IPHONE
+#include <OpenGLES/ES1/gl.h>
+#else
 #include <OpenGL/gl.h>
+#endif /* TARGET_OS_IPHONE */
 #else
 #include <GL/gl.h>
 #endif

@@ -16,6 +16,7 @@
 
 - (void)setupGL;
 - (void)tearDownGL;
+- (void)resizeToSize:(CGSize)size;
 
 @end
 
@@ -80,23 +81,24 @@
     glShadeModel(GL_FLAT);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    // Call reshape() with the screen resolution
-    {
-        // Get view dimensions in pixels
-        UIScreen *mainscr = [UIScreen mainScreen];
-        
-        GLsizei backingPixelWidth  = (GLsizei)(mainscr.currentMode.size.width);
-        GLsizei backingPixelHeight = (GLsizei)(mainscr.currentMode.size.height);
-        
-        NSLog(@"reshape %d %d", backingPixelWidth, backingPixelHeight);
-        
-        reshape__GiT1(backingPixelWidth, backingPixelHeight);
-    }
+    [self resizeToSize:[UIScreen mainScreen].bounds.size];
 }
 
 - (void)tearDownGL
 {
     [EAGLContext setCurrentContext:self.context];
+}
+
+- (void)resizeToSize:(CGSize)size
+{
+    // Call reshape() with the new size multiplied by the native scale factor
+    CGFloat nativeScale = [UIScreen mainScreen].nativeScale;
+
+    GLsizei newWidth  = (GLsizei)(size.width * nativeScale);
+    GLsizei newHeight = (GLsizei)(size.height * nativeScale);
+    NSLog(@"size %d %d", newWidth, newHeight);
+    
+    reshape__GiT1(newWidth, newHeight);
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
@@ -113,19 +115,11 @@
     display__Gv(NULL);
 }
 
-- (void)viewWillLayoutSubviews
-{
-
-}
-
-- (void)viewDidLayoutSubviews
-{
-
-}
-
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [self resizeToSize:size];
 
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		320FE73C1BF31D7100DF6767 /* gluperspective.c in Sources */ = {isa = PBXBuildFile; fileRef = 320FE73B1BF31D7100DF6767 /* gluperspective.c */; };
+		3217984C1C9A8CC90055B2E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EBA1B01C969E7200B4D03A /* main.m */; };
 		324C56AE1A36DEBF00FFDD25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56AD1A36DEBF00FFDD25 /* AppDelegate.m */; };
 		324C56B01A36DEBF00FFDD25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 324C56AF1A36DEBF00FFDD25 /* main.m */; };
 		324C56B21A36DEBF00FFDD25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 324C56B11A36DEBF00FFDD25 /* Images.xcassets */; };
@@ -22,6 +23,12 @@
 		32EBA1C31C969E7200B4D03A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32EBA1C11C969E7200B4D03A /* LaunchScreen.storyboard */; };
 		32EBA1C91C969F4C00B4D03A /* ep.c in Sources */ = {isa = PBXBuildFile; fileRef = 324C56CF1A36E95D00FFDD25 /* ep.c */; };
 		32EBA1CB1C96A03600B4D03A /* gluperspective_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = 32EBA1CA1C96A03600B4D03A /* gluperspective_gles.c */; };
+		32EBA1D71C9A83A700B4D03A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EBA1D61C9A83A700B4D03A /* AppDelegate.m */; };
+		32EBA1E01C9A83A800B4D03A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32EBA1DE1C9A83A700B4D03A /* Main.storyboard */; };
+		32EBA1E21C9A83A800B4D03A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32EBA1E11C9A83A800B4D03A /* Assets.xcassets */; };
+		32EBA1E71C9A854C00B4D03A /* ep.c in Sources */ = {isa = PBXBuildFile; fileRef = 324C56CF1A36E95D00FFDD25 /* ep.c */; };
+		32EBA1E91C9A855400B4D03A /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EBA1BA1C969E7200B4D03A /* GameViewController.m */; };
+		32EBA1EA1C9A855400B4D03A /* gluperspective_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = 32EBA1CA1C96A03600B4D03A /* gluperspective_gles.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +58,12 @@
 		32EBA1C21C969E7200B4D03A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32EBA1C41C969E7200B4D03A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32EBA1CA1C96A03600B4D03A /* gluperspective_gles.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gluperspective_gles.c; path = ../../../src/gluperspective_gles.c; sourceTree = "<group>"; };
+		32EBA1D01C9A83A700B4D03A /* ElectroPortis-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ElectroPortis-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32EBA1D51C9A83A700B4D03A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		32EBA1D61C9A83A700B4D03A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		32EBA1DF1C9A83A800B4D03A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		32EBA1E11C9A83A800B4D03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		32EBA1E31C9A83A800B4D03A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +81,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		32EBA1CD1C9A83A700B4D03A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -77,6 +97,7 @@
 				324C56A91A36DEBF00FFDD25 /* ElectroPortis */,
 				32EBA1C81C969F2400B4D03A /* ElectroPortis-OS X */,
 				32EBA1AE1C969E7200B4D03A /* ElectroPortis-iOS */,
+				32EBA1D11C9A83A700B4D03A /* ElectroPortis-tvOS */,
 				324C56A81A36DEBF00FFDD25 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +107,7 @@
 			children = (
 				324C56A71A36DEBF00FFDD25 /* ElectroPortis.app */,
 				32EBA1AD1C969E7200B4D03A /* ElectroPortis-iOS.app */,
+				32EBA1D01C9A83A700B4D03A /* ElectroPortis-tvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +174,26 @@
 			path = ElectroPortis;
 			sourceTree = "<group>";
 		};
+		32EBA1D11C9A83A700B4D03A /* ElectroPortis-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				32EBA1D51C9A83A700B4D03A /* AppDelegate.h */,
+				32EBA1D61C9A83A700B4D03A /* AppDelegate.m */,
+				32EBA1DE1C9A83A700B4D03A /* Main.storyboard */,
+				32EBA1E11C9A83A800B4D03A /* Assets.xcassets */,
+				32EBA1E31C9A83A800B4D03A /* Info.plist */,
+				32EBA1D21C9A83A700B4D03A /* Supporting Files */,
+			);
+			path = "ElectroPortis-tvOS";
+			sourceTree = "<group>";
+		};
+		32EBA1D21C9A83A700B4D03A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,6 +231,23 @@
 			productReference = 32EBA1AD1C969E7200B4D03A /* ElectroPortis-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		32EBA1CF1C9A83A700B4D03A /* ElectroPortis-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32EBA1E41C9A83A800B4D03A /* Build configuration list for PBXNativeTarget "ElectroPortis-tvOS" */;
+			buildPhases = (
+				32EBA1CC1C9A83A700B4D03A /* Sources */,
+				32EBA1CD1C9A83A700B4D03A /* Frameworks */,
+				32EBA1CE1C9A83A700B4D03A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ElectroPortis-tvOS";
+			productName = "ElectroPortis-tvOS";
+			productReference = 32EBA1D01C9A83A700B4D03A /* ElectroPortis-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -209,6 +268,9 @@
 					32EBA1AC1C969E7200B4D03A = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
+					32EBA1CF1C9A83A700B4D03A = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 				};
 			};
 			buildConfigurationList = 324C56A21A36DEBF00FFDD25 /* Build configuration list for PBXProject "ElectroPortis" */;
@@ -226,6 +288,7 @@
 			targets = (
 				324C56A61A36DEBF00FFDD25 /* ElectroPortis */,
 				32EBA1AC1C969E7200B4D03A /* ElectroPortis-iOS */,
+				32EBA1CF1C9A83A700B4D03A /* ElectroPortis-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -247,6 +310,15 @@
 				32EBA1BE1C969E7200B4D03A /* Main.storyboard in Resources */,
 				32EBA1C01C969E7200B4D03A /* Assets.xcassets in Resources */,
 				32EBA1C31C969E7200B4D03A /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32EBA1CE1C9A83A700B4D03A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32EBA1E21C9A83A800B4D03A /* Assets.xcassets in Resources */,
+				32EBA1E01C9A83A800B4D03A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +349,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		32EBA1CC1C9A83A700B4D03A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3217984C1C9A8CC90055B2E2 /* main.m in Sources */,
+				32EBA1E91C9A855400B4D03A /* GameViewController.m in Sources */,
+				32EBA1EA1C9A855400B4D03A /* gluperspective_gles.c in Sources */,
+				32EBA1E71C9A854C00B4D03A /* ep.c in Sources */,
+				32EBA1D71C9A83A700B4D03A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -302,6 +386,14 @@
 				32EBA1C21C969E7200B4D03A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		32EBA1DE1C9A83A700B4D03A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32EBA1DF1C9A83A800B4D03A /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -447,6 +539,41 @@
 			};
 			name = Release;
 		};
+		32EBA1E51C9A83A800B4D03A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "ElectroPortis-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.bslabs.ElectroPortis-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		32EBA1E61C9A83A800B4D03A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "ElectroPortis-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.bslabs.ElectroPortis-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -473,6 +600,15 @@
 			buildConfigurations = (
 				32EBA1C51C969E7200B4D03A /* Debug */,
 				32EBA1C61C969E7200B4D03A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32EBA1E41C9A83A800B4D03A /* Build configuration list for PBXNativeTarget "ElectroPortis-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32EBA1E51C9A83A800B4D03A /* Debug */,
+				32EBA1E61C9A83A800B4D03A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

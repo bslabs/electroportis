@@ -26,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		320FE73B1BF31D7100DF6767 /* gluperspective.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gluperspective.c; path = ../../../src/gluperspective.c; sourceTree = "<group>"; };
+		3217984B1C9A8B4E0055B2E2 /* ElectroPortis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ElectroPortis.entitlements; sourceTree = "<group>"; };
 		324C56A71A36DEBF00FFDD25 /* ElectroPortis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElectroPortis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		324C56AB1A36DEBF00FFDD25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		324C56AC1A36DEBF00FFDD25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		324C56AA1A36DEBF00FFDD25 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3217984B1C9A8B4E0055B2E2 /* ElectroPortis.entitlements */,
 				324C56AB1A36DEBF00FFDD25 /* Info.plist */,
 				324C56AF1A36DEBF00FFDD25 /* main.m */,
 			);
@@ -198,6 +200,11 @@
 				TargetAttributes = {
 					324C56A61A36DEBF00FFDD25 = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					32EBA1AC1C969E7200B4D03A = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -383,6 +390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ElectroPortis/ElectroPortis.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ElectroPortis/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -395,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ElectroPortis/ElectroPortis.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ElectroPortis/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

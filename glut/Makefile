@@ -6,7 +6,7 @@ CFLAGS+=-I../windows/ElectroPortis/include -I../include -Wall -Os -Wno-int-conve
 
 ifeq ($(shell uname),Darwin)
 	# Mac
-	CFLAGS+=-arch i386
+	CFLAGS+=-fsanitize=address
 	LIBS+=-framework OpenGL -framework GLUT
 else
 	# Linux/Unix

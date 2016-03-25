@@ -1113,25 +1113,49 @@ static float foldtwixt__GiPffT3(int a0, const float *a1, float f14, float f15)
   }
 }
 
+#ifdef OPENGL10
+// OpenGL 1.0 implementation
+static void drawshape__GiT1(char poly, const void *context)
+{
+    if (poly == 0)
+    {
+        wrap_glBegin(GL_LINES, context);
+        for (size_t i=0; i < NELEMS(square_line_vertices); i+=2)
+        {
+            wrap_glVertex2f(square_line_vertices[i], square_line_vertices[i+1], context);
+        }
+        wrap_glEnd(context);
+    }
+    else
+    {
+        wrap_glBegin(GL_TRIANGLE_FAN, context);
+        for (size_t i=0; i < NELEMS(square_polygon_triangle_fan_vertices); i+=2)
+        {
+            wrap_glVertex2f(square_polygon_triangle_fan_vertices[i], square_polygon_triangle_fan_vertices[i+1], context);
+        }
+        wrap_glEnd(context);
+    }
+}
+#else
+// Implementation using vertex arrays, for OpenGL 1.1+ and OpenGL ES 1.0
 static void drawshape__GiT1(char poly, const void *context)
 {
   if (poly == 0)
   {
     wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
     wrap_glVertexPointer(2, GL_FLOAT, 0, square_line_vertices, context);
-    wrap_glDrawArrays(GL_LINES, 0, sizeof(square_line_vertices)/sizeof(square_line_vertices[0]) / 2, context);
+    wrap_glDrawArrays(GL_LINES, 0, NELEMS(square_line_vertices) / 2, context);
     wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
   else
   {
     wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
     wrap_glVertexPointer(2, GL_FLOAT, 0, square_polygon_triangle_fan_vertices, context);
-    wrap_glDrawArrays(GL_TRIANGLE_FAN, 0, sizeof(square_polygon_triangle_fan_vertices)/sizeof(square_polygon_triangle_fan_vertices[0]) / 2, context);
+    wrap_glDrawArrays(GL_TRIANGLE_FAN, 0, NELEMS(square_polygon_triangle_fan_vertices) / 2, context);
     wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
-
-  return;
 }
+#endif // OPENGL10
 
 static void tasteQueue__Gv(void)
 {

@@ -159,6 +159,11 @@ static float t;
 static struct animSeq *seqList;
 static struct animSeq *editSeq;
 
+#ifdef OPENGL15
+static GLuint square_line_vbo, square_polygon_triangle_fan_vbo;
+static int vbo_initialized = 0;
+#endif
+
 static void drawit__Gv(int n, const void *context);
 static void addToSeq__GP7animSeqP11animCommand(struct animSeq *animSeq, struct animCommand *animCommand);
 static void animateacts__Gv(void);
@@ -1136,7 +1141,7 @@ static void drawshape__GiT1(char poly, const void *context)
         wrap_glEnd(context);
     }
 }
-#else
+#elif OPENGL11
 // Implementation using vertex arrays, for OpenGL 1.1+ and OpenGL ES 1.0
 static void drawshape__GiT1(char poly, const void *context)
 {
@@ -1155,6 +1160,31 @@ static void drawshape__GiT1(char poly, const void *context)
     wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
   }
 }
+#elif OPENGL15
+// Implementation using vertex buffer objects, for OpenGL 1.5+ and OpenGL ES 1.1+
+static void drawshape__GiT1(char poly, const void *context)
+{
+  if (poly == 0)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, square_line_vbo); // bind the buffer
+    wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
+    wrap_glVertexPointer(2, GL_FLOAT, 0, 0, context);
+    wrap_glDrawArrays(GL_LINES, 0, NELEMS(square_line_vertices) / 2, context);
+    wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the buffer
+  }
+  else
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, square_polygon_triangle_fan_vbo); // bind the buffer
+    wrap_glEnableClientState(GL_VERTEX_ARRAY, context);
+    wrap_glVertexPointer(2, GL_FLOAT, 0, 0, context);
+    wrap_glDrawArrays(GL_TRIANGLE_FAN, 0, NELEMS(square_polygon_triangle_fan_vertices) / 2, context);
+    wrap_glDisableClientState(GL_VERTEX_ARRAY, context);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the buffer
+  }
+}
+#else
+#error Define OPENGL10, OPENGL11, or OPENGL15 depending on what your system supports
 #endif // OPENGL10
 
 static void tasteQueue__Gv(void)
@@ -1907,6 +1937,23 @@ static void setacttargets__Gv(void)
 
 void reshape__GiT1(const GLuint width, const GLuint height)
 {
+#ifdef OPENGL15
+  if (!vbo_initialized)
+  {
+    glGenBuffers(1, &square_line_vbo);  // generate a buffer
+    glBindBuffer(GL_ARRAY_BUFFER, square_line_vbo); // use the buffer
+    glBufferData(GL_ARRAY_BUFFER, sizeof(square_line_vertices), square_line_vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the buffer
+
+    glGenBuffers(1, &square_polygon_triangle_fan_vbo);  // generate a buffer
+    glBindBuffer(GL_ARRAY_BUFFER, square_polygon_triangle_fan_vbo); // use the buffer
+    glBufferData(GL_ARRAY_BUFFER, sizeof(square_polygon_triangle_fan_vertices), square_polygon_triangle_fan_vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the buffer
+
+    vbo_initialized = 1;
+  }
+#endif
+
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

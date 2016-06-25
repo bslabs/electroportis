@@ -6,10 +6,12 @@ CFLAGS+=-I../windows/ElectroPortis/include -I../include -Wall -Os -Wno-int-conve
 
 ifeq ($(shell uname),Darwin)
 	# Mac
+	CFLAGS+=-DOPENGL15
 	CFLAGS+=-fsanitize=address
 	LIBS+=-framework OpenGL -framework GLUT
 else
 	# Linux/Unix
+	CFLAGS+=-DOPENGL15
 endif
 
 OBJS=$(COBJS)

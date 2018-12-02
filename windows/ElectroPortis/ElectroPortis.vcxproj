@@ -56,7 +56,7 @@
       <SDLCheck>true</SDLCheck>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
-      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)ext\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;%(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)..\..\src\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;%(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -75,7 +75,7 @@
       <SDLCheck>true</SDLCheck>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)ext\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)ext\wglext;$(ProjectDir)ext\SHRWLocks;$(ProjectDir)..\..\src\rand48;$(ProjectDir)ext\vs2012_math;$(ProjectDir)include;$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -90,7 +90,7 @@
     <ClInclude Include="..\..\include\ep.h" />
     <ClInclude Include="ext\vs2012_math\vs2012_math.h" />
     <ClInclude Include="ext\vs2012_math\vs2012_math_private.h" />
-    <ClInclude Include="ext\rand48\rand48.h" />
+    <ClInclude Include="..\..\src\rand48\rand48.h" />
     <ClInclude Include="include\render.hpp" />
     <ClInclude Include="include\replay_draw.hpp" />
     <ClInclude Include="resource\resource.h" />
@@ -112,10 +112,10 @@
     </ClCompile>
     <ClCompile Include="ext\vs2012_math\math_constants.c" />
     <ClCompile Include="ext\vs2012_math\s_expm1.c" />
-    <ClCompile Include="ext\rand48\drand48.c" />
-    <ClCompile Include="ext\rand48\erand48.c" />
-    <ClCompile Include="ext\rand48\srand48.c" />
-    <ClCompile Include="ext\rand48\_rand48.c" />
+    <ClCompile Include="..\..\src\rand48\drand48.c" />
+    <ClCompile Include="..\..\src\rand48\erand48.c" />
+    <ClCompile Include="..\..\src\rand48\srand48.c" />
+    <ClCompile Include="..\..\src\rand48\_rand48.c" />
     <ClCompile Include="src\render.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)$(TargetName)_cpp.pch</PrecompiledHeaderOutputFile>

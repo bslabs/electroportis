@@ -66,9 +66,6 @@
     <ClInclude Include="include\util.hpp">
       <Filter>Header Files\saver</Filter>
     </ClInclude>
-    <ClInclude Include="ext\rand48\rand48.h">
-      <Filter>Header Files\ext\rand48</Filter>
-    </ClInclude>
     <ClInclude Include="ext\vs2012_math\vs2012_math.h">
       <Filter>Header Files\ext\vs2012_math</Filter>
     </ClInclude>
@@ -99,20 +96,11 @@
     <ClInclude Include="ext\wglext\wglext.h">
       <Filter>Header Files\ext\wglext</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\rand48\rand48.h">
+      <Filter>Header Files\ext\rand48</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ext\rand48\_rand48.c">
-      <Filter>Source Files\ext\rand48</Filter>
-    </ClCompile>
-    <ClCompile Include="ext\rand48\drand48.c">
-      <Filter>Source Files\ext\rand48</Filter>
-    </ClCompile>
-    <ClCompile Include="ext\rand48\erand48.c">
-      <Filter>Source Files\ext\rand48</Filter>
-    </ClCompile>
-    <ClCompile Include="ext\rand48\srand48.c">
-      <Filter>Source Files\ext\rand48</Filter>
-    </ClCompile>
     <ClCompile Include="ext\vs2012_math\math_constants.c">
       <Filter>Source Files\ext\vs2012_math</Filter>
     </ClCompile>
@@ -145,6 +133,18 @@
     </ClCompile>
     <ClCompile Include="..\..\src\gluperspective.c">
       <Filter>Source Files\saver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rand48\_rand48.c">
+      <Filter>Source Files\ext\rand48</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rand48\drand48.c">
+      <Filter>Source Files\ext\rand48</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rand48\erand48.c">
+      <Filter>Source Files\ext\rand48</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rand48\srand48.c">
+      <Filter>Source Files\ext\rand48</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

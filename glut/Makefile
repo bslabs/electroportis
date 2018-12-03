@@ -17,6 +17,8 @@ else
 		# Mac
 		CFLAGS+=-fsanitize=address
 		LIBS+=-framework OpenGL -framework GLUT
+	else
+		LIBS+=-lGL -lglut -lm
 	endif
 endif
 

@@ -15,26 +15,13 @@
  */
 #pragma once
 
-#ifdef __APPLE__
-#include "TargetConditionals.h"
-#if TARGET_OS_IPHONE
-#include <OpenGLES/ES1/gl.h>
-#else
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#endif /* TARGET_OS_IPHONE */
-#else
-#include <GL/gl.h>
-#include <GL/glu.h>
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern char oflag, bflag;
 
 void init_ep(void);
-void reshape__GiT1(const GLuint width, const GLuint height);
+void reshape__GiT1(const int width, const int height);
 void display__Gv(const void *context);
 #ifdef __cplusplus
 }

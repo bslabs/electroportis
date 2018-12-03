@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
   mainwinid = glutCreateWindow("ElectroPortis");
 
   glutDisplayFunc(drawfunc);
+  glutReshapeFunc(reshape__GiT1);
   glutIdleFunc(iterate);
 
   glutCreateMenu(menuhandler);
@@ -91,7 +92,7 @@ int main(int argc, char *argv[])
   glShadeModel(GL_FLAT);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  reshape__GiT1((GLuint)1024, (GLuint)768);
+  reshape__GiT1(1024, 768);
 
   glutMainLoop();
 }

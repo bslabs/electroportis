@@ -1935,7 +1935,7 @@ static void setacttargets__Gv(void)
   }
 }
 
-void reshape__GiT1(const GLuint width, const GLuint height)
+void reshape__GiT1(const int width, const int height)
 {
 #ifdef OPENGL15
   if (!vbo_initialized)

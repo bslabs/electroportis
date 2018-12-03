@@ -1,0 +1,22 @@
+language: c
+
+matrix:
+  include:
+    - os: linux
+      name: "glut-linux-xenial"
+      dist: xenial
+      script: make -C glut
+      addons:
+        apt:
+          packages: freeglut3-dev
+    - os: osx
+      name: "glut-osx"
+      script: make -C glut
+    - os: windows
+      name: "windows"
+      env:
+        - MSBUILD_PATH="/C/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
+      script:
+        - export PATH=$MSBUILD_PATH:$PATH
+        - cd windows
+        - MSBuild.exe
